@@ -397,12 +397,12 @@ body.dark #quick-exit {
 }
 
 /* Per-counselor overrides */
-.avatar[data-avatar="evelyn"] { background-image: url("seaglasssanctuary/evelyn.jpg"); }
-.avatar[data-avatar="marcus"] { background-image: url("seaglasssanctuary/marcus.jpg"); }
-.avatar[data-avatar="jasmine"] { background-image: url("seaglasssanctuary/jasmine.jpg"); }
-.avatar[data-avatar="theo"]   { background-image: url("seaglasssanctuary/theo.jpg"); }
-.avatar[data-avatar="lauren"] { background-image: url("seaglasssanctuary/lauren.jpg"); }
-.avatar[data-avatar="samuel"] { background-image: url("seaglasssanctuary/samuel.jpg"); }
+.avatar[data-avatar="evelyn"] { background-image: url("evelyn.jpg"); }
+.avatar[data-avatar="marcus"] { background-image: url("marcus.jpg"); }
+.avatar[data-avatar="jasmine"] { background-image: url("jasmine.jpg"); }
+.avatar[data-avatar="theo"]   { background-image: url("theo.jpg"); }
+.avatar[data-avatar="lauren"] { background-image: url("lauren.jpg"); }
+.avatar[data-avatar="samuel"] { background-image: url("samuel.jpg"); }
 
 
 /* Card body finer spacing */
