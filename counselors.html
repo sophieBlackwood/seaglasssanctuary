@@ -12,20 +12,20 @@
 
 <body>
 
- <!-- QUICK EXIT BUTTON -->
-<button id="quick-exit" title="Quickly exit to Google">
-  <i class="fa-solid fa-arrow-right-from-bracket"></i> Quick Exit
-</button>
+  <!-- Quick Exit Button -->
+  <button id="quick-exit" title="Quickly exit to Google">
+    <i class="fa-solid fa-arrow-right-from-bracket"></i> Quick Exit
+  </button>
 
-  <!-- FLOATING BUTTONS -->
-<div id="floating-buttons">
-  <button id="theme-toggle" title="Toggle theme">
-    <i class="fa-solid fa-moon"></i>
-  </button>
-  <button id="back-to-top" title="Back to top">
-    <i class="fa-solid fa-arrow-up"></i>
-  </button>
-</div>
+  <!-- Floating Side Buttons -->
+  <div id="floating-buttons">
+    <button id="theme-toggle" title="Toggle theme">
+      <i class="fa-solid fa-moon"></i>
+    </button>
+    <button id="back-to-top" title="Back to top">
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
+  </div>
 
   <header class="navbar">
     <div class="container nav-container">
@@ -43,141 +43,101 @@
     </div>
   </header>
 
-  <main>
-    <!-- HERO -->
+    <!-- Hero Section -->
     <section class="hero">
       <div class="container hero-content">
-		  <h2>Find a Counselor</h2> 
+        <h2>Find a Counselor</h2>
       </div>
     </section>
 
-   <section id="counselors" class="section">
-  <div class="container">
-    <h3>Meet Our Counselors</h3>
-    <p class="muted">Our licensed clinicians are here to support you. Click "Schedule" to book a session.</p>
+    <!-- Counselors Section -->
+    <section id="counselors" class="section">
+      <div class="container">
+        <h3>Meet Our Counselors</h3>
+        <p class="muted">Our licensed clinicians are here to support you. Click "Schedule" to book a session.</p>
+        <div class="card-grid counselors-grid">
 
-    <div class="card-grid counselors-grid">
-      <!-- Card 1 -->
-      <div class="card counselor" data-name="Dr. Evelyn Carter, Ph.D.">
-        <div class="avatar"  data-avatar="evelyn"></div>
-        <div class="card-body">
-          <h4>Dr. Evelyn Carter, Ph.D.</h4>
-          <p class="meta">Anxiety &amp; Stress Disorders · CBT · Mindfulness</p>
-          <p class="blurb">Dr. Carter helps clients identify triggers, build coping strategies, and restore calm using evidence-based CBT and mindfulness.</p>
-          <div class="card-actions">
-            <button class="btn schedule-btn" data-counselor="Dr. Evelyn Carter, Ph.D." data-calendly="https://calendly.com/example-evelyn">Schedule</button>
+          <!-- Counselor Card 1 -->
+          <div class="card counselor" data-name="Dr. Evelyn Carter, Ph.D.">
+            <div class="avatar" data-avatar="evelyn"></div>
+            <div class="card-body">
+              <h4>Dr. Evelyn Carter, Ph.D.</h4>
+              <p class="meta">Anxiety &amp; Stress Disorders · CBT · Mindfulness</p>
+              <p class="blurb">Dr. Carter helps clients identify triggers, build coping strategies, and restore calm using evidence-based CBT and mindfulness.</p>
+              <div class="card-actions">
+                <button class="btn schedule-btn" data-counselor="Dr. Evelyn Carter, Ph.D." data-calendly="https://calendly.com/example-evelyn">Schedule</button>
+              </div>
+            </div>
           </div>
+
+          <!-- Counselor Card 2 -->
+          <div class="card counselor" data-name="Marcus Nguyen, LCSW">
+            <div class="avatar" data-avatar="marcus"></div>
+            <div class="card-body">
+              <h4>Marcus Nguyen, LCSW</h4>
+              <p class="meta">Depression &amp; Burnout · ACT · Strength-Based</p>
+              <p class="blurb">Marcus supports clients through burnout and low mood with practical resilience-building and values-guided work.</p>
+              <div class="card-actions">
+                <button class="btn schedule-btn" data-counselor="Marcus Nguyen, LCSW" data-calendly="https://calendly.com/example-marcus">Schedule</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Counselor Card 3 -->
+          <div class="card counselor" data-name="Jasmine Patel, LMFT">
+            <div class="avatar" data-avatar="jasmine"></div>
+            <div class="card-body">
+              <h4>Jasmine Patel, LMFT</h4>
+              <p class="meta">Trauma &amp; PTSD · EMDR · Somatic Therapy</p>
+              <p class="blurb">Jasmine creates a safe, paced environment to process trauma and build somatic resilience using EMDR and narrative techniques.</p>
+              <div class="card-actions">
+                <button class="btn schedule-btn" data-counselor="Jasmine Patel, LMFT" data-calendly="https://calendly.com/example-jasmine">Schedule</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Counselor Card 4 -->
+          <div class="card counselor" data-name="Dr. Theo Ramirez, Psy.D.">
+            <div class="avatar" data-avatar="theo"></div>
+            <div class="card-body">
+              <h4>Dr. Theo Ramirez, Psy.D.</h4>
+              <p class="meta">LGBTQ+ Support · Integrative Psychotherapy</p>
+              <p class="blurb">Dr. Ramirez provides affirming care focused on identity, relationships, and social anxiety, rooted in acceptance and strength.</p>
+              <div class="card-actions">
+                <button class="btn schedule-btn" data-counselor="Dr. Theo Ramirez, Psy.D." data-calendly="https://calendly.com/example-theo">Schedule</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Counselor Card 5 -->
+          <div class="card counselor" data-name="Lauren Mitchell, MSW">
+            <div class="avatar" data-avatar="lauren"></div>
+            <div class="card-body">
+              <h4>Lauren Mitchell, MSW</h4>
+              <p class="meta">Bipolar Disorder · DBT · Psychoeducation</p>
+              <p class="blurb">Lauren supports mood regulation through structured DBT skills and psychoeducation, helping clients build daily stability.</p>
+              <div class="card-actions">
+                <button class="btn schedule-btn" data-counselor="Lauren Mitchell, MSW" data-calendly="https://calendly.com/example-lauren">Schedule</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Counselor Card 6 -->
+          <div class="card counselor" data-name="Samuel Osei, LPC">
+            <div class="avatar" data-avatar="samuel"></div>
+            <div class="card-body">
+              <h4>Samuel Osei, LPC</h4>
+              <p class="meta">ADHD &amp; Executive Function · Coaching-Oriented CBT</p>
+              <p class="blurb">Samuel focuses on practical strategies for organization, focus, and follow-through, combining coaching with CBT techniques.</p>
+              <div class="card-actions">
+                <button class="btn schedule-btn" data-counselor="Samuel Osei, LPC" data-calendly="https://calendly.com/example-samuel">Schedule</button>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
-
-      <!-- Card 2 -->
-      <div class="card counselor" data-name="Marcus Nguyen, LCSW">
-        <div class="avatar"  data-avatar="marcus"></div>
-        <div class="card-body">
-          <h4>Marcus Nguyen, LCSW</h4>
-          <p class="meta">Depression &amp; Burnout · ACT · Strength-Based</p>
-          <p class="blurb">Marcus supports clients through burnout and low mood with practical resilience-building and values-guided work.</p>
-          <div class="card-actions">
-            <button class="btn schedule-btn" data-counselor="Marcus Nguyen, LCSW" data-calendly="https://calendly.com/example-marcus">Schedule</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="card counselor" data-name="Jasmine Patel, LMFT">
-        <div class="avatar"  data-avatar="jasmine"></div>
-        <div class="card-body">
-          <h4>Jasmine Patel, LMFT</h4>
-          <p class="meta">Trauma &amp; PTSD · EMDR · Somatic Therapy</p>
-          <p class="blurb">Jasmine creates a safe, paced environment to process trauma and build somatic resilience using EMDR and narrative techniques.</p>
-          <div class="card-actions">
-            <button class="btn schedule-btn" data-counselor="Jasmine Patel, LMFT" data-calendly="https://calendly.com/example-jasmine">Schedule</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 4 -->
-      <div class="card counselor" data-name="Dr. Theo Ramirez, Psy.D.">
-        <div class="avatar"  data-avatar="theo"></div>
-        <div class="card-body">
-          <h4>Dr. Theo Ramirez, Psy.D.</h4>
-          <p class="meta">LGBTQ+ Support · Integrative Psychotherapy</p>
-          <p class="blurb">Dr. Ramirez provides affirming care focused on identity, relationships, and social anxiety, rooted in acceptance and strength.</p>
-          <div class="card-actions">
-            <button class="btn schedule-btn" data-counselor="Dr. Theo Ramirez, Psy.D." data-calendly="https://calendly.com/example-theo">Schedule</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 5 -->
-      <div class="card counselor" data-name="Lauren Mitchell, MSW">
-        <div class="avatar"  data-avatar="lauren"></div>
-        <div class="card-body">
-          <h4>Lauren Mitchell, MSW</h4>
-          <p class="meta">Bipolar Disorder · DBT · Psychoeducation</p>
-          <p class="blurb">Lauren supports mood regulation through structured DBT skills and psychoeducation, helping clients build daily stability.</p>
-          <div class="card-actions">
-            <button class="btn schedule-btn" data-counselor="Lauren Mitchell, MSW" data-calendly="https://calendly.com/example-lauren">Schedule</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 6 -->
-      <div class="card counselor" data-name="Samuel Osei, LPC">
-        <div class="avatar"  data-avatar="samuel"></div>
-        <div class="card-body">
-          <h4>Samuel Osei, LPC</h4>
-          <p class="meta">ADHD &amp; Executive Function · Coaching-Oriented CBT</p>
-          <p class="blurb">Samuel focuses on practical strategies for organization, focus, and follow-through, combining coaching with CBT techniques.</p>
-          <div class="card-actions">
-            <button class="btn schedule-btn" data-counselor="Samuel Osei, LPC" data-calendly="https://calendly.com/example-samuel">Schedule</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Booking Modal -->
-<div id="booking-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="booking-title">
-  <div class="modal-panel">
-    <button class="modal-close" aria-label="Close booking dialog">&times;</button>
-    <h4 id="booking-title">Request an Appointment</h4>
-    <p class="muted" id="booking-counselor">For: —</p>
-
-    <form id="booking-form">
-      <input type="hidden" name="counselor" id="form-counselor" />
-      <label>
-        Your name
-        <input type="text" name="name" required />
-      </label>
-      <label>
-        Email
-        <input type="email" name="email" required />
-      </label>
-      <label>
-        Phone (optional)
-        <input type="tel" name="phone" />
-      </label>
-      <label>
-        Preferred date / time
-        <input type="text" name="pref" placeholder="e.g., Mon 9/8, mornings" />
-      </label>
-      <label>
-        Brief reason (optional)
-        <textarea name="reason" rows="3" placeholder="A short note for the counselor"></textarea>
-      </label>
-
-      <div class="modal-actions">
-        <!-- Replace example@balancepoint.org with your scheduling inbox -->
-        <button type="submit" class="btn">Send Request</button>
-        <a href="#" class="btn btn-secondary" id="open-calendly" target="_blank" rel="noopener">Book via Scheduler</a>
-      </div>
-
-      <p class="muted small">Or call our scheduling team at <strong>1-800-555-1234</strong>.</p>
-    </form>
-  </div>
-</div>
+    </section>
 
   <footer>
     <div class="container">
@@ -185,7 +145,6 @@
       <p>This website exists for the purpose of a Business Professionals of America competitive event. It is not to be used for mental help and was made by a group of secondary students for competitive purposes.</p>
     </div>
   </footer>
-
   <script src="script.js"></script>
 </body>
 </html>
