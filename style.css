@@ -1,4 +1,4 @@
-// Variables
+/* Variables */
 :root {
   --bg: #F2FBFA;
   --text: #03443C;
@@ -19,7 +19,7 @@ body.dark {
   --muted: #a4a4a4;
 }
 
-// Reset & Base
+/* Reset & Base */
 * {
   margin: 0;
   padding: 0;
@@ -45,7 +45,7 @@ a {
   padding: 0 1.5rem;
 }
 
-// Navbar
+/* Navbar */
 .navbar {
   background: var(--card-bg);
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -84,60 +84,67 @@ a {
   color: var(--accent);
 }
 
-// Responsive Navbar
+// Side Nav — initially hidden, styled for smaller screens
 .sidenav {
     height: 100%;
     width: 0;
     position: fixed;
     top: 0;
     left: 0;
-    background-color:  var(--card-bg);
+    background-color: #000000;
     overflow-x: hidden;
     padding-top: 60px;
     transition: 0.5s;
-	z-index: 99;
+    z-index: 99;
 }
 
 .sidenav a {
     padding: 10px 15px;
     text-decoration: none;
     font-size: 18px;
-    color: var(--text);
+    color: #f9f9f9;
     display: block;
     transition: 0.3s;
 }
 
 .sidenav a:hover {
-    background-color: var(--accent);
+    background-color: #a3000f;
 }
 
 .closebtn {
-	position: absolute;
-	top: 0;
-	left: 0;
-	padding: 30px 20px;
-	color: var(--accent);
-	cursor: pointer;
-	font-size: 35px;
-	text-decoration: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 30px 20px;
+    color: #f9f9f9;
+    cursor: pointer;
+    font-size: 35px;
+    text-decoration: none;
 }
 
 .closebtn:hover {
-	background-color: var(--accent);
+    background-color: #a3000f;
 }
 
 .hamburger-menu {
     font-size: 30px;
     cursor: pointer;
-	color: #f9f9f9;
-	position: fixed;
-	top: 20px;
-	left: 20px;
-	z-index: 100;
-	display: none;
+    color: #f9f9f9;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+    display: none;
 }
 
-// Hero Sections
+/* Show hamburger on screens below 900px */
+@media (max-width: 900px) {
+    .hamburger-menu {
+        display: block;
+    }
+}
+
+/* Hero Sections */
 .hero,
 .hero-helplines,
 .hero-about {
@@ -175,7 +182,7 @@ a {
   margin: 0 auto 2rem;
 }
 
-// Buttons
+/* Buttons */
 .btn {
   background: white;
   color: var(--accent);
@@ -208,7 +215,7 @@ a {
   color: white;
 }
 
-// Floating Buttons
+/* Floating Buttons */
 #floating-buttons {
   position: fixed;
   right: 1.5rem;
@@ -220,7 +227,7 @@ a {
   z-index: 2000;
 }
 
-// Button transitions
+/* Button transitions */
 #back-to-top,
 #theme-toggle {
   width: 3rem;
@@ -236,7 +243,7 @@ a {
   transition: all 0.3s ease;
 }
 
-// Theme Button
+/* Theme Button */
 #theme-toggle {
   background: var(--card-bg);
   color: var(--text);
@@ -249,7 +256,7 @@ a {
   color: white;
 }
 
-// Back-to-top
+/* Back-to-top */
 #back-to-top {
   background: var(--accent);
   color: white;
@@ -267,7 +274,7 @@ a {
   transform: scale(1.05);
 }
 
-// Mobile Compact Floating Buttons
+/* Mobile Compact Floating Buttons */
 @media (max-width: 768px) {
   #floating-buttons {
     gap: 0;
@@ -286,7 +293,7 @@ a {
   }
 }
 
-// Quick Exit Button
+/* Quick Exit Button */
 #quick-exit {
   position: fixed;
   top: 1.2rem;
@@ -316,7 +323,7 @@ body.dark #quick-exit {
   background: #e84c5a;
 }
 
-// Counselor Cards
+/* Counselor Cards */
 .counselors-grid {
   margin-top: 1.5rem;
   gap: 1.5rem;
@@ -334,7 +341,7 @@ body.dark #quick-exit {
   background-image: linear-gradient(135deg, rgba(42,93,103,0.08), rgba(91,138,148,0.06));
 }
 
-// Avatar overrides
+/* Avatar overrides */
 .avatar[data-avatar="evelyn"] { background-image: url("evelyn.jpg"); }
 .avatar[data-avatar="marcus"] { background-image: url("marcus.jpg"); }
 .avatar[data-avatar="jasmine"] { background-image: url("jasmine.jpg"); }
@@ -342,7 +349,7 @@ body.dark #quick-exit {
 .avatar[data-avatar="lauren"] { background-image: url("lauren.jpg"); }
 .avatar[data-avatar="samuel"] { background-image: url("samuel.jpg"); }
 
-// Counselor card spacing
+/* Counselor card spacing */
 .counselor .card-body h4 {
   margin-bottom: 0.25rem;
   font-size: 1.05rem;
@@ -361,14 +368,14 @@ body.dark #quick-exit {
   margin-bottom: 0.8rem;
 }
 
-// Card actions
+/* Card actions */
 .card-actions {
   display: flex;
   gap: 0.75rem;
   align-items: center;
 }
 
-// Modals
+/* Modals */
 .modal {
   position: fixed;
   inset: 0;
@@ -408,7 +415,7 @@ body.dark #quick-exit {
   }
 }
 
-// Sections & Cards
+/* Sections & Cards */
 .section {
   padding: 4rem 1.5rem;
   text-align: center;
@@ -458,12 +465,12 @@ blockquote,
   box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
 
-// About Page
+/* About Page */
 .team-photo {
   width: 90%;
 }
 
-// Footer
+/* Footer */
 footer {
   background: var(--accent);
   color: white;
@@ -472,7 +479,7 @@ footer {
   font-size: 0.9rem;
 }
 
-// Responsive
+/* Responsive */
 @media (max-width: 992px) {
   .hero h2 {
     font-size: 2rem;
