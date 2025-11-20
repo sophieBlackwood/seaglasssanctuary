@@ -1,100 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Maya's Story</title>
-  <link rel="stylesheet" href="https://use.typekit.net/rig8hkd.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <link rel="icon" type="image/x-icon" href="favicon.ico"/>
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maya's Testimonial</title>
+  <link rel="stylesheet" href="styles.css"> <!-- your main CSS -->
 </head>
-
 <body>
 
-  <!-- QUICK EXIT BUTTON -->
-  <button id="quick-exit" title="Quickly exit to Google">
-    <i class="fa-solid fa-arrow-right-from-bracket"></i> Quick Exit
-  </button>
-
-  <!-- FLOATING BUTTONS -->
-  <div id="floating-buttons">
-    <button id="theme-toggle" title="Toggle theme">
-      <i class="fa-solid fa-moon"></i>
-    </button>
-    <button id="back-to-top" title="Back to top">
-      <i class="fa-solid fa-arrow-up"></i>
-    </button>
-  </div>
-
-  <!-- HEADER -->
-  <header class="navbar">
-    <div class="container nav-container">
-      <h1 class="logo">Seaglass Sanctuary</h1>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="index.html#mission">Mission</a></li>
-          <li><a href="index.html#resources">Resources</a></li>
-          <li><a href="helplines.html">Helplines</a></li>
-          <li><a href="index.html#support">Support</a></li>
-          <li><a href="index.html#stories">Stories</a></li>
-          <li><a href="index.html#blog">Blog</a></li>
-        </ul>
-      </nav>
+  <!-- Navbar (optional) -->
+  <nav class="navbar">
+    <div class="nav-container container">
+      <a href="index.html" class="logo">CounselingSite</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="counselors.html">Counselors</a></li>
+      </ul>
     </div>
-  </header>
+  </nav>
 
-
-  <main>
-
-    <!-- STORY HERO -->
-    <section class="hero">
-      <div class="container hero-content">
-        <h2>Maya’s Story</h2>
-        <p class="subtitle">A journey toward finally feeling heard.</p>
+  <!-- Blog Section -->
+  <section id="blog" class="blog-post container">
+    <article class="blog-card">
+      <div class="blog-image">
+        <img src="maya.jpg" alt="Maya smiling" />
       </div>
-    </section>
+
+ <div class="blog-content">
+  <h3>Finding the Right Counselor: Maya's Journey</h3>
+  <p class="date"><strong>Shared by:</strong> Maya P.</p>
+
+  <p>"Finding a counselor here was simple and comforting. I finally feel heard and understood."</p>
+
+  <h4>Why I Sought Counseling</h4>
+  <p>Before reaching out, I was struggling with constant stress and feelings of being overwhelmed. Everyday responsibilities—work, family, and personal life—felt heavier, and I realized I needed support to regain balance and clarity.</p>
+
+  <h4>The Experience</h4>
+  <p>The process of finding a counselor was surprisingly smooth. From the website's user-friendly layout to the clear information about each counselor's expertise, I quickly found someone whose experience matched my needs. Booking a session was straightforward, and I felt respected and valued even before our first meeting.</p>
+
+  <h4>What Made It Work</h4>
+  <ul>
+    <li>Easy-to-navigate platform that matched me with the right counselor</li>
+    <li>Transparent profiles detailing experience and specialties</li>
+    <li>Friendly, responsive communication from the team</li>
+    <li>Comfortable and safe session environment, both online and in-person</li>
+  </ul>
+
+  <h4>My Takeaway</h4>
+  <p>After a few sessions, I noticed a profound change in how I approached challenges. I felt more confident, understood, and supported. It’s a relief to know that professional help is accessible and effective. This experience reminded me that seeking help is a strength, not a weakness.</p>
+
+  <p>"Finding a counselor here has not just helped me cope, but has empowered me to thrive." – Maya P.</p>
+
+  <a href="counselors.html" class="btn">Find Your Counselor</a>
+</div>
 
 
-    <!-- STORY CONTENT -->
-    <section class="story-section">
-      <div class="container">
-        <p>
-          Maya came to Seaglass Sanctuary during a time when she felt overwhelmed, isolated,  
-          and unsure of where to turn. The process of seeking help often felt confusing and  
-          intimidating, but she took the first courageous step by exploring our resources.
-        </p>
-
-        <p>
-          What she found was a supportive space built for people just like her — a place where  
-          information is clear, finding help is straightforward, and emotional well-being is  
-          treated with the compassion it deserves.
-        </p>
-
-        <p>
-          Through our guided listings and supportive tools, Maya connected with a counselor  
-          who made her feel truly listened to for the first time in a long while. Her journey  
-          is a reminder that help doesn’t need to feel out of reach — sometimes it begins with  
-          a single, quiet moment of bravery.
-        </p>
-
-        <a href="index.html#stories" class="btn">Back to Stories</a>
-
-      </div>
-    </section>
-
-  </main>
-
-
-  <!-- FOOTER -->
+  <!-- Footer -->
   <footer>
-    <div class="container">
-      <p>© 2025 Seaglass Sanctuary | A Mental Health Awareness Initiative</p>
-      <p>This website exists for the purpose of a Business Professionals of America competitive event. It is not to be used for mental help and was made by a group of secondary students for competitive purposes.</p>
-    </div>
+    &copy; 2025 CounselingSite. All rights reserved.
   </footer>
 
-  <script src="script.js"></script>
 </body>
 </html>
-
