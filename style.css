@@ -84,6 +84,60 @@ a {
   color: var(--accent);
 }
 
+// Responsive Navbar
+/* Side Nav - initially hidden, styled for smaller screens */
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color:  var(--card-bg);
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+	z-index: 99;
+}
+
+.sidenav a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: var(--text);
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    background-color: var(--accent);
+}
+
+.closebtn {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 30px 20px;
+	color: #f9f9f9;
+	cursor: pointer;
+	font-size: 35px;
+	text-decoration: none;
+}
+
+.closebtn:hover {
+	backgroun-color: #a3000f;
+}
+
+.hamburger-menu {
+    font-size: 30px;
+    cursor: pointer;
+	color: #f9f9f9;
+	position: fixed;
+	top: 20px;
+	left: 20px;
+	z-index: 100;
+	display: none;
+}
+
 // Hero Sections
 .hero,
 .hero-helplines,
