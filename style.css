@@ -1,3 +1,22 @@
+:root {
+  --bg: #F2FBFA;          /* Light background */
+  --text: #1C221D;        /* Strong dark text */
+  --accent: #CC5083;      /* Vibrant accent on light */
+  --accent-light: #E47AA4;/* Hover accent */
+  --card-bg: #03443C;     /* Deep teal card */
+  --muted: #8F9E77;       /* Secondary text */
+  --radius: 12px;
+  --transition: 0.3s ease;
+}
+
+body.dark {
+  --bg: #0E1211;          /* True dark background */
+  --text: #DFFAEA;        /* High-contrast light text */
+  --accent: #FF7AAE;      /* Brighter accent for dark mode */
+  --accent-light: #CC5083;/* Accent hover (deep but visible) */
+  --card-bg: #1C221D;     /* Dark neutral card */
+  --muted: #9CB8A4;       /* Softer light-muted text */
+}
 /* Variables */
 :root {
   --bg: #F2FBFA;          /* Light background */
@@ -67,6 +86,7 @@ a {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 1.5rem;
+  color: var(--text-secondary);
 }
 
 /* ==========================
