@@ -427,7 +427,7 @@ body.dark #quick-exit {
 
 .counselor .blurb {
   font-size: 0.95rem;
-  color: var(--text);
+  color: var(--muted);
   margin-bottom: 0.8rem;
 }
 
