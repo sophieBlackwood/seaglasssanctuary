@@ -5,7 +5,7 @@
   --accent: #0A7A67;      /* New teal/green accent */
   --accent-light: #4FB29F;/* Lighter hover accent */
   --card-bg: #03443C;     /* Deep teal card */
-  --muted: #8F9E77;       /* Earthy secondary text */
+  --muted:#4FB29F;       /* Earthy secondary text  #8F9E77 */
   --radius: 12px;
   --transition: 0.3s ease;
 }
