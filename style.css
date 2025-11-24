@@ -107,63 +107,82 @@ a {
   color: var(--accent);
 }
 
-// Side Nav — initially hidden, styled for smaller screens
+/* ==========================
+   Mobile Side Navigation
+   ========================== */
+
 .sidenav {
     height: 100%;
     width: 0;
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #000000;
+    background-color: var(--text); /* deep teal */
     overflow-x: hidden;
     padding-top: 60px;
     transition: 0.5s;
     z-index: 99;
 }
 
+/* Navigation links */
 .sidenav a {
-    padding: 10px 15px;
+    padding: 12px 20px;
     text-decoration: none;
     font-size: 18px;
-    color: #f9f9f9;
+    color: var(--bg);  /* light text */
     display: block;
     transition: 0.3s;
 }
 
 .sidenav a:hover {
-    background-color: #a3000f;
+    background-color: var(--accent-light); /* soft teal highlight */
+    color: var(--card-bg);
 }
 
+/* Close button (X) */
 .closebtn {
     position: absolute;
     top: 0;
     left: 0;
-    padding: 30px 20px;
-    color: #f9f9f9;
+    padding: 25px 20px;
+    color: var(--bg);
     cursor: pointer;
-    font-size: 35px;
+    font-size: 32px;
     text-decoration: none;
+    transition: 0.3s;
 }
 
 .closebtn:hover {
-    background-color: #a3000f;
+    background-color: var(--accent-light);
 }
 
+/* Hamburger button */
 .hamburger-menu {
-    font-size: 30px;
+    font-size: 32px;
     cursor: pointer;
-    color: #f9f9f9;
+    color: var(--text);
     position: fixed;
     top: 20px;
     left: 20px;
     z-index: 100;
-    display: none;
+    display: none; /* shown only on mobile via media query */
+    align-items: center;
+    gap: 10px;
 }
 
-/* Show hamburger on screens below 900px */
+/* Optional image next to icon */
+.sidenav-img {
+    height: 28px;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+/* ==========================
+   Responsive Behavior
+   ========================== */
 @media (max-width: 900px) {
     .hamburger-menu {
-        display: block;
+        display: flex;
     }
 }
 
