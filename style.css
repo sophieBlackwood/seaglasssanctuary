@@ -15,7 +15,7 @@ body.dark {
   --text: #DFFAEA;        /* Soft, readable aqua-white */
   --accent: #4FB29F;      /* Brighter teal for dark mode */
   --accent-light: #7FD0C2;/* Lighter hover accent */
-  --card-bg: #1C221D;     /* Dark neutral card */
+  --card-bg: #03443C;     /* Dark neutral card #1C221D*/
   --muted: #9CB8A4;       /* Soft muted text */
 }
 
