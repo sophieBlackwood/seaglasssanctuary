@@ -2,22 +2,23 @@
 :root {
   --bg: #F2FBFA;          /* Light background */
   --text: #1C221D;        /* Strong dark text */
-  --accent: #CC5083;      /* Vibrant accent on light */
-  --accent-light: #E47AA4;/* Hover accent */
+  --accent: #0A7A67;      /* New teal/green accent */
+  --accent-light: #4FB29F;/* Lighter hover accent */
   --card-bg: #03443C;     /* Deep teal card */
-  --muted: #8F9E77;       /* Secondary text */
+  --muted: #8F9E77;       /* Earthy secondary text */
   --radius: 12px;
   --transition: 0.3s ease;
 }
 
 body.dark {
   --bg: #0E1211;          /* True dark background */
-  --text: #DFFAEA;        /* High-contrast light text */
-  --accent: #FF7AAE;      /* Brighter accent for dark mode */
-  --accent-light: #CC5083;/* Accent hover (deep but visible) */
+  --text: #DFFAEA;        /* Soft, readable aqua-white */
+  --accent: #4FB29F;      /* Brighter teal for dark mode */
+  --accent-light: #7FD0C2;/* Lighter hover accent */
   --card-bg: #1C221D;     /* Dark neutral card */
-  --muted: #9CB8A4;       /* Softer light-muted text */
+  --muted: #9CB8A4;       /* Soft muted text */
 }
+
 
 
 /* Reset & Base */
