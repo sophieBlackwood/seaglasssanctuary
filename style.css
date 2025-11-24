@@ -68,49 +68,53 @@ a {
   padding: 0 1.5rem;
 }
 
-/* Navbar */
+/* ==========================
+   Navbar
+   ========================== */
 .navbar {
-  background: var(--card-bg);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  position: sticky;
-  top: 0;
-  z-index: 999;
+    background: var(--card-bg);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 999;
 }
 
 .nav-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.2rem 0;
-  flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 1.5rem;
+    flex-wrap: wrap;
 }
 
 .logo {
-  font-weight: 700;
-  font-size: 1.5rem;
-  color: var(--accent);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--accent);
+    cursor: pointer;
 }
 
 .nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
 }
 
 .nav-links a {
-  color: var(--text);
-  font-weight: 500;
-  transition: color var(--transition);
+    color: var(--text);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color var(--transition);
 }
 
 .nav-links a:hover {
-  color: var(--accent);
+    color: var(--accent);
 }
 
 /* ==========================
    Mobile Side Navigation
    ========================== */
-
 .sidenav {
     height: 100%;
     width: 0;
@@ -120,22 +124,21 @@ a {
     background-color: var(--text); /* deep teal */
     overflow-x: hidden;
     padding-top: 60px;
-    transition: 0.5s;
-    z-index: 99;
+    transition: width 0.5s ease;
+    z-index: 9999;
 }
 
-/* Navigation links */
 .sidenav a {
-    padding: 12px 20px;
+    padding: 12px 24px;
     text-decoration: none;
     font-size: 18px;
     color: var(--bg);  /* light text */
     display: block;
-    transition: 0.3s;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .sidenav a:hover {
-    background-color: var(--accent-light); /* soft teal highlight */
+    background-color: var(--accent-light); /* soft highlight */
     color: var(--card-bg);
 }
 
@@ -143,20 +146,21 @@ a {
 .closebtn {
     position: absolute;
     top: 0;
-    left: 0;
-    padding: 25px 20px;
-    color: var(--bg);
-    cursor: pointer;
+    right: 0;
+    padding: 20px 25px;
     font-size: 32px;
+    cursor: pointer;
+    color: var(--bg);
     text-decoration: none;
-    transition: 0.3s;
+    transition: background-color 0.3s;
 }
 
 .closebtn:hover {
     background-color: var(--accent-light);
+    color: var(--card-bg);
 }
 
-/* Hamburger button */
+/* Hamburger Menu Button */
 .hamburger-menu {
     font-size: 32px;
     cursor: pointer;
@@ -164,13 +168,13 @@ a {
     position: fixed;
     top: 20px;
     left: 20px;
-    z-index: 100;
-    display: none; /* shown only on mobile via media query */
+    z-index: 1000;
+    display: none;
     align-items: center;
     gap: 10px;
 }
 
-/* Optional image next to icon */
+/* Optional image next to hamburger icon */
 .sidenav-img {
     height: 28px;
     vertical-align: middle;
@@ -183,6 +187,14 @@ a {
 @media (max-width: 900px) {
     .hamburger-menu {
         display: flex;
+    }
+
+    .nav-links {
+        display: none; /* hide desktop links on mobile */
+    }
+
+    .sidenav {
+        width: 0; /* start hidden */
     }
 }
 
