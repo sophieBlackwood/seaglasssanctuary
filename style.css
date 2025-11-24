@@ -1,23 +1,24 @@
 /* Variables */
 :root {
-  --bg: #F2FBFA;
-  --text: #1C221D;
-  --accent: #CC5083;
-  --accent-light: #E47AA4; /* lighter tint of accent for contrast */
-  --card-bg: #03443C;
-  --muted: #8F9E77;
+  --bg: #F2FBFA;          /* Light background */
+  --text: #1C221D;        /* Strong dark text */
+  --accent: #CC5083;      /* Vibrant accent on light */
+  --accent-light: #E47AA4;/* Hover accent */
+  --card-bg: #03443C;     /* Deep teal card */
+  --muted: #8F9E77;       /* Secondary text */
   --radius: 12px;
   --transition: 0.3s ease;
 }
 
 body.dark {
-  --bg: #DFFAEA;
-  --text: #03443C;
-  --accent: #9acfd3;
-  --accent-light: #6fb3b8;
-  --card-bg: #2a2d33;
-  --muted: #a4a4a4;
+  --bg: #0E1211;          /* True dark background */
+  --text: #DFFAEA;        /* High-contrast light text */
+  --accent: #FF7AAE;      /* Brighter accent for dark mode */
+  --accent-light: #CC5083;/* Accent hover (deep but visible) */
+  --card-bg: #1C221D;     /* Dark neutral card */
+  --muted: #9CB8A4;       /* Softer light-muted text */
 }
+
 
 /* Reset & Base */
 * {
