@@ -2,7 +2,7 @@
 :root {
   --bg: #F2FBFA;          /* Light background */
   --text: #1C221D;         /* Strong dark text  */
-  --text-secondary:#F2FBFA /*for buttons, lighter text */
+  --text-secondary:#DFFAEA; /*for buttons, lighter text */
   --accent: #0A7A67;      /* New teal/green accent */
   --accent-light: #4FB29F;/* Lighter hover accent */
   --card-bg: #03443C;     /* Deep teal card */
