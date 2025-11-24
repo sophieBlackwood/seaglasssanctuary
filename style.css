@@ -1,11 +1,11 @@
 /* Variables */
 :root {
   --bg: #F2FBFA;
-  --text: #8F9E77;
-  --accent: #CC5803;
-  --accent-light: #5b8a94;
-  --card-bg: #1C221D;
-  --muted: #6c757d;
+  --text: #1C221D;
+  --accent: #CC5083;
+  --accent-light: #E47AA4; /* lighter tint of accent for contrast */
+  --card-bg: #03443C;
+  --muted: #8F9E77;
   --radius: 12px;
   --transition: 0.3s ease;
 }
