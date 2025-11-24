@@ -19,6 +19,27 @@ body.dark {
   --muted: #9CB8A4;       /* Soft muted text */
 }
 
+/* Pink Mode 
+:root {
+  --bg: #F2FBFA;          
+  --text: #1C221D;       
+  --accent: #CC5083;  
+  --accent-light: #E47AA4;
+  --card-bg: #03443C;     
+  --muted: #8F9E77;
+  --radius: 12px;
+  --transition: 0.3s ease;
+}
+
+body.dark {
+  --bg: #0E1211;          
+  --text: #DFFAEA;        
+  --accent: #FF7AAE;     
+  --accent-light: #CC5083;
+  --card-bg: #1C221D;    
+  --muted: #9CB8A4;      
+}
+*/
 
 
 /* Reset & Base */
