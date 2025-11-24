@@ -200,25 +200,13 @@ a {
   background: linear-gradient(135deg, var(--accent-light), var(--accent));
 }
 
-.hero-helplines {
-  background: linear-gradient(135deg, var(--accent-light), #7fc1c9);
-}
-
-.hero-about {
-  background: linear-gradient(135deg, var(--accent-light), var(--accent));
-}
-
-.hero h2,
-.hero-helplines h2,
-.hero-about h2 {
+.hero h2 {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
 }
 
-.hero p,
-.hero-helplines p,
-.hero-about p {
+.hero p {
   font-size: 1.1rem;
   max-width: 600px;
   margin: 0 auto 2rem;
