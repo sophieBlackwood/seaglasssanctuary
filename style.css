@@ -73,7 +73,7 @@ a {
    Navbar
    ========================== */
 .navbar {
-    background: var(--text-secondary);
+    background: var(--card-bg);
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     position: sticky;
     top: 0;
