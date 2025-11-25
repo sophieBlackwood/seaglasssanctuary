@@ -34,7 +34,7 @@ body.pink-mode {
   --text: #4A2C40;          /* muted, dark mauve text */
   --accent: #E48FB1;        /* gentle, warm pink for buttons/links */
   --accent-light: #F2B6CD;  /* lighter hover variant */
-  --card-bg: #FFDFF0;       /* soft pink cards */
+  --card-bg: #D78FA3;       /* richer, darker pink for cards */
   --muted: #CFA0B5;         /* subtle muted tone for metadata/text */
 }
 
@@ -45,7 +45,7 @@ body.dark.pink-mode {
   --text: #FDECF4;          /* soft pink text for readability */
   --accent: #FF8FB7;        /* bright but calming pink accent */
   --accent-light: #F2B6CD;  /* softer hover accent */
-  --card-bg: #3B2637;       /* dark card background with pink tint */
+  --card-bg: #862C50;       /* dark, muted pink for cards in dark mode */
   --muted: #D6AFC6;         /* muted text for dark environment */
 }
 
