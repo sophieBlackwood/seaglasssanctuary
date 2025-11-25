@@ -255,7 +255,7 @@ a {
 
 /* Buttons */
 .btn {
-  background: var(--always-white-text);
+  background: var(--always-light-text);
   color: var(--accent);
   padding: 0.9rem 1.8rem;
   border-radius: var(--radius);
@@ -267,7 +267,7 @@ a {
 
 .btn:hover {
   background: var(--accent-light);
-  color: white;
+  color: var(--always-light-text);
 }
 
 .btn-secondary {
