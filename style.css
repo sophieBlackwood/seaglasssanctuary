@@ -5,7 +5,7 @@
   --accent: #0A7A67;      /* New teal/green accent */
   --accent-light: #4FB29F;/* Lighter hover accent */
   --card-bg: #03443C;     /* Deep teal card */
-  --muted: #4FB29F;       /* Earthy secondary text  #8F9E77 */
+  --muted: #4FB29F;       /* Earthy secondary text  */
   --container: #1C221D;
   --radius: 12px;
   --transition: 0.3s ease;
@@ -16,7 +16,7 @@ body.dark {
   --text: #DFFAEA;        /* Soft, readable aqua-white */
   --accent: #4FB29F;      /* Brighter teal for dark mode */
   --accent-light: #7FD0C2;/* Lighter hover accent */
-  --card-bg: #03443C;     /* Dark neutral card #1C221D*/
+  --card-bg: #03443C;     /* Dark neutral card */
   --muted: #4FB29F;       /* Soft muted text */
   --container: #DFFAEA;
 }
@@ -68,9 +68,15 @@ a {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 1.5rem;
-  color: var(--container);
+  color: var(--text);
 }
 
+.container-card{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  color: var(--container);
+}
 /* ==========================
    Navbar
    ========================== */
