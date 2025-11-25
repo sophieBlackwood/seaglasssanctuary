@@ -1,38 +1,36 @@
-/* Variables */
+/* ================================================================
+   VARIABLES — Base (Light Mode)
+   ================================================================ */
 :root {
-  --bg: #F2FBFA;          /* Light background */
-  --text: #1C221D;         /* Strong dark text  */
-  --accent: #0A7A67;      /* New teal/green accent */
-  --accent-light: #4FB29F;/* Lighter hover accent */
-  --card-bg: #03443C;     /* Deep teal card */
-  --muted: #4FB29F;       /* Earthy secondary text  */
+  --bg: #F2FBFA;
+  --text: #1C221D;
+  --accent: #0A7A67;
+  --accent-light: #4FB29F;
+  --card-bg: #03443C;
+  --muted: #4FB29F;
   --container: #1C221D;
-   --always-light-text: #DFFAEA;
+  --always-light-text: #DFFAEA;
+
   --radius: 12px;
   --transition: 0.3s ease;
 }
 
+/* ================================================================
+   DARK MODE
+   ================================================================ */
 body.dark {
-  --bg: #0E1211;          /* True dark background */
-  --text: #DFFAEA;        /* Soft, readable aqua-white */
-  --accent: #4FB29F;      /* Brighter teal for dark mode */
-  --accent-light: #7FD0C2;/* Lighter hover accent */
-  --card-bg: #03443C;     /* Dark neutral card */
-  --muted: #4FB29F;       /* Soft muted text */
+  --bg: #0E1211;
+  --text: #DFFAEA;
+  --accent: #4FB29F;
+  --accent-light: #7FD0C2;
+  --card-bg: #03443C;
+  --muted: #4FB29F;
   --container: #DFFAEA;
 }
 
-/* Smooth global theme transitions */
-:root,
-body,
-body.pink-mode,
-body.dark,
-body.dark.pink-mode {
-  transition: background-color 0.6s ease, color 0.6s ease, 
-              border-color 0.6s ease, fill 0.6s ease;
-}
-
-/* 🌸 Pink Mode */
+/* ================================================================
+   PINK MODE (LIGHT VERSION)
+   ================================================================ */
 body.pink-mode {
   --bg: #F2FBFA;
   --text: #1C221D;
@@ -42,14 +40,31 @@ body.pink-mode {
   --muted: #8F9E77;
 }
 
-/* Pink Mode + Dark Mode */
+/* ================================================================
+   PINK + DARK MODE  (YOUR MISSING MODE)
+   ================================================================ */
 body.dark.pink-mode {
   --bg: #0E1211;
   --text: #DFFAEA;
-  --accent: #FF7AAE;
-  --accent-light: #CC5083;
+  --accent: #FF7AAE;       /* pink but bright enough for dark mode */
+  --accent-light: #CC5083; /* slightly darker hover for dark env */
   --card-bg: #1C221D;
   --muted: #9CB8A4;
+}
+
+/* ================================================================
+   GLOBAL THEME TRANSITION
+   ================================================================ */
+:root,
+body,
+body.pink-mode,
+body.dark,
+body.dark.pink-mode {
+  transition:
+    background-color 0.6s ease,
+    color 0.6s ease,
+    border-color 0.6s ease,
+    fill 0.6s ease;
 }
 
 /* Reset & Base */
