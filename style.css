@@ -111,16 +111,18 @@ a {
     top: 0;
     width: 100%;
     z-index: 999;
-    padding-right: 10vw; 
+    padding-right: 150px; /* space for Quick Exit button */
+    min-height: 70px;     /* FIX: prevents collapsing */
+    display: flex;
+    align-items: center;
 }
-
 
 .nav-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1.2rem 1.5rem;
-    flex-wrap: wrap;
+    width: 100%;
 }
 
 .logo {
@@ -219,32 +221,48 @@ a {
 }
 
 /* ==========================
-   Responsive Behavior
+   Mobile (max-width: 900px)
    ========================== */
 @media (max-width: 900px) {
-    .hamburger-menu {
-        display: flex;
-        position: relative;
-        top: 0;
-        left: 0;
-        margin-right: 1rem;
-    }
-  
-    .nav-links {
-        display: none; /* hide desktop links on mobile */
+
+    .navbar {
+        padding-right: 0;      /* let layout adjust naturally */
+        padding-left: 0;
+        height: 70px;          /* FIX: consistent height */
     }
 
-    .sidenav {
-        width: 0; /* start hidden */
+    .nav-container {
+        padding: 1rem 1.2rem;
+        position: relative;
+        gap: 0;
     }
+
+    /* Hamburger left */
+    .hamburger-menu {
+        display: flex;
+        position: absolute;
+        left: 1.2rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 30px;
+        color: var(--text);
+    }
+
+    /* Centered logo */
     .logo {
         position: absolute;
         left: 50%;
-        transform: translateX(-50%);
-        font-size: 1.25rem;
-        pointer-events: none; /* Prevent menu overlap issues */
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1.35rem;
         width: max-content;
+        pointer-events: none;
         white-space: nowrap;
+    }
+
+    /* Hide desktop links */
+    .nav-links {
+        display: none;
     }
 }
 
@@ -391,8 +409,8 @@ a {
 /* Quick Exit Button */
 #quick-exit {
   position: fixed;
-  top: 1.2rem;
-  right: 1.2rem;
+  top: 0.9rem;
+  right: 1rem;
   background: #e63946;
   color: white;
   border: none;
@@ -400,13 +418,22 @@ a {
   padding: 0.7rem 1.2rem;
   font-weight: 600;
   font-size: 0.95rem;
-  z-index: 2000;
+  z-index: 2000; /* above navbar */
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   box-shadow: 0 3px 10px rgba(0,0,0,0.15);
   transition: background var(--transition), transform var(--transition);
+}
+
+@media (max-width: 600px) {
+  #quick-exit {
+    font-size: 0.85rem;
+    padding: 0.55rem 0.95rem;
+    right: 0.7rem;
+    top: 0.7rem;
+  }
 }
 
 #quick-exit:hover {
