@@ -92,9 +92,7 @@ a {
   color: var(--always-light-text); /* always white/teal */
 }
 
-/* ==========================
-   Navbar
-   ========================== */
+/* Navbar */
 .navbar {
     background: var(--card-bg);
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -140,16 +138,14 @@ a {
   color: var(--accent-light);
 }
 
-/* ==========================
-   Mobile Side Navigation
-   ========================== */
+/* Side Nav for Smaller Screens */
 .sidenav {
     height: 100%;
     width: 0;
     position: fixed;
     top: 0;
     left: 0;
-    background-color: var(--text); /* deep teal */
+    background-color: var(--text); 
     overflow-x: hidden;
     padding-top: 60px;
     transition: width 0.5s ease;
@@ -160,13 +156,13 @@ a {
     padding: 12px 24px;
     text-decoration: none;
     font-size: 18px;
-    color: var(--bg);  /* light text */
+    color: var(--bg); 
     display: block;
     transition: background-color 0.3s, color 0.3s;
 }
 
 .sidenav a:hover {
-    background-color: var(--accent-light); /* soft highlight */
+    background-color: var(--accent-light); 
     color: var(--card-bg);
 }
 
@@ -211,15 +207,13 @@ a {
     margin-left: 8px;
 }
 
-/* ==========================
-   Mobile (max-width: 900px)
-   ========================== */
+/* Responsive Navbar Styles */
 @media (max-width: 900px) {
 
     .navbar {
-        padding-right: 0;      /* let layout adjust naturally */
+        padding-right: 0;      
         padding-left: 0;
-        height: 70px;          /* FIX: consistent height */
+        height: 70px;          
     }
 
     .nav-container {
@@ -228,7 +222,6 @@ a {
         gap: 0;
     }
 
-    /* Hamburger left */
     .hamburger-menu {
         display: flex;
         position: absolute;
@@ -239,7 +232,6 @@ a {
         color: var(--text);
     }
 
-    /* Centered logo */
     .logo {
         position: absolute;
         left: 50%;
@@ -251,7 +243,6 @@ a {
         white-space: nowrap;
     }
 
-    /* Hide desktop links */
     .nav-links {
         display: none;
     }
@@ -378,7 +369,7 @@ a {
   transform: scale(1.05);
 }
 
-/* Mobile Compact Floating Buttons */
+/* Responsive Floating Buttons */
 @media (max-width: 768px) {
   #floating-buttons {
     gap: 0;
@@ -409,7 +400,7 @@ a {
   padding: 0.7rem 1.2rem;
   font-weight: 600;
   font-size: 0.95rem;
-  z-index: 2000; /* above navbar */
+  z-index: 2000;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -481,7 +472,6 @@ body.dark #quick-exit {
   margin-bottom: 0.8rem;
 }
 
-/* Card actions */
 .card-actions {
   display: flex;
   gap: 0.75rem;
@@ -582,6 +572,7 @@ blockquote,
 .team-photo {
   width: 90%;
 }
+
 /* Blog card styling */
 .blog-card {
   display: flex;
