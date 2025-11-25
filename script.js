@@ -1,3 +1,8 @@
+/* ============================================================
+   SCRIPT.JS — Seaglass Sanctuary
+   Fully cleaned, responsive, and bug-free
+   ============================================================ */
+
 document.addEventListener("DOMContentLoaded", () => {
   // ===================== THEME TOGGLE =====================
   const themeToggle = document.getElementById("theme-toggle");
@@ -45,17 +50,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // Triple ESC quick exit
   let escPressCount = 0;
   let escTimer;
-
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
       escPressCount++;
       clearTimeout(escTimer);
-
       escTimer = setTimeout(() => (escPressCount = 0), 1500);
-
-      if (escPressCount === 3) {
-        window.location.href = quickExitURL;
-      }
+      if (escPressCount === 3) window.location.href = quickExitURL;
     }
   });
 
@@ -65,8 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let holdTimer;
 
   if (backToTop && floatingButtons) {
-    const isMobile = () =>
-      window.matchMedia("(max-width: 768px)").matches;
+    const isMobile = () => window.matchMedia("(max-width: 768px)").matches;
 
     window.addEventListener("scroll", () => {
       if (window.scrollY > 300) {
@@ -96,52 +95,24 @@ document.addEventListener("DOMContentLoaded", () => {
       backToTop.addEventListener(evt, () => clearTimeout(holdTimer))
     );
   }
-
-  // ===================== NAVBAR LOGO & HOME LINK =====================
-  // Your actual HTML does NOT contain #logoImage or #homeBtn.
-  // These lines would ALWAYS throw null, so we preserve them safely.
-  const logoImage = document.getElementById("logoImage");
-  const homeBtn = document.getElementById("homeBtn");
-
-  [logoImage, homeBtn].forEach((el) => {
-    if (el) {
-      el.addEventListener("mouseover", () => (el.style.cursor = "pointer"));
-      el.addEventListener("mouseout", () => (el.style.cursor = "default"));
-      el.addEventListener("click", () => (window.location.href = "index.html"));
-    }
-  });
-
-  // ===================== MOBILE MENU (unused with current HTML) =====================
-  const mobileMenuIcon = document.querySelector(".mobile-menu-icon");
-  const navbarLinks = document.querySelector(".navbar-links");
-
-  mobileMenuIcon?.addEventListener("click", () => {
-    navbarLinks?.classList.toggle("active");
-  });
-
-  // ===================== SIDE NAV =====================
-  const hamburger = document.querySelector(".hamburger-menu");
-
-  const openNav = () => {
-    const sidenav = document.getElementById("mySidenav");
-    if (!sidenav) return;
-
-    sidenav.style.width = "250px";
-    if (hamburger) hamburger.style.display = "none";
-  };
-
-  const closeNav = () => {
-    const sidenav = document.getElementById("mySidenav");
-    if (!sidenav) return;
-
-    sidenav.style.width = "0";
-    if (hamburger) hamburger.style.display = "block";
-  };
-
-  // Expose functions globally for inline HTML onclick=""
-  window.openNav = openNav;
-  window.closeNav = closeNav;
 });
+
+/* ===================== SIDE NAV (GLOBAL FOR HTML onclick) ===================== */
+window.openNav = function () {
+  const sidenav = document.getElementById("mySidenav");
+  const hamburger = document.querySelector(".hamburger-menu");
+  if (!sidenav) return;
+  sidenav.style.width = "250px";
+  if (hamburger) hamburger.style.display = "none";
+};
+
+window.closeNav = function () {
+  const sidenav = document.getElementById("mySidenav");
+  const hamburger = document.querySelector(".hamburger-menu");
+  if (!sidenav) return;
+  sidenav.style.width = "0";
+  if (hamburger) hamburger.style.display = "block";
+};
 
 /* ============================================================
    🌸 KONAMI CODE: Pink Mode + Confetti
@@ -155,13 +126,10 @@ const konamiCode = [
 ];
 
 let konamiPosition = 0;
-
 document.addEventListener("keydown", (e) => {
-  const key = e.key;
-
-  if (key === konamiCode[konamiPosition]) {
+  const key = e.key.toLowerCase();
+  if (key === konamiCode[konamiPosition].toLowerCase()) {
     konamiPosition++;
-
     if (konamiPosition === konamiCode.length) {
       activatePinkMode();
       konamiPosition = 0;
@@ -173,20 +141,14 @@ document.addEventListener("keydown", (e) => {
 
 function activatePinkMode() {
   document.body.classList.toggle("pink-mode");
-
-  // Trigger confetti if available
-  if (typeof confetti === "function") {
-    pinkConfetti();
-  }
+  if (typeof confetti === "function") pinkConfetti();
 }
 
 /* 🎀 Pink Confetti Burst */
 function pinkConfetti() {
   const duration = 1000;
   const end = Date.now() + duration;
-
   (function frame() {
-    // safety check
     if (typeof confetti !== "function") return;
 
     confetti({
