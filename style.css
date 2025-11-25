@@ -238,6 +238,7 @@ a {
 
 .hero {
   background: linear-gradient(135deg, #0A7A67, #4FB29F);
+  color: var(--always-light-text);
 }
 
 .hero h2 {
@@ -254,7 +255,7 @@ a {
 
 /* Buttons */
 .btn {
-  background: white;
+  background: var(--always-white-text);
   color: var(--accent);
   padding: 0.9rem 1.8rem;
   border-radius: var(--radius);
