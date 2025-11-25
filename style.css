@@ -1,6 +1,4 @@
-/* ================================================================
-   VARIABLES — Base (Light Mode)
-   ================================================================ */
+/* Base or Light Mode */
 :root {
   --bg: #F2FBFA;
   --text: #1C221D;
@@ -15,9 +13,7 @@
   --transition: 0.3s ease;
 }
 
-/* ================================================================
-   DARK MODE
-   ================================================================ */
+/* Dark Mode */
 body.dark {
   --bg: #0E1211;
   --text: #DFFAEA;
@@ -28,9 +24,7 @@ body.dark {
   --container: #DFFAEA;
 }
 
-/* ================================================================
-   PINK MODE (LIGHT VERSION) — HIGH CONTRAST
-   ================================================================ */
+/* Secret Pink Light Mode */
 body.pink-mode {           
   --bg: #FCEFF5;            /* very light blush background */
   --text: #4A2C40;          /* deep muted mauve text */
@@ -41,9 +35,7 @@ body.pink-mode {
 }
 
 
-/* ================================================================
-   PINK + DARK MODE
-   ================================================================ */
+/* Secret Pink Dark Mode */
 body.dark.pink-mode {
   --bg: #141014;            /* near-black with a rose tint */
   --text: #FDECF4;          /* soft pink-white for readability */
@@ -53,9 +45,7 @@ body.dark.pink-mode {
   --muted: #D6AFC6;         /* muted lavender-pink */
 }
 
-/* ================================================================
-   GLOBAL THEME TRANSITION
-   ================================================================ */
+/* Global Transitions */
 :root,
 body,
 body.pink-mode,
