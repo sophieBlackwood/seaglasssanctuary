@@ -213,7 +213,7 @@ a {
 .hero,
 .hero-helplines,
 .hero-about {
-  color: white;
+  color: var(--always-light-text);
   padding: 6rem 1.5rem;
   text-align: center;
   border-radius: 0 0 40px 40px;
