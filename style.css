@@ -7,6 +7,7 @@
   --card-bg: #03443C;     /* Deep teal card */
   --muted: #4FB29F;       /* Earthy secondary text  */
   --container: #1C221D;
+   --always-light-text: #DFFAEA;
   --radius: 12px;
   --transition: 0.3s ease;
 }
@@ -71,12 +72,13 @@ a {
   color: var(--text);
 }
 
-.container-card{
+.container-card {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 1.5rem;
-  color: var(--container);
+  color: var(--always-light-text); /* always white/teal */
 }
+
 /* ==========================
    Navbar
    ========================== */
@@ -111,14 +113,14 @@ a {
 }
 
 .nav-links a {
-    color: #DFFAEA;
-    font-weight: 500;
-    text-decoration: none;
-    transition: color var(--transition);
+  color: var(--always-light-text);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color var(--transition);
 }
 
 .nav-links a:hover {
-    color: var(--text);
+  color: var(--accent-light);
 }
 
 /* ==========================
