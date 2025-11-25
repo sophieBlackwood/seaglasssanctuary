@@ -19,50 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("theme", darkMode ? "dark" : "light");
     });
   }
-/* 🌸 Konami Code Pink Mode + Confetti */
-const konamiCode = [
-  "ArrowUp", "ArrowUp",
-  "ArrowDown", "ArrowDown",
-  "ArrowLeft", "ArrowRight",
-  "ArrowLeft", "ArrowRight",
-  "b", "a"
-];
-
-let konamiPosition = 0;
-
-document.addEventListener("keydown", (e) => {
-  const key = e.key;
-
-  if (key === konamiCode[konamiPosition]) {
-    konamiPosition++;
-
-    if (konamiPosition === konamiCode.length) {
-      activatePinkMode();
-      konamiPosition = 0;
-    }
-  } else {
-    konamiPosition = 0;
-  }
-});
-
-function activatePinkMode() {
-  // Toggle the pink mode theme
-  document.body.classList.toggle("pink-mode");
-
-  // Trigger confetti burst
-  pinkConfetti();
-}
-
-/* 🎀 Pink Confetti Burst */
-function pinkConfetti() {
-  const duration = 1 * 1000;
-  const end = Date.now() + duration;
-
-  (function frame() {
-    confetti({
-      particleCount: 12,
-      angle: 60,
-      spread: 55,
 
 
   // ===================== QUICK EXIT =====================
@@ -165,3 +121,48 @@ function pinkConfetti() {
   window.openNav = openNav;
   window.closeNav = closeNav;
 });
+
+/* 🌸 Konami Code Pink Mode + Confetti */
+const konamiCode = [
+  "ArrowUp", "ArrowUp",
+  "ArrowDown", "ArrowDown",
+  "ArrowLeft", "ArrowRight",
+  "ArrowLeft", "ArrowRight",
+  "b", "a"
+];
+
+let konamiPosition = 0;
+
+document.addEventListener("keydown", (e) => {
+  const key = e.key;
+
+  if (key === konamiCode[konamiPosition]) {
+    konamiPosition++;
+
+    if (konamiPosition === konamiCode.length) {
+      activatePinkMode();
+      konamiPosition = 0;
+    }
+  } else {
+    konamiPosition = 0;
+  }
+});
+
+function activatePinkMode() {
+  // Toggle the pink mode theme
+  document.body.classList.toggle("pink-mode");
+
+  // Trigger confetti burst
+  pinkConfetti();
+}
+
+/* 🎀 Pink Confetti Burst */
+function pinkConfetti() {
+  const duration = 1 * 1000;
+  const end = Date.now() + duration;
+
+  (function frame() {
+    confetti({
+      particleCount: 12,
+      angle: 60,
+      spread: 55,
