@@ -28,25 +28,28 @@ body.dark {
 }
 
 /* ================================================================
-   PINK MODE (LIGHT VERSION)
+   PINK MODE (LIGHT VERSION) — HIGH CONTRAST
    ================================================================ */
 body.pink-mode {           
-  --text: #4A2C40;          /* muted, dark mauve text */
-  --accent: #E48FB1;        /* gentle, warm pink for buttons/links */
-  --accent-light: #F2B6CD;  /* lighter hover variant */
-  --card-bg: #D78FA3;       /* richer, darker pink for cards */
-  --muted: #CFA0B5;         /* subtle muted tone for metadata/text */
+  --bg: #FCEFF5;            /* very light blush background */
+  --text: #4A2C40;          /* deep muted mauve text */
+  --accent: #D96A8A;        /* medium warm pink accent */
+  --accent-light: #EFA6BF;  /* soft, friendly hover */
+  --card-bg: #B24366;       /* deep rose plum — rich + readable */
+  --muted: #A8798B;         /* muted mauve for small text */
 }
+
 
 /* ================================================================
    PINK + DARK MODE
    ================================================================ */
 body.dark.pink-mode {
-  --text: #FDECF4;          /* soft pink text for readability */
+  --bg: #141014;            /* near-black with a rose tint */
+  --text: #FDECF4;          /* soft pink-white for readability */
   --accent: #FF8FB7;        /* bright but calming pink accent */
-  --accent-light: #F2B6CD;  /* softer hover accent */
-  --card-bg: #862C50;       /* dark, muted pink for cards in dark mode */
-  --muted: #D6AFC6;         /* muted text for dark environment */
+  --accent-light: #F2B6CD;  /* lighter hover accent */
+  --card-bg: #4A1E2D;       /* rich dark plum-rose */
+  --muted: #D6AFC6;         /* muted lavender-pink */
 }
 
 /* ================================================================
