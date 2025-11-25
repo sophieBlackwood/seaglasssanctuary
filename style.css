@@ -89,7 +89,9 @@ a {
     top: 0;
     width: 100%;
     z-index: 999;
+    padding-right: 120px; 
 }
+
 
 .nav-container {
     display: flex;
@@ -206,6 +208,15 @@ a {
 
     .sidenav {
         width: 0; /* start hidden */
+    }
+    .logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 1.25rem;
+        pointer-events: none; /* Prevent menu overlap issues */
+        width: max-content;
+        white-space: nowrap;
     }
 }
 
