@@ -245,12 +245,14 @@ a {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
+  color: var(--always-light-text);
 }
 
 .hero p {
   font-size: 1.1rem;
   max-width: 600px;
   margin: 0 auto 2rem;
+  color: var(--always-light-text);
 }
 
 /* Buttons */
