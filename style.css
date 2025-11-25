@@ -10,6 +10,7 @@
   --muted: #4FB29F;
   --container: #1C221D;
   --always-light-text: #DFFAEA;
+   --footer: #0A7A67;
   --radius: 12px;
   --transition: 0.3s ease;
 }
@@ -646,7 +647,7 @@ blockquote,
 
 /* Footer */
 footer {
-  background: #0A7A67;
+  background: var(--footer);
   color: white;
   text-align: center;
   padding: 1.5rem;
