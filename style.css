@@ -629,7 +629,7 @@ blockquote,
 /* Footer */
 footer {
   background: var(--footer);
-  color: white;
+  color: var(--always-light-text);
   text-align: center;
   padding: 1.5rem;
   font-size: 0.9rem;
