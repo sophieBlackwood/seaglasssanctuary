@@ -30,8 +30,7 @@ body.dark {
 /* ================================================================
    PINK MODE (LIGHT VERSION)
    ================================================================ */
-body.pink-mode {
-  --bg: #FFF0F5;            /* very soft lavender-pink background */
+body.pink-mode {           
   --text: #4A2C40;          /* muted, dark mauve text */
   --accent: #E48FB1;        /* gentle, warm pink for buttons/links */
   --accent-light: #F2B6CD;  /* lighter hover variant */
@@ -43,7 +42,6 @@ body.pink-mode {
    PINK + DARK MODE
    ================================================================ */
 body.dark.pink-mode {
-  --bg: #2A1F2A;            /* dark mauve background */
   --text: #FDECF4;          /* soft pink text for readability */
   --accent: #FF8FB7;        /* bright but calming pink accent */
   --accent-light: #F2B6CD;  /* softer hover accent */
