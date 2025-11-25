@@ -595,7 +595,7 @@ blockquote,
 
 /* Footer */
 footer {
-  background: var(--accent);
+  background: #0A7A67;
   color: white;
   text-align: center;
   padding: 1.5rem;
