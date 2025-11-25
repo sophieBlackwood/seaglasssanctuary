@@ -1,10 +1,6 @@
-/* ============================================================
-   SCRIPT.JS — Seaglass Sanctuary
-   Fully cleaned, responsive, and bug-free
-   ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
-  // ===================== THEME TOGGLE =====================
+  // Theme Toggle Button
   const themeToggle = document.getElementById("theme-toggle");
 
   if (themeToggle) {
@@ -29,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ===================== QUICK EXIT =====================
+  // Quick Exit Button
   const quickExitBtn = document.getElementById("quick-exit");
   const modal = document.getElementById("quick-exit-modal");
   const dismissModal = document.getElementById("dismiss-modal");
@@ -59,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ===================== FLOATING BUTTONS =====================
+  // Floating Buttons
   const backToTop = document.getElementById("back-to-top");
   const floatingButtons = document.getElementById("floating-buttons");
   let holdTimer;
@@ -97,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-/* ===================== SIDE NAV (GLOBAL FOR HTML onclick) ===================== */
+// Side Nav
 window.openNav = function () {
   const sidenav = document.getElementById("mySidenav");
   const hamburger = document.querySelector(".hamburger-menu");
@@ -114,9 +110,7 @@ window.closeNav = function () {
   if (hamburger) hamburger.style.display = "block";
 };
 
-/* ============================================================
-   🌸 KONAMI CODE: Pink Mode + Confetti
-   ============================================================ */
+// Secret Pink Mode
 const konamiCode = [
   "ArrowUp", "ArrowUp",
   "ArrowDown", "ArrowDown",
@@ -144,7 +138,6 @@ function activatePinkMode() {
   if (typeof confetti === "function") pinkConfetti();
 }
 
-/* 🎀 Pink Confetti Burst */
 function pinkConfetti() {
   const duration = 1000;
   const end = Date.now() + duration;
