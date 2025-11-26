@@ -100,8 +100,8 @@ a {
     top: 0;
     width: 100%;
     z-index: 999;
-    padding-right: 150px; /* space for Quick Exit button */
-    min-height: 70px;     /* FIX: prevents collapsing */
+    padding-right: 150px;
+    min-height: 80px; /* more breathing room */
     display: flex;
     align-items: center;
 }
@@ -110,32 +110,39 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.2rem 1.5rem;
+    padding: 1.4rem 1.8rem;
     width: 100%;
 }
 
+/* ⭐ More prominent logo */
 .logo {
-    font-weight: 700;
-    font-size: 1.5rem;
+    font-weight: 800;
+    font-size: 1.9rem;    /* increased from 1.5rem */
+    letter-spacing: 1px;  /* subtle polish */
     color: var(--accent);
     cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.logo:hover {
+    opacity: 0.85;
 }
 
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 1.5rem;
+    gap: 1.7rem;
 }
 
 .nav-links a {
-  color: var(--always-light-text);
-  font-weight: 500;
-  text-decoration: none;
-  transition: color var(--transition);
+    color: var(--always-light-text);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 .nav-links a:hover {
-  color: var(--accent-light);
+    color: var(--accent-light);
 }
 
 /* Side Nav for Smaller Screens */
@@ -166,7 +173,6 @@ a {
     color: var(--card-bg);
 }
 
-/* Close button (X) */
 .closebtn {
     position: absolute;
     top: 0;
@@ -175,8 +181,6 @@ a {
     font-size: 32px;
     cursor: pointer;
     color: var(--bg);
-    text-decoration: none;
-    transition: background-color 0.3s;
 }
 
 .closebtn:hover {
@@ -184,65 +188,56 @@ a {
     color: var(--card-bg);
 }
 
-/* Hamburger Menu Button */
+/* Hamburger Menu */
 .hamburger-menu {
     font-size: 32px;
     cursor: pointer;
     color: var(--text);
-    top: 20px;
-    left: 20px;
     z-index: 1000;
     display: none;
     align-items: center;
     gap: 10px;
-    position: relative;
-    top: 0;
-    left: 0;
 }
 
 /* Optional image next to hamburger icon */
 .sidenav-img {
     height: 28px;
-    vertical-align: middle;
     margin-left: 8px;
 }
 
-/* Responsive Navbar Styles */
+
+/* ============================================================
+   RESPONSIVE NAVBAR
+   ============================================================ */
 @media (max-width: 900px) {
 
+    /* Remove padding that pushes elements off center */
     .navbar {
-        padding-right: 0;      
+        padding-right: 0;
         padding-left: 0;
-        height: 70px;          
+        height: 70px;
     }
 
     .nav-container {
         padding: 1rem 1.2rem;
-        position: relative;
-        gap: 0;
+        justify-content: center;
     }
 
+    /* Show hamburger */
     .hamburger-menu {
         display: flex;
         position: absolute;
         left: 1.2rem;
         top: 50%;
         transform: translateY(-50%);
-        font-size: 30px;
-        color: var(--text);
     }
 
+    /* ⭐ Hide the logo on responsive screens */
     .logo {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 1.35rem;
-        width: max-content;
-        pointer-events: none;
-        white-space: nowrap;
+        display: none !important;
     }
 
+    /* Nav links hidden in hamburger mode */
     .nav-links {
         display: none;
     }
