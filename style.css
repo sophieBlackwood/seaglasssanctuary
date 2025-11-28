@@ -219,12 +219,8 @@ a {
 }
 
 
-/* ============================================================
-   RESPONSIVE NAVBAR
-   ============================================================ */
+/* Responsive Navbar */
 @media (max-width: 900px) {
-
-    /* Remove padding that pushes elements off center */
     .navbar {
         padding-right: 0;
         padding-left: 0;
@@ -244,13 +240,11 @@ a {
         top: 50%;
         transform: translateY(-50%);
     }
-
-    /* ⭐ Hide the logo on responsive screens */
+  
     .logo {
         display: none !important;
     }
 
-    /* Nav links hidden in hamburger mode */
     .nav-links {
         display: none;
     }
@@ -399,7 +393,7 @@ a {
 /* Quick Exit Button */
 #quick-exit {
   position: fixed;
-  top: 0.9rem;
+  top: 1.8rem;
   right: 1rem;
   background: #e63946;
   color: white;
