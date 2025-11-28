@@ -545,8 +545,8 @@ body.dark #quick-exit {
   transform: translate(-50%, -50%) scale(1);
 }
 
-#pink-mode-modal .modal-dismiss,
-#pink-mode-dismiss {
+/* Buttons inside the modal */
+#pink-mode-modal button {
   margin-top: 1rem;
   padding: 0.5rem 1rem;
   border: none;
@@ -556,10 +556,10 @@ body.dark #quick-exit {
   cursor: pointer;
   font-weight: 600;
   transition: background 0.3s ease;
+  margin-left: 0.5rem;
 }
 
-#pink-mode-modal .modal-dismiss:hover,
-#pink-mode-dismiss:hover {
+#pink-mode-modal button:hover {
   background: #d62839;
 }
 
