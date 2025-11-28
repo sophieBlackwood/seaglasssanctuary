@@ -89,53 +89,62 @@ a {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 1.5rem;
-  color: var(--always-light-text); /* always white/teal */
+  color: var(--always-light-text); 
 }
 
 /* Navbar */
 .navbar {
-    background: var(--card-bg);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     position: sticky;
     top: 0;
-    width: 100%;
     z-index: 999;
-    padding-right: 150px;
-    min-height: 80px; /* more breathing room */
+    width: 100%;
+
     display: flex;
     align-items: center;
+
+    background: var(--card-bg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+    min-height: 80px;
+    padding-right: 150px;
 }
 
+/* Navbar Inner Wrapper */
 .nav-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.4rem 1.8rem;
+
     width: 100%;
+    padding: 1.4rem 1.8rem;
 }
 
-/* ⭐ More prominent logo */
+/* Logo */
 .logo {
-    font-weight: 800;
-    font-size: 1.9rem;    /* increased from 1.5rem */
-    letter-spacing: 1px;  /* subtle polish */
-    color: var(--accent);
-    cursor: pointer;
-    transition: opacity 0.3s;
-   height: 48px;    /* ← the actual fix */
+    display: block;
+    height: 48px;        
     width: auto;
     object-fit: contain;
-    display: block;
+
+    font-weight: 800;
+    font-size: 1.9rem;
+    letter-spacing: 1px;
+
+    color: var(--accent);
+    cursor: pointer;
+    transition: opacity 0.3s ease;
 }
 
 .logo:hover {
     opacity: 0.85;
 }
 
+/* Nav Links*/
 .nav-links {
-    list-style: none;
     display: flex;
     gap: 1.7rem;
+    list-style: none;
+    align-items: center;
 }
 
 .nav-links a {
