@@ -6,41 +6,60 @@
   <title>Counselors</title>
   <link rel="stylesheet" href="https://use.typekit.net/rig8hkd.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <link rel="icon" type="image/x-icon" href="favicon.ico"/>
+  <link rel="icon" type="image/x-icon" href="icon_transparent.png"/>
   <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
-
 <body>
 
   <!-- Quick Exit Button -->
-  <button id="quick-exit" title="Quickly exit to Google">
-    <i class="fa-solid fa-arrow-right-from-bracket"></i> Quick Exit
-  </button>
-
+<button id="quick-exit" title="Quickly exit to Google">
+  <i class="fa-solid fa-arrow-right-from-bracket"></i> Quick Exit
+</button>
+  
   <!-- Floating Side Buttons -->
-  <div id="floating-buttons">
-    <button id="theme-toggle" title="Toggle theme">
-      <i class="fa-solid fa-moon"></i>
-    </button>
-    <button id="back-to-top" title="Back to top">
-      <i class="fa-solid fa-arrow-up"></i>
-    </button>
-  </div>
+<div id="floating-buttons">
+  <button id="theme-toggle" title="Toggle theme">
+    <i class="fa-solid fa-moon"></i>
+  </button>
+  <button id="back-to-top" title="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+</div>
 
   <header class="navbar">
     <div class="container nav-container">
-      <h1 class="logo">Seaglass Sanctuary</h1>
+      <img class="logo" id="logoImage" src="logo_text.png" alt="logo">
       <nav>
         <ul class="nav-links">
-          <li><a href="index.html#mission">Mission</a></li>
-          <li><a href="index.html#resources">Resources</a></li>
+          <li><a href="#mission">Mission</a></li>
+          <li><a href="#resources">Resources</a></li>
           <li><a href="helplines.html">Helplines</a></li>
-          <li><a href="index.html#support">Support</a></li>
-          <li><a href="index.html#stories">Stories</a></li>
-          <li><a href="index.html#blog">Blog</a></li>
+          <li><a href="#support">Support</a></li>
+          <li><a href="#stories">Stories</a></li>
+          <li><a href="#blog">Blog</a></li>
         </ul>
       </nav>
     </div>
+
+    <!-- Mobile Side Navigation -->
+<div class="hamburger-menu" onclick="openNav()">
+  &#9776;
+  <img src="icon_transparent.png" alt="Seaglass logo" class="sidenav-img">
+</div>
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <hr>
+  <a href="index.html" class="special-link">Home</a>
+  <a href="index.html#mission">Mission</a>
+  <a href="index.html#resources">Resources</a>
+  <a href="helplines.html">Helplines</a>
+  <a href="index.html#support">Support</a>
+  <a href="index.html#stories">Stories</a>
+  <a href="index.html#blog">Blog</a>
+</div>
+
   </header>
 
     <!-- Hero Section -->
