@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  //Theme toggle
+  //Theme Toggle
   const themeToggle = document.getElementById("theme-toggle");
 
   if (themeToggle) {
@@ -28,27 +28,25 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-
-  //If they trigger pink mode, they are staying with it :)
+  //Restore Pink Mode
   const savedPink = localStorage.getItem("pink-mode");
   if (savedPink === "on") {
     document.body.classList.add("pink-mode");
   }
 
 
-
-  // Quick Exit Button and Modal
+  //Quick Exit Button and Modal
   const quickExitBtn = document.getElementById("quick-exit");
   const modal = document.getElementById("quick-exit-modal");
   const dismissModal = document.getElementById("dismiss-modal");
   const quickExitURL = "https://www.google.com/search?q=weather+today&safe=active";
 
-  // Quick exit button redirect
+  // Quick exit redirect
   quickExitBtn?.addEventListener("click", () => {
     window.location.href = quickExitURL;
   });
 
-  // Show modal only once per session, and only on desktop
+  // Show modal once per session (desktop only)
   if (modal && window.innerWidth > 768 && !sessionStorage.getItem("quick-exit-seen")) {
     modal.classList.add("show");
     sessionStorage.setItem("quick-exit-seen", "true");
@@ -57,8 +55,16 @@ document.addEventListener("DOMContentLoaded", () => {
   dismissModal?.addEventListener("click", () => modal.classList.remove("show"));
 
 
+  //Pink Mode Modal
+  const pinkModal = document.getElementById("pink-mode-modal");
+  const pinkDismiss = document.getElementById("pink-mode-dismiss");
 
-  // Triple esc quick exit
+  pinkDismiss?.addEventListener("click", () => {
+    pinkModal.classList.remove("show");
+  });
+
+
+  //Triple Esc Quick Exit
   let escPressCount = 0;
   let escTimer;
 
@@ -67,17 +73,14 @@ document.addEventListener("DOMContentLoaded", () => {
       escPressCount++;
       clearTimeout(escTimer);
 
-      // Reset after 1.5 seconds
       escTimer = setTimeout(() => (escPressCount = 0), 1500);
 
-      // Trigger quick exit on 3 rapid presses
       if (escPressCount === 3) window.location.href = quickExitURL;
     }
   });
 
 
-
-  //Floating buttons, back to top
+ //Floating Buttons and Back to Top
   const backToTop = document.getElementById("back-to-top");
   const floatingButtons = document.getElementById("floating-buttons");
   let holdTimer;
@@ -85,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (backToTop && floatingButtons) {
     const isMobile = () => window.matchMedia("(max-width: 768px)").matches;
 
-    // Show/hide buttons based on scroll position
+    // Scroll behavior
     window.addEventListener("scroll", () => {
       if (window.scrollY > 300) {
         backToTop.classList.add("visible");
@@ -101,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
       window.scrollTo({ top: 0, behavior: "smooth" })
     );
 
-    // Long-press on mobile toggles additional floating buttons
+    // Long-press reveal (mobile)
     backToTop.addEventListener("mousedown", () => {
       if (isMobile()) {
         holdTimer = setTimeout(() => {
@@ -115,7 +118,6 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 });
-
 
 
 //Side Nav
@@ -138,8 +140,7 @@ window.closeNav = function () {
 };
 
 
-
-// Secret Pink Mode because why not. 
+// Secret Pink Mode :)
 const konamiCode = [
   "arrowup", "arrowup",
   "arrowdown", "arrowdown",
@@ -150,14 +151,13 @@ const konamiCode = [
 
 let konamiPosition = 0;
 
-// Listen for the Konami code sequence
 document.addEventListener("keydown", (e) => {
   const key = e.key.toLowerCase();
 
   if (key === konamiCode[konamiPosition]) {
     konamiPosition++;
 
-    // Completed sequence → toggle pink mode
+    // Completed sequence → activate pink mode
     if (konamiPosition === konamiCode.length) {
       activatePinkMode();
       konamiPosition = 0;
@@ -168,8 +168,14 @@ document.addEventListener("keydown", (e) => {
 });
 
 
-// Toggle pink mode + save state
+// Toggle Pink Mode
 function activatePinkMode() {
   const enabled = document.body.classList.toggle("pink-mode");
   localStorage.setItem("pink-mode", enabled ? "on" : "off");
+
+  // Show modal ONLY when turning pink mode on
+  if (enabled) {
+    const pinkModal = document.getElementById("pink-mode-modal");
+    if (pinkModal) pinkModal.classList.add("show");
+  }
 }
