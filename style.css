@@ -520,6 +520,49 @@ body.dark #quick-exit {
   }
 }
 
+/* Pink Mode Modal (matches quick exit) */
+#pink-mode-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--card-bg);
+  color: var(--always-light-text);
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  z-index: 2500;
+  display: none;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#pink-mode-modal.show {
+  display: block;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+#pink-mode-modal .modal-dismiss,
+#pink-mode-dismiss {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  background: #e63946;
+  color: white;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+#pink-mode-modal .modal-dismiss:hover,
+#pink-mode-dismiss:hover {
+  background: #d62839;
+}
+
 /* Sections & Cards */
 .section {
   padding: 4rem 1.5rem;
