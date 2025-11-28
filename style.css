@@ -465,7 +465,7 @@ body.dark #quick-exit {
 .counselor .card-body h4 {
   margin-bottom: 0.25rem;
   font-size: 1.05rem;
-  color: var(--always-white-text);
+  color: var(--always-light-text);
 }
 
 .counselor .meta {
@@ -476,7 +476,7 @@ body.dark #quick-exit {
 
 .counselor .blurb {
   font-size: 0.95rem;
-  color: var(--always-white-text);
+  color: var(--always-light-text);
   margin-bottom: 0.8rem;
 }
 
