@@ -1,11 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  //Theme Toggle
+  // Theme Toggle
   const themeToggle = document.getElementById("theme-toggle");
-
   if (themeToggle) {
     const savedTheme = localStorage.getItem("theme");
-
     if (savedTheme === "dark") {
       document.body.classList.add("dark");
       themeToggle.innerHTML = '<i class="fa-regular fa-sun"></i>';
@@ -29,25 +27,35 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.add("pink-mode");
   }
 
-  //Quick Exit
+  // Quick Exit
   const quickExitBtn = document.getElementById("quick-exit");
   const modal = document.getElementById("quick-exit-modal");
   const dismissModal = document.getElementById("dismiss-modal");
   const quickExitURL = "https://www.google.com/search?q=weather+today&safe=active";
 
   quickExitBtn?.addEventListener("click", () => window.location.href = quickExitURL);
+
   if (modal && window.innerWidth > 768 && !sessionStorage.getItem("quick-exit-seen")) {
     modal.classList.add("show");
     sessionStorage.setItem("quick-exit-seen", "true");
   }
+
   dismissModal?.addEventListener("click", () => modal.classList.remove("show"));
 
   // Pink Mode Modal
   const pinkModal = document.getElementById("pink-mode-modal");
   const pinkDismiss = document.getElementById("pink-mode-dismiss");
+  const pinkDeactivate = document.getElementById("pink-mode-deactivate");
+
   pinkDismiss?.addEventListener("click", () => pinkModal.classList.remove("show"));
 
-  // Triple ESC quick exit
+  pinkDeactivate?.addEventListener("click", () => {
+    document.body.classList.remove("pink-mode");
+    localStorage.setItem("pink-mode", "off");
+    pinkModal.classList.remove("show");
+  });
+
+  // Triple ESC Quick Exit
   let escPressCount = 0;
   let escTimer;
   document.addEventListener("keydown", (event) => {
@@ -59,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  //Floating Buttons
+  // Floating Buttons & Back to Top
   const backToTop = document.getElementById("back-to-top");
   const floatingButtons = document.getElementById("floating-buttons");
   let holdTimer;
@@ -104,7 +112,7 @@ window.closeNav = function () {
   if (hamburger) hamburger.style.display = "block";
 };
 
-// Secret Pink Mode (Konami code)
+// Secret Pink Mode (Konami Code)
 const konamiCode = ["arrowup","arrowup","arrowdown","arrowdown","arrowleft","arrowright","arrowleft","arrowright","b","a"];
 let konamiPosition = 0;
 
@@ -124,7 +132,7 @@ function activatePinkMode() {
   const pinkEnabled = document.body.classList.toggle("pink-mode");
   localStorage.setItem("pink-mode", pinkEnabled ? "on" : "off");
 
-  // Show modal only if turning on
+  // Show modal only when turning on
   if (pinkEnabled) {
     const pinkModal = document.getElementById("pink-mode-modal");
     if (pinkModal) pinkModal.classList.add("show");
