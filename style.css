@@ -94,7 +94,7 @@ a {
 
 /* Navbar */
 .navbar {
-    position: sticky;
+    position: fixed;
     top: 0;
     z-index: 999;
     width: 100%;
@@ -392,6 +392,7 @@ a {
 
 /* Quick Exit Button */
 #quick-exit {
+  position: absolute;
   top: 1.8rem;
   right: 1rem;
   background: #e63946;
