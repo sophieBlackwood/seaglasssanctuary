@@ -102,7 +102,7 @@ a {
   align-items: center; 
   background: var(--card-bg); 
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); 
-  min-height: 80px;
+  min-height: 70px; /* Reduced height to make navbar less tall */
 } 
 
 /* Navbar Inner Wrapper */ 
@@ -111,7 +111,7 @@ a {
   align-items: center; 
   justify-content: space-between; 
   width: 100%; 
-  padding: 1.4rem 1.8rem; 
+  padding: 1.4rem 4rem 1.4rem 1.8rem; /* Increased right padding to prevent overlap with quick exit button */
 } 
 
 .nav-right {
@@ -218,7 +218,6 @@ a {
     margin-left: 8px;
 }
 
-
 /* Responsive Navbar */
 @media (max-width: 900px) {
     .navbar {
@@ -228,7 +227,7 @@ a {
     }
 
     .nav-container {
-        padding: 1rem 1.2rem;
+        padding: 1rem 3rem 1rem 1.2rem; /* Increased right padding for mobile to prevent overlap */
         justify-content: center;
     }
 
@@ -398,11 +397,10 @@ a {
   }
 }
 
-
 #quick-exit {
   position: fixed;
   top: 1rem;
-  right: 2rem;
+  right: 1rem; /* Adjusted to prevent overlap with navbar links */
   background: #e63946;
   color: white;
   border: none;
@@ -423,7 +421,7 @@ a {
   #quick-exit {
     font-size: 0.85rem;
     padding: 0.55rem 0.95rem;
-    right: 1rem; 
+    right: 0.7rem; /* Adjusted for mobile */
     top: 0.7rem;
   }
 }
@@ -436,6 +434,7 @@ a {
 body.dark #quick-exit {
   background: #e84c5a;
 }
+
 
 /* Counselor Cards */
 .counselors-grid {
