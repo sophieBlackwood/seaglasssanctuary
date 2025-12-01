@@ -92,40 +92,40 @@ a {
   color: var(--always-light-text); 
 }
 
-/* Navbar */
+//* Navbar */
 .navbar {
     position: fixed;
     top: 0;
     z-index: 999;
     width: 100%;
 
-    display: flex;
-    align-items: center;
-
     background: var(--card-bg);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 
     min-height: 80px;
-    padding-right: 150px;
+
+    display: flex;
+    align-items: center;
 }
 
 /* Navbar Inner Wrapper */
 .nav-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
 
     width: 100%;
     padding: 1.4rem 1.8rem;
+
+    /* Keep your image spacing on the far right */
+    padding-right: 150px;
 }
 
-/* Logo */
+/* Logo (left side) */
 .logo {
     display: block;
-    height: 48px;        
+    height: 48px;
     width: auto;
     object-fit: contain;
-
     font-weight: 800;
     font-size: 1.9rem;
     letter-spacing: 1px;
@@ -139,7 +139,17 @@ a {
     opacity: 0.85;
 }
 
-/* Nav Links*/
+/* Container for links + exit button */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    /* Moves content to the right side! */
+    margin-left: auto;
+}
+
+/* Nav Links */
 .nav-links {
     display: flex;
     gap: 1.7rem;
@@ -390,25 +400,27 @@ a {
   }
 }
 
+
 /* Quick Exit Button */
 #quick-exit {
-  background: #e63946;
-  top:1.8 rem;
-  position: absolute;
-  color: white;
-  border: none;
-  border-radius: var(--radius);
-  padding: 0.7rem 1.2rem;
-  font-weight: 600;
-  font-size: 0.95rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  z-index: 2000;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-  transition: background var(--transition), transform var(--transition);
+    background: #e63946;
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+
+    padding: 0.7rem 1.2rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    transition: background var(--transition), transform var(--transition);
 }
+
 
 @media (max-width: 600px) {
   #quick-exit {
