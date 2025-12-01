@@ -392,7 +392,6 @@ a {
 
 /* Quick Exit Button */
 #quick-exit {
-  position: static;
   top: 1.8rem;
   right: 1rem;
   background: #e63946;
