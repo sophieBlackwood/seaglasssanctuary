@@ -392,8 +392,7 @@ a {
 
 /* Quick Exit Button */
 #quick-exit {
-  position: absolute;
-  top: 1.8rem;
+  margin-left: auto;
   background: #e63946;
   color: white;
   border: none;
@@ -401,7 +400,6 @@ a {
   padding: 0.7rem 1.2rem;
   font-weight: 600;
   font-size: 0.95rem;
-  z-index: 2000;
   cursor: pointer;
   display: flex;
   align-items: center;
