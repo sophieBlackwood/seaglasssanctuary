@@ -92,7 +92,7 @@ a {
   color: var(--always-light-text); 
 }
 
-/* Navbar */ 
+/* Navbar */
 .navbar {
   position: fixed;
   top: 0;
@@ -103,24 +103,16 @@ a {
   background: var(--card-bg);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   min-height: 70px;
+  padding: 0 2rem;
 }
 
-/* Navbar Inner */
+/* Navbar Inner Container */
 .nav-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  /* More even overall spacing */
-  padding: 1.4rem 5rem 1.4rem 2.2rem;
-}
-
-/* Right side (links, toggles, etc.) */
-.nav-right {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 2.2rem;
+  padding: 1.4rem 5rem 1.4rem 2.2rem; /* Adjust spacing as needed */
 }
 
 /* Logo */
@@ -129,16 +121,21 @@ a {
   height: 48px;
   width: auto;
   object-fit: contain;
-  color: var(--accent);
   cursor: pointer;
   transition: opacity 0.3s ease;
-  
-  /* Moves logo further right without breaking layout */
-  margin-right: 2.5rem;
+  margin-right: 2.5rem; /* Space to right */
 }
 
 .logo:hover {
   opacity: 0.85;
+}
+
+/* Right Side Navigation Links / Buttons */
+.nav-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
 }
 
 /* Navigation Links */
@@ -147,6 +144,8 @@ a {
   align-items: center;
   gap: 1.8rem;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-links a {
@@ -162,62 +161,76 @@ a {
 
 /* Side Nav for Smaller Screens */
 .sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: var(--text); 
-    overflow-x: hidden;
-    padding-top: 60px;
-    transition: width 0.5s ease;
-    z-index: 9999;
+  height: 100%;
+  width: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--text);
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: width 0.5s ease;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
 }
 
 .sidenav a {
-    padding: 12px 24px;
-    text-decoration: none;
-    font-size: 18px;
-    color: var(--bg); 
-    display: block;
-    transition: background-color 0.3s, color 0.3s;
+  padding: 12px 24px;
+  text-decoration: none;
+  font-size: 18px;
+  color: var(--bg);
+  display: block;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .sidenav a:hover {
-    background-color: var(--accent-light); 
-    color: var(--card-bg);
+  background-color: var(--accent-light);
+  color: var(--card-bg);
 }
 
+/* Close Button */
 .closebtn {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 20px 25px;
-    font-size: 32px;
-    cursor: pointer;
-    color: var(--bg);
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 20px 25px;
+  font-size: 32px;
+  cursor: pointer;
+  color: var(--bg);
 }
 
 .closebtn:hover {
-    background-color: var(--accent-light);
-    color: var(--card-bg);
+  background-color: var(--accent-light);
+  color: var(--card-bg);
+  border-radius: 0 0 0 6px;
 }
 
 /* Hamburger Menu */
 .hamburger-menu {
-    font-size: 32px;
-    cursor: pointer;
-    color: var(--text);
-    z-index: 1000;
-    display: none;
-    align-items: center;
-    gap: 10px;
+  display: none;
+  font-size: 32px;
+  cursor: pointer;
+  color: var(--text);
+  align-items: center;
+  gap: 10px;
+  z-index: 1000;
 }
 
 /* Optional image next to hamburger icon */
 .sidenav-img {
-    height: 28px;
-    margin-left: 8px;
+  height: 28px;
+  margin-left: 8px;
+}
+
+/* Responsive for Mobile */
+@media (max-width: 900px) {
+  .nav-links {
+    display: none; /* Hide normal nav links */
+  }
+  .hamburger-menu {
+    display: flex; /* Show hamburger icon */
+  }
 }
 
 /* Responsive Navbar */
