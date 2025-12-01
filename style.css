@@ -1,49 +1,49 @@
 /* Base or Light Mode */
 :root {
-  --bg: #F2FBFA;
-  --text: #1C221D;
-  --accent: #0A7A67;
-  --accent-light: #4FB29F;
-  --card-bg: #03443C;
-  --muted: #4FB29F;
-  --container: #1C221D;
-  --always-light-text: #DFFAEA;
-   --footer: #0A7A67;
-  --radius: 12px;
-  --transition: 0.3s ease;
+--bg: #F2FBFA;            /* very light mint background */
+--text: #1C221D;          /* very dark greenish text */
+--accent: #0A7A67;        /* deep teal accent */
+--accent-light: #4FB29F;  /* soft teal highlight */
+--card-bg: #03443C;       /* dark teal card background */
+--muted: #4FB29F;         /* muted teal for secondary text */
+--container: #1C221D;     /* dark greenish container background */
+--always-light-text: #DFFAEA; /* soft mint-white text for contrast */
+--footer: #0A7A67;        /* dark teal footer background */
+--radius: 12px;          
+--transition: 0.3s ease; 
 }
 
 /* Dark Mode */
 body.dark {
-  --bg: #0E1211;
-  --text: #DFFAEA;
-  --accent: #4FB29F;
-  --accent-light: #7FD0C2;
-  --card-bg: #03443C;
-  --muted: #4FB29F;
-  --container: #DFFAEA;
+--bg: #0E1211;            /* near-black background */
+--text: #DFFAEA;          /* soft mint-white text */
+--accent: #4FB29F;        /* teal accent */
+--accent-light: #7FD0C2;  /* lighter teal accent */
+--card-bg: #03443C;       /* dark teal card background */
+--muted: #4FB29F;         /* muted teal text */
+--container: #DFFAEA;     /* light mint container background */
 }
 
 /* Secret Pink Light Mode */
-body.pink-mode {           
-  --bg: #FCEFF5;            /* very light blush background */
-  --text: #4A2C40;          /* deep muted mauve text */
-  --accent: #D96A8A;        /* medium warm pink accent */
-  --accent-light: #EFA6BF;  /* soft, friendly hover */
-  --card-bg: #B24366;       /* deep rose plum — rich + readable */
-  --muted: #A8798B;         /* muted mauve for small text */
+body.pink-mode {
+--bg: #FCEFF5;            /* very light blush background */
+--text: #4A2C40;          /* deep muted mauve text */
+--accent: #D96A8A;        /* medium warm pink accent */
+--accent-light: #EFA6BF;  /* soft, friendly hover accent */
+--card-bg: #B24366;       /* deep rose plum card background */
+--muted: #A8798B;         /* muted mauve for secondary text */
 }
-
 
 /* Secret Pink Dark Mode */
 body.dark.pink-mode {
-  --bg: #141014;            /* near-black with a rose tint */
-  --text: #FDECF4;          /* soft pink-white for readability */
-  --accent: #FF8FB7;        /* bright but calming pink accent */
-  --accent-light: #F2B6CD;  /* lighter hover accent */
-  --card-bg: #4A1E2D;       /* rich dark plum-rose */
-  --muted: #D6AFC6;         /* muted lavender-pink */
+--bg: #141014;            /* near-black with rose tint */
+--text: #FDECF4;          /* soft pink-white text */
+--accent: #FF8FB7;        /* bright, calming pink accent */
+--accent-light: #F2B6CD;  /* lighter pink hover accent */
+--card-bg: #4A1E2D;       /* rich dark plum-rose background */
+--muted: #D6AFC6;         /* muted lavender-pink text */
 }
+
 
 /* Global Transitions */
 :root,
