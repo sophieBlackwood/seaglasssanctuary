@@ -102,7 +102,7 @@ a {
   align-items: center; 
   background: var(--card-bg); 
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); 
-  min-height: 80px; padding-right: 150px; 
+  min-height: 80px;
 } 
 
 /* Navbar Inner Wrapper */ 
@@ -113,6 +113,13 @@ a {
   width: 100%; 
   padding: 1.4rem 1.8rem; 
 } 
+
+.nav-right {
+    margin-left: auto;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
 
 /* Logo */ 
 .logo { 
