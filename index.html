@@ -1,105 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Seaglass Sanctuary</title>
-  <link rel="stylesheet" href="https://use.typekit.net/rig8hkd.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <link rel="icon" type="image/x-icon" href="icon_transparent.png"/>
-  <link rel="stylesheet" href="style.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-</head>
-<body>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Seaglass Sanctuary — A mental health awareness initiative providing resources, stories, community support, and wellbeing tools." />
   
-  <!-- Floating Side Buttons -->
-<div id="floating-buttons">
-  <button id="theme-toggle" title="Toggle theme">
-    <i class="fa-solid fa-moon"></i>
-  </button>
-  <button id="back-to-top" title="Back to top">
-    <i class="fa-solid fa-arrow-up"></i>
-  </button>
-</div>
-<!-- NOTE: THIS IS CHANGED TO HOPEFULLY FIX HEADER. IF THIS WORKS, TRANSFER TO OTHER PAGES. :( -->
-<header class="navbar">
-  <div class="container nav-container">
-    <a href="index.html">
-      <img class="logo" id="logoImage" src="logo_text.png" alt="logo">
-    </a>
+  <title>Seaglass Sanctuary</title>
 
-    <div class="nav-right">
-      <nav>
-        <ul class="nav-links">
-          <li><a href="#mission">Mission</a></li>
-          <li><a href="#resources">Resources</a></li>
-          <li><a href="helplines.html">Helplines</a></li>
-          <li><a href="#support">Support</a></li>
-          <li><a href="#stories">Stories</a></li>
-          <li><a href="#blog">Blog</a></li>
-        </ul>
-      </nav>
-      
-<!--Quick Exit Button -->
-      <button id="quick-exit" title="Quickly exit to Google">
-        <i class="fa-solid fa-arrow-right-from-bracket"></i> Quick Exit
-      </button>
-    </div>
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://use.typekit.net/rig8hkd.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="icon_transparent.png" />
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Floating Side Buttons -->
+  <div id="floating-buttons">
+    <button id="theme-toggle" aria-label="Toggle theme">
+      <i class="fa-solid fa-moon"></i>
+    </button>
+
+    <button id="back-to-top" aria-label="Back to top">
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
   </div>
-</header>
+
+  <!-- Header -->
+  <header class="navbar">
+    <div class="container nav-container">
+
+      <a href="index.html" aria-label="Seaglass Sanctuary Home">
+        <img
+          class="logo"
+          id="logoImage"
+          src="logo_text.png"
+          alt="Seaglass Sanctuary logo"
+        />
+      </a>
+
+      <div class="nav-right">
+        <nav aria-label="Main navigation">
+          <ul class="nav-links">
+            <li><a href="#mission">Mission</a></li>
+            <li><a href="#resources">Resources</a></li>
+            <li><a href="helplines.html">Helplines</a></li>
+            <li><a href="#support">Support</a></li>
+            <li><a href="#stories">Stories</a></li>
+            <li><a href="#blog">Blog</a></li>
+          </ul>
+        </nav>
+
+        <!-- Quick Exit -->
+        <button id="quick-exit" aria-label="Quick exit to Google">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          Quick Exit
+        </button>
+      </div>
+
+    </div>
+  </header>
 
   <!-- Mobile Navigation -->
-<div class="hamburger-menu" onclick="openNav()">
-  &#9776;
-  <img src="icon_transparent.png" alt="Seaglass logo" class="sidenav-img">
-</div>
+  <button
+    class="hamburger-menu"
+    onclick="openNav()"
+    aria-label="Open mobile menu"
+  >
+    &#9776;
+    <img src="icon_transparent.png" alt="Seaglass icon" class="sidenav-img" />
+  </button>
 
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-  <hr>
-  <a href="index.html" class="special-link">Home</a>
-  <a href="index.html#mission">Mission</a>
-  <a href="index.html#resources">Resources</a>
-  <a href="helplines.html">Helplines</a>
-  <a href="index.html#support">Support</a>
-  <a href="index.html#stories">Stories</a>
-  <a href="index.html#blog">Blog</a>
-</div>
+  <nav id="mySidenav" class="sidenav" aria-label="Mobile navigation">
+    <button class="closebtn" onclick="closeNav()" aria-label="Close menu">×</button>
+    <hr />
+    <a href="index.html" class="special-link">Home</a>
+    <a href="#mission">Mission</a>
+    <a href="#resources">Resources</a>
+    <a href="helplines.html">Helplines</a>
+    <a href="#support">Support</a>
+    <a href="#stories">Stories</a>
+    <a href="#blog">Blog</a>
+  </nav>
 
   <main>
+
     <!-- Hero Section -->
     <section class="hero">
       <div class="container">
         <h2>Your Mind Matters</h2>
-        <p>At Seaglass Sanctuary, we believe in breaking the stigma and providing accessible resources for mental well-being.</p>
+        <p>
+          At Seaglass Sanctuary, we believe in breaking the stigma and providing accessible resources for mental well-being.
+        </p>
         <a href="#resources" class="btn" id="mission">Find Support</a>
-      </div >
+      </div>
     </section>
 
     <!-- Mission Section -->
-    <section  class="section mission">
-   <div class="container">
+    <section class="section mission">
+      <div class="container">
         <h3>Our Mission</h3>
-        <p>Seaglass Sanctuary exists to connect individuals with the tools, stories, and communities that promote understanding and healing. We’re here to help everyone find their center.</p> 
-        <br>
+        <p>
+          Seaglass Sanctuary exists to connect individuals with the tools, stories, and communities that promote understanding and healing. We’re here to help everyone find their center.
+        </p>
+        <br />
         <a href="aboutus.html" class="btn-secondary" id="resources">Learn More About Us</a>
       </div>
     </section>
 
     <!-- Resources Section -->
-    <section  class="section">
+    <section class="section">
       <div class="container-card">
         <h3>Resources</h3>
+
         <div class="card-grid">
           <div class="card">
             <h4>Helplines And Hotlines</h4>
             <p>Access 24/7 local and national crisis lines and mental health resources.</p>
             <a href="helplines.html" class="link">View helplines →</a>
           </div>
+
           <div class="card">
             <h4>Professional Support</h4>
             <p>Find certified counselors and schedule an online session with a mental health professional.</p>
-            <a href="counselors.html" class="link" id="support" >Book an appointment →</a>
+            <a href="counselors.html" class="link" id="support">Book an appointment →</a>
           </div>
         </div>
       </div>
@@ -107,9 +136,12 @@
 
     <!-- Support Section -->
     <section class="section">
-    <div class="container">
+      <div class="container">
         <h3>Community Support</h3>
-        <p>Join our online community to share your experiences, find understanding, and support one another in a safe environment.</p><br>
+        <p>
+          Join our online community to share your experiences, find understanding, and support one another in a safe environment.
+        </p>
+        <br />
         <a href="#" class="btn-secondary">Visit Forums</a>
       </div>
     </section>
@@ -118,85 +150,102 @@
     <section class="section events">
       <div class="container-card">
         <h3>Upcoming Event</h3>
+
         <div class="event-card">
           <h4>Mental Health Awareness Workshop</h4>
           <p><strong>Date:</strong> December 12, 2025</p>
           <p><strong>Time:</strong> 3:00 PM - 5:00 PM</p>
           <p><strong>Location:</strong> Seaglass Sanctuary Community Center</p>
-          <p>Join us for an interactive workshop focusing on mental health awareness, coping strategies, and community resources.</p>
-          <br>
-          <a href="index.html#support" class="btn btn-secondary" id="stories">Learn More</a>
+          <p>
+            Join us for an interactive workshop focusing on mental health awareness, coping strategies, and community resources.
+          </p>
+          <br />
+          <a href="#support" class="btn btn-secondary" id="stories">Learn More</a>
         </div>
       </div>
     </section>
 
-    <!-- Testimonials - I like but also no. Perhaps phase 2? -->
-    <section  class="section testimonials">
+    <!-- Testimonials Section -->
+    <section class="section testimonials">
       <div class="container-card">
         <h3>Real Stories</h3>
+
         <div class="testimonial-grid">
           <blockquote>
-            "Seaglass Sanctuary helped me realize I wasn’t alone. The stories and support changed my perspective."
-            <cite>– Jordan R.</cite>
-          <br> <a href="jordan.html" class="link">Read more →</a>
+            “Seaglass Sanctuary helped me realize I wasn’t alone. The stories and support changed my perspective.”
+            <cite>– Jordan R.</cite><br />
+            <a href="jordan.html" class="link">Read more →</a>
           </blockquote>
+
           <blockquote>
-            "Finding a counselor here was simple and comforting. I finally feel heard and understood."
-            <cite id="blog">– Maya P.</cite>
-           <br> <a href="maya.html" class="link">Read more →</a>
+            “Finding a counselor here was simple and comforting. I finally feel heard and understood.”
+            <cite id="blog">– Maya P.</cite><br />
+            <a href="maya.html" class="link">Read more →</a>
           </blockquote>
         </div>
       </div>
     </section>
 
-    <!-- BLOG -->
+    <!-- Blog Section -->
     <section class="section">
       <div class="container-card">
         <h3>From the Blog</h3>
+
         <div class="card-grid">
           <div class="card">
             <h4>Understanding Disorders</h4>
             <p>Learn about anxiety, depression, PTSD, bipolar disorder, and other common conditions.</p>
             <a href="disorders.html" class="link">Learn more →</a>
           </div>
+
           <div class="card">
             <h4>Mindful Habits for Everyday Calm</h4>
-            <p>Simple, practical habits to help reduce stress and improve your mental clarity.</p>
+            <p>Simple, practical habits to help reduce stress and improve mental clarity.</p>
             <a href="mindful.html" class="link">Read more →</a>
           </div>
+
           <div class="card">
             <h4>Understanding Burnout</h4>
             <p>Recognize the signs and take the right steps toward recovery and self-care.</p>
             <a href="burnout.html" class="link">Read more →</a>
-              </div>
+          </div>
         </div>
       </div>
     </section>
+
   </main>
 
   <!-- Quick Exit Popup -->
-  <div id="quick-exit-modal" class="modal">
+  <div id="quick-exit-modal" class="modal" role="dialog" aria-modal="true">
     <div class="modal-content">
       <h3>Quick Exit Feature</h3>
       <p>Press <strong>ESC 3 times quickly</strong> to leave this site instantly.</p>
       <button id="dismiss-modal" class="btn">Got it</button>
     </div>
   </div>
-  
-<div id="pink-mode-modal">
-  <p>
-    You have activated Pink Mode! Sometimes we just need a fun new way of looking at the world. Pink Mode can remind us to enjoy little things and have fun.
-  </p>
-  <button id="pink-mode-dismiss">Close</button>
-  <button id="pink-mode-deactivate">Deactivate Pink Mode</button>
-</div>
 
+  <!-- Pink Mode Modal -->
+  <div id="pink-mode-modal" role="alertdialog">
+    <p>
+      You have activated Pink Mode! Sometimes we just need a fun new way of looking at the world. Pink Mode can remind us to enjoy little things and have fun.
+    </p>
+    <button id="pink-mode-dismiss">Close</button>
+    <button id="pink-mode-deactivate">Deactivate Pink Mode</button>
+  </div>
+
+  <!-- Footer -->
   <footer>
     <div class="container footer">
       <p>© 2025 Seaglass Sanctuary | A Mental Health Awareness Initiative</p>
-      <p>This website exists for the purpose of a Business Professionals of America competitive event. It is not to be used for mental help and was made by a group of secondary students for competitive purposes.</p>
+      <p>
+        This website exists for the purpose of a Business Professionals of America competitive event. It is not to be used for mental help and was made by a group of secondary students for competitive purposes.
+      </p>
     </div>
   </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script src="script.js"></script>
+
 </body>
 </html>
