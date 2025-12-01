@@ -102,8 +102,7 @@ a {
   align-items: center;
   background: var(--card-bg);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  min-height: 50px;
-  max-height: 60px;
+  min-height: 70px;
 }
 
 /* Navbar Inner */
