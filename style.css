@@ -124,7 +124,6 @@ a {
   cursor: pointer;
   transition: opacity 0.3s ease;
   align-items: left;
-  margin-right: 2.5rem; /* Space to right */
 }
 
 .logo:hover {
