@@ -103,7 +103,7 @@ a {
   background: var(--card-bg);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   min-height: 70px;
-  padding: 0 2rem;
+  padding: 0 2rem; /* overall padding */
 }
 
 /* Navbar Inner Container */
@@ -112,7 +112,7 @@ a {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 1.4rem 5rem 1.4rem 2.2rem; /* Adjust spacing as needed */
+  padding: 1.4rem 5rem 1.4rem 2.2rem; 
 }
 
 /* Logo */
@@ -123,7 +123,6 @@ a {
   object-fit: contain;
   cursor: pointer;
   transition: opacity 0.3s ease;
-  align-items: left;
 }
 
 .logo:hover {
@@ -132,10 +131,9 @@ a {
 
 /* Right Side Navigation Links / Buttons */
 .nav-right {
-  margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 2.2rem;
+  gap: 2.2rem; 
 }
 
 /* Navigation Links */
