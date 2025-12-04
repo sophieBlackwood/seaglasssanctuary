@@ -637,6 +637,7 @@ blockquote,
 /* About Page */
 .team-photo {
  width: 90%;
+  height:auto; 
 }
 
 /* Blog card styling */
