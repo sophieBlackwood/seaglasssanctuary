@@ -621,9 +621,17 @@ body.dark #quick-exit {
   margin-top: 2rem;
 }
 
-.card,
-blockquote,
+.card {
+   background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  transition: transform var(--transition), box-shadow var(--transition);
+    color: #7FD0C2;
+}
+
 .team-member,
+blockquote,
 .event-card {
   background: var(--card-bg);
   border-radius: var(--radius);
