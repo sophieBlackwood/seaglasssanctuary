@@ -522,7 +522,7 @@ body.dark #quick-exit {
 
 .modal-content {
   background: var(--card-bg);
-  color: var(--text);
+  color: var(--always-light-text);
   border-radius: 12px 12px 0 0;
   max-width: 400px;
   padding: 2rem;
