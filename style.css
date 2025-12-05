@@ -40,7 +40,7 @@ body.dark.pink-mode {
 --text: #FDECF4;          /* soft pink-white text */
 --accent: #FF8FB7;        /* bright, calming pink accent */
 --accent-light: #F2B6CD;  /* lighter pink hover accent */
---card-bg: #4A1E2D;       /* rich dark plum-rose background */
+---bg: #4A1E2D;       /* rich dark plum-rose background */
 --muted: #D6AFC6;         /* muted lavender-pink text */
 }
 
@@ -85,7 +85,7 @@ a {
   color: var(--text);
 }
 
-.container-card {
+.container- {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 1.5rem;
@@ -104,7 +104,7 @@ a {
   width: 100%;
   display: flex;
   align-items: center;
-  background: var(--card-bg);
+  background: var(---bg);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   min-height: 70px;
   padding: 0 2rem; /* overall padding */
@@ -168,7 +168,7 @@ a {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: var(--card-bg);
+  background-color: var(---bg);
   overflow-x: hidden;
   padding-top: 70px;
   transition: width 0.5s ease;
@@ -188,7 +188,7 @@ a {
 
 .sidenav a:hover {
   background-color: var(--accent-light);
-  color: var(--card-bg);
+  color: var(---bg);
 }
 
 /* Close Button */
@@ -205,7 +205,7 @@ a {
 
 .closebtn:hover {
   background-color: var(--accent-light);
-  color: var(--card-bg);
+  color: var(---bg);
   border-radius: 0 0 0 6px;
 }
 
@@ -367,7 +367,7 @@ a {
 
 /* Theme Button */
 #theme-toggle {
-  background: var(--card-bg);
+  background: var(---bg);
   color: var(--text);
   border: 2px solid var(--accent);
 }
@@ -455,7 +455,7 @@ body.dark #quick-exit {
 }
 
 
-/* Counselor Cards */
+/* Counselor s */
 .counselors-grid {
   margin-top: 1.5rem;
   gap: 1.5rem;
@@ -481,8 +481,8 @@ body.dark #quick-exit {
 .avatar[data-avatar="lauren"] { background-image: url("lauren.jpg"); }
 .avatar[data-avatar="samuel"] { background-image: url("samuel.jpg"); }
 
-/* Counselor card spacing */
-.counselor .card-body h4 {
+/* Counselor  spacing */
+.counselor .-body h4 {
   margin-bottom: 0.25rem;
   font-size: 1.05rem;
   color: var(--always-light-text);
@@ -500,7 +500,7 @@ body.dark #quick-exit {
   margin-bottom: 0.8rem;
 }
 
-.card-actions {
+.-actions {
   display: flex;
   gap: 0.75rem;
   align-items: center;
@@ -526,7 +526,7 @@ body.dark #quick-exit {
 }
 
 .modal-content {
-  background: var(--card-bg);
+  background: var(---bg);
   color: var(--always-light-text);
   border-radius: 12px 12px 0 0;
   max-width: 400px;
@@ -552,7 +552,7 @@ body.dark #quick-exit {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: var(--card-bg);
+  background: var(---bg);
   color: var(--always-light-text);
   padding: 2rem;
   border-radius: var(--radius);
@@ -589,7 +589,7 @@ body.dark #quick-exit {
   background: #d62839;
 }
 
-/* Sections & Cards */
+/* Sections & s */
 .section {
   padding: 4rem 1.5rem;
   text-align: center;
@@ -601,14 +601,14 @@ body.dark #quick-exit {
   color: var(--accent);
 }
 
-.card-grid,
+.-grid,
 .testimonial-grid,
 .team-grid {
   display: grid;
   gap: 2rem;
 }
 
-.card-grid {
+.-grid {
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
@@ -623,7 +623,7 @@ body.dark #quick-exit {
 }
 
 .team-member {
-   background: var(--card-bg);
+   background: var(---bg);
   border-radius: var(--radius);
   padding: 2rem;
   box-shadow: 0 3px 10px rgba(0,0,0,0.05);
@@ -639,6 +639,7 @@ blockquote,
   padding: 2rem;
   box-shadow: 0 3px 10px rgba(0,0,0,0.05);
   transition: transform var(--transition), box-shadow var(--transition);
+  color: var(--always-light-text);
 }
 
 .card:hover,
