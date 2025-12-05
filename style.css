@@ -170,7 +170,7 @@ a {
   left: 0;
   background-color: var(--card-bg);
   overflow-x: hidden;
-  padding-top: 60px;
+  padding-top: 70px;
   transition: width 0.5s ease;
   z-index: 9999;
   display: flex;
@@ -194,7 +194,7 @@ a {
 /* Close Button */
 .closebtn {
   position: absolute;
-  top: 0;
+  top: 10px;
   right: 0;
   padding: 20px 25px;
   font-size: 32px;
