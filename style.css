@@ -162,7 +162,6 @@ a {
 }
 
 /* Sidenav for smaller screens */
-
 .sidenav {
   height: 100%;
   width: 0;
@@ -178,7 +177,6 @@ a {
   padding-top: 0; 
 }
 
-/* NEW: Header row inside sidenav (logo + X) */
 .sidenav-header {
   display: flex;
   justify-content: space-between;
@@ -234,8 +232,7 @@ a {
   gap: 10px;
   z-index: 1000;
 }
-
-/* Optional image next to hamburger icon */
+/* Image next to hamburger icon */
 .sidenav-img {
   height: 24px;
   margin-left: 8px;
