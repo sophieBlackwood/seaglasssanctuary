@@ -107,7 +107,7 @@ a {
   background: var(--card-bg);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   min-height: 70px;
-  padding: 0 2rem; /* overall padding */
+  padding: 0 2rem;
 }
 
 /* Navbar Inner Container */
@@ -133,11 +133,11 @@ a {
   opacity: 0.85;
 }
 
-/* Right Side Navigation Links / Buttons */
+/* Right Side Navigation */
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 2.2rem; 
+  gap: 2.2rem;
 }
 
 /* Navigation Links */
@@ -161,7 +161,8 @@ a {
   color: var(--accent-light);
 }
 
-/* Side Nav for Smaller Screens */
+/* Sidenav for smaller screens */
+
 .sidenav {
   height: 100%;
   width: 0;
@@ -170,13 +171,29 @@ a {
   left: 0;
   background-color: var(--card-bg);
   overflow-x: hidden;
-  padding-top: 70px;
   transition: width 0.5s ease;
   z-index: 9999;
   display: flex;
   flex-direction: column;
+  padding-top: 0; 
 }
 
+/* NEW: Header row inside sidenav (logo + X) */
+.sidenav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;   
+  margin-bottom: 10px;     
+}
+
+/* Sidenav Logo */
+.sidenav-logo {
+  height: 36px;
+  width: auto;
+}
+
+/* Sidenav Links */
 .sidenav a {
   padding: 12px 24px;
   text-decoration: none;
@@ -188,25 +205,23 @@ a {
 
 .sidenav a:hover {
   background-color: var(--accent-light);
-  color: var(---bg);
+  color: var(--card-bg);
 }
 
 /* Close Button */
 .closebtn {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 20px 25px;
+  position: static;
   font-size: 32px;
   cursor: pointer;
   color: var(--bg);
-  margin-bottom: 10px;
+  padding: 0;
+  line-height: 1;
 }
 
 .closebtn:hover {
   background-color: var(--accent-light);
   color: var(--card-bg);
-  border-radius: 0 0 0 6px;
+  border-radius: 6px;
 }
 
 /* Hamburger Menu */
@@ -229,10 +244,10 @@ a {
 /* Responsive for Mobile */
 @media (max-width: 900px) {
   .nav-links {
-    display: none; /* Hide normal nav links */
+    display: none;
   }
   .hamburger-menu {
-    display: flex; /* Show hamburger icon */
+    display: flex;
   }
 }
 
@@ -245,11 +260,10 @@ a {
     }
 
     .nav-container {
-        padding: 1rem 3rem 1rem 1.2rem; /* Increased right padding for mobile to prevent overlap */
+        padding: 1rem 3rem 1rem 1.2rem;
         justify-content: center;
     }
 
-    /* Show hamburger */
     .hamburger-menu {
         display: flex;
         position: absolute;
@@ -257,7 +271,7 @@ a {
         top: 50%;
         transform: translateY(-50%);
     }
-  
+
     .logo {
         display: none !important;
     }
@@ -266,6 +280,7 @@ a {
         display: none;
     }
 }
+
 
 /* Hero Sections */
 .hero,
