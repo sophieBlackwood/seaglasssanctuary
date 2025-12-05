@@ -631,7 +631,6 @@ blockquote,
   padding: 2rem;
   box-shadow: 0 3px 10px rgba(0,0,0,0.05);
   transition: transform var(--transition), box-shadow var(--transition);
-  color: var(--always-light-text);
 }
 
 .card:hover,
