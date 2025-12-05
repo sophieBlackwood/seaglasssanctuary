@@ -380,7 +380,7 @@ a {
 /* Theme Button */
 #theme-toggle {
   background: var(--card-bg);
-  color: var(--text);
+  color: var(--always-light-text);
   border: 2px solid var(--accent);
 }
 
