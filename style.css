@@ -720,7 +720,7 @@ footer {
   font-size: 0.9rem;
 }
 
-/* Responsive */
+/* Responsive: Smaller Screens */
 @media (max-width: 992px) {
   .hero h2 {
     font-size: 2rem;
@@ -760,3 +760,41 @@ footer {
     font-size: 0.85rem;
   }
 }
+/* Responsive: Larger Screens */
+
+/* Large desktops (1440px+) */
+@media (min-width: 1440px) {
+  :root {
+    font-size: 18px;
+  }
+
+  .container,
+  .container-card {
+    max-width: 1280px;
+  }
+}
+
+/* Ultra-wide screens (1800px+) */
+@media (min-width: 1800px) {
+  :root {
+    font-size: 19px;
+  }
+
+  .container,
+  .container-card {
+    max-width: 1400px;
+  }
+}
+
+/* 4K and above */
+@media (min-width: 2200px) {
+  :root {
+    font-size: 20px;
+  }
+
+  .container,
+  .container-card {
+    max-width: 1600px;
+  }
+}
+
