@@ -470,7 +470,7 @@ body.dark #quick-exit {
 /* Counselor Cards */
 .counselors-grid {
   margin-top: 1.5rem;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .counselor .avatar {
@@ -760,41 +760,41 @@ footer {
     font-size: 0.85rem;
   }
 }
-/* Responsive: Larger Screens */
 
+/* Responsive: Larger Screens */
 /* Large desktops (1440px+) */
 @media (min-width: 1440px) {
   :root {
-    font-size: 18px;
+    font-size: 15px;
   }
 
   .container,
   .container-card {
-    max-width: 1280px;
+    max-width: 1250px;
   }
 }
 
 /* Ultra-wide screens (1800px+) */
 @media (min-width: 1800px) {
   :root {
-    font-size: 19px;
+    font-size: 17px;
   }
 
   .container,
   .container-card {
-    max-width: 1400px;
+    max-width: 1350px;
   }
 }
 
 /* 4K and above */
 @media (min-width: 2200px) {
   :root {
-    font-size: 20px;
+    font-size: 19px;
   }
 
   .container,
   .container-card {
-    max-width: 1600px;
+    max-width: 1500px;
   }
 }
 
