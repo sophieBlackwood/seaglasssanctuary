@@ -55,6 +55,20 @@ document.addEventListener("DOMContentLoaded", () => {
     pinkModal.classList.remove("show");
   });
 
+  // Secret Logo Hold Trigger
+const logo = document.querySelector(".logo");
+let logoHoldTimer;
+
+logo?.addEventListener("mousedown", () => {
+  logoHoldTimer = setTimeout(() => {
+    activatePinkMode();
+  }, 2000);
+});
+
+["mouseup", "mouseleave"].forEach(evt =>
+  logo?.addEventListener(evt, () => clearTimeout(logoHoldTimer))
+);
+
   // Triple ESC Quick Exit
   let escPressCount = 0;
   let escTimer;
