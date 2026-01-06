@@ -536,6 +536,28 @@ body.dark #quick-exit {
   align-items: center;
 }
 
+/* Schedule button */
+.schedule-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.schedule-btn {
+  padding: 0.9rem 2.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 999px;
+  text-align: center;
+}
+
+/* Mobile spacing */
+@media (max-width: 768px) {
+  .schedule-cta {
+    margin-top: 2.5rem;
+  }
+}
+
 /* Modals */
 .modal {
   position: fixed;
