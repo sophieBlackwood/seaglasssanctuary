@@ -1,6 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   /* -------------------- */
+  /* Accessibility: Reduced Motion */
+  /* -------------------- */
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  if (prefersReducedMotion) {
+    document.documentElement.style.scrollBehavior = "auto";
+  }
+
+  /* -------------------- */
   /* Theme Toggle */
   /* -------------------- */
   const themeToggle = document.getElementById("theme-toggle");
@@ -96,10 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
       escPressCount++;
       clearTimeout(escTimer);
       escTimer = setTimeout(() => escPressCount = 0, 1500);
-
-      if (escPressCount === 3) {
-        window.location.href = quickExitURL;
-      }
+      if (escPressCount === 3) window.location.href = quickExitURL;
     }
   });
 
@@ -124,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     backToTop.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
     });
 
     backToTop.addEventListener("mousedown", () => {
@@ -141,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* -------------------- */
-  /* Smooth Scrolling for Anchor Links */
+  /* Smooth Scrolling (Anchors + Header Offset) */
   /* -------------------- */
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", function (e) {
@@ -152,7 +160,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       e.preventDefault();
 
-      const yOffset = -80; // adjust if you have a fixed header
+      const header = document.querySelector("header");
+      const yOffset = header ? -header.offsetHeight : -80;
+
       const y =
         targetEl.getBoundingClientRect().top +
         window.pageYOffset +
@@ -160,8 +170,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       window.scrollTo({
         top: y,
-        behavior: "smooth"
+        behavior: prefersReducedMotion ? "auto" : "smooth"
       });
+
+      // Auto-close side nav if open
+      if (document.getElementById("mySidenav")?.style.width !== "0px") {
+        closeNav();
+      }
     });
   });
 
