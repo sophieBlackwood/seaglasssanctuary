@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  // Theme Toggle
+  /* -------------------- */
+  /* Theme Toggle */
+  /* -------------------- */
   const themeToggle = document.getElementById("theme-toggle");
   if (themeToggle) {
     const savedTheme = localStorage.getItem("theme");
@@ -21,33 +23,45 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Restore Pink Mode if previously saved
+  /* -------------------- */
+  /* Restore Pink Mode */
+  /* -------------------- */
   const savedPink = localStorage.getItem("pink-mode");
   if (savedPink === "on") {
     document.body.classList.add("pink-mode");
   }
 
-  // Quick Exit
+  /* -------------------- */
+  /* Quick Exit */
+  /* -------------------- */
   const quickExitBtn = document.getElementById("quick-exit");
   const modal = document.getElementById("quick-exit-modal");
   const dismissModal = document.getElementById("dismiss-modal");
   const quickExitURL = "https://www.google.com/search?q=weather+today&safe=active";
 
-  quickExitBtn?.addEventListener("click", () => window.location.href = quickExitURL);
+  quickExitBtn?.addEventListener("click", () => {
+    window.location.href = quickExitURL;
+  });
 
   if (modal && window.innerWidth > 768 && !sessionStorage.getItem("quick-exit-seen")) {
     modal.classList.add("show");
     sessionStorage.setItem("quick-exit-seen", "true");
   }
 
-  dismissModal?.addEventListener("click", () => modal.classList.remove("show"));
+  dismissModal?.addEventListener("click", () => {
+    modal.classList.remove("show");
+  });
 
-  // Pink Mode Modal
+  /* -------------------- */
+  /* Pink Mode Modal */
+  /* -------------------- */
   const pinkModal = document.getElementById("pink-mode-modal");
   const pinkDismiss = document.getElementById("pink-mode-dismiss");
   const pinkDeactivate = document.getElementById("pink-mode-deactivate");
 
-  pinkDismiss?.addEventListener("click", () => pinkModal.classList.remove("show"));
+  pinkDismiss?.addEventListener("click", () => {
+    pinkModal.classList.remove("show");
+  });
 
   pinkDeactivate?.addEventListener("click", () => {
     document.body.classList.remove("pink-mode");
@@ -55,39 +69,50 @@ document.addEventListener("DOMContentLoaded", () => {
     pinkModal.classList.remove("show");
   });
 
-  // Secret Logo Hold Trigger
-const logo = document.querySelector(".logo");
-let logoHoldTimer;
+  /* -------------------- */
+  /* Secret Logo Hold */
+  /* -------------------- */
+  const logo = document.querySelector(".logo");
+  let logoHoldTimer;
 
-logo?.addEventListener("mousedown", () => {
-  logoHoldTimer = setTimeout(() => {
-    activatePinkMode();
-  }, 2000);
-});
+  logo?.addEventListener("mousedown", () => {
+    logoHoldTimer = setTimeout(() => {
+      activatePinkMode();
+    }, 2000);
+  });
 
-["mouseup", "mouseleave"].forEach(evt =>
-  logo?.addEventListener(evt, () => clearTimeout(logoHoldTimer))
-);
+  ["mouseup", "mouseleave"].forEach(evt =>
+    logo?.addEventListener(evt, () => clearTimeout(logoHoldTimer))
+  );
 
-  // Triple ESC Quick Exit
+  /* -------------------- */
+  /* Triple ESC Quick Exit */
+  /* -------------------- */
   let escPressCount = 0;
   let escTimer;
+
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
       escPressCount++;
       clearTimeout(escTimer);
       escTimer = setTimeout(() => escPressCount = 0, 1500);
-      if (escPressCount === 3) window.location.href = quickExitURL;
+
+      if (escPressCount === 3) {
+        window.location.href = quickExitURL;
+      }
     }
   });
 
-  // Floating Buttons & Back to Top
+  /* -------------------- */
+  /* Floating Buttons */
+  /* -------------------- */
   const backToTop = document.getElementById("back-to-top");
   const floatingButtons = document.getElementById("floating-buttons");
   let holdTimer;
 
   if (backToTop && floatingButtons) {
     const isMobile = () => window.matchMedia("(max-width: 768px)").matches;
+
     window.addEventListener("scroll", () => {
       if (window.scrollY > 300) {
         backToTop.classList.add("visible");
@@ -98,19 +123,53 @@ logo?.addEventListener("mousedown", () => {
       }
     });
 
-    backToTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
     backToTop.addEventListener("mousedown", () => {
       if (isMobile()) {
-        holdTimer = setTimeout(() => floatingButtons.classList.toggle("reveal"), 600);
+        holdTimer = setTimeout(() => {
+          floatingButtons.classList.toggle("reveal");
+        }, 600);
       }
     });
+
     ["mouseup", "mouseleave", "touchend"].forEach(evt =>
       backToTop.addEventListener(evt, () => clearTimeout(holdTimer))
     );
   }
+
+  /* -------------------- */
+  /* Smooth Scrolling for Anchor Links */
+  /* -------------------- */
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function (e) {
+      const targetId = this.getAttribute("href");
+      const targetEl = document.querySelector(targetId);
+
+      if (!targetEl) return;
+
+      e.preventDefault();
+
+      const yOffset = -80; // adjust if you have a fixed header
+      const y =
+        targetEl.getBoundingClientRect().top +
+        window.pageYOffset +
+        yOffset;
+
+      window.scrollTo({
+        top: y,
+        behavior: "smooth"
+      });
+    });
+  });
+
 });
 
-// Side Nav
+/* -------------------- */
+/* Side Navigation */
+ /* -------------------- */
 window.openNav = function () {
   const sidenav = document.getElementById("mySidenav");
   const hamburger = document.querySelector(".hamburger-menu");
@@ -118,6 +177,7 @@ window.openNav = function () {
   sidenav.style.width = "250px";
   if (hamburger) hamburger.style.display = "none";
 };
+
 window.closeNav = function () {
   const sidenav = document.getElementById("mySidenav");
   const hamburger = document.querySelector(".hamburger-menu");
@@ -126,8 +186,13 @@ window.closeNav = function () {
   if (hamburger) hamburger.style.display = "block";
 };
 
-// Secret Pink Mode (Konami Code)
-const konamiCode = ["arrowup","arrowup","arrowdown","arrowdown","arrowleft","arrowright","arrowleft","arrowright","b","a"];
+/* -------------------- */
+/* Konami Code */
+ /* -------------------- */
+const konamiCode = [
+  "arrowup","arrowup","arrowdown","arrowdown",
+  "arrowleft","arrowright","arrowleft","arrowright","b","a"
+];
 let konamiPosition = 0;
 
 document.addEventListener("keydown", (e) => {
@@ -138,15 +203,18 @@ document.addEventListener("keydown", (e) => {
       activatePinkMode();
       konamiPosition = 0;
     }
-  } else konamiPosition = 0;
+  } else {
+    konamiPosition = 0;
+  }
 });
 
-// Toggle Pink Mode
+/* -------------------- */
+/* Activate Pink Mode */
+ /* -------------------- */
 function activatePinkMode() {
   const pinkEnabled = document.body.classList.toggle("pink-mode");
   localStorage.setItem("pink-mode", pinkEnabled ? "on" : "off");
 
-  // Show modal only when turning on
   if (pinkEnabled) {
     const pinkModal = document.getElementById("pink-mode-modal");
     if (pinkModal) pinkModal.classList.add("show");
