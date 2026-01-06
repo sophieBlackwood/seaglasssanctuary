@@ -510,8 +510,6 @@ body.dark #quick-exit {
 .avatar[data-avatar="theo"] { background-image: url("theo.jpg"); }
 .avatar[data-avatar="lauren"] { background-image: url("lauren.jpg"); }
 .avatar[data-avatar="samuel"] { background-image: url("samuel.jpg"); }
-.avatar[data-avatar="allison"] { background-image: url("allison.jpg"); }
-.avatar[data-avatar="alex"] { background-image: url("alex.jpg"); }
 
 /* Counselor card spacing */
 .counselor .card-body h4 {
