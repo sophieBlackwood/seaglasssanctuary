@@ -819,3 +819,14 @@ footer {
   }
 }
 
+/* Counselor image responsiveness */
+@media (max-width: 768px) {
+  .counselor {
+    align-items: center;
+    text-align: center;
+  }
+
+  .card-actions {
+    justify-content: center;
+  }
+}
