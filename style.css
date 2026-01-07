@@ -729,6 +729,13 @@ footer {
   font-size: 0.9rem;
 }
 
+footer,
+footer p,
+footer span,
+footer a {
+  color: var(--always-light-text) !important;
+}
+
 /* Responsive: Smaller Screens */
 @media (max-width: 992px) {
   .hero h2 {
