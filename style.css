@@ -386,7 +386,7 @@ a {
   cursor: pointer;
   border: none;
   color: #ffffff;
-  background: var(#4FB29F);
+  background: #4FB29F;
   box-shadow: 0 3px 10px rgba(0,0,0,0.2);
   transition: background var(--transition), transform var(--transition);
 }
