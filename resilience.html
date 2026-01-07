@@ -1,1 +1,156 @@
-<html></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building Emotional Resilience</title>
+  <link rel="stylesheet" href="https://use.typekit.net/rig8hkd.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="icon" type="image/x-icon" href="icon_transparent.png"/>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+<!-- Quick Exit Button -->
+<button id="quick-exit" title="Quickly exit to Google">
+  <i class="fa-solid fa-arrow-right-from-bracket"></i> Quick Exit
+</button>
+
+<!-- Floating Side Buttons -->
+<div id="floating-buttons">
+  <button id="theme-toggle" title="Toggle theme">
+    <i class="fa-solid fa-moon"></i>
+  </button>
+  <button id="back-to-top" title="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+</div>
+
+<header class="navbar">
+  <div class="container nav-container">
+    <a href="index.html">
+      <img class="logo" id="logoImage" src="logo_text.png" alt="logo">
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#mission">Mission</a></li>
+        <li><a href="index.html#resources">Resources</a></li>
+        <li><a href="helplines.html">Helplines</a></li>
+        <li><a href="index.html#support">Support</a></li>
+        <li><a href="index.html#stories">Stories</a></li>
+        <li><a href="index.html#blog">Blog</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Mobile Side Navigation -->
+  <div class="hamburger-menu" onclick="openNav()">
+    &#9776;
+    <img src="icon_transparent.png" alt="Seaglass logo" class="sidenav-img">
+  </div>
+
+  <div id="mySidenav" class="sidenav">
+    <div class="sidenav-header">
+      <img src="logo_text.png" class="sidenav-logo" alt="Seaglass logo">
+      <span class="closebtn" onclick="closeNav()">×</span>
+    </div>
+    <hr>
+    <a href="index.html" class="special-link">Home</a>
+    <a href="index.html#mission">Mission</a>
+    <a href="index.html#resources">Resources</a>
+    <a href="helplines.html">Helplines</a>
+    <a href="index.html#support">Support</a>
+    <a href="index.html#stories">Stories</a>
+    <a href="index.html#blog">Blog</a>
+  </div>
+</header>
+
+<br><br>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container hero-content">
+    <h2>Building Emotional Resilience</h2>
+    <a href="index.html" class="btn">Home</a>
+  </div>
+</section>
+
+<!-- Blog Post -->
+<section id="blog" class="blog-post container">
+  <article class="blog-card">
+
+    <div class="blog-image">
+      <img src="resilience.jpg" alt="Calm ocean waves symbolizing strength and balance">
+    </div>
+
+    <div class="blog-content">
+      <h3>Building Emotional Resilience: Strength in Challenging Times</h3>
+      <p class="date"><strong>Published:</strong> December 3, 2025</p>
+
+      <p>
+        Emotional resilience is the ability to adapt, recover, and continue moving forward during times of stress or adversity.
+        It does not mean ignoring difficult emotions, but rather learning how to respond to challenges in healthy and constructive ways.
+      </p>
+
+      <h4>Why Emotional Resilience Matters</h4>
+      <p>
+        Life often presents unexpected challenges—academic pressure, relationship stress, family responsibilities,
+        and personal expectations can all take a toll on mental well-being. Emotional resilience helps individuals
+        manage these stressors while maintaining balance and perspective.
+      </p>
+
+      <ul>
+        <li>Improves coping skills during stressful situations</li>
+        <li>Supports emotional regulation and self-awareness</li>
+        <li>Encourages confidence and adaptability</li>
+        <li>Promotes long-term mental wellness</li>
+      </ul>
+
+      <h4>Ways to Strengthen Emotional Resilience</h4>
+
+      <p><strong>1. Develop Self-Awareness</strong><br>
+      Understanding your emotional responses can help you recognize stress early and respond with intention.
+      Journaling, reflection, and mindfulness practices can support this awareness.</p>
+
+      <p><strong>2. Maintain Supportive Connections</strong><br>
+      Strong relationships provide reassurance, understanding, and encouragement. Reaching out to trusted friends,
+      family members, or mentors can reduce feelings of isolation.</p>
+
+      <p><strong>3. Focus on What You Can Control</strong><br>
+      While not every situation is within your control, your response often is. Practicing grounding techniques,
+      such as deep breathing or structured problem-solving, can help restore a sense of stability.</p>
+
+      <p><strong>4. Prioritize Healthy Routines</strong><br>
+      Consistent sleep, balanced nutrition, and regular physical activity all contribute to emotional strength and resilience.</p>
+
+      <h4>Resilience Is a Skill</h4>
+      <p>
+        Emotional resilience is not something you are born with—it is a skill that can be developed over time.
+        With patience, support, and practice, individuals can build the ability to navigate challenges more effectively.
+      </p>
+
+      <p class="muted">
+        <em>This article is for educational purposes only and is not a substitute for professional mental health care.</em>
+      </p>
+
+      <a href="index.html#blog" class="btn">Read More Resources</a>
+    </div>
+
+  </article>
+</section>
+
+<footer>
+  <div class="container">
+    <p>© 2025 Seaglass Sanctuary | A Mental Health Awareness Initiative</p>
+    <p>
+      This website exists for the purpose of a Business Professionals of America competitive event.
+      It is not to be used for mental help and was made by a group of secondary students for competitive purposes.
+    </p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
