@@ -720,7 +720,7 @@ blockquote,
   margin-top: 1rem;
 }
 
-/* Footer */
+/* Footer — always light text */
 footer {
   background: var(--footer);
   color: var(--always-light-text);
