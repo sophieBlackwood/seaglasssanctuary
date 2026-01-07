@@ -21,7 +21,8 @@ body.dark {
 --accent-light: #7FD0C2;  /* lighter teal accent */
 --card-bg: #03443C;       /* dark teal card background */
 --muted: #4FB29F;         /* muted teal text */
---container: #DFFAEA;     /* light mint container background */
+--container: #DFFAEA;  /* light mint container background */
+--footer: #0A7A67;        /* dark teal footer background */
 }
 
 /* Secret Pink Light Mode */
