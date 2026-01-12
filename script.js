@@ -235,3 +235,32 @@ function activatePinkMode() {
     if (pinkModal) pinkModal.classList.add("show");
   }
 }
+
+  const blogTrack = document.querySelector('.blog-card-grid');
+  const blogPrev = document.querySelector('.blog-carousel-btn.prev');
+  const blogNext = document.querySelector('.blog-carousel-btn.next');
+  const blogCards = document.querySelectorAll('.blog-card');
+
+  let blogIndex = 0;
+  const blogGap = 32;
+
+  function updateBlogCarousel() {
+    const cardWidth = blogCards[0].offsetWidth + blogGap;
+    blogTrack.style.transform = `translateX(-${blogIndex * cardWidth}px)`;
+  }
+
+  blogNext.addEventListener('click', () => {
+    if (blogIndex < blogCards.length - 1) {
+      blogIndex++;
+      updateBlogCarousel();
+    }
+  });
+
+  blogPrev.addEventListener('click', () => {
+    if (blogIndex > 0) {
+      blogIndex--;
+      updateBlogCarousel();
+    }
+  });
+
+  window.addEventListener('resize', updateBlogCarousel);
