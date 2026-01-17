@@ -174,66 +174,66 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* ===================================================== */
-  /* BLOG CENTER-FOCUSED CAROUSEL (MOBILE-FRIENDLY) */
-  /* ===================================================== */
-  const blogTrack = document.querySelector('.blog-card-grid');
-  const blogPrev = document.querySelector('.blog-carousel-btn.prev');
-  const blogNext = document.querySelector('.blog-carousel-btn.next');
-  const blogCards = Array.from(document.querySelectorAll('.blog-card'));
+ /* ===================================================== */
+/* BLOG CENTER-FOCUSED CAROUSEL (MOBILE-FRIENDLY) */
+/* ===================================================== */
+const blogTrack = document.querySelector('.blog-card-grid');
+const blogPrev = document.querySelector('.blog-carousel-btn.prev');
+const blogNext = document.querySelector('.blog-carousel-btn.next');
+const blogCards = Array.from(document.querySelectorAll('.blog-card'));
 
-  if (blogTrack && blogCards.length > 0) {
-    let blogIndex = 0; // start at first card
+if (blogTrack && blogCards.length > 0) {
+  let blogIndex = 0; // start at first card
 
-    function updateBlogCarousel() {
-      const containerWidth = blogTrack.parentElement.offsetWidth;
-      const cardGap = parseFloat(getComputedStyle(blogTrack).gap || 0);
+  // Get widths of all cards once (before any transforms)
+  const cardWidths = blogCards.map(card => card.offsetWidth);
 
-      // Get widths of all cards dynamically
-      const cardWidths = blogCards.map(card => card.offsetWidth);
+  function updateBlogCarousel() {
+    const containerWidth = blogTrack.parentElement.offsetWidth;
+    const cardGap = parseFloat(getComputedStyle(blogTrack).gap || 0);
 
-      // Calculate offset to center active card
-      let offset = 0;
-      for (let i = 0; i < blogIndex; i++) offset += cardWidths[i] + cardGap;
-      offset += cardWidths[blogIndex] / 2 - containerWidth / 2;
+    // Calculate offset to center active card
+    let offset = 0;
+    for (let i = 0; i < blogIndex; i++) offset += cardWidths[i] + cardGap;
+    offset += cardWidths[blogIndex] / 2 - containerWidth / 2;
 
-      // Prevent scrolling beyond first/last card
-      const maxOffset = blogTrack.scrollWidth - containerWidth;
-      offset = Math.min(Math.max(0, offset), maxOffset);
+    // Prevent scrolling beyond last card, but allow centering first card (negative offset)
+    const maxOffset = blogTrack.scrollWidth - containerWidth;
+    offset = Math.min(offset, maxOffset);
 
-      blogTrack.style.transform = `translateX(-${offset}px)`;
+    blogTrack.style.transform = `translateX(-${offset}px)`;
 
-      // Depth scaling for side cards
-      blogCards.forEach((card, i) => {
-        if (i === blogIndex) {
-          card.classList.add('active');
-          card.style.transform = 'scale(1)';
-        } else {
-          card.classList.remove('active');
-          const distance = Math.abs(i - blogIndex);
-          const scale = Math.max(0.75, 1 - 0.15 * distance);
-          card.style.transform = `scale(${scale})`;
-        }
-      });
-    }
-
-    blogNext?.addEventListener('click', () => {
-      if (blogIndex < blogCards.length - 1) {
-        blogIndex++;
-        updateBlogCarousel();
+    // Depth scaling for side cards
+    blogCards.forEach((card, i) => {
+      if (i === blogIndex) {
+        card.classList.add('active');
+        card.style.transform = 'scale(1)';
+      } else {
+        card.classList.remove('active');
+        const distance = Math.abs(i - blogIndex);
+        const scale = Math.max(0.75, 1 - 0.15 * distance);
+        card.style.transform = `scale(${scale})`;
       }
     });
-
-    blogPrev?.addEventListener('click', () => {
-      if (blogIndex > 0) {
-        blogIndex--;
-        updateBlogCarousel();
-      }
-    });
-
-    window.addEventListener('resize', updateBlogCarousel);
-    updateBlogCarousel();
   }
+
+  blogNext?.addEventListener('click', () => {
+    if (blogIndex < blogCards.length - 1) {
+      blogIndex++;
+      updateBlogCarousel();
+    }
+  });
+
+  blogPrev?.addEventListener('click', () => {
+    if (blogIndex > 0) {
+      blogIndex--;
+      updateBlogCarousel();
+    }
+  });
+
+  window.addEventListener('resize', updateBlogCarousel);
+  updateBlogCarousel();
+}
 
   /* -------------------- */
   /* Side Navigation */
