@@ -705,9 +705,7 @@ blockquote,
   gap: 2rem;
   transition: transform 0.4s ease-in-out;
   will-change: transform;
-  padding-left: 50%;
-  padding-right: 50%;
-  box-sizing: content-box;
+  /* Removed padding-left/right; JS handles centering without it */
 }
 
 /* ================================================= */
@@ -725,15 +723,14 @@ blockquote,
   color: var(--text);
   text-align: left;
 
-  /* Carousel behavior */
-  transform: scale(0.88);
+  /* Removed default transform scale; JS handles all scaling dynamically */
   transition: transform 0.4s ease;
   z-index: 1;
 }
 
 /* Center / active card */
 .blog-card.active {
-  transform: scale(1);
+  /* Removed scale(1); JS sets it */
   z-index: 2;
 }
 
@@ -822,12 +819,12 @@ blockquote,
   }
 
   .blog-card {
-    transform: scale(0.85);
+    /* Removed transform scale; JS handles all */
     flex: 0 0 70%;
   }
 
   .blog-card.active {
-    transform: scale(1);
+    /* Removed scale(1); JS sets it */
   }
 
   .blog-carousel-btn {
