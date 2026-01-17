@@ -175,9 +175,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ===================================================== */
-  /* BLOG CENTER-FOCUSED CAROUSEL (UPDATED / DEPTH SCALE) */
+  /* BLOG CENTER-FOCUSED CAROUSEL (MOBILE-FRIENDLY) */
   /* ===================================================== */
-
   const blogTrack = document.querySelector('.blog-card-grid');
   const blogPrev = document.querySelector('.blog-carousel-btn.prev');
   const blogNext = document.querySelector('.blog-carousel-btn.next');
@@ -188,27 +187,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateBlogCarousel() {
       const containerWidth = blogTrack.parentElement.offsetWidth;
-      const cardWidths = blogCards.map(card => card.offsetWidth);
       const cardGap = parseFloat(getComputedStyle(blogTrack).gap || 0);
 
-      // Calculate total offset for centering
+      // Get widths of all cards dynamically
+      const cardWidths = blogCards.map(card => card.offsetWidth);
+
+      // Calculate offset to center active card
       let offset = 0;
-      for (let i = 0; i < blogIndex; i++) {
-        offset += cardWidths[i] + cardGap;
-      }
+      for (let i = 0; i < blogIndex; i++) offset += cardWidths[i] + cardGap;
       offset += cardWidths[blogIndex] / 2 - containerWidth / 2;
+
+      // Prevent scrolling beyond first/last card
+      const maxOffset = blogTrack.scrollWidth - containerWidth;
+      offset = Math.min(Math.max(0, offset), maxOffset);
 
       blogTrack.style.transform = `translateX(-${offset}px)`;
 
-      // Depth scaling
+      // Depth scaling for side cards
       blogCards.forEach((card, i) => {
         if (i === blogIndex) {
           card.classList.add('active');
+          card.style.transform = 'scale(1)';
         } else {
           card.classList.remove('active');
-          // optional smaller scale on sides
           const distance = Math.abs(i - blogIndex);
-          const scale = Math.max(0.7, 1 - 0.15 * distance);
+          const scale = Math.max(0.75, 1 - 0.15 * distance);
           card.style.transform = `scale(${scale})`;
         }
       });
