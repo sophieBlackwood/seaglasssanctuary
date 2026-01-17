@@ -705,7 +705,11 @@ blockquote,
   gap: 2rem;
   transition: transform 0.4s ease-in-out;
   will-change: transform;
-  /* Removed padding-left/right; JS handles centering without it */
+}
+
+/* Smooth jump helper for infinite loop */
+.blog-card-grid.no-transition {
+  transition: none !important;
 }
 
 /* ================================================= */
@@ -724,14 +728,14 @@ blockquote,
   text-align: left;
 
   /* Removed default transform scale; JS handles all scaling dynamically */
-  transition: transform 0.4s ease;
+  transition: transform 0.4s ease, z-index 0s linear 0.4s;
   z-index: 1;
 }
 
 /* Center / active card */
 .blog-card.active {
-  /* Removed scale(1); JS sets it */
   z-index: 2;
+  transition: transform 0.4s ease, z-index 0s;
 }
 
 /* Blog links */
@@ -819,12 +823,11 @@ blockquote,
   }
 
   .blog-card {
-    /* Removed transform scale; JS handles all */
     flex: 0 0 70%;
   }
 
   .blog-card.active {
-    /* Removed scale(1); JS sets it */
+    /* JS handles scale */
   }
 
   .blog-carousel-btn {
@@ -850,6 +853,7 @@ blockquote,
     flex: 0 0 360px;
   }
 }
+
 
 /* ================================================= */
 /* FOOTER (SAFE & READABLE) */
