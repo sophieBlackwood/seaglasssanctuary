@@ -718,13 +718,7 @@ blockquote,
   flex: 0 0 clamp(260px, 80vw, 340px);
   display: flex;
   flex-direction: column;
-
-  background: linear-gradient(
-    135deg,
-    rgba(127,193,201,0.12),
-    rgba(42,93,103,0.06)
-  );
-
+  background: var(--card-bg);
   padding: 1.5rem;
   border-radius: 16px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.12);
@@ -866,8 +860,8 @@ blockquote,
 /* ================================================= */
 
 footer {
-  background-color: #1f2a2e;
-  color: #ffffff;
+  background-color: var(--footer);
+  color: var(--always-light-text);
   text-align: center;
   padding: 1.5rem;
   font-size: 0.9rem;
@@ -877,7 +871,7 @@ footer,
 footer p,
 footer span,
 footer a {
-  color: #ffffff !important;
+  color: var(--always-light-text);
 }
 
 /* ================================================= */
