@@ -678,6 +678,7 @@ blockquote,
 .blog-section {
   padding: 4rem 1.5rem;
   text-align: center;
+  overflow: hidden; /* Prevents horizontal scroll on the whole page */
 }
 
 .blog-section h3 {
@@ -691,12 +692,17 @@ blockquote,
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
+  max-width: 1200px; /* Optional: keeps carousel from getting too wide */
+  margin: 0 auto;
 }
 
 /* Track container */
 .blog-carousel-track-container {
   overflow: hidden;
   width: 100%;
+  /* Added padding to allow the 'active' card to scale without being clipped */
+  padding: 2rem 0; 
 }
 
 /* Track */
@@ -705,18 +711,20 @@ blockquote,
   gap: 2rem;
   transition: transform 0.4s ease-in-out;
   will-change: transform;
+  /* Ensure cards align to the start for easier JS calculation */
+  justify-content: flex-start; 
 }
 
-/* Smooth jump helper for infinite loop */
 .blog-card-grid.no-transition {
   transition: none !important;
 }
 
 /* ================================================= */
-/* BLOG CARD (SINGLE SOURCE OF TRUTH) */
+/* BLOG CARD */
 /* ================================================= */
 
 .blog-card {
+  /* Use flex-basis for consistent sizing */
   flex: 0 0 clamp(260px, 80vw, 340px);
   display: flex;
   flex-direction: column;
@@ -726,24 +734,18 @@ blockquote,
   box-shadow: 0 6px 20px rgba(0,0,0,0.12);
   color: var(--text);
   text-align: left;
-
-  /* Removed default transform scale; JS handles all scaling dynamically */
-  transition: transform 0.4s ease, z-index 0s linear 0.4s;
+  
+  /* Transition setup */
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
   z-index: 1;
+  cursor: pointer;
 }
 
-/* Center / active card */
+/* Center / active card - visual feedback */
 .blog-card.active {
   z-index: 2;
-  transition: transform 0.4s ease, z-index 0s;
-}
-
-/* Blog links */
-.blog-link {
-  display: inline-block;
-  margin-top: 10px;
-  color: var(--accent);
-  text-decoration: none;
+  transform: scale(1.05); /* Added slight scale to justify the .active class */
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
 }
 
 /* ================================================= */
@@ -751,17 +753,26 @@ blockquote,
 /* ================================================= */
 
 .blog-carousel-btn {
-  background: none;
+  background: white; /* Added background for visibility over cards */
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: none;
-  font-size: 2rem;
+  font-size: 1.5rem;
   cursor: pointer;
   color: var(--accent);
-  padding: 0 0.5rem;
-  z-index: 3;
+  z-index: 10;
+  transition: all 0.2s ease;
 }
 
 .blog-carousel-btn:hover {
-  opacity: 0.7;
+  transform: scale(1.1);
+  background: var(--accent);
+  color: white;
 }
 
 /* ================================================= */
@@ -769,47 +780,36 @@ blockquote,
 /* ================================================= */
 
 .blog-content {
-  padding: 1.75rem;
-}
-
-.blog-content h3 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-  color: var(--accent);
+  /* Removed duplicate padding; let the card handle it */
+  display: flex;
+  flex-direction: column;
 }
 
 .blog-content .date {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--muted);
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .blog-content h4 {
   font-size: 1.25rem;
-  margin-top: 1.4rem;
-  margin-bottom: 0.6rem;
+  margin: 0.5rem 0;
   color: var(--accent);
-}
-
-.blog-content ul {
-  list-style: disc inside;
-  margin-left: 1rem;
-  margin-bottom: 1rem;
-}
-
-.blog-content li {
-  margin-bottom: 0.4rem;
+  line-height: 1.3;
 }
 
 .blog-content p {
-  line-height: 1.65;
-  margin-bottom: 1rem;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  margin-bottom: 1.25rem;
   color: var(--text);
-}
-
-.blog-content .btn {
-  margin-top: 1.25rem;
-  align-self: flex-start;
+  /* Optional: Limit text to 3 lines for visual consistency */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* ================================================= */
