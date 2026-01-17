@@ -671,9 +671,7 @@ blockquote,
   border-radius: var(--radius);
 }
 
-/* ================================================= */
-/* BLOG CARD BASE (UNCHANGED) */
-/* ================================================= */
+/* Blog Card Styling */
 .blog-card {
   display: flex;
   flex-direction: column;
@@ -688,22 +686,20 @@ blockquote,
   margin: 2rem 0;
   color: var(--text);
 
-  /* 🔹 Added for carousel animation */
+  /* 🔧 MODIFIED: contrast-safe de-emphasis */
   transform: scale(0.85);
-  opacity: 0.5;
-  transition: transform 0.4s ease, opacity 0.4s ease;
+  filter: brightness(0.85);
+  transition: transform 0.4s ease, filter 0.4s ease;
 }
 
-/* 🔹 Center / featured card */
+/* 🔧 ADDED: active (center) card */
 .blog-card.active {
   transform: scale(1);
-  opacity: 1;
+  filter: brightness(1);
   z-index: 2;
 }
 
-/* ================================================= */
-/* BLOG SECTION CAROUSEL */
-/* ================================================= */
+/* Blog Section Carousel */
 .blog-section {
   padding: 4rem 1.5rem;
   text-align: center;
@@ -728,15 +724,12 @@ blockquote,
   width: 100%;
 }
 
-/* Track */
+/* Track (flex) */
 .blog-card-grid {
   display: flex;
   gap: 2rem;
   transition: transform 0.4s ease-in-out;
   will-change: transform;
-
-  /* 🔹 Keeps scaling centered */
-  align-items: stretch;
 }
 
 /* Cards */
@@ -770,9 +763,7 @@ blockquote,
   opacity: 0.7;
 }
 
-/* ================================================= */
-/* RESPONSIVE */
-/* ================================================= */
+/* Responsive */
 @media (max-width: 768px) {
   .blog-card {
     flex: 0 0 85%;
@@ -840,10 +831,137 @@ blockquote,
   align-self: flex-start;
 }
 
-/* ================================================= */
-/* MOBILE TYPOGRAPHY TWEAKS (UNCHANGED) */
-/* ================================================= */
+
+/* Footer — always light text */
+footer {
+  background: var(--footer);
+  color: var(--always-light-text);
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.9rem;
+}
+
+footer,
+footer p,
+footer span,
+footer a {
+  color: var(--always-light-text) !important;
+}
+
+/* 🔧 ADDED: footer contrast safety */
+footer {
+  background-color: #1f2a2e;
+  color: #ffffff;
+}
+
+footer p,
+footer span,
+footer a {
+  color: #ffffff !important;
+}
+
+/* Responsive: Smaller Screens */
+@media (max-width: 992px) {
+  .hero h2 {
+    font-size: 2rem;
+  }
+
+  .section {
+    padding: 3rem 1.2rem;
+  }
+}
+
 @media (max-width: 768px) {
+  .nav-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    width: 100%;
+  }
+
+  #theme-toggle,
+  #back-to-top {
+    right: 1rem;
+    width: 2.6rem;
+    height: 2.6rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  #quick-exit {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* Responsive: Larger Screens */
+/* Large desktops (1440px+) */
+@media (min-width: 1440px) {
+  :root {
+    font-size: 15px;
+  }
+
+  .container,
+  .container-card {
+    max-width: 1250px;
+  }
+}
+
+/* Ultra-wide screens (1800px+) */
+@media (min-width: 1800px) {
+  :root {
+    font-size: 17px;
+  }
+
+  .container,
+  .container-card {
+    max-width: 1350px;
+  }
+}
+
+/* 4K and above */
+@media (min-width: 2200px) {
+  :root {
+    font-size: 19px;
+  }
+
+  .container,
+  .container-card {
+    max-width: 1500px;
+  }
+}
+
+/* Counselor image responsiveness */
+@media (max-width: 768px) {
+  .counselor .avatar {
+    width: 100px;
+    height: 72px;
+  }
+
+  .schedule-btn {
+    width: 90%;
+    max-width: 320px;
+  }
+}
+ 
+@media (max-width: 768px) {
+  .schedule-cta {
+    margin-top: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 3rem 1.2rem;
+  }
+
   .blog-content {
     padding: 1.4rem;
   }
@@ -856,3 +974,4 @@ blockquote,
     font-size: 1.15rem;
   }
 }
+
