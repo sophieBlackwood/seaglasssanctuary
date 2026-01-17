@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
- /* ===================================================== */
+/* ===================================================== */
 /* BLOG CENTER-FOCUSED CAROUSEL (MOBILE-FRIENDLY) */
 /* ===================================================== */
 const blogTrack = document.querySelector('.blog-card-grid');
@@ -218,17 +218,13 @@ if (blogTrack && blogCards.length > 0) {
   }
 
   blogNext?.addEventListener('click', () => {
-    if (blogIndex < blogCards.length - 1) {
-      blogIndex++;
-      updateBlogCarousel();
-    }
+    blogIndex = (blogIndex + 1) % blogCards.length; // Loop to start
+    updateBlogCarousel();
   });
 
   blogPrev?.addEventListener('click', () => {
-    if (blogIndex > 0) {
-      blogIndex--;
-      updateBlogCarousel();
-    }
+    blogIndex = (blogIndex - 1 + blogCards.length) % blogCards.length; // Loop to end
+    updateBlogCarousel();
   });
 
   window.addEventListener('resize', updateBlogCarousel);
