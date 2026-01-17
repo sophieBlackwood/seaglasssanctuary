@@ -727,14 +727,13 @@ blockquote,
 
   /* Carousel behavior */
   transform: scale(0.88);
-  filter: brightness(0.85);
-  transition: transform 0.4s ease, filter 0.4s ease;
+  transition: transform 0.4s ease;
+  z-index: 1;
 }
 
 /* Center / active card */
 .blog-card.active {
   transform: scale(1);
-  filter: brightness(1);
   z-index: 2;
 }
 
@@ -819,12 +818,12 @@ blockquote,
 /* Phones */
 @media (max-width: 768px) {
   .blog-card-grid {
-    gap: 1.25rem;
+    gap: 1rem;
   }
 
   .blog-card {
-    transform: scale(0.95);
-    filter: brightness(0.9);
+    transform: scale(0.85);
+    flex: 0 0 70%;
   }
 
   .blog-card.active {
