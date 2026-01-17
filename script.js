@@ -186,7 +186,10 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!blogTrack || blogCards.length === 0) return;
 
   let blogIndex = Math.floor(blogCards.length / 2); // start centered
-  const blogGap = 32;
+
+  const blogGap = parseFloat(
+  getComputedStyle(blogTrack).gap || 0
+);
 
   function updateBlogCarousel() {
     const cardWidth = blogCards[0].offsetWidth + blogGap;
