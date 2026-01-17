@@ -705,6 +705,9 @@ blockquote,
   gap: 2rem;
   transition: transform 0.4s ease-in-out;
   will-change: transform;
+  padding-left: 50%;
+  padding-right: 50%;
+  box-sizing: content-box;
 }
 
 /* ================================================= */
