@@ -149,13 +149,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* -------------------- */
-  /* Smooth Scrolling (Anchors + Header Offset) */
+  /* Smooth Scrolling */
   /* -------------------- */
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", function (e) {
       const targetId = this.getAttribute("href");
       const targetEl = document.querySelector(targetId);
-
       if (!targetEl) return;
 
       e.preventDefault();
@@ -172,14 +171,57 @@ document.addEventListener("DOMContentLoaded", () => {
         top: y,
         behavior: prefersReducedMotion ? "auto" : "smooth"
       });
-
-      // Auto-close side nav if open
-      if (document.getElementById("mySidenav")?.style.width !== "0px") {
-        closeNav();
-      }
     });
   });
 
+  /* ===================================================== */
+  /* BLOG CENTER-FOCUSED CAROUSEL (UPDATED / MINIMAL) */
+  /* ===================================================== */
+
+  const blogTrack = document.querySelector('.blog-card-grid');
+  const blogPrev = document.querySelector('.blog-carousel-btn.prev');
+  const blogNext = document.querySelector('.blog-carousel-btn.next');
+  const blogCards = Array.from(document.querySelectorAll('.blog-card'));
+
+  if (!blogTrack || blogCards.length === 0) return;
+
+  let blogIndex = Math.floor(blogCards.length / 2); // start centered
+  const blogGap = 32;
+
+  function updateBlogCarousel() {
+    const cardWidth = blogCards[0].offsetWidth + blogGap;
+    const containerWidth = blogTrack.parentElement.offsetWidth;
+
+    const offset =
+      blogIndex * cardWidth -
+      containerWidth / 2 +
+      cardWidth / 2;
+
+    blogTrack.style.transform = `translateX(-${offset}px)`;
+
+    // Update active (center) card
+    blogCards.forEach((card, i) => {
+      card.classList.toggle('active', i === blogIndex);
+    });
+  }
+
+  blogNext?.addEventListener('click', () => {
+    if (blogIndex < blogCards.length - 1) {
+      blogIndex++;
+      updateBlogCarousel();
+    }
+  });
+
+  blogPrev?.addEventListener('click', () => {
+    if (blogIndex > 0) {
+      blogIndex--;
+      updateBlogCarousel();
+    }
+  });
+
+  window.addEventListener('resize', updateBlogCarousel);
+
+  updateBlogCarousel(); // initial position
 });
 
 /* -------------------- */
@@ -235,32 +277,3 @@ function activatePinkMode() {
     if (pinkModal) pinkModal.classList.add("show");
   }
 }
-
-  const blogTrack = document.querySelector('.blog-card-grid');
-  const blogPrev = document.querySelector('.blog-carousel-btn.prev');
-  const blogNext = document.querySelector('.blog-carousel-btn.next');
-  const blogCards = document.querySelectorAll('.blog-card');
-
-  let blogIndex = 0;
-  const blogGap = 32;
-
-  function updateBlogCarousel() {
-    const cardWidth = blogCards[0].offsetWidth + blogGap;
-    blogTrack.style.transform = `translateX(-${blogIndex * cardWidth}px)`;
-  }
-
-  blogNext.addEventListener('click', () => {
-    if (blogIndex < blogCards.length - 1) {
-      blogIndex++;
-      updateBlogCarousel();
-    }
-  });
-
-  blogPrev.addEventListener('click', () => {
-    if (blogIndex > 0) {
-      blogIndex--;
-      updateBlogCarousel();
-    }
-  });
-
-  window.addEventListener('resize', updateBlogCarousel);
