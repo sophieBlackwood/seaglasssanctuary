@@ -180,69 +180,81 @@ const blogNext = document.querySelector('.blog-carousel-btn.next');
 const blogCards = Array.from(document.querySelectorAll('.blog-card'));
 
 if (blogTrack && blogCards.length > 0) {
-  let blogIndex = 0;
-
-  // Clone first and last cards for smooth looping
+  // 1. Clone cards
   const firstClone = blogCards[0].cloneNode(true);
   const lastClone = blogCards[blogCards.length - 1].cloneNode(true);
+  
   blogTrack.appendChild(firstClone);
-  blogTrack.insertBefore(lastClone, blogCards[0]);
+  blogTrack.insertBefore(lastClone, blogTrack.firstChild);
 
-  const allCards = Array.from(blogTrack.children);
-
-  const cardWidths = allCards.map(card => card.offsetWidth);
+  // blogIndex 0 now refers to the first REAL card (which is at index 1 in the DOM)
+  let blogIndex = 0; 
+  let isMoving = false; // Prevents click-spamming during transition
 
   function updateBlogCarousel(animate = true) {
+    const allCards = Array.from(blogTrack.children);
     const containerWidth = blogTrack.parentElement.offsetWidth;
     const cardGap = parseFloat(getComputedStyle(blogTrack).gap || 0);
+    
+    // Recalculate width in case of resize
+    const cardWidth = allCards[0].offsetWidth; 
 
-    let offset = 0;
-    for (let i = 0; i < blogIndex + 1; i++) offset += cardWidths[i] + cardGap; // +1 because of prepended clone
-    offset -= cardWidths[blogIndex + 1] / 2 - containerWidth / 2;
+    // Calculation for centering the card:
+    // Move past the (blogIndex + 1) cards, then adjust to center the active card
+    const offset = (blogIndex + 1) * (cardWidth + cardGap) - (containerWidth / 2) + (cardWidth / 2);
 
-    if (!animate) blogTrack.style.transition = 'none';
-    else blogTrack.style.transition = '';
+    blogTrack.style.transition = animate ? 'transform 0.4s ease-in-out' : 'none';
+    blogTrack.style.transform = `translateX(${-offset}px)`;
 
-    blogTrack.style.transform = `translateX(-${offset}px)`;
-
+    // Handle scaling and active classes
     allCards.forEach((card, i) => {
-      if (i === blogIndex + 1) { // +1 for clone offset
-        card.classList.add('active');
-        card.style.transform = 'scale(1)';
-      } else {
-        card.classList.remove('active');
-        const distance = Math.abs(i - (blogIndex + 1));
-        const scale = Math.max(0.75, 1 - 0.15 * distance);
-        card.style.transform = `scale(${scale})`;
-      }
+      const isCenter = i === blogIndex + 1;
+      card.classList.toggle('active', isCenter);
+      
+      const distance = Math.abs(i - (blogIndex + 1));
+      const scale = isCenter ? 1 : Math.max(0.8, 1 - 0.1 * distance);
+      card.style.transform = `scale(${scale})`;
+      card.style.opacity = isCenter ? '1' : '0.6'; // Optional: fade out side cards
     });
   }
 
-  function moveNext() {
-    blogIndex++;
-    updateBlogCarousel();
-
+  function handleTransitionEnd() {
+    isMoving = false;
+    
+    // Jump without animation if we are on a clone
     if (blogIndex >= blogCards.length) {
-      // Jump instantly back to real first card
       blogIndex = 0;
-      setTimeout(() => updateBlogCarousel(false), 300); // no animation
+      updateBlogCarousel(false);
+    } else if (blogIndex < 0) {
+      blogIndex = blogCards.length - 1;
+      updateBlogCarousel(false);
     }
+  }
+
+  function moveNext() {
+    if (isMoving) return;
+    isMoving = true;
+    blogIndex++;
+    updateBlogCarousel(true);
   }
 
   function movePrev() {
+    if (isMoving) return;
+    isMoving = true;
     blogIndex--;
-    updateBlogCarousel();
-
-    if (blogIndex < 0) {
-      blogIndex = blogCards.length - 1;
-      setTimeout(() => updateBlogCarousel(false), 300);
-    }
+    updateBlogCarousel(true);
   }
 
+  // Event Listeners
   blogNext?.addEventListener('click', moveNext);
   blogPrev?.addEventListener('click', movePrev);
-  window.addEventListener('resize', () => updateBlogCarousel(false));
+  blogTrack.addEventListener('transitionend', handleTransitionEnd);
+  
+  window.addEventListener('resize', () => {
+    updateBlogCarousel(false);
+  });
 
+  // Initial call
   updateBlogCarousel(false);
 }
 
