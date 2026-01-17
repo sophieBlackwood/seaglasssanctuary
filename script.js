@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ===================================================== */
-  /* BLOG CENTER-FOCUSED CAROUSEL (UPDATED / MINIMAL) */
+  /* BLOG CENTER-FOCUSED CAROUSEL (UPDATED / DEPTH SCALE) */
   /* ===================================================== */
 
   const blogTrack = document.querySelector('.blog-card-grid');
@@ -183,100 +183,107 @@ document.addEventListener("DOMContentLoaded", () => {
   const blogNext = document.querySelector('.blog-carousel-btn.next');
   const blogCards = Array.from(document.querySelectorAll('.blog-card'));
 
-  if (!blogTrack || blogCards.length === 0) return;
+  if (blogTrack && blogCards.length > 0) {
+    let blogIndex = 0; // start at first card
 
-  let blogIndex = Math.floor(blogCards.length / 2); // start centered
+    function updateBlogCarousel() {
+      const containerWidth = blogTrack.parentElement.offsetWidth;
+      const cardWidths = blogCards.map(card => card.offsetWidth);
+      const cardGap = parseFloat(getComputedStyle(blogTrack).gap || 0);
 
-  const blogGap = parseFloat(
-  getComputedStyle(blogTrack).gap || 0
-);
+      // Calculate total offset for centering
+      let offset = 0;
+      for (let i = 0; i < blogIndex; i++) {
+        offset += cardWidths[i] + cardGap;
+      }
+      offset += cardWidths[blogIndex] / 2 - containerWidth / 2;
 
-  function updateBlogCarousel() {
-    const cardWidth = blogCards[0].offsetWidth + blogGap;
-    const containerWidth = blogTrack.parentElement.offsetWidth;
+      blogTrack.style.transform = `translateX(-${offset}px)`;
 
-    const offset =
-      blogIndex * cardWidth -
-      containerWidth / 2 +
-      cardWidth / 2;
+      // Depth scaling
+      blogCards.forEach((card, i) => {
+        if (i === blogIndex) {
+          card.classList.add('active');
+        } else {
+          card.classList.remove('active');
+          // optional smaller scale on sides
+          const distance = Math.abs(i - blogIndex);
+          const scale = Math.max(0.7, 1 - 0.15 * distance);
+          card.style.transform = `scale(${scale})`;
+        }
+      });
+    }
 
-    blogTrack.style.transform = `translateX(-${offset}px)`;
-
-    // Update active (center) card
-    blogCards.forEach((card, i) => {
-      card.classList.toggle('active', i === blogIndex);
+    blogNext?.addEventListener('click', () => {
+      if (blogIndex < blogCards.length - 1) {
+        blogIndex++;
+        updateBlogCarousel();
+      }
     });
+
+    blogPrev?.addEventListener('click', () => {
+      if (blogIndex > 0) {
+        blogIndex--;
+        updateBlogCarousel();
+      }
+    });
+
+    window.addEventListener('resize', updateBlogCarousel);
+    updateBlogCarousel();
   }
 
-  blogNext?.addEventListener('click', () => {
-    if (blogIndex < blogCards.length - 1) {
-      blogIndex++;
-      updateBlogCarousel();
-    }
-  });
+  /* -------------------- */
+  /* Side Navigation */
+  /* -------------------- */
+  window.openNav = function () {
+    const sidenav = document.getElementById("mySidenav");
+    const hamburger = document.querySelector(".hamburger-menu");
+    if (!sidenav) return;
+    sidenav.style.width = "250px";
+    if (hamburger) hamburger.style.display = "none";
+  };
 
-  blogPrev?.addEventListener('click', () => {
-    if (blogIndex > 0) {
-      blogIndex--;
-      updateBlogCarousel();
-    }
-  });
+  window.closeNav = function () {
+    const sidenav = document.getElementById("mySidenav");
+    const hamburger = document.querySelector(".hamburger-menu");
+    if (!sidenav) return;
+    sidenav.style.width = "0";
+    if (hamburger) hamburger.style.display = "block";
+  };
 
-  window.addEventListener('resize', updateBlogCarousel);
+  /* -------------------- */
+  /* Konami Code */
+  /* -------------------- */
+  const konamiCode = [
+    "arrowup","arrowup","arrowdown","arrowdown",
+    "arrowleft","arrowright","arrowleft","arrowright","b","a"
+  ];
+  let konamiPosition = 0;
 
-  updateBlogCarousel(); // initial position
-});
-
-/* -------------------- */
-/* Side Navigation */
- /* -------------------- */
-window.openNav = function () {
-  const sidenav = document.getElementById("mySidenav");
-  const hamburger = document.querySelector(".hamburger-menu");
-  if (!sidenav) return;
-  sidenav.style.width = "250px";
-  if (hamburger) hamburger.style.display = "none";
-};
-
-window.closeNav = function () {
-  const sidenav = document.getElementById("mySidenav");
-  const hamburger = document.querySelector(".hamburger-menu");
-  if (!sidenav) return;
-  sidenav.style.width = "0";
-  if (hamburger) hamburger.style.display = "block";
-};
-
-/* -------------------- */
-/* Konami Code */
- /* -------------------- */
-const konamiCode = [
-  "arrowup","arrowup","arrowdown","arrowdown",
-  "arrowleft","arrowright","arrowleft","arrowright","b","a"
-];
-let konamiPosition = 0;
-
-document.addEventListener("keydown", (e) => {
-  const key = e.key.toLowerCase();
-  if (key === konamiCode[konamiPosition]) {
-    konamiPosition++;
-    if (konamiPosition === konamiCode.length) {
-      activatePinkMode();
+  document.addEventListener("keydown", (e) => {
+    const key = e.key.toLowerCase();
+    if (key === konamiCode[konamiPosition]) {
+      konamiPosition++;
+      if (konamiPosition === konamiCode.length) {
+        activatePinkMode();
+        konamiPosition = 0;
+      }
+    } else {
       konamiPosition = 0;
     }
-  } else {
-    konamiPosition = 0;
+  });
+
+  /* -------------------- */
+  /* Activate Pink Mode */
+  /* -------------------- */
+  function activatePinkMode() {
+    const pinkEnabled = document.body.classList.toggle("pink-mode");
+    localStorage.setItem("pink-mode", pinkEnabled ? "on" : "off");
+
+    if (pinkEnabled) {
+      const pinkModal = document.getElementById("pink-mode-modal");
+      if (pinkModal) pinkModal.classList.add("show");
+    }
   }
+
 });
-
-/* -------------------- */
-/* Activate Pink Mode */
- /* -------------------- */
-function activatePinkMode() {
-  const pinkEnabled = document.body.classList.toggle("pink-mode");
-  localStorage.setItem("pink-mode", pinkEnabled ? "on" : "off");
-
-  if (pinkEnabled) {
-    const pinkModal = document.getElementById("pink-mode-modal");
-    if (pinkModal) pinkModal.classList.add("show");
-  }
-}
