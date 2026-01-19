@@ -1,164 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Seaglass Sanctuary</title>
-  <link rel="stylesheet" href="https://use.typekit.net/rig8hkd.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <link rel="icon" type="image/x-icon" href="icon_transparent.png"/>
-  <link rel="stylesheet" href="style.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-</head>
-<body>
-
-  <!-- Quick Exit Button -->
-<button id="quick-exit" title="Quickly exit to Google">
-  <i class="fa-solid fa-arrow-right-from-bracket"></i> Quick Exit
-</button>
-  
-  <!-- Floating Side Buttons -->
-<div id="floating-buttons">
-  <button id="theme-toggle" title="Toggle theme">
-    <i class="fa-solid fa-moon"></i>
-  </button>
-  <button id="back-to-top" title="Back to top">
-    <i class="fa-solid fa-arrow-up"></i>
-  </button>
-</div>
-
-  <header class="navbar">
-    <div class="container nav-container">
-      <a href="index.html">
-        <img class="logo" id="logoImage" src="logo_text.png" alt="logo">
-      </a>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="index.html#mission">Mission</a></li>
-          <li><a href="index.html#resources">Resources</a></li>
-          <li><a href="helplines.html">Helplines</a></li>
-          <li><a href="index.html#support">Support</a></li>
-          <li><a href="index.html#stories">Stories</a></li>
-          <li><a href="index.html#blog">Blog</a></li>
-        </ul>
-      </nav>
-    </div>
-
-    <!-- Mobile Side Navigation -->
-<div class="hamburger-menu" onclick="openNav()">
-  &#9776;
-  <img src="icon_transparent.png" alt="Seaglass logo" class="sidenav-img">
-</div>
-<div id="mySidenav" class="sidenav">
-
-  <!-- Header row: logo + close button -->
-  <div class="sidenav-header">
-    <img src="logo_text.png" class="sidenav-logo" alt="Seaglass logo">
-    <span class="closebtn" onclick="closeNav()">×</span>
-  </div>
-  <hr>
-
-  <a href="index.html" class="special-link">Home</a>
-  <a href="index.html#mission">Mission</a>
-  <a href="index.html#resources">Resources</a>
-  <a href="helplines.html">Helplines</a>
-  <a href="index.html#support">Support</a>
-  <a href="index.html#stories">Stories</a>
-  <a href="index.html#blog">Blog</a>
-</div>
-</header>
- <br>
-  <br>
-
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="container">
-        <h2>Your Mind Matters</h2>
-        <p> At Seaglass Sanctuary, we believe in breaking the stigma and providing accessible resources for mental well-being. </p>
-        <a href="#resources" class="btn" id="mission">Find Support</a>
-      </div>
-    </section>
-
-    <!-- Mission Section -->
-    <section class="section mission">
-      <div class="container">
-        <h3>Our Mission</h3>
-        <p> Seaglass Sanctuary exists to connect individuals with the tools, stories, and communities that promote understanding and healing. We’re here to help everyone find their center. </p>
-        <br>
-        <a href="aboutus.html" class="btn-secondary" id="resources">Learn More About Us</a>
-      </div>
-    </section>
-
-    <!-- Resources Section -->
-    <section class="section">
-      <div class="container-card">
-        <h3>Resources</h3>
-
-        <div class="card-grid">
-          <div class="card">
-            <h4>Helplines And Hotlines</h4>
-            <p>Access 24/7 local and national crisis lines and mental health resources.</p>
-            <a href="helplines.html" class="link">View helplines →</a>
-          </div>
-
-          <div class="card">
-            <h4>Professional Support</h4>
-            <p>Find certified counselors and schedule an online session with a mental health professional.</p>
-            <a href="counselors.html" class="link" id="support">Book an appointment →</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Support Section -->
-    <section class="section">
-      <div class="container">
-        <h3>Community Support</h3>
-        <p> Join our online community to share your experiences, find understanding, and support one another in a safe environment. </p>
-        <br>
-        <a href="https://discord.gg/5EyZdy9amY" class="btn-secondary">Visit Forums</a>
-      </div>
-    </section>
-
-    <!-- Event Section -->
-    <section class="section events">
-      <div class="container-card">
-        <h3>Upcoming Event</h3>
-
-        <div class="event-card">
-          <h4>Mental Health Awareness Workshop</h4>
-          <p><strong>Date:</strong> December 12, 2025</p>
-          <p><strong>Time:</strong> 3:00 PM - 5:00 PM</p>
-          <p><strong>Location:</strong> Seaglass Sanctuary Community Center</p>
-          <p id="stories"> Join us for an interactive workshop focusing on mental health awareness, coping strategies, and community resources. </p>
-          <br>
-          <!-- for phase two, I want to include a section with lots of different events where you can learn more. Perhaps using this code. <a href="#support" class="btn btn-secondary" id="stories">Learn More</a> -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="section testimonials">
-      <div class="container-card">
-        <h3>Real Stories</h3>
-
-        <div class="testimonial-grid">
-          <blockquote>
-            “Seaglass Sanctuary helped me realize I wasn’t alone. The stories and support changed my perspective.”
-            <cite>– Jordan R.</cite><br>
-            <a href="jordan.html" class="link">Read more →</a>
-          </blockquote>
-
-          <blockquote>
-            “Finding a counselor here was simple and comforting. I finally feel heard and understood.”
-            <cite id="blog">– Maya P.</cite><br>
-            <a href="maya.html" class="link">Read more →</a>
-          </blockquote>
-        </div>
-      </div>
-    </section>
-
 <!-- Blog Section -->
 <section class="section blog-section">
   <div class="container-card">
@@ -169,29 +8,39 @@
 
       <div class="blog-carousel-track-container">
         <div class="blog-card-grid">
+
           <div class="blog-card">
-            <h4>Understanding Disorders</h4>
-            <p>Learn about anxiety, depression, PTSD, bipolar disorder, and other common conditions.</p>
-            <a href="disorders.html" class="blog-link">Learn more →</a>
+            <div class="blog-card-inner">
+              <h4>Understanding Disorders</h4>
+              <p>Learn about anxiety, depression, PTSD, bipolar disorder, and other common conditions.</p>
+              <a href="disorders.html" class="blog-link">Learn more →</a>
+            </div>
           </div>
 
           <div class="blog-card">
-            <h4>Mindful Habits for Everyday Calm</h4>
-            <p>Simple, practical habits to help reduce stress and improve mental clarity.</p>
-            <a href="mindful.html" class="blog-link">Read more →</a>
+            <div class="blog-card-inner">
+              <h4>Mindful Habits for Everyday Calm</h4>
+              <p>Simple, practical habits to help reduce stress and improve mental clarity.</p>
+              <a href="mindful.html" class="blog-link">Read more →</a>
+            </div>
           </div>
 
           <div class="blog-card">
-            <h4>Understanding Burnout</h4>
-            <p>Recognize the signs and take the right steps toward recovery and self-care.</p>
-            <a href="burnout.html" class="blog-link">Read more →</a>
+            <div class="blog-card-inner">
+              <h4>Understanding Burnout</h4>
+              <p>Recognize the signs and take the right steps toward recovery and self-care.</p>
+              <a href="burnout.html" class="blog-link">Read more →</a>
+            </div>
           </div>
 
           <div class="blog-card">
-            <h4>Building Emotional Resilience</h4>
-            <p>How to strengthen coping skills, adapt to stress, and bounce back from life’s challenges.</p>
-            <a href="resilience.html" class="blog-link">Read more →</a>
+            <div class="blog-card-inner">
+              <h4>Building Emotional Resilience</h4>
+              <p>How to strengthen coping skills, adapt to stress, and bounce back from life’s challenges.</p>
+              <a href="resilience.html" class="blog-link">Read more →</a>
+            </div>
           </div>
+
         </div>
       </div>
 
