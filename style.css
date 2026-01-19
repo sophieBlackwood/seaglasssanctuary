@@ -727,20 +727,23 @@ blockquote,
   text-align: left;
   cursor: pointer;
 
+  /* Smooth transitions for scaling/focus */
   transition:
     box-shadow 0.25s ease,
     opacity 0.25s ease,
     transform 0.25s ease;
 
-  transform: scale(0.9);
-  opacity: 0.6;
+  /* Non-active cards */
+  transform: scale(1);  /* same size */
+  opacity: 0.8;         /* slightly dimmed */
 }
 
-/* ACTIVE CARD */
+/* ACTIVE CARD (CENTER FOCUS) */
 .blog-card.active .blog-card-inner {
-  transform: scale(1);
-  opacity: 1;
+  transform: scale(1.05);        /* slightly larger */
+  opacity: 1;                     /* fully visible */
   box-shadow: 0 14px 36px rgba(0,0,0,0.25);
+  z-index: 5;                     /* ensure visual overlap */
 }
 
 /* ================= BUTTONS ================= */
@@ -851,8 +854,6 @@ blockquote,
     flex: 0 0 360px;
   }
 }
-
-
 /* ================================================= */
 /* FOOTER (SAFE & READABLE) */
 /* ================================================= */
