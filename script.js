@@ -1,8 +1,33 @@
-document.addEventListener("DOMContentLoaded", () => {
+/* ================================================= */
+/* MAIN SCRIPT: Seaglass Sanctuary */
+/* ================================================= */
 
+/* -------------------- */
+/* Side Navigation */
+function openNav() {
+  const sidenav = document.getElementById("mySidenav");
+  const hamburger = document.querySelector(".hamburger-menu");
+  if (!sidenav || !hamburger) return;
+
+  if (window.innerWidth <= 768) {
+    sidenav.style.width = "250px";
+    hamburger.style.display = "none";
+  }
+}
+
+function closeNav() {
+  const sidenav = document.getElementById("mySidenav");
+  const hamburger = document.querySelector(".hamburger-menu");
+  if (!sidenav || !hamburger) return;
+
+  sidenav.style.width = "0";
+  hamburger.style.display = "block";
+}
+
+/* -------------------- */
+document.addEventListener("DOMContentLoaded", () => {
   /* -------------------- */
   /* Accessibility: Reduced Motion */
-  /* -------------------- */
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;
@@ -13,7 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* -------------------- */
   /* Theme Toggle */
-  /* -------------------- */
   const themeToggle = document.getElementById("theme-toggle");
   if (themeToggle) {
     const savedTheme = localStorage.getItem("theme");
@@ -36,84 +60,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* -------------------- */
   /* Restore Pink Mode */
-  /* -------------------- */
   const savedPink = localStorage.getItem("pink-mode");
-  if (savedPink === "on") {
-    document.body.classList.add("pink-mode");
-  }
+  if (savedPink === "on") document.body.classList.add("pink-mode");
 
   /* -------------------- */
   /* Quick Exit */
-  /* -------------------- */
   const quickExitBtn = document.getElementById("quick-exit");
-  const modal = document.getElementById("quick-exit-modal");
-  const dismissModal = document.getElementById("dismiss-modal");
   const quickExitURL = "https://www.google.com/search?q=weather+today&safe=active";
-
   quickExitBtn?.addEventListener("click", () => {
     window.location.href = quickExitURL;
   });
 
-  if (modal && window.innerWidth > 768 && !sessionStorage.getItem("quick-exit-seen")) {
-    modal.classList.add("show");
-    sessionStorage.setItem("quick-exit-seen", "true");
-  }
-
-  dismissModal?.addEventListener("click", () => {
-    modal.classList.remove("show");
-  });
-
-  /* -------------------- */
-  /* Pink Mode Modal */
-  /* -------------------- */
-  const pinkModal = document.getElementById("pink-mode-modal");
-  const pinkDismiss = document.getElementById("pink-mode-dismiss");
-  const pinkDeactivate = document.getElementById("pink-mode-deactivate");
-
-  pinkDismiss?.addEventListener("click", () => {
-    pinkModal.classList.remove("show");
-  });
-
-  pinkDeactivate?.addEventListener("click", () => {
-    document.body.classList.remove("pink-mode");
-    localStorage.setItem("pink-mode", "off");
-    pinkModal.classList.remove("show");
-  });
-
-  /* -------------------- */
-  /* Secret Logo Hold */
-  /* -------------------- */
-  const logo = document.querySelector(".logo");
-  let logoHoldTimer;
-
-  logo?.addEventListener("mousedown", () => {
-    logoHoldTimer = setTimeout(() => {
-      activatePinkMode();
-    }, 2000);
-  });
-
-  ["mouseup", "mouseleave"].forEach(evt =>
-    logo?.addEventListener(evt, () => clearTimeout(logoHoldTimer))
-  );
-
-  /* -------------------- */
-  /* Triple ESC Quick Exit */
-  /* -------------------- */
-  let escPressCount = 0;
-  let escTimer;
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      escPressCount++;
-      clearTimeout(escTimer);
-      escTimer = setTimeout(() => escPressCount = 0, 1500);
-      if (escPressCount === 3) window.location.href = quickExitURL;
-    }
-  });
-
   /* -------------------- */
   /* Floating Buttons */
-  /* -------------------- */
   const backToTop = document.getElementById("back-to-top");
   const floatingButtons = document.getElementById("floating-buttons");
   let holdTimer;
@@ -137,9 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     backToTop.addEventListener("mousedown", () => {
       if (isMobile()) {
-        holdTimer = setTimeout(() => {
-          floatingButtons.classList.toggle("reveal");
-        }, 600);
+        holdTimer = setTimeout(() => floatingButtons.classList.toggle("reveal"), 600);
       }
     });
 
@@ -150,7 +107,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* -------------------- */
   /* Smooth Scrolling */
-  /* -------------------- */
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", function (e) {
       const targetId = this.getAttribute("href");
@@ -204,30 +160,23 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         });
 
-        blogCards.forEach(card =>
-          card.classList.toggle("active", card === closest)
-        );
+        blogCards.forEach(card => card.classList.toggle("active", card === closest));
       };
 
-      blogContainer.addEventListener("scroll", () =>
-        requestAnimationFrame(updateActiveOnScroll)
-      );
-
+      blogContainer.addEventListener("scroll", () => requestAnimationFrame(updateActiveOnScroll));
       updateActiveOnScroll();
       return;
     }
 
     /* ---------- DESKTOP (NO JUMPING) ---------- */
-
     const firstClone = blogCards[0].cloneNode(true);
     const lastClone = blogCards[blogCards.length - 1].cloneNode(true);
-
     blogTrack.appendChild(firstClone);
     blogTrack.insertBefore(lastClone, blogTrack.firstChild);
 
-    const total = blogCards.length;
     let index = 0;
     let isMoving = false;
+    const total = blogCards.length;
 
     function update(animate = true) {
       const cards = Array.from(blogTrack.children);
@@ -247,8 +196,14 @@ document.addEventListener("DOMContentLoaded", () => {
       cards.forEach((card, i) => {
         const active = i === visualIndex;
         card.classList.toggle("active", active);
-        card.style.opacity = active ? "1" : "0.6";
-        card.style.transform = `scale(${active ? 1 : 0.85})`;
+        const inner = card.querySelector(".blog-card-inner");
+        if (inner) {
+          inner.style.transform = `scale(${active ? 1 : 0.9})`;
+          inner.style.opacity = active ? "1" : "0.6";
+          inner.style.boxShadow = active
+            ? "0 14px 36px rgba(0,0,0,0.25)"
+            : "0 6px 20px rgba(0,0,0,0.12)";
+        }
       });
     }
 
@@ -265,12 +220,10 @@ document.addEventListener("DOMContentLoaded", () => {
     function onEnd(e) {
       if (e.target !== blogTrack || e.propertyName !== "transform") return;
       isMoving = false;
-
       if (index >= total) {
         index = 0;
         jump();
       }
-
       if (index < 0) {
         index = total - 1;
         jump();
@@ -300,27 +253,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* -------------------- */
-  /* Side Navigation */
-  /* -------------------- */
-  window.openNav = function () {
-    const sidenav = document.getElementById("mySidenav");
-    const hamburger = document.querySelector(".hamburger-menu");
-    if (!sidenav) return;
-    sidenav.style.width = "250px";
-    if (hamburger) hamburger.style.display = "none";
-  };
-
-  window.closeNav = function () {
-    const sidenav = document.getElementById("mySidenav");
-    const hamburger = document.querySelector(".hamburger-menu");
-    if (!sidenav) return;
-    sidenav.style.width = "0";
-    if (hamburger) hamburger.style.display = "block";
-  };
-
-  /* -------------------- */
   /* Konami Code */
-  /* -------------------- */
   const konamiCode = [
     "arrowup","arrowup","arrowdown","arrowdown",
     "arrowleft","arrowright","arrowleft","arrowright","b","a"
@@ -335,14 +268,11 @@ document.addEventListener("DOMContentLoaded", () => {
         activatePinkMode();
         konamiPosition = 0;
       }
-    } else {
-      konamiPosition = 0;
-    }
+    } else konamiPosition = 0;
   });
 
   /* -------------------- */
   /* Activate Pink Mode */
-  /* -------------------- */
   function activatePinkMode() {
     const enabled = document.body.classList.toggle("pink-mode");
     localStorage.setItem("pink-mode", enabled ? "on" : "off");
@@ -352,5 +282,4 @@ document.addEventListener("DOMContentLoaded", () => {
       modal?.classList.add("show");
     }
   }
-
 });
