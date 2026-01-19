@@ -131,93 +131,104 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ================================================= */
-  /* BLOG CAROUSEL (INFINITE LOOP + ARROWS) */
-  /* ================================================= */
+/* BLOG CAROUSEL (INFINITE LOOP + CENTER FOCUS) */
+/* ================================================= */
 
-  const blogContainer = document.querySelector(".blog-carousel-track-container");
-  const blogTrack = document.querySelector(".blog-card-grid");
-  const blogPrev = document.querySelector(".blog-carousel-btn.prev");
-  const blogNext = document.querySelector(".blog-carousel-btn.next");
-  const blogCards = Array.from(document.querySelectorAll(".blog-card"));
+const blogContainer = document.querySelector(".blog-carousel-track-container");
+const blogTrack = document.querySelector(".blog-card-grid");
+const blogPrev = document.querySelector(".blog-carousel-btn.prev");
+const blogNext = document.querySelector(".blog-carousel-btn.next");
+const blogCards = Array.from(document.querySelectorAll(".blog-card"));
 
-  if (blogTrack && blogCards.length > 0) {
+if (blogTrack && blogCards.length > 0) {
 
-    /* ---------- MOBILE ---------- */
-    const isMobileCarousel = () => window.matchMedia("(max-width: 768px)").matches;
-    if (isMobileCarousel()) {
-      const updateActiveOnScroll = () => {
-        const center = blogContainer.scrollLeft + blogContainer.offsetWidth / 2;
-        let closest = null;
-        let dist = Infinity;
+  const isMobileCarousel = () => window.matchMedia("(max-width: 768px)").matches;
 
-        blogCards.forEach(card => {
-          const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-          const d = Math.abs(center - cardCenter);
-          if (d < dist) {
-            dist = d;
-            closest = card;
-          }
-        });
+  /* ---------- MOBILE SCROLL ---------- */
+  if (isMobileCarousel()) {
+    const updateActiveOnScroll = () => {
+      const center = blogContainer.scrollLeft + blogContainer.offsetWidth / 2;
+      let closest = null;
+      let dist = Infinity;
 
-        blogCards.forEach(card => card.classList.toggle("active", card === closest));
-      };
+      blogCards.forEach(card => {
+        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+        const d = Math.abs(center - cardCenter);
+        if (d < dist) {
+          dist = d;
+          closest = card;
+        }
+      });
 
-      blogContainer.addEventListener("scroll", () => requestAnimationFrame(updateActiveOnScroll));
-      updateActiveOnScroll();
-      return;
-    }
+      blogCards.forEach(card => card.classList.toggle("active", card === closest));
+    };
 
-    /* ---------- DESKTOP INFINITE LOOP ---------- */
-    // Duplicate posts for seamless looping
-    blogCards.forEach(card => {
-      const clone = card.cloneNode(true);
-      blogTrack.appendChild(clone);
+    blogContainer.addEventListener("scroll", () => requestAnimationFrame(updateActiveOnScroll));
+    updateActiveOnScroll();
+    return;
+  }
+
+  /* ---------- DESKTOP INFINITE LOOP WITH CENTER FOCUS ---------- */
+  const total = blogCards.length;
+  const gap = parseFloat(getComputedStyle(blogTrack).gap) || 0;
+
+  // Clone cards for seamless looping
+  blogCards.forEach(card => blogTrack.appendChild(card.cloneNode(true)));
+
+  let index = 0;
+
+  const updateActive = () => {
+    const cards = Array.from(blogTrack.children);
+    const centerIndex = index + total; // offset by original length
+    cards.forEach((card, i) => {
+      card.classList.toggle("active", i === centerIndex);
     });
+  };
 
-    let index = 0;
+  const updateCarousel = (animate = true) => {
     const cardWidth = blogCards[0].offsetWidth;
-    const gap = parseFloat(getComputedStyle(blogTrack).gap) || 0;
-    const total = blogCards.length;
+    const offset = index * (cardWidth + gap);
+    blogTrack.style.transition = animate ? "transform 0.5s ease" : "none";
+    blogTrack.style.transform = `translateX(${-offset}px)`;
+    updateActive();
+  };
 
-    function updateCarousel() {
-      const offset = index * (cardWidth + gap);
-      blogTrack.style.transition = "transform 0.5s ease";
-      blogTrack.style.transform = `translateX(${-offset}px)`;
-    }
+  const jumpToStart = () => {
+    blogTrack.style.transition = "none";
+    index = 0;
+    updateCarousel(false);
+  };
 
-    function jumpToStart() {
+  const next = () => {
+    index++;
+    updateCarousel();
+    if (index >= total) setTimeout(jumpToStart, 510);
+  };
+
+  const prev = () => {
+    if (index === 0) {
+      index = total;
       blogTrack.style.transition = "none";
-      blogTrack.style.transform = `translateX(0px)`;
-      index = 0;
-    }
-
-    function next() {
-      index++;
-      updateCarousel();
-      if (index >= total) {
-        setTimeout(jumpToStart, 510); // after transition
-      }
-    }
-
-    function prev() {
-      if (index === 0) {
-        index = total;
-        blogTrack.style.transition = "none";
-        blogTrack.style.transform = `translateX(${-index * (cardWidth + gap)}px)`;
-        requestAnimationFrame(() => {
-          index--;
-          blogTrack.style.transition = "transform 0.5s ease";
-          updateCarousel();
-        });
-      } else {
+      updateCarousel(false);
+      requestAnimationFrame(() => {
         index--;
         updateCarousel();
-      }
+      });
+    } else {
+      index--;
+      updateCarousel();
     }
+  };
 
-    blogNext?.addEventListener("click", next);
-    blogPrev?.addEventListener("click", prev);
-  }
+  blogNext?.addEventListener("click", next);
+  blogPrev?.addEventListener("click", prev);
+
+  // Initial render
+  updateCarousel(false);
+
+  // Update on window resize
+  window.addEventListener("resize", () => updateCarousel(false));
+}
 
   /* -------------------- */
   /* Konami Code */
