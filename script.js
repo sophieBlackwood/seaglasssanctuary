@@ -131,86 +131,63 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 /* ================================================= */
-/* BLOG CAROUSEL (INFINITE LOOP + CENTER FOCUS) */
+/* BLOG CAROUSEL - SIMPLE INFINITE LOOP */
 /* ================================================= */
 
-const blogContainer = document.querySelector(".blog-carousel-track-container");
-const blogTrack = document.querySelector(".blog-card-grid");
-const blogPrev = document.querySelector(".blog-carousel-btn.prev");
-const blogNext = document.querySelector(".blog-carousel-btn.next");
-const blogCards = Array.from(document.querySelectorAll(".blog-card"));
+document.addEventListener("DOMContentLoaded", () => {
+  const blogTrack = document.querySelector(".blog-card-grid");
+  const blogPrev = document.querySelector(".blog-carousel-btn.prev");
+  const blogNext = document.querySelector(".blog-carousel-btn.next");
+  const blogCards = Array.from(document.querySelectorAll(".blog-card"));
+  const blogContainer = document.querySelector(".blog-carousel-track-container");
 
-if (blogTrack && blogCards.length > 0) {
+  if (!blogTrack || blogCards.length === 0) return;
 
   const isMobileCarousel = () => window.matchMedia("(max-width: 768px)").matches;
 
   /* ---------- MOBILE SCROLL ---------- */
   if (isMobileCarousel()) {
-    const updateActiveOnScroll = () => {
-      const center = blogContainer.scrollLeft + blogContainer.offsetWidth / 2;
-      let closest = null;
-      let dist = Infinity;
-
-      blogCards.forEach(card => {
-        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-        const d = Math.abs(center - cardCenter);
-        if (d < dist) {
-          dist = d;
-          closest = card;
-        }
-      });
-
-      blogCards.forEach(card => card.classList.toggle("active", card === closest));
-    };
-
-    blogContainer.addEventListener("scroll", () => requestAnimationFrame(updateActiveOnScroll));
-    updateActiveOnScroll();
-    return;
+    return; // mobile handles scroll natively
   }
 
-  /* ---------- DESKTOP INFINITE LOOP WITH CENTER FOCUS ---------- */
+  /* ---------- DESKTOP INFINITE LOOP ---------- */
   const total = blogCards.length;
   const gap = parseFloat(getComputedStyle(blogTrack).gap) || 0;
 
-  // Clone cards for seamless looping
+  // Clone all cards for seamless looping
   blogCards.forEach(card => blogTrack.appendChild(card.cloneNode(true)));
 
   let index = 0;
 
-  const updateActive = () => {
-    const cards = Array.from(blogTrack.children);
-    const centerIndex = index + total; // the center card
-    cards.forEach((card, i) => {
-      card.classList.toggle("active", i === centerIndex);
-    });
-  };
+  const cardWidth = blogCards[0].offsetWidth;
 
   const updateCarousel = (animate = true) => {
-    const cardWidth = blogCards[0].offsetWidth;
     const offset = index * (cardWidth + gap);
     blogTrack.style.transition = animate ? "transform 0.5s ease" : "none";
     blogTrack.style.transform = `translateX(${-offset}px)`;
-    updateActive();
   };
 
-  // Smooth reset without disappearing
-  const resetIfNeeded = () => {
-    if (index >= total) {
-      index = 0;
-      updateCarousel(false); // no transition
-    }
+  const jumpToStart = () => {
+    index = 0;
+    updateCarousel(false);
   };
 
   const next = () => {
     index++;
     updateCarousel();
-    setTimeout(resetIfNeeded, 510); // after transition
+    if (index >= total) {
+      setTimeout(jumpToStart, 510);
+    }
   };
 
   const prev = () => {
     if (index === 0) {
-      index = total - 1;
+      index = total;
       updateCarousel(false);
+      requestAnimationFrame(() => {
+        index--;
+        updateCarousel();
+      });
     } else {
       index--;
       updateCarousel();
@@ -223,9 +200,9 @@ if (blogTrack && blogCards.length > 0) {
   // Initial render
   updateCarousel(false);
 
-  // Update on window resize
+  // Adjust on window resize
   window.addEventListener("resize", () => updateCarousel(false));
-}
+});
 
   /* -------------------- */
   /* Konami Code */
