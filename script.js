@@ -1,9 +1,7 @@
 /* ================================================= */
-/* MAIN SCRIPT: Seaglass Sanctuary */
+/* MAIN SCRIPT: Seaglass Sanctuary - UPDATED CAROUSEL */
 /* ================================================= */
 
-/* -------------------- */
-/* Side Navigation */
 function openNav() {
   const sidenav = document.getElementById("mySidenav");
   const hamburger = document.querySelector(".hamburger-menu");
@@ -24,7 +22,6 @@ function closeNav() {
   hamburger.style.display = "block";
 }
 
-/* -------------------- */
 document.addEventListener("DOMContentLoaded", () => {
   /* -------------------- */
   /* Accessibility: Reduced Motion */
@@ -130,33 +127,26 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-/* ================================================= */
-/* BLOG CAROUSEL - ARROWS ONLY, SIMPLE INFINITE LOOP */
-/* ================================================= */
+  /* ================================================= */
+  /* BLOG CAROUSEL - ARROWS ONLY, SIMPLE LOOP */
+  /* ================================================= */
 
-const blogTrack = document.querySelector(".blog-card-grid");
-const blogPrev = document.querySelector(".blog-carousel-btn.prev");
-const blogNext = document.querySelector(".blog-carousel-btn.next");
-const blogCards = Array.from(document.querySelectorAll(".blog-card"));
-const blogContainer = document.querySelector(".blog-carousel-track-container");
+  const blogTrack = document.querySelector(".blog-card-grid");
+  const blogPrev = document.querySelector(".blog-carousel-btn.prev");
+  const blogNext = document.querySelector(".blog-carousel-btn.next");
+  const blogCards = Array.from(document.querySelectorAll(".blog-card"));
 
-if (blogTrack && blogCards.length > 0) {
-  const isMobileCarousel = () => window.matchMedia("(max-width: 768px)").matches;
-
-  /* ---------- MOBILE ---------- */
-  if (!isMobileCarousel()) {
-    const total = blogCards.length;
+  if (blogTrack && blogCards.length > 0) {
     const gap = parseFloat(getComputedStyle(blogTrack).gap) || 0;
+    const total = blogCards.length;
 
-    // Clone all cards for seamless infinite loop
+    // Clone cards to allow smooth looping
     blogCards.forEach(card => blogTrack.appendChild(card.cloneNode(true)));
 
     let index = 0;
 
-    // Measure card width **after clones are in the DOM**
-    const cardWidth = blogCards[0].offsetWidth;
-
     const updateCarousel = (animate = true) => {
+      const cardWidth = blogCards[0].offsetWidth;
       const offset = index * (cardWidth + gap);
       blogTrack.style.transition = animate ? "transform 0.5s ease" : "none";
       blogTrack.style.transform = `translateX(${-offset}px)`;
@@ -170,9 +160,7 @@ if (blogTrack && blogCards.length > 0) {
     const next = () => {
       index++;
       updateCarousel();
-      if (index >= total) {
-        setTimeout(jumpToStart, 510); // loop seamlessly
-      }
+      if (index >= total) setTimeout(jumpToStart, 510);
     };
 
     const prev = () => {
@@ -195,10 +183,9 @@ if (blogTrack && blogCards.length > 0) {
     // Initial render
     updateCarousel(false);
 
-    // Adjust on window resize
+    // Update on window resize
     window.addEventListener("resize", () => updateCarousel(false));
   }
-}
 
   /* -------------------- */
   /* Konami Code */
@@ -219,8 +206,6 @@ if (blogTrack && blogCards.length > 0) {
     } else konamiPosition = 0;
   });
 
-  /* -------------------- */
-  /* Activate Pink Mode */
   function activatePinkMode() {
     const enabled = document.body.classList.toggle("pink-mode");
     localStorage.setItem("pink-mode", enabled ? "on" : "off");
