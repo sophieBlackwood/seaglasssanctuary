@@ -734,16 +734,19 @@ blockquote,
     transform 0.25s ease;
 
   /* Non-active cards */
-  transform: scale(1);  /* same size */
+  transform: scale(1);  /* all cards same size */
   opacity: 0.8;         /* slightly dimmed */
 }
 
 /* ACTIVE CARD (CENTER FOCUS) */
 .blog-card.active .blog-card-inner {
-  transform: scale(1.05);        /* slightly larger */
-  opacity: 1;                     /* fully visible */
-  box-shadow: 0 14px 36px rgba(0,0,0,0.25);
-  z-index: 5;                     /* ensure visual overlap */
+  transform: scale(1.08);                     /* slightly larger */
+  opacity: 1;                                 /* fully visible */
+  box-shadow:
+    0 14px 36px rgba(0,0,0,0.25),           /* main shadow */
+    0 0 20px rgba(255,200,50,0.4),           /* subtle glow */
+    0 0 40px rgba(255,200,50,0.2);           /* extra glow layer */
+  z-index: 5;                                 /* visual overlap */
 }
 
 /* ================= BUTTONS ================= */
@@ -854,6 +857,7 @@ blockquote,
     flex: 0 0 360px;
   }
 }
+
 /* ================================================= */
 /* FOOTER (SAFE & READABLE) */
 /* ================================================= */
