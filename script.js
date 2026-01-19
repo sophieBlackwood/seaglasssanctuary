@@ -174,89 +174,127 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-const blogTrack = document.querySelector('.blog-card-grid');
-const blogPrev = document.querySelector('.blog-carousel-btn.prev');
-const blogNext = document.querySelector('.blog-carousel-btn.next');
-const blogCards = Array.from(document.querySelectorAll('.blog-card'));
+  /* ================================================= */
+  /* BLOG CAROUSEL (DESKTOP + MOBILE SAFE) */
+  /* ================================================= */
 
-if (blogTrack && blogCards.length > 0) {
-  // 1. Clone cards
-  const firstClone = blogCards[0].cloneNode(true);
-  const lastClone = blogCards[blogCards.length - 1].cloneNode(true);
-  
-  blogTrack.appendChild(firstClone);
-  blogTrack.insertBefore(lastClone, blogTrack.firstChild);
+  const blogTrack = document.querySelector('.blog-card-grid');
+  const blogContainer = document.querySelector('.blog-carousel-track-container');
+  const blogPrev = document.querySelector('.blog-carousel-btn.prev');
+  const blogNext = document.querySelector('.blog-carousel-btn.next');
+  const blogCards = Array.from(document.querySelectorAll('.blog-card'));
 
-  // blogIndex 0 now refers to the first REAL card (which is at index 1 in the DOM)
-  let blogIndex = 0; 
-  let isMoving = false; // Prevents click-spamming during transition
+  const isMobileCarousel = () => window.matchMedia("(max-width: 768px)").matches;
 
-  function updateBlogCarousel(animate = true) {
-    const allCards = Array.from(blogTrack.children);
-    const containerWidth = blogTrack.parentElement.offsetWidth;
-    const cardGap = parseFloat(getComputedStyle(blogTrack).gap || 0);
-    
-    // Recalculate width in case of resize
-    const cardWidth = allCards[0].offsetWidth; 
+  if (blogTrack && blogCards.length > 0) {
 
-    // Calculation for centering the card:
-    // Move past the (blogIndex + 1) cards, then adjust to center the active card
-    const offset = (blogIndex + 1) * (cardWidth + cardGap) - (containerWidth / 2) + (cardWidth / 2);
+    /* ---------- MOBILE: native scroll + active sync ---------- */
+    if (isMobileCarousel()) {
 
-    blogTrack.style.transition = animate ? 'transform 0.4s ease-in-out' : 'none';
-    blogTrack.style.transform = `translateX(${-offset}px)`;
+      const updateActiveOnScroll = () => {
+        const containerCenter =
+          blogContainer.scrollLeft + blogContainer.offsetWidth / 2;
 
-    // Handle scaling and active classes
-    allCards.forEach((card, i) => {
-      const isCenter = i === blogIndex + 1;
-      card.classList.toggle('active', isCenter);
-      
-      const distance = Math.abs(i - (blogIndex + 1));
-      const scale = isCenter ? 1 : Math.max(0.8, 1 - 0.1 * distance);
-      card.style.transform = `scale(${scale})`;
-      card.style.opacity = isCenter ? '1' : '0.6'; // Optional: fade out side cards
-    });
-  }
+        let closestCard = null;
+        let closestDistance = Infinity;
 
-  function handleTransitionEnd() {
-    isMoving = false;
-    
-    // Jump without animation if we are on a clone
-    if (blogIndex >= blogCards.length) {
-      blogIndex = 0;
-      updateBlogCarousel(false);
-    } else if (blogIndex < 0) {
-      blogIndex = blogCards.length - 1;
-      updateBlogCarousel(false);
+        blogCards.forEach(card => {
+          const cardCenter =
+            card.offsetLeft + card.offsetWidth / 2;
+
+          const distance = Math.abs(containerCenter - cardCenter);
+
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestCard = card;
+          }
+        });
+
+        blogCards.forEach(card =>
+          card.classList.toggle("active", card === closestCard)
+        );
+      };
+
+      blogContainer.addEventListener("scroll", () => {
+        requestAnimationFrame(updateActiveOnScroll);
+      });
+
+      updateActiveOnScroll();
+      return;
     }
-  }
 
-  function moveNext() {
-    if (isMoving) return;
-    isMoving = true;
-    blogIndex++;
-    updateBlogCarousel(true);
-  }
+    /* ---------- DESKTOP: transform-based infinite carousel ---------- */
 
-  function movePrev() {
-    if (isMoving) return;
-    isMoving = true;
-    blogIndex--;
-    updateBlogCarousel(true);
-  }
+    const firstClone = blogCards[0].cloneNode(true);
+    const lastClone = blogCards[blogCards.length - 1].cloneNode(true);
 
-  // Event Listeners
-  blogNext?.addEventListener('click', moveNext);
-  blogPrev?.addEventListener('click', movePrev);
-  blogTrack.addEventListener('transitionend', handleTransitionEnd);
-  
-  window.addEventListener('resize', () => {
+    blogTrack.appendChild(firstClone);
+    blogTrack.insertBefore(lastClone, blogTrack.firstChild);
+
+    let blogIndex = 0;
+    let isMoving = false;
+
+    function updateBlogCarousel(animate = true) {
+      const allCards = Array.from(blogTrack.children);
+      const containerWidth = blogTrack.parentElement.offsetWidth;
+      const cardGap = parseFloat(getComputedStyle(blogTrack).gap || 0);
+      const cardWidth = allCards[0].offsetWidth;
+
+      const offset =
+        (blogIndex + 1) * (cardWidth + cardGap) -
+        (containerWidth / 2) +
+        (cardWidth / 2);
+
+      blogTrack.style.transition = animate ? 'transform 0.4s ease-in-out' : 'none';
+      blogTrack.style.transform = `translateX(${-offset}px)`;
+
+      allCards.forEach((card, i) => {
+        const isCenter = i === blogIndex + 1;
+        card.classList.toggle('active', isCenter);
+
+        const distance = Math.abs(i - (blogIndex + 1));
+        const scale = isCenter ? 1 : Math.max(0.8, 1 - 0.1 * distance);
+        card.style.transform = `scale(${scale})`;
+        card.style.opacity = isCenter ? '1' : '0.6';
+      });
+    }
+
+    function handleTransitionEnd() {
+      isMoving = false;
+
+      if (blogIndex >= blogCards.length) {
+        blogIndex = 0;
+        updateBlogCarousel(false);
+      } else if (blogIndex < 0) {
+        blogIndex = blogCards.length - 1;
+        updateBlogCarousel(false);
+      }
+    }
+
+    function moveNext() {
+      if (isMoving) return;
+      isMoving = true;
+      blogIndex++;
+      updateBlogCarousel(true);
+    }
+
+    function movePrev() {
+      if (isMoving) return;
+      isMoving = true;
+      blogIndex--;
+      updateBlogCarousel(true);
+    }
+
+    blogNext?.addEventListener('click', moveNext);
+    blogPrev?.addEventListener('click', movePrev);
+    blogTrack.addEventListener('transitionend', handleTransitionEnd);
+
+    window.addEventListener('resize', () => {
+      updateBlogCarousel(false);
+    });
+
     updateBlogCarousel(false);
-  });
-
-  // Initial call
-  updateBlogCarousel(false);
-}
+  }
 
   /* -------------------- */
   /* Side Navigation */
