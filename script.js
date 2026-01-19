@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 /* ================================================= */
-/* BLOG CAROUSEL - SIMPLE INFINITE LOOP */
+/* BLOG CAROUSEL - ARROWS ONLY, SIMPLE INFINITE LOOP */
 /* ================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -145,20 +145,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const isMobileCarousel = () => window.matchMedia("(max-width: 768px)").matches;
 
-  /* ---------- MOBILE SCROLL ---------- */
-  if (isMobileCarousel()) {
-    return; // mobile handles scroll natively
-  }
+  /* ---------- MOBILE ---------- */
+  if (isMobileCarousel()) return; // scroll handled natively on mobile
 
-  /* ---------- DESKTOP INFINITE LOOP ---------- */
+  /* ---------- DESKTOP ---------- */
   const total = blogCards.length;
   const gap = parseFloat(getComputedStyle(blogTrack).gap) || 0;
 
-  // Clone all cards for seamless looping
+  // Clone all cards for infinite loop
   blogCards.forEach(card => blogTrack.appendChild(card.cloneNode(true)));
 
   let index = 0;
 
+  // Measure card width **after clones are in the DOM**
   const cardWidth = blogCards[0].offsetWidth;
 
   const updateCarousel = (animate = true) => {
@@ -176,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
     index++;
     updateCarousel();
     if (index >= total) {
-      setTimeout(jumpToStart, 510);
+      setTimeout(jumpToStart, 510); // loop seamlessly
     }
   };
 
@@ -194,6 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  // Arrow click events
   blogNext?.addEventListener("click", next);
   blogPrev?.addEventListener("click", prev);
 
