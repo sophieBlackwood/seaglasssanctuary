@@ -671,7 +671,7 @@ blockquote,
   border-radius: var(--radius);
 }
 
-/* ================================================= */
+//* ================================================= */
 /* BLOG CAROUSEL */
 /* ================================================= */
 
@@ -710,7 +710,6 @@ blockquote,
   justify-content: center;
   align-items: center;
 
-  /* 🚫 NEVER TRANSFORM THIS */
   transform: none !important;
   opacity: 1 !important;
 }
@@ -727,10 +726,10 @@ blockquote,
   text-align: left;
   cursor: pointer;
 
+  /* 🚫 NO transform transition */
   transition:
-    transform 0.35s ease,
-    box-shadow 0.35s ease,
-    opacity 0.35s ease;
+    box-shadow 0.25s ease,
+    opacity 0.25s ease;
 
   transform: scale(0.9);
   opacity: 0.6;
@@ -738,10 +737,9 @@ blockquote,
 
 /* ACTIVE CARD */
 .blog-card.active .blog-card-inner {
-  transform: scale(1);
+  transform: scale(1); /* instant */
   opacity: 1;
   box-shadow: 0 14px 36px rgba(0,0,0,0.25);
-  z-index: 2;
 }
 
 /* ================= BUTTONS ================= */
@@ -848,7 +846,6 @@ blockquote,
     flex: 0 0 360px;
   }
 }
-
 
 /* ================================================= */
 /* FOOTER (SAFE & READABLE) */
