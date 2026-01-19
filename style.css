@@ -678,54 +678,34 @@ blockquote,
 .blog-section {
   padding: 4rem 1.5rem;
   text-align: center;
-  overflow: hidden; /* Prevents horizontal scroll on the whole page */
+  overflow: hidden;
 }
 
-.blog-section h3 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  color: var(--accent);
-}
-
-/* Carousel Wrapper */
 .blog-carousel {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 1200px; /* Optional: keeps carousel from getting too wide */
+  max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Track container */
 .blog-carousel-track-container {
   overflow: hidden;
   width: 100%;
-  /* Added padding to allow the 'active' card to scale without being clipped */
-  padding: 2rem 0;
+  padding: 3rem 0; /* space for scaling */
 }
 
-/* Track */
+/* ================= TRACK ================= */
+
 .blog-card-grid {
   display: flex;
   gap: 2rem;
-  transition: transform 0.4s ease-in-out;
   will-change: transform;
-  /* Ensure cards align to the start for easier JS calculation */
-  justify-content: flex-start;
+  transition: transform 0.4s ease;
 }
 
-.blog-card-grid.no-transition {
-  transition: none !important;
-}
-
-/* ================================================= */
-/* BLOG CARD */
-/* ================================================= */
+/* ================= CARD ================= */
 
 .blog-card {
-  /* Use flex-basis for consistent sizing */
-  flex: 0 0 clamp(260px, 80vw, 340px);
+  flex: 0 0 320px; /* stable width for math */
   display: flex;
   flex-direction: column;
   background: var(--card-bg);
@@ -734,76 +714,74 @@ blockquote,
   box-shadow: 0 6px 20px rgba(0,0,0,0.12);
   color: var(--text);
   text-align: left;
-
-  /* Transition setup */
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  z-index: 1;
   cursor: pointer;
+
+  transition:
+    box-shadow 0.3s ease,
+    opacity 0.3s ease,
+    transform 0.3s ease;
+
+  transform: scale(0.9);
+  opacity: 0.6;
 }
 
-/* Center / active card - visual feedback */
+/* ACTIVE CARD ONLY */
 .blog-card.active {
+  transform: scale(1);
+  opacity: 1;
+  box-shadow: 0 14px 36px rgba(0,0,0,0.25);
   z-index: 2;
-  transform: scale(1.05);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
 }
 
-/* ================================================= */
-/* CAROUSEL BUTTONS */
-/* ================================================= */
+/* ================= BUTTONS ================= */
 
 .blog-carousel-btn {
-  background: white;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  width: 45px;
-  height: 45px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
+  background: white;
   color: var(--accent);
+  font-size: 1.4rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
   z-index: 10;
-  transition: all 0.2s ease;
+}
+
+.blog-carousel-btn.prev {
+  left: -22px;
+}
+
+.blog-carousel-btn.next {
+  right: -22px;
 }
 
 .blog-carousel-btn:hover {
-  transform: scale(1.1);
   background: var(--accent);
   color: white;
 }
 
-/* ================================================= */
-/* BLOG CONTENT */
-/* ================================================= */
-
-.blog-content {
-  display: flex;
-  flex-direction: column;
-}
+/* ================= CONTENT ================= */
 
 .blog-content .date {
-  font-size: 0.85rem;
-  color: var(--muted);
-  margin-bottom: 0.5rem;
-  text-transform: uppercase;
+  font-size: 0.8rem;
   letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 .blog-content h4 {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   margin: 0.5rem 0;
   color: var(--accent);
-  line-height: 1.3;
 }
 
 .blog-content p {
-  line-height: 1.6;
   font-size: 0.95rem;
-  margin-bottom: 1.25rem;
-  color: var(--text);
+  line-height: 1.6;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -811,54 +789,45 @@ blockquote,
 }
 
 /* ================================================= */
-/* RESPONSIVE FIXES */
+/* RESPONSIVE */
 /* ================================================= */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .blog-card {
+    flex: 0 0 280px;
+  }
+}
 
 /* Phones */
 @media (max-width: 768px) {
 
   .blog-carousel-track-container {
     overflow-x: auto;
-    overflow-y: visible;
-    -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
     padding: 1.5rem 0;
   }
 
   .blog-card-grid {
-    gap: 1rem;
     transform: none !important;
     transition: none !important;
     width: max-content;
-    scroll-behavior: smooth;
+    gap: 1.2rem;
   }
 
   .blog-card {
-    flex: 0 0 70%;
+    flex: 0 0 75vw;
     scroll-snap-align: center;
+    transform: none !important;
+    opacity: 1 !important;
   }
 
-  /* Remove scale on mobile to prevent clipping */
   .blog-card.active {
-    transform: none;
     box-shadow: 0 6px 20px rgba(0,0,0,0.12);
   }
 
-  /* Hide arrows on mobile (swipe instead) */
   .blog-carousel-btn {
     display: none;
-  }
-
-  .blog-content {
-    padding: 1.4rem;
-  }
-
-  .blog-content h3 {
-    font-size: 1.7rem;
-  }
-
-  .blog-content h4 {
-    font-size: 1.15rem;
   }
 }
 
@@ -868,6 +837,7 @@ blockquote,
     flex: 0 0 360px;
   }
 }
+
 
 
 /* ================================================= */
