@@ -706,55 +706,40 @@ blockquote,
 /* ================= CARD (POSITIONING ONLY) ================= */
 
 .blog-card {
-  flex: 0 0 320px;
+  flex: 0 0 320px; /* base card size */
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: none !important;
-  opacity: 1 !important;
 }
 
 /* ================= CARD INNER (VISUAL ONLY) ================= */
 
 .blog-card-inner {
   width: 100%;
-  background: var(--card-bg);
+  background: var(--card-bg); /* matches your card colors */
   padding: 1.5rem;
   border-radius: 16px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-  color: var(--always-light-text);
+  color: var(--text);
   text-align: left;
   cursor: pointer;
 
-  /* Smooth transitions for scaling/focus */
-  transition:
-    box-shadow 0.35s ease,
-    opacity 0.35s ease,
-    transform 0.35s ease,
-    color 0.35s ease;
+  transition: 
+    transform 0.25s ease, 
+    opacity 0.25s ease, 
+    box-shadow 0.25s ease;
 
-  /* Non-active cards: all same size, slightly dimmed */
-  transform: scale(1);
-  opacity: 0.75;
+  transform: scale(1);  /* all non-active cards same size */
+  opacity: 0.8;         /* slightly dimmed */
 }
 
-/* ACTIVE CARD (CENTER FOCUS) */
+/* ================= ACTIVE CARD (CENTER FOCUS) ================= */
+
 .blog-card.active .blog-card-inner {
-  transform: scale(1.12); /* slightly larger */
-  opacity: 1;             /* fully visible */
-  z-index: 5;             /* ensure visual overlap */
-
-  /* Enhanced shadow + glow for visual emphasis */
-  box-shadow:
-    0 16px 36px rgba(0,0,0,0.35),  /* main shadow */
-    0 0 15px rgba(79,178,159,0.5),  /* subtle teal glow */
-    0 0 30px rgba(79,178,159,0.3);  /* extra glow layer */
-}
-
-/* ACTIVE CARD TEXT HIGHLIGHT */
-.blog-card.active .blog-content h4 {
-  color: var(--accent-light);
-  font-weight: 600;
+  transform: scale(1.05);       /* slightly larger */
+  opacity: 1;                    /* fully visible */
+  box-shadow: 0 14px 36px rgba(0,0,0,0.25); /* subtle elevation */
+  z-index: 5;                    /* overlap neighbors cleanly */
 }
 
 /* ================= BUTTONS ================= */
@@ -849,7 +834,7 @@ blockquote,
   }
 
   .blog-card-inner {
-    transform: scale(1) !important;
+    transform: none !important;
     opacity: 1 !important;
     box-shadow: 0 6px 20px rgba(0,0,0,0.12);
   }
@@ -865,7 +850,6 @@ blockquote,
     flex: 0 0 360px;
   }
 }
-
 
 /* ================================================= */
 /* FOOTER (SAFE & READABLE) */
