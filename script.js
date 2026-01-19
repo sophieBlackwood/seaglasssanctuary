@@ -179,7 +179,7 @@ if (blogTrack && blogCards.length > 0) {
 
   const updateActive = () => {
     const cards = Array.from(blogTrack.children);
-    const centerIndex = index + total; // offset by original length
+    const centerIndex = index + total; // the center card
     cards.forEach((card, i) => {
       card.classList.toggle("active", i === centerIndex);
     });
@@ -193,27 +193,24 @@ if (blogTrack && blogCards.length > 0) {
     updateActive();
   };
 
-  const jumpToStart = () => {
-    blogTrack.style.transition = "none";
-    index = 0;
-    updateCarousel(false);
+  // Smooth reset without disappearing
+  const resetIfNeeded = () => {
+    if (index >= total) {
+      index = 0;
+      updateCarousel(false); // no transition
+    }
   };
 
   const next = () => {
     index++;
     updateCarousel();
-    if (index >= total) setTimeout(jumpToStart, 510);
+    setTimeout(resetIfNeeded, 510); // after transition
   };
 
   const prev = () => {
     if (index === 0) {
-      index = total;
-      blogTrack.style.transition = "none";
+      index = total - 1;
       updateCarousel(false);
-      requestAnimationFrame(() => {
-        index--;
-        updateCarousel();
-      });
     } else {
       index--;
       updateCarousel();
