@@ -671,7 +671,7 @@ blockquote,
   border-radius: var(--radius);
 }
 
-//* ================================================= */
+/* ================================================= */
 /* BLOG CAROUSEL */
 /* ================================================= */
 
@@ -691,6 +691,7 @@ blockquote,
   overflow: hidden;
   width: 100%;
   padding: 3rem 0;
+  position: relative;
 }
 
 /* ================= TRACK ================= */
@@ -699,7 +700,7 @@ blockquote,
   display: flex;
   gap: 2rem;
   will-change: transform;
-  transition: transform 0.4s ease;
+  transition: transform 0.5s ease;
 }
 
 /* ================= CARD (POSITIONING ONLY) ================= */
@@ -726,10 +727,10 @@ blockquote,
   text-align: left;
   cursor: pointer;
 
-  /* 🚫 NO transform transition */
   transition:
     box-shadow 0.25s ease,
-    opacity 0.25s ease;
+    opacity 0.25s ease,
+    transform 0.25s ease;
 
   transform: scale(0.9);
   opacity: 0.6;
@@ -737,7 +738,7 @@ blockquote,
 
 /* ACTIVE CARD */
 .blog-card.active .blog-card-inner {
-  transform: scale(1); /* instant */
+  transform: scale(1);
   opacity: 1;
   box-shadow: 0 14px 36px rgba(0,0,0,0.25);
 }
@@ -758,6 +759,10 @@ blockquote,
   cursor: pointer;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
   z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s ease, color 0.25s ease;
 }
 
 .blog-carousel-btn.prev {
@@ -846,6 +851,7 @@ blockquote,
     flex: 0 0 360px;
   }
 }
+
 
 /* ================================================= */
 /* FOOTER (SAFE & READABLE) */
