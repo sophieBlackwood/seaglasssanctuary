@@ -413,8 +413,8 @@ a {
   position: fixed;
   top: 1rem;
   right: 1rem;
-  background: #c1121f;
-  color: #ffffff;
+  background: #e84c5a;
+  color: var(--always-light-text);
   border: none;
   border-radius: var(--radius);
   padding: 0.7rem 1.2rem;
@@ -441,11 +441,6 @@ a {
     top: 0.7rem;
   }
 }
-
-body.dark #quick-exit {
-  background: #e84c5a;
-}
-
 
 /* Counselor Cards Grid */
 .counselors-grid {
