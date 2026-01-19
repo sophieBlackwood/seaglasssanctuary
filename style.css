@@ -710,7 +710,6 @@ blockquote,
   display: flex;
   justify-content: center;
   align-items: center;
-
   transform: none !important;
   opacity: 1 !important;
 }
@@ -729,24 +728,33 @@ blockquote,
 
   /* Smooth transitions for scaling/focus */
   transition:
-    box-shadow 0.25s ease,
-    opacity 0.25s ease,
-    transform 0.25s ease;
+    box-shadow 0.35s ease,
+    opacity 0.35s ease,
+    transform 0.35s ease,
+    color 0.35s ease;
 
-  /* Non-active cards */
-  transform: scale(1);  /* all cards same size */
-  opacity: 0.8;         /* slightly dimmed */
+  /* Non-active cards: all same size, slightly dimmed */
+  transform: scale(1);
+  opacity: 0.75;
 }
 
 /* ACTIVE CARD (CENTER FOCUS) */
 .blog-card.active .blog-card-inner {
-  transform: scale(1.08);                     /* slightly larger */
-  opacity: 1;                                 /* fully visible */
+  transform: scale(1.12); /* slightly larger */
+  opacity: 1;             /* fully visible */
+  z-index: 5;             /* ensure visual overlap */
+
+  /* Enhanced shadow + glow for visual emphasis */
   box-shadow:
-    0 14px 36px rgba(0,0,0,0.25),           /* main shadow */
-    0 0 20px rgba(255,200,50,0.4),           /* subtle glow */
-    0 0 40px rgba(255,200,50,0.2);           /* extra glow layer */
-  z-index: 5;                                 /* visual overlap */
+    0 16px 36px rgba(0,0,0,0.35),  /* main shadow */
+    0 0 15px rgba(79,178,159,0.5),  /* subtle teal glow */
+    0 0 30px rgba(79,178,159,0.3);  /* extra glow layer */
+}
+
+/* ACTIVE CARD TEXT HIGHLIGHT */
+.blog-card.active .blog-content h4 {
+  color: var(--accent-light);
+  font-weight: 600;
 }
 
 /* ================= BUTTONS ================= */
@@ -841,7 +849,7 @@ blockquote,
   }
 
   .blog-card-inner {
-    transform: none !important;
+    transform: scale(1) !important;
     opacity: 1 !important;
     box-shadow: 0 6px 20px rgba(0,0,0,0.12);
   }
@@ -857,6 +865,7 @@ blockquote,
     flex: 0 0 360px;
   }
 }
+
 
 /* ================================================= */
 /* FOOTER (SAFE & READABLE) */
