@@ -702,7 +702,7 @@ blockquote,
   overflow: hidden;
   width: 100%;
   /* Added padding to allow the 'active' card to scale without being clipped */
-  padding: 2rem 0; 
+  padding: 2rem 0;
 }
 
 /* Track */
@@ -712,7 +712,7 @@ blockquote,
   transition: transform 0.4s ease-in-out;
   will-change: transform;
   /* Ensure cards align to the start for easier JS calculation */
-  justify-content: flex-start; 
+  justify-content: flex-start;
 }
 
 .blog-card-grid.no-transition {
@@ -734,7 +734,7 @@ blockquote,
   box-shadow: 0 6px 20px rgba(0,0,0,0.12);
   color: var(--text);
   text-align: left;
-  
+
   /* Transition setup */
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   z-index: 1;
@@ -744,7 +744,7 @@ blockquote,
 /* Center / active card - visual feedback */
 .blog-card.active {
   z-index: 2;
-  transform: scale(1.05); /* Added slight scale to justify the .active class */
+  transform: scale(1.05);
   box-shadow: 0 12px 30px rgba(0,0,0,0.2);
 }
 
@@ -753,7 +753,7 @@ blockquote,
 /* ================================================= */
 
 .blog-carousel-btn {
-  background: white; /* Added background for visibility over cards */
+  background: white;
   border-radius: 50%;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   width: 45px;
@@ -780,7 +780,6 @@ blockquote,
 /* ================================================= */
 
 .blog-content {
-  /* Removed duplicate padding; let the card handle it */
   display: flex;
   flex-direction: column;
 }
@@ -805,7 +804,6 @@ blockquote,
   font-size: 0.95rem;
   margin-bottom: 1.25rem;
   color: var(--text);
-  /* Optional: Limit text to 3 lines for visual consistency */
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -818,20 +816,37 @@ blockquote,
 
 /* Phones */
 @media (max-width: 768px) {
+
+  .blog-carousel-track-container {
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding: 1.5rem 0;
+  }
+
   .blog-card-grid {
     gap: 1rem;
+    transform: none !important;
+    transition: none !important;
+    width: max-content;
+    scroll-behavior: smooth;
   }
 
   .blog-card {
     flex: 0 0 70%;
+    scroll-snap-align: center;
   }
 
+  /* Remove scale on mobile to prevent clipping */
   .blog-card.active {
-    /* JS handles scale */
+    transform: none;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
   }
 
+  /* Hide arrows on mobile (swipe instead) */
   .blog-carousel-btn {
-    font-size: 1.6rem;
+    display: none;
   }
 
   .blog-content {
