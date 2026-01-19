@@ -690,7 +690,7 @@ blockquote,
 .blog-carousel-track-container {
   overflow: hidden;
   width: 100%;
-  padding: 3rem 0; /* space for scaling */
+  padding: 3rem 0;
 }
 
 /* ================= TRACK ================= */
@@ -702,12 +702,23 @@ blockquote,
   transition: transform 0.4s ease;
 }
 
-/* ================= CARD ================= */
+/* ================= CARD (POSITIONING ONLY) ================= */
 
 .blog-card {
-  flex: 0 0 320px; /* stable width for math */
+  flex: 0 0 320px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* 🚫 NEVER TRANSFORM THIS */
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+/* ================= CARD INNER (VISUAL ONLY) ================= */
+
+.blog-card-inner {
+  width: 100%;
   background: var(--card-bg);
   padding: 1.5rem;
   border-radius: 16px;
@@ -717,16 +728,16 @@ blockquote,
   cursor: pointer;
 
   transition:
-    box-shadow 0.3s ease,
-    opacity 0.3s ease,
-    transform 0.3s ease;
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    opacity 0.35s ease;
 
   transform: scale(0.9);
   opacity: 0.6;
 }
 
-/* ACTIVE CARD ONLY */
-.blog-card.active {
+/* ACTIVE CARD */
+.blog-card.active .blog-card-inner {
   transform: scale(1);
   opacity: 1;
   box-shadow: 0 14px 36px rgba(0,0,0,0.25);
@@ -818,11 +829,11 @@ blockquote,
   .blog-card {
     flex: 0 0 75vw;
     scroll-snap-align: center;
-    transform: none !important;
-    opacity: 1 !important;
   }
 
-  .blog-card.active {
+  .blog-card-inner {
+    transform: none !important;
+    opacity: 1 !important;
     box-shadow: 0 6px 20px rgba(0,0,0,0.12);
   }
 
@@ -837,7 +848,6 @@ blockquote,
     flex: 0 0 360px;
   }
 }
-
 
 
 /* ================================================= */
