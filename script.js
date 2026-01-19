@@ -131,20 +131,19 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ================================================= */
-  /* BLOG CAROUSEL (DESKTOP + MOBILE SAFE) */
+  /* BLOG CAROUSEL (INFINITE LOOP + ARROWS) */
   /* ================================================= */
 
-  const blogTrack = document.querySelector(".blog-card-grid");
   const blogContainer = document.querySelector(".blog-carousel-track-container");
+  const blogTrack = document.querySelector(".blog-card-grid");
   const blogPrev = document.querySelector(".blog-carousel-btn.prev");
   const blogNext = document.querySelector(".blog-carousel-btn.next");
   const blogCards = Array.from(document.querySelectorAll(".blog-card"));
 
-  const isMobileCarousel = () => window.matchMedia("(max-width: 768px)").matches;
-
   if (blogTrack && blogCards.length > 0) {
 
     /* ---------- MOBILE ---------- */
+    const isMobileCarousel = () => window.matchMedia("(max-width: 768px)").matches;
     if (isMobileCarousel()) {
       const updateActiveOnScroll = () => {
         const center = blogContainer.scrollLeft + blogContainer.offsetWidth / 2;
@@ -168,88 +167,56 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    /* ---------- DESKTOP (NO JUMPING) ---------- */
-    const firstClone = blogCards[0].cloneNode(true);
-    const lastClone = blogCards[blogCards.length - 1].cloneNode(true);
-    blogTrack.appendChild(firstClone);
-    blogTrack.insertBefore(lastClone, blogTrack.firstChild);
+    /* ---------- DESKTOP INFINITE LOOP ---------- */
+    // Duplicate posts for seamless looping
+    blogCards.forEach(card => {
+      const clone = card.cloneNode(true);
+      blogTrack.appendChild(clone);
+    });
 
     let index = 0;
-    let isMoving = false;
+    const cardWidth = blogCards[0].offsetWidth;
+    const gap = parseFloat(getComputedStyle(blogTrack).gap) || 0;
     const total = blogCards.length;
 
-    function update(animate = true) {
-      const cards = Array.from(blogTrack.children);
-      const gap = parseFloat(getComputedStyle(blogTrack).gap) || 0;
-      const cardWidth = cards[0].offsetWidth;
-      const containerWidth = blogTrack.parentElement.offsetWidth;
-
-      const visualIndex = index + 1;
-      const offset =
-        visualIndex * (cardWidth + gap) -
-        containerWidth / 2 +
-        cardWidth / 2;
-
-      blogTrack.style.transition = animate ? "transform 0.4s ease" : "none";
+    function updateCarousel() {
+      const offset = index * (cardWidth + gap);
+      blogTrack.style.transition = "transform 0.5s ease";
       blogTrack.style.transform = `translateX(${-offset}px)`;
-
-      cards.forEach((card, i) => {
-        const active = i === visualIndex;
-        card.classList.toggle("active", active);
-        const inner = card.querySelector(".blog-card-inner");
-        if (inner) {
-          inner.style.transform = `scale(${active ? 1 : 0.9})`;
-          inner.style.opacity = active ? "1" : "0.6";
-          inner.style.boxShadow = active
-            ? "0 14px 36px rgba(0,0,0,0.25)"
-            : "0 6px 20px rgba(0,0,0,0.12)";
-        }
-      });
     }
 
-    function jump() {
+    function jumpToStart() {
       blogTrack.style.transition = "none";
-      requestAnimationFrame(() => {
-        update(false);
-        requestAnimationFrame(() => {
-          blogTrack.style.transition = "transform 0.4s ease";
-        });
-      });
-    }
-
-    function onEnd(e) {
-      if (e.target !== blogTrack || e.propertyName !== "transform") return;
-      isMoving = false;
-      if (index >= total) {
-        index = 0;
-        jump();
-      }
-      if (index < 0) {
-        index = total - 1;
-        jump();
-      }
+      blogTrack.style.transform = `translateX(0px)`;
+      index = 0;
     }
 
     function next() {
-      if (isMoving) return;
-      isMoving = true;
       index++;
-      update(true);
+      updateCarousel();
+      if (index >= total) {
+        setTimeout(jumpToStart, 510); // after transition
+      }
     }
 
     function prev() {
-      if (isMoving) return;
-      isMoving = true;
-      index--;
-      update(true);
+      if (index === 0) {
+        index = total;
+        blogTrack.style.transition = "none";
+        blogTrack.style.transform = `translateX(${-index * (cardWidth + gap)}px)`;
+        requestAnimationFrame(() => {
+          index--;
+          blogTrack.style.transition = "transform 0.5s ease";
+          updateCarousel();
+        });
+      } else {
+        index--;
+        updateCarousel();
+      }
     }
 
     blogNext?.addEventListener("click", next);
     blogPrev?.addEventListener("click", prev);
-    blogTrack.addEventListener("transitionend", onEnd);
-    window.addEventListener("resize", () => update(false));
-
-    update(false);
   }
 
   /* -------------------- */
