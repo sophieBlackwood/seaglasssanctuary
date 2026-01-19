@@ -223,50 +223,57 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    /* ---------- DESKTOP: transform-based infinite carousel ---------- */
+    /* ---------- DESKTOP: FIXED infinite carousel ---------- */
 
     const firstClone = blogCards[0].cloneNode(true);
     const lastClone = blogCards[blogCards.length - 1].cloneNode(true);
 
+    firstClone.classList.add("clone");
+    lastClone.classList.add("clone");
+
     blogTrack.appendChild(firstClone);
     blogTrack.insertBefore(lastClone, blogTrack.firstChild);
 
+    const totalRealCards = blogCards.length;
     let blogIndex = 0;
     let isMoving = false;
 
     function updateBlogCarousel(animate = true) {
       const allCards = Array.from(blogTrack.children);
       const containerWidth = blogTrack.parentElement.offsetWidth;
-      const cardGap = parseFloat(getComputedStyle(blogTrack).gap || 0);
+      const cardGap = parseFloat(getComputedStyle(blogTrack).gap) || 0;
       const cardWidth = allCards[0].offsetWidth;
 
-      const offset =
-        (blogIndex + 1) * (cardWidth + cardGap) -
-        (containerWidth / 2) +
-        (cardWidth / 2);
+      const visualIndex = blogIndex + 1;
 
-      blogTrack.style.transition = animate ? 'transform 0.4s ease-in-out' : 'none';
+      const offset =
+        visualIndex * (cardWidth + cardGap) -
+        containerWidth / 2 +
+        cardWidth / 2;
+
+      blogTrack.style.transition = animate ? "transform 0.4s ease" : "none";
       blogTrack.style.transform = `translateX(${-offset}px)`;
 
       allCards.forEach((card, i) => {
-        const isCenter = i === blogIndex + 1;
-        card.classList.toggle('active', isCenter);
-
-        const distance = Math.abs(i - (blogIndex + 1));
-        const scale = isCenter ? 1 : Math.max(0.8, 1 - 0.1 * distance);
-        card.style.transform = `scale(${scale})`;
-        card.style.opacity = isCenter ? '1' : '0.6';
+        const isCenter = i === visualIndex;
+        card.classList.toggle("active", isCenter);
+        card.style.opacity = isCenter ? "1" : "0.6";
+        card.style.transform = `scale(${isCenter ? 1 : 0.85})`;
       });
     }
 
-    function handleTransitionEnd() {
+    function handleTransitionEnd(e) {
+      if (e.propertyName !== "transform") return;
+
       isMoving = false;
 
-      if (blogIndex >= blogCards.length) {
+      if (blogIndex >= totalRealCards) {
         blogIndex = 0;
         updateBlogCarousel(false);
-      } else if (blogIndex < 0) {
-        blogIndex = blogCards.length - 1;
+      }
+
+      if (blogIndex < 0) {
+        blogIndex = totalRealCards - 1;
         updateBlogCarousel(false);
       }
     }
@@ -285,13 +292,11 @@ document.addEventListener("DOMContentLoaded", () => {
       updateBlogCarousel(true);
     }
 
-    blogNext?.addEventListener('click', moveNext);
-    blogPrev?.addEventListener('click', movePrev);
-    blogTrack.addEventListener('transitionend', handleTransitionEnd);
+    blogNext?.addEventListener("click", moveNext);
+    blogPrev?.addEventListener("click", movePrev);
+    blogTrack.addEventListener("transitionend", handleTransitionEnd);
 
-    window.addEventListener('resize', () => {
-      updateBlogCarousel(false);
-    });
+    window.addEventListener("resize", () => updateBlogCarousel(false));
 
     updateBlogCarousel(false);
   }
