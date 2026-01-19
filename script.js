@@ -134,75 +134,71 @@ document.addEventListener("DOMContentLoaded", () => {
 /* BLOG CAROUSEL - ARROWS ONLY, SIMPLE INFINITE LOOP */
 /* ================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
-  const blogTrack = document.querySelector(".blog-card-grid");
-  const blogPrev = document.querySelector(".blog-carousel-btn.prev");
-  const blogNext = document.querySelector(".blog-carousel-btn.next");
-  const blogCards = Array.from(document.querySelectorAll(".blog-card"));
-  const blogContainer = document.querySelector(".blog-carousel-track-container");
+const blogTrack = document.querySelector(".blog-card-grid");
+const blogPrev = document.querySelector(".blog-carousel-btn.prev");
+const blogNext = document.querySelector(".blog-carousel-btn.next");
+const blogCards = Array.from(document.querySelectorAll(".blog-card"));
+const blogContainer = document.querySelector(".blog-carousel-track-container");
 
-  if (!blogTrack || blogCards.length === 0) return;
-
+if (blogTrack && blogCards.length > 0) {
   const isMobileCarousel = () => window.matchMedia("(max-width: 768px)").matches;
 
   /* ---------- MOBILE ---------- */
-  if (isMobileCarousel()) return; // scroll handled natively on mobile
+  if (!isMobileCarousel()) {
+    const total = blogCards.length;
+    const gap = parseFloat(getComputedStyle(blogTrack).gap) || 0;
 
-  /* ---------- DESKTOP ---------- */
-  const total = blogCards.length;
-  const gap = parseFloat(getComputedStyle(blogTrack).gap) || 0;
+    // Clone all cards for seamless infinite loop
+    blogCards.forEach(card => blogTrack.appendChild(card.cloneNode(true)));
 
-  // Clone all cards for infinite loop
-  blogCards.forEach(card => blogTrack.appendChild(card.cloneNode(true)));
+    let index = 0;
 
-  let index = 0;
+    // Measure card width **after clones are in the DOM**
+    const cardWidth = blogCards[0].offsetWidth;
 
-  // Measure card width **after clones are in the DOM**
-  const cardWidth = blogCards[0].offsetWidth;
+    const updateCarousel = (animate = true) => {
+      const offset = index * (cardWidth + gap);
+      blogTrack.style.transition = animate ? "transform 0.5s ease" : "none";
+      blogTrack.style.transform = `translateX(${-offset}px)`;
+    };
 
-  const updateCarousel = (animate = true) => {
-    const offset = index * (cardWidth + gap);
-    blogTrack.style.transition = animate ? "transform 0.5s ease" : "none";
-    blogTrack.style.transform = `translateX(${-offset}px)`;
-  };
-
-  const jumpToStart = () => {
-    index = 0;
-    updateCarousel(false);
-  };
-
-  const next = () => {
-    index++;
-    updateCarousel();
-    if (index >= total) {
-      setTimeout(jumpToStart, 510); // loop seamlessly
-    }
-  };
-
-  const prev = () => {
-    if (index === 0) {
-      index = total;
+    const jumpToStart = () => {
+      index = 0;
       updateCarousel(false);
-      requestAnimationFrame(() => {
+    };
+
+    const next = () => {
+      index++;
+      updateCarousel();
+      if (index >= total) {
+        setTimeout(jumpToStart, 510); // loop seamlessly
+      }
+    };
+
+    const prev = () => {
+      if (index === 0) {
+        index = total;
+        updateCarousel(false);
+        requestAnimationFrame(() => {
+          index--;
+          updateCarousel();
+        });
+      } else {
         index--;
         updateCarousel();
-      });
-    } else {
-      index--;
-      updateCarousel();
-    }
-  };
+      }
+    };
 
-  // Arrow click events
-  blogNext?.addEventListener("click", next);
-  blogPrev?.addEventListener("click", prev);
+    blogNext?.addEventListener("click", next);
+    blogPrev?.addEventListener("click", prev);
 
-  // Initial render
-  updateCarousel(false);
+    // Initial render
+    updateCarousel(false);
 
-  // Adjust on window resize
-  window.addEventListener("resize", () => updateCarousel(false));
-});
+    // Adjust on window resize
+    window.addEventListener("resize", () => updateCarousel(false));
+  }
+}
 
   /* -------------------- */
   /* Konami Code */
