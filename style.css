@@ -787,24 +787,33 @@ blockquote,
 ========================== */
 
 .post {
-  max-width: 720px;
+  max-width: 800px; /* Slightly wider for modern screens */
   margin: 0 auto;
-  padding: 3rem 1.25rem 5rem;
+  padding: 4rem 1.5rem 8rem;
+  /* Smooth entry animation */
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ==========================
    POST MEDIA
-========================== */
+========================= */
 
 .post-media {
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+  position: relative;
 }
 
 .post-media img {
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 6px;
+  border-radius: 16px; /* Larger radius for a friendlier look */
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05); /* Soft, airy shadow */
 }
 
 /* ==========================
@@ -813,56 +822,81 @@ blockquote,
 
 .post-content {
   color: var(--text);
-  font-size: 1rem;
-  line-height: 1.8;
+  /* Use a system stack for clarity or a serif for "editorial" feel */
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1.125rem; /* Larger base font for better readability */
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* vertical rhythm */
+/* Improved Vertical Rhythm */
 .post-content > * + * {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
 }
 
 .post-content h3 {
-  font-size: 2.1rem;
-  line-height: 1.25;
-  letter-spacing: -0.02em;
-  margin-top: 0;
+  font-size: clamp(2rem, 5vw, 2.75rem); /* Fluid typography */
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.04em; /* Tight tracking for headers */
+  color: var(--heading-color, #111);
+  margin-bottom: 1rem;
 }
 
 .post-content .date {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   color: var(--muted);
-  margin-top: 0.5rem;
+  display: block;
+  margin-bottom: 2rem;
 }
 
 .post-content h4 {
-  font-size: 1.2rem;
-  margin-top: 3rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 4rem;
+  letter-spacing: -0.01em;
 }
 
+/* Custom List Styling */
 .post-content ul {
-  padding-left: 1.2rem;
+  padding-left: 0;
+  list-style: none;
 }
 
 .post-content li {
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+/* Modern Bullet Point */
+.post-content li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--accent-color, #007aff);
+  font-weight: bold;
 }
 
 /* ==========================
-   MOBILE
+   MOBILE & ACCESSIBILITY
 ========================== */
 
 @media (max-width: 768px) {
   .post {
-    padding-top: 2.5rem;
+    padding-top: 2rem;
+    padding-bottom: 4rem;
   }
 
-  .post-content h3 {
-    font-size: 1.75rem;
+  /* Increase line height slightly for smaller screens */
+  .post-content {
+    font-size: 1.05rem;
+    line-height: 1.6;
   }
 }
-
-
 /* ================================================= */
 /* RESPONSIVE */
 /* ================================================= */
