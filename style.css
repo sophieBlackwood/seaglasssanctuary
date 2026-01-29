@@ -781,26 +781,46 @@ blockquote,
   overflow: hidden;
 }
 /* ==========================
-   POST LAYOUT
+   BLOG POST (ISOLATED)
 ========================== */
 
-.post {
-  padding: 6rem 1.5rem 8rem;
-  animation: fadeIn 0.8s ease-out;
+/* Hard reset for the post only */
+.post,
+.post * {
+  box-sizing: border-box;
 }
+
+.post {
+  all: initial;                 /* nukes inherited chaos */
+  display: block;
+  padding: 6rem 1.5rem 8rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #222;
+}
+
+/* Restore basic text behavior */
+.post h1,
+.post h3,
+.post p,
+.post ul,
+.post li,
+.post span,
+.post a {
+  all: unset;
+  display: block;
+}
+
+/* ==========================
+   CONTAINER
+========================== */
 
 .post-article {
   max-width: 720px;
   margin: 0 auto;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
 /* ==========================
-   POST HEADER
+   HEADER
 ========================== */
 
 .post-header {
@@ -810,9 +830,9 @@ blockquote,
 
 .post-category {
   font-size: 0.8rem;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--accent-color);
+  color: #007aff;
 }
 
 .post-title {
@@ -824,7 +844,7 @@ blockquote,
 
 .post-meta {
   font-size: 0.9rem;
-  color: var(--muted);
+  color: #666;
 }
 
 /* ==========================
@@ -837,25 +857,26 @@ blockquote,
 
 .post-hero img {
   width: 100%;
-  border-radius: 16px;
   display: block;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+  border-radius: 16px;
 }
 
 /* ==========================
-   POST BODY (TYPOGRAPHY)
+   BODY TYPOGRAPHY
 ========================== */
 
 .post-body {
-  font-family: 'Inter', -apple-system, sans-serif;
   font-size: 1.1rem;
   line-height: 1.75;
-  color: var(--text);
 }
 
-/* Vertical rhythm */
+/* vertical rhythm */
 .post-body > * + * {
   margin-top: 1.6rem;
+}
+
+.post-body p {
+  max-width: 65ch;
 }
 
 .post-body h3 {
@@ -864,12 +885,8 @@ blockquote,
   font-weight: 700;
 }
 
-.post-body p {
-  max-width: 65ch; /* real editorial trick */
-}
-
 .post-body ul {
-  padding-left: 1.2rem;
+  margin-left: 1.2rem;
 }
 
 .post-body li {
@@ -885,14 +902,23 @@ blockquote,
   text-align: center;
 }
 
+.post-actions a {
+  display: inline-block;
+  padding: 0.8rem 1.6rem;
+  border-radius: 999px;
+  background: #007aff;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+}
+
 /* ==========================
    MOBILE
 ========================== */
 
 @media (max-width: 768px) {
   .post {
-    padding-top: 3rem;
-    padding-bottom: 5rem;
+    padding: 3rem 1.2rem 5rem;
   }
 
   .post-body {
