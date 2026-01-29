@@ -781,148 +781,166 @@ blockquote,
   overflow: hidden;
 }
 /* ==========================
-   BLOG POST (ISOLATED)
+   GENERAL POST / HERO LAYOUT
 ========================== */
 
-/* Hard reset for the post only */
-.post,
-.post * {
-  box-sizing: border-box;
-}
-
-.post {
-  all: initial;                 /* nukes inherited chaos */
-  display: block;
-  padding: 6rem 1.5rem 8rem;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  color: #222;
-}
-
-/* Restore basic text behavior */
-.post h1,
-.post h3,
-.post p,
-.post ul,
-.post li,
-.post span,
-.post a {
-  all: unset;
-  display: block;
-}
-
-/* ==========================
-   CONTAINER
-========================== */
-
-.post-article {
-  max-width: 720px;
+.post, .blog-post {
+  max-width: 900px;
   margin: 0 auto;
+  padding: 4rem 1.5rem 8rem;
+  animation: fadeIn 0.8s ease-out;
+  font-family: 'Inter', -apple-system, sans-serif;
+  color: var(--text, #111);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ==========================
-   HEADER
+   POST CARD / ARTICLE
 ========================== */
+
+.post-article, .post-card, .blog-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--card-bg, #fff);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+}
 
 .post-header {
-  text-align: center;
-  margin-bottom: 3rem;
+  padding: 2rem 1.5rem 0;
 }
 
 .post-category {
-  font-size: 0.8rem;
-  letter-spacing: 0.15em;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent-color, #007aff);
   text-transform: uppercase;
-  color: #007aff;
+  letter-spacing: 0.1em;
 }
 
 .post-title {
-  font-size: clamp(2.2rem, 5vw, 2.8rem);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-weight: 800;
-  line-height: 1.15;
-  margin: 1rem 0;
+  line-height: 1.2;
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
 }
 
 .post-meta {
   font-size: 0.9rem;
-  color: #666;
+  font-weight: 500;
+  color: var(--muted, #666);
+  margin-bottom: 2rem;
 }
 
 /* ==========================
-   HERO IMAGE
+   POST BODY
 ========================== */
 
-.post-hero {
-  margin: 3rem 0;
+.post-body, .blog-content {
+  padding: 0 1.5rem 2rem;
+  line-height: 1.7;
 }
 
-.post-hero img {
+.post-body > *, .blog-content > * + * {
+  margin-top: 1.5rem;
+}
+
+.post-body ul, .blog-content ul {
+  padding-left: 1.5rem;
+  list-style: none;
+}
+
+.post-body li, .blog-content li {
+  position: relative;
+  margin-bottom: 0.75rem;
+}
+
+.post-body li::before, .blog-content li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--accent-color, #007aff);
+  font-weight: bold;
+}
+
+/* ==========================
+   POST MEDIA / IMAGES
+========================== */
+
+.post-media, .blog-image {
+  margin-bottom: 2rem;
   width: 100%;
+}
+
+.post-media img, .blog-image img {
+  width: 100%;
+  height: auto;
   display: block;
   border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
 }
 
 /* ==========================
-   BODY TYPOGRAPHY
+   BUTTONS
 ========================== */
 
-.post-body {
-  font-size: 1.1rem;
-  line-height: 1.75;
-}
-
-/* vertical rhythm */
-.post-body > * + * {
-  margin-top: 1.6rem;
-}
-
-.post-body p {
-  max-width: 65ch;
-}
-
-.post-body h3 {
-  margin-top: 3rem;
-  font-size: 1.4rem;
-  font-weight: 700;
-}
-
-.post-body ul {
-  margin-left: 1.2rem;
-}
-
-.post-body li {
-  margin-bottom: 0.6rem;
-}
-
-/* ==========================
-   ACTIONS
-========================== */
-
-.post-actions {
-  margin-top: 4rem;
-  text-align: center;
-}
-
-.post-actions a {
+.post-actions .btn, .hero-content .btn {
   display: inline-block;
-  padding: 0.8rem 1.6rem;
-  border-radius: 999px;
-  background: #007aff;
-  color: white;
-  text-decoration: none;
+  margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  background: var(--accent-color, #007aff);
+  color: #fff;
   font-weight: 600;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.post-actions .btn:hover, .hero-content .btn:hover {
+  background: darken(var(--accent-color, #007aff), 10%);
 }
 
 /* ==========================
-   MOBILE
+   HERO SECTION
+========================== */
+
+.hero {
+  background: var(--hero-bg, #f5f7fa);
+  padding: 6rem 1.5rem 4rem;
+  text-align: center;
+  border-radius: 16px;
+  margin-bottom: 3rem;
+}
+
+.hero h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+/* ==========================
+   MOBILE & RESPONSIVE
 ========================== */
 
 @media (max-width: 768px) {
-  .post {
-    padding: 3rem 1.2rem 5rem;
+  .post, .blog-post {
+    padding-top: 2rem;
+    padding-bottom: 4rem;
   }
 
-  .post-body {
+  .post-body, .blog-content {
     font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  .post-title {
+    font-size: 1.75rem;
   }
 }
 
