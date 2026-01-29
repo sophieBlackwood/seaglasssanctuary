@@ -666,9 +666,7 @@ blockquote,
   border-radius: var(--radius);
 }
 
-/* ================================================= */
-/* BLOG CAROUSEL - SIMPLE, UNIFORM CARDS */
-/* ================================================= */
+/* Blog Carosel */
 
 .blog-section {
   padding: 4rem 1.5rem;
