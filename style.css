@@ -787,116 +787,121 @@ blockquote,
 ========================== */
 
 .post {
-  max-width: 800px; /* Slightly wider for modern screens */
-  margin: 0 auto;
-  padding: 4rem 1.5rem 8rem;
-  /* Smooth entry animation */
+  padding: 6rem 1.5rem 8rem;
   animation: fadeIn 0.8s ease-out;
+}
+
+.post-article {
+  max-width: 720px;
+  margin: 0 auto;
 }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* ==========================
-   POST MEDIA
-========================= */
-
-.post-media {
-  margin-bottom: 3rem;
-  position: relative;
-}
-
-.post-media img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 16px; /* Larger radius for a friendlier look */
-  box-shadow: 0 20px 40px rgba(0,0,0,0.05); /* Soft, airy shadow */
-}
-
-/* ==========================
-   POST CONTENT
+   POST HEADER
 ========================== */
 
-.post-content {
-  color: var(--text);
-  /* Use a system stack for clarity or a serif for "editorial" feel */
-  font-family: 'Inter', -apple-system, sans-serif;
-  font-size: 1.125rem; /* Larger base font for better readability */
-  line-height: 1.7;
-  -webkit-font-smoothing: antialiased;
+.post-header {
+  text-align: center;
+  margin-bottom: 3rem;
 }
 
-/* Improved Vertical Rhythm */
-.post-content > * + * {
-  margin-top: 2rem;
-}
-
-.post-content h3 {
-  font-size: clamp(2rem, 5vw, 2.75rem); /* Fluid typography */
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -0.04em; /* Tight tracking for headers */
-  color: var(--heading-color, #111);
-  margin-bottom: 1rem;
-}
-
-.post-content .date {
-  font-size: 0.9rem;
-  font-weight: 500;
+.post-category {
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  color: var(--accent-color);
+}
+
+.post-title {
+  font-size: clamp(2.2rem, 5vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin: 1rem 0;
+}
+
+.post-meta {
+  font-size: 0.9rem;
   color: var(--muted);
-  display: block;
-  margin-bottom: 2rem;
-}
-
-.post-content h4 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-top: 4rem;
-  letter-spacing: -0.01em;
-}
-
-/* Custom List Styling */
-.post-content ul {
-  padding-left: 0;
-  list-style: none;
-}
-
-.post-content li {
-  margin-bottom: 0.75rem;
-  padding-left: 1.5rem;
-  position: relative;
-}
-
-/* Modern Bullet Point */
-.post-content li::before {
-  content: "—";
-  position: absolute;
-  left: 0;
-  color: var(--accent-color, #007aff);
-  font-weight: bold;
 }
 
 /* ==========================
-   MOBILE & ACCESSIBILITY
+   HERO IMAGE
+========================== */
+
+.post-hero {
+  margin: 3rem 0;
+}
+
+.post-hero img {
+  width: 100%;
+  border-radius: 16px;
+  display: block;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+}
+
+/* ==========================
+   POST BODY (TYPOGRAPHY)
+========================== */
+
+.post-body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: var(--text);
+}
+
+/* Vertical rhythm */
+.post-body > * + * {
+  margin-top: 1.6rem;
+}
+
+.post-body h3 {
+  margin-top: 3rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.post-body p {
+  max-width: 65ch; /* real editorial trick */
+}
+
+.post-body ul {
+  padding-left: 1.2rem;
+}
+
+.post-body li {
+  margin-bottom: 0.6rem;
+}
+
+/* ==========================
+   ACTIONS
+========================== */
+
+.post-actions {
+  margin-top: 4rem;
+  text-align: center;
+}
+
+/* ==========================
+   MOBILE
 ========================== */
 
 @media (max-width: 768px) {
   .post {
-    padding-top: 2rem;
-    padding-bottom: 4rem;
+    padding-top: 3rem;
+    padding-bottom: 5rem;
   }
 
-  /* Increase line height slightly for smaller screens */
-  .post-content {
+  .post-body {
     font-size: 1.05rem;
-    line-height: 1.6;
   }
 }
+
 /* ================================================= */
 /* RESPONSIVE */
 /* ================================================= */
