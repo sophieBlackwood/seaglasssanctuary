@@ -43,7 +43,7 @@ body.dark.pink-mode {
 --accent-light: #F2B6CD;  /* lighter pink hover accent */
 --card-bg: #4A1E2D;       /* rich dark plum-rose background */
 --muted: #D6AFC6;         /* muted lavender-pink text */
-}
+}p
 
 
 /* Global Transitions */
@@ -781,87 +781,86 @@ blockquote,
   overflow: hidden;
 }
 /* ==========================
-   POST ARTICLE
+   POST SECTION
 ========================= */
 
-.post-article {
+#post {
   max-width: 900px;
-  margin: 0 auto 3rem;
-  background: #fff;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-  font-family: inherit; /* inherit from global */
+  margin: 3rem auto;
+  font-family: inherit;
+  color: #333;
+  line-height: 1.7;
 }
 
-.post-header {
+/* POST ARTICLE CARD */
+#post .post-article {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+/* HEADER */
+#post .post-header {
   padding: 2rem 1.5rem 0;
 }
 
-.post-category {
+#post .post-category {
   display: inline-block;
   font-size: 0.85rem;
   font-weight: 600;
-  color: #007aff; /* accent color */
+  color: #007aff;
   margin-bottom: 0.5rem;
 }
 
-.post-title {
+#post .post-title {
   font-size: 2rem;
   margin: 0.25rem 0 0.75rem;
   line-height: 1.3;
 }
 
-.post-meta {
+#post .post-meta {
   font-size: 0.875rem;
   color: #555;
   margin-bottom: 1.5rem;
 }
 
-/* ==========================
-   POST HERO IMAGE
-========================= */
-
-.post-hero img {
+/* HERO IMAGE */
+#post .post-hero img {
   width: 100%;
   height: auto;
   display: block;
   border-radius: 16px;
-  margin-bottom: 2rem;
+  margin: 0 0 2rem;
 }
 
-/* ==========================
-   POST BODY
-========================= */
-
-.post-body {
+/* BODY */
+#post .post-body {
   padding: 0 1.5rem 2rem;
-  line-height: 1.7;
-  font-size: 1rem;
-  color: #333;
 }
 
-.post-body h3 {
+#post .post-body h3 {
   font-size: 1.5rem;
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
-  color: #007aff; /* accent color */
+  color: #007aff;
 }
 
-.post-body ul {
+#post .post-body ul {
   padding-left: 1.5rem;
 }
 
-.post-body li {
+#post .post-body li {
   margin-bottom: 0.5rem;
 }
 
-/* ==========================
-   POST ACTION BUTTON
-========================= */
-
-.post-actions {
+/* ACTION BUTTON */
+#post .post-actions {
   padding-top: 1.5rem;
+}
+
+#post .post-actions .btn {
+  /* Keep your global .btn styles */
 }
 
 /* ================================================= */
