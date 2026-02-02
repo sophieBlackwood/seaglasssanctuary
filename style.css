@@ -840,17 +840,14 @@ blockquote,
   padding: 2.6rem;
   line-height: 1.85;
   font-size: 1rem;
-  color: #f4f7f8; /* HIGH contrast body text */
+  text-align: left;              /* FIXES off-center feel */
+  color: #f4f7f8;
 }
-
-/* Primary text */
 
 .post-content p,
 .post-content li {
   color: #f4f7f8;
 }
-
-/* Secondary / subtle text */
 
 .post-content em,
 .post-content small {
@@ -860,7 +857,7 @@ blockquote,
 /* Headings */
 
 .post-content h2 {
-  margin-top: 2.8rem;
+  margin-top: 3rem;
   margin-bottom: 1rem;
   font-size: 1.4rem;
   color: var(--accent-light);
@@ -886,17 +883,13 @@ blockquote,
   border-radius: 14px;
   margin: 2.4rem 0;
   font-style: italic;
-  color: #ffffff; /* MAX contrast */
+  color: #ffffff;
 }
 
 /* ---------- Vertical Rhythm ---------- */
 
 .post-content > * {
   margin-bottom: 1.6rem;
-}
-
-.post-content > h2 {
-  margin-top: 3rem;
 }
 
 /* ---------- Footer ---------- */
@@ -906,6 +899,19 @@ blockquote,
   display: flex;
   justify-content: center;
   border-top: 1px solid color-mix(in srgb, var(--card-bg) 70%, white);
+}
+
+/* Button contrast fix (light mode safe) */
+
+.post-footer .btn-secondary {
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  background: transparent;
+}
+
+.post-footer .btn-secondary:hover {
+  background: var(--accent);
+  color: #ffffff;
 }
 
 /* ================================================= */
