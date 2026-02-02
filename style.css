@@ -781,7 +781,7 @@ blockquote,
   overflow: hidden;
 }
 /* ==========================
-   NEW POST SYSTEM
+   NEW POST SYSTEM (FINAL)
 ========================= */
 
 .post {
@@ -792,13 +792,12 @@ blockquote,
 
 .post-card {
   background: var(--card-bg);
-  color: var(--always-light-text);
   border-radius: 22px;
   box-shadow: 0 10px 32px rgba(0,0,0,0.18);
   overflow: hidden;
 }
 
-/* Header */
+/* ---------- Header ---------- */
 
 .post-header {
   padding: 2.8rem 2.8rem 1.6rem;
@@ -818,6 +817,7 @@ blockquote,
   font-size: 2.3rem;
   line-height: 1.25;
   margin-bottom: 0.6rem;
+  color: var(--always-light-text);
 }
 
 .post-meta {
@@ -825,7 +825,7 @@ blockquote,
   color: var(--muted);
 }
 
-/* Hero */
+/* ---------- Hero ---------- */
 
 .post-hero img {
   width: 100%;
@@ -834,48 +834,79 @@ blockquote,
   object-fit: cover;
 }
 
-/* Content */
+/* ---------- Content ---------- */
 
 .post-content {
   padding: 2.6rem;
   line-height: 1.85;
   font-size: 1rem;
+  color: #f4f7f8; /* HIGH contrast body text */
 }
 
+/* Primary text */
+
+.post-content p,
+.post-content li {
+  color: #f4f7f8;
+}
+
+/* Secondary / subtle text */
+
+.post-content em,
+.post-content small {
+  color: var(--muted);
+}
+
+/* Headings */
+
 .post-content h2 {
-  margin-top: 2.4rem;
-  margin-bottom: 0.8rem;
+  margin-top: 2.8rem;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
   color: var(--accent-light);
 }
 
+/* Lists */
+
 .post-content ul {
   margin-left: 1.2rem;
-  margin-bottom: 1.4rem;
+  margin-bottom: 2rem;
 }
 
 .post-content li {
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
 }
 
-/* Callout */
+/* ---------- Callout ---------- */
 
 .post-callout {
-  background: color-mix(in srgb, var(--card-bg) 80%, white);
+  background: color-mix(in srgb, var(--card-bg) 70%, white);
   border-left: 4px solid var(--accent);
   padding: 1.3rem 1.5rem;
   border-radius: 14px;
-  margin: 2.2rem 0;
+  margin: 2.4rem 0;
   font-style: italic;
+  color: #ffffff; /* MAX contrast */
 }
 
-/* Footer */
+/* ---------- Vertical Rhythm ---------- */
+
+.post-content > * {
+  margin-bottom: 1.6rem;
+}
+
+.post-content > h2 {
+  margin-top: 3rem;
+}
+
+/* ---------- Footer ---------- */
 
 .post-footer {
   padding: 2rem 2.5rem 2.6rem;
   display: flex;
   justify-content: center;
+  border-top: 1px solid color-mix(in srgb, var(--card-bg) 70%, white);
 }
-
 
 /* ================================================= */
 /* RESPONSIVE */
