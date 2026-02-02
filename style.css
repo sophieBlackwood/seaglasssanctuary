@@ -784,26 +784,26 @@ blockquote,
 }
 
 /* ==========================
-   NEW POST SYSTEM (FINAL)
-========================= */
+   FINAL POST SYSTEM (STABLE)
+========================== */
 
 .post {
   max-width: 900px;
-  margin: 5rem auto;
+  margin: 6rem auto;
   padding: 0 1.5rem;
 }
 
+/* Card shell */
 .post-card {
   background: var(--card-bg);
   border-radius: 22px;
-  box-shadow: 0 10px 32px rgba(0,0,0,0.18);
-  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.22);
 }
 
 /* ---------- Header ---------- */
 
 .post-header {
-  padding: 2.8rem 2.8rem 1.6rem;
+  padding: 3rem 3rem 1.8rem;
   text-align: center;
 }
 
@@ -813,11 +813,11 @@ blockquote,
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.7rem;
 }
 
 .post-title {
-  font-size: 2.3rem;
+  font-size: 2.4rem;
   line-height: 1.25;
   margin-bottom: 0.6rem;
   color: var(--always-light-text);
@@ -840,10 +840,9 @@ blockquote,
 /* ---------- Content ---------- */
 
 .post-content {
-  padding: 2.6rem;
+  padding: 2.8rem 3rem;
   line-height: 1.85;
   font-size: 1rem;
-  text-align: left;         
   color: var(--always-light-text);
 }
 
@@ -862,7 +861,7 @@ blockquote,
 .post-content h2 {
   margin-top: 3rem;
   margin-bottom: 1rem;
-  font-size: 1.4rem;
+  font-size: 1.45rem;
   color: var(--accent-light);
 }
 
@@ -880,45 +879,74 @@ blockquote,
 /* ---------- Callout ---------- */
 
 .post-callout {
-  background: color-mix(in srgb, var(--card-bg) 70%, white);
+  background: color-mix(in srgb, var(--card-bg) 85%, white);
   border-left: 4px solid var(--accent);
-  padding: 1.3rem 1.5rem;
+  padding: 1.4rem 1.6rem;
   border-radius: 14px;
-  margin: 2.4rem 0;
+  margin: 2.8rem 0;
   font-style: italic;
   color: var(--always-light-text);
 }
 
-/* ---------- Vertical Rhythm ---------- */
+/* Vertical rhythm */
 
 .post-content > * {
   margin-bottom: 1.6rem;
 }
 
+/* ---------- Footer CTA ---------- */
+
 .post-footer {
-  padding: 2rem 2.5rem 2.6rem;
+  padding: 2.6rem 2.5rem 3rem;
   display: flex;
   justify-content: center;
-  background: var(--card-bg); /* ensures contrast inside card */
-  border-top: 1px solid color-mix(in srgb, var(--card-bg) 70%, white);
+  background: var(--card-bg);
+  border-top: 1px solid color-mix(in srgb, var(--card-bg) 75%, white);
 }
 
-.post-footer .btn-secondary {
-  display: inline-block;
-  background: var(--accent-dark); /* strong contrasting color */
+/* Dedicated post button (no global conflicts) */
+
+.post-footer .post-btn {
+  background: var(--accent-dark);
   color: #ffffff;
-  padding: 0.9rem 2.4rem;
+  padding: 0.95rem 2.8rem;
   border-radius: 999px;
   font-weight: 700;
-  text-align: center;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.28);
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
-.post-footer .btn-secondary:hover {
+.post-footer .post-btn:hover {
   background: color-mix(in srgb, var(--accent-dark) 85%, black);
   transform: translateY(-2px);
-  box-shadow: 0 10px 26px rgba(0,0,0,0.35);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.38);
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 768px) {
+  .post-header {
+    padding: 2.2rem 1.8rem 1.4rem;
+  }
+
+  .post-title {
+    font-size: 2rem;
+  }
+
+  .post-content {
+    padding: 2rem 1.8rem;
+  }
+
+  .post-footer {
+    padding: 2.2rem 1.8rem 2.6rem;
+  }
+
+  .post-footer .post-btn {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 /* ================================================= */
