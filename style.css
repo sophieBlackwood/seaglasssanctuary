@@ -780,6 +780,7 @@ blockquote,
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
 /* ==========================
    NEW POST SYSTEM (FINAL)
 ========================= */
@@ -840,13 +841,13 @@ blockquote,
   padding: 2.6rem;
   line-height: 1.85;
   font-size: 1rem;
-  text-align: left;              /* FIXES off-center feel */
-  color: #f4f7f8;
+  text-align: left;         
+  color: var(--always-light-text);
 }
 
 .post-content p,
 .post-content li {
-  color: #f4f7f8;
+  color: var(--always-light-text);
 }
 
 .post-content em,
@@ -883,7 +884,7 @@ blockquote,
   border-radius: 14px;
   margin: 2.4rem 0;
   font-style: italic;
-  color: #ffffff;
+  color: var(--always-light-text);
 }
 
 /* ---------- Vertical Rhythm ---------- */
@@ -904,14 +905,14 @@ blockquote,
 /* Button contrast fix (light mode safe) */
 
 .post-footer .btn-secondary {
-  color: var(--accent);
+  color: var(--accent-light);
   border: 2px solid var(--accent);
   background: transparent;
 }
 
 .post-footer .btn-secondary:hover {
-  background: var(--accent);
-  color: #ffffff;
+  background: var(--accent-light);
+  color: var(--always-light-text);
 }
 
 /* ================================================= */
