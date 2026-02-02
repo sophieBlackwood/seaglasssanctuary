@@ -20,6 +20,7 @@ body.dark {
 --text: #DFFAEA;          /* soft mint-white text */
 --accent: #4FB29F;        /* teal accent */
 --accent-light: #7FD0C2;  /* lighter teal accent */
+--accent-dark: #FF8FB7; /* brighter pink for visibility */
 --card-bg: #03443C;       /* dark teal card background */
 --muted: #4FB29F;         /* muted teal text */
 --container: #DFFAEA;  /* light mint container background */
