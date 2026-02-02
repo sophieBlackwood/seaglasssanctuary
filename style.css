@@ -906,7 +906,7 @@ blockquote,
 
 .post-footer .btn-secondary {
   color: var(--accent-light);
-  border: 2px solid var(--accent);
+  border: 2px solid var(--accent-light);
   background: transparent;
 }
 
