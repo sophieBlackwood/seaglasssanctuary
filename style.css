@@ -793,15 +793,15 @@ blockquote,
 .post-card {
   background: var(--card-bg);
   color: var(--always-light-text);
-  border-radius: 20px;
-  box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+  border-radius: 22px;
+  box-shadow: 0 10px 32px rgba(0,0,0,0.18);
   overflow: hidden;
 }
 
 /* Header */
 
 .post-header {
-  padding: 2.5rem 2.5rem 1.5rem;
+  padding: 2.8rem 2.8rem 1.6rem;
   text-align: center;
 }
 
@@ -811,13 +811,13 @@ blockquote,
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
 }
 
 .post-title {
-  font-size: 2.2rem;
-  margin-bottom: 0.6rem;
+  font-size: 2.3rem;
   line-height: 1.25;
+  margin-bottom: 0.6rem;
 }
 
 .post-meta {
@@ -837,38 +837,45 @@ blockquote,
 /* Content */
 
 .post-content {
-  padding: 2.5rem;
-  line-height: 1.8;
+  padding: 2.6rem;
+  line-height: 1.85;
   font-size: 1rem;
 }
 
 .post-content h2 {
-  color: var(--accent-light);
-  margin-top: 2.2rem;
+  margin-top: 2.4rem;
   margin-bottom: 0.8rem;
+  color: var(--accent-light);
 }
 
-.post-content p {
-  margin-bottom: 1.2rem;
+.post-content ul {
+  margin-left: 1.2rem;
+  margin-bottom: 1.4rem;
 }
 
-/* Callout / highlight boxes */
+.post-content li {
+  margin-bottom: 0.4rem;
+}
+
+/* Callout */
 
 .post-callout {
-  background: color-mix(in srgb, var(--card-bg) 70%, white);
+  background: color-mix(in srgb, var(--card-bg) 80%, white);
   border-left: 4px solid var(--accent);
-  padding: 1.2rem 1.4rem;
-  border-radius: 12px;
-  margin: 2rem 0;
+  padding: 1.3rem 1.5rem;
+  border-radius: 14px;
+  margin: 2.2rem 0;
+  font-style: italic;
 }
 
 /* Footer */
 
 .post-footer {
-  padding: 1.8rem 2.5rem 2.5rem;
+  padding: 2rem 2.5rem 2.6rem;
   display: flex;
   justify-content: center;
 }
+
 
 /* ================================================= */
 /* RESPONSIVE */
