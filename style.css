@@ -781,82 +781,93 @@ blockquote,
   overflow: hidden;
 }
 /* ==========================
-   POST SECTION
+   NEW POST SYSTEM
 ========================= */
 
-#post {
+.post {
   max-width: 900px;
-  margin: 3rem auto;
-  font-family: inherit;
-  color: #333;
-  line-height: 1.7;
+  margin: 5rem auto;
+  padding: 0 1.5rem;
 }
 
-/* POST ARTICLE CARD */
-#post .post-article {
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+.post-card {
+  background: var(--card-bg);
+  color: var(--always-light-text);
+  border-radius: 20px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.18);
   overflow: hidden;
 }
 
-/* HEADER */
-#post .post-header {
-  padding: 2rem 1.5rem 0;
+/* Header */
+
+.post-header {
+  padding: 2.5rem 2.5rem 1.5rem;
+  text-align: center;
 }
 
-#post .post-category {
+.post-tag {
   display: inline-block;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #007aff;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
   margin-bottom: 0.5rem;
 }
 
-#post .post-title {
-  font-size: 2rem;
-  margin: 0.25rem 0 0.75rem;
-  line-height: 1.3;
+.post-title {
+  font-size: 2.2rem;
+  margin-bottom: 0.6rem;
+  line-height: 1.25;
 }
 
-#post .post-meta {
-  font-size: 0.875rem;
-  color: #555;
-  margin-bottom: 1.5rem;
+.post-meta {
+  font-size: 0.9rem;
+  color: var(--muted);
 }
 
-/* HERO IMAGE */
-#post .post-hero img {
+/* Hero */
+
+.post-hero img {
   width: 100%;
-  height: auto;
   display: block;
-  border-radius: 16px;
-  margin: 0 0 2rem;
+  max-height: 420px;
+  object-fit: cover;
 }
 
-/* BODY */
-#post .post-body {
-  padding: 0 1.5rem 2rem;
+/* Content */
+
+.post-content {
+  padding: 2.5rem;
+  line-height: 1.8;
+  font-size: 1rem;
 }
 
-#post .post-body h3 {
-  font-size: 1.5rem;
-  margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
-  color: #007aff;
+.post-content h2 {
+  color: var(--accent-light);
+  margin-top: 2.2rem;
+  margin-bottom: 0.8rem;
 }
 
-#post .post-body ul {
-  padding-left: 1.5rem;
+.post-content p {
+  margin-bottom: 1.2rem;
 }
 
-#post .post-body li {
-  margin-bottom: 0.5rem;
+/* Callout / highlight boxes */
+
+.post-callout {
+  background: color-mix(in srgb, var(--card-bg) 70%, white);
+  border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.4rem;
+  border-radius: 12px;
+  margin: 2rem 0;
 }
 
-/* ACTION BUTTON */
-#post .post-actions {
-  padding-top: 1.5rem;
+/* Footer */
+
+.post-footer {
+  padding: 1.8rem 2.5rem 2.5rem;
+  display: flex;
+  justify-content: center;
 }
 
 /* ================================================= */
