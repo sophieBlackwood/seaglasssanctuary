@@ -905,7 +905,7 @@ blockquote,
 /* Correct button for dark surface */
 
 .post-footer .btn-secondary {
-  background: var(--accent);
+  background: var(--accent-dark);
   color: #ffffff;
   border: none;
   padding: 0.9rem 2.4rem;
@@ -916,7 +916,7 @@ blockquote,
 }
 
 .post-footer .btn-secondary:hover {
-  background: color-mix(in srgb, var(--accent) 85%, black);
+  background: color-mix(in srgb, var(--accent-dark) 85%, black);
   transform: translateY(-2px);
   box-shadow: 0 10px 26px rgba(0,0,0,0.35);
 }
