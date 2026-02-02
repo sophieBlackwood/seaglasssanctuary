@@ -902,17 +902,23 @@ blockquote,
   border-top: 1px solid color-mix(in srgb, var(--card-bg) 70%, white);
 }
 
-/* Button contrast fix (light mode safe) */
+/* Correct button for dark surface */
 
 .post-footer .btn-secondary {
-  color: var(--accent-light);
-  border: 2px solid var(--accent-light);
-  background: transparent;
+  background: var(--accent);
+  color: #ffffff;
+  border: none;
+  padding: 0.9rem 2.4rem;
+  border-radius: 999px;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .post-footer .btn-secondary:hover {
-  background: var(--accent-light);
-  color: var(--always-light-text);
+  background: color-mix(in srgb, var(--accent) 85%, black);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.35);
 }
 
 /* ================================================= */
