@@ -12,153 +12,160 @@
 </head>
 <body>
 
-  <!-- Quick Exit Button -->
-  <button id="quick-exit" title="Quickly exit to Google">
-    <i class="fa-solid fa-arrow-right-from-bracket"></i> Quick Exit
+<!-- Quick Exit Button -->
+<button id="quick-exit" title="Quickly exit to Google">
+  <i class="fa-solid fa-arrow-right-from-bracket"></i> Quick Exit
+</button>
+
+<!-- Floating Side Buttons -->
+<div id="floating-buttons">
+  <button id="theme-toggle" title="Toggle theme">
+    <i class="fa-solid fa-moon"></i>
   </button>
-  
-  <!-- Floating Side Buttons -->
-  <div id="floating-buttons">
-    <button id="theme-toggle" title="Toggle theme">
-      <i class="fa-solid fa-moon"></i>
-    </button>
-    <button id="back-to-top" title="Back to top">
-      <i class="fa-solid fa-arrow-up"></i>
-    </button>
+  <button id="back-to-top" title="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+</div>
+
+<header class="navbar">
+  <div class="container nav-container">
+    <a href="index.html">
+      <img class="logo" id="logoImage" src="logo_text.png" alt="logo">
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#mission">Mission</a></li>
+        <li><a href="index.html#resources">Resources</a></li>
+        <li><a href="helplines.html">Helplines</a></li>
+        <li><a href="index.html#support">Support</a></li>
+        <li><a href="index.html#stories">Stories</a></li>
+        <li><a href="index.html#blog">Blog</a></li>
+      </ul>
+    </nav>
   </div>
 
-  <!-- Navbar -->
-  <header class="navbar">
-    <div class="container nav-container">
-      <a href="index.html">
-        <img class="logo" id="logoImage" src="logo_text.png" alt="logo">
-      </a>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="index.html#mission">Mission</a></li>
-          <li><a href="index.html#resources">Resources</a></li>
-          <li><a href="helplines.html">Helplines</a></li>
-          <li><a href="index.html#support">Support</a></li>
-          <li><a href="index.html#stories">Stories</a></li>
-          <li><a href="index.html#blog">Blog</a></li>
-        </ul>
-      </nav>
+  <!-- Mobile Side Navigation -->
+  <div class="hamburger-menu" onclick="openNav()">
+    &#9776;
+    <img src="icon_transparent.png" alt="Seaglass logo" class="sidenav-img">
+  </div>
+  <div id="mySidenav" class="sidenav">
+    <div class="sidenav-header">
+      <img src="logo_text.png" class="sidenav-logo" alt="Seaglass logo">
+      <span class="closebtn" onclick="closeNav()">×</span>
     </div>
+    <hr>
+    <a href="index.html" class="special-link">Home</a>
+    <a href="index.html#mission">Mission</a>
+    <a href="index.html#resources">Resources</a>
+    <a href="helplines.html">Helplines</a>
+    <a href="index.html#support">Support</a>
+    <a href="index.html#stories">Stories</a>
+    <a href="index.html#blog">Blog</a>
+  </div>
+</header>
 
-    <!-- Mobile Side Navigation -->
-    <div class="hamburger-menu" onclick="openNav()">
-      &#9776;
-      <img src="icon_transparent.png" alt="Seaglass logo" class="sidenav-img">
-    </div>
-    <div id="mySidenav" class="sidenav">
-      <div class="sidenav-header">
-        <img src="logo_text.png" class="sidenav-logo" alt="Seaglass logo">
-        <span class="closebtn" onclick="closeNav()">×</span>
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container hero-content">
+    <h2>Mindful Habits for Everyday Calm</h2>
+    <a href="index.html" class="btn">Home</a>
+  </div>
+</section>
+
+<!-- Post -->
+<section id="post" class="post">
+  <article class="post-article">
+
+    <header class="post-header">
+      <span class="post-category">Mental Health</span>
+
+      <h1 class="post-title">
+        Mindful Habits for Everyday Calm
+      </h1>
+
+      <p class="post-meta">
+        Published: November 17, 2025
+      </p>
+    </header>
+
+    <figure class="post-hero">
+      <img src="mindful.jpg" alt="Peaceful daily mindfulness scene">
+    </figure>
+
+    <div class="post-body">
+      <p>
+        In a world filled with noise, deadlines, and constant distractions,
+        it’s easy to move through the day on autopilot. Mindfulness offers
+        a gentle way to reconnect with the present moment, creating space
+        for clarity, calm, and emotional well-being.
+      </p>
+
+      <h3>Start With a Morning Pause</h3>
+      <p>
+        Before reaching for your phone, take a quiet moment to breathe deeply.
+        This helps your mind ease into the day with intention rather than rushing
+        into stress or urgency.
+      </p>
+
+      <h3>Practice Mindful Breathing</h3>
+      <p>
+        Even 60 seconds of slow, steady breathing can lower stress levels
+        and help reset your nervous system. Try pausing throughout the day
+        to inhale for 4 seconds, hold for 2, and exhale for 6.
+      </p>
+
+      <h3>Ground Yourself With Your Senses</h3>
+      <p>
+        Notice what you can see, hear, smell, touch, and taste. This simple
+        grounding practice is especially useful during moments of overwhelm
+        or mental fog.
+      </p>
+
+      <h3>Create Small Moments of Stillness</h3>
+      <p>
+        Mindfulness doesn’t have to mean sitting still for long periods.
+        It can be as simple as stepping outside for fresh air, savoring a warm
+        drink, or taking a slow walk without music or distractions.
+      </p>
+
+      <h3>End the Day With Reflection</h3>
+      <p>
+        Spend a few minutes each night reflecting on what went well,
+        what you’re grateful for, or what you learned. This trains your
+        mind to look for calm instead of stress.
+      </p>
+
+      <p>
+        Mindful habits don’t eliminate life’s challenges, but they help
+        create moments of steadiness within them. With consistent practice,
+        mindfulness becomes a powerful anchor—one that supports clarity,
+        resilience, and peace in everyday life.
+      </p>
+
+      <p class="post-quote">
+        "Mindfulness helped me slow down and feel more in control of my thoughts." – Anonymous
+      </p>
+
+      <div class="post-actions">
+        <a href="index.html#resources" class="btn">Explore More Resources</a>
       </div>
-      <hr>
-      <a href="index.html" class="special-link">Home</a>
-      <a href="index.html#mission">Mission</a>
-      <a href="index.html#resources">Resources</a>
-      <a href="helplines.html">Helplines</a>
-      <a href="index.html#support">Support</a>
-      <a href="index.html#stories">Stories</a>
-      <a href="index.html#blog">Blog</a>
     </div>
-  </header>
 
-  <br><br>
+  </article>
+</section>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container hero-content">
-      <h2>Mindful Habits for Everyday Calm</h2>
-      <a href="index.html" class="btn">Home</a>
-    </div>
-  </section>
+<footer>
+  <div class="container">
+    <p>© 2025 Seaglass Sanctuary | A Mental Health Awareness Initiative</p>
+    <p>
+      This website exists for the purpose of a Business Professionals of America competitive event.
+      It is not to be used for mental help and was made by a group of secondary students for competitive purposes.
+    </p>
+  </div>
+</footer>
 
-  <!-- Blog Post -->
-  <section id="post" class="post">
-    <article class="post-article">
-
-      <header class="post-header">
-        <span class="post-category">Mental Health</span>
-        <h1 class="post-title">Mindful Habits for Everyday Calm</h1>
-        <p class="post-meta">Published: November 17, 2025</p>
-      </header>
-
-      <figure class="post-hero">
-        <img src="mindful.jpg" alt="Calming mindful lifestyle scene">
-      </figure>
-
-      <div class="post-body">
-        <p>
-          In a world filled with noise, deadlines, and constant distractions,
-          it’s easy to move through the day on autopilot. Mindfulness offers
-          a gentle way to reconnect with the present moment, creating space
-          for clarity, calm, and emotional well-being. These simple habits
-          can be woven into any routine—no special tools or long meditation
-          sessions required.
-        </p>
-
-        <h3>Start With a Morning Pause</h3>
-        <p>
-          Before reaching for your phone, take a quiet moment to breathe deeply.
-          This helps your mind ease into the day with intention rather than rushing
-          into stress or urgency.
-        </p>
-
-        <h3>Practice Mindful Breathing</h3>
-        <p>
-          Even 60 seconds of slow, steady breathing can lower stress levels
-          and help reset your nervous system. Try pausing throughout the day
-          to inhale for 4 seconds, hold for 2, and exhale for 6.
-        </p>
-
-        <h3>Ground Yourself With Your Senses</h3>
-        <p>
-          Notice what you can see, hear, smell, touch, and taste. This simple
-          grounding practice is especially useful during moments of overwhelm
-          or mental fog.
-        </p>
-
-        <h3>Create Small Moments of Stillness</h3>
-        <p>
-          Mindfulness doesn’t have to mean sitting still for long periods.
-          It can be as simple as stepping outside for fresh air, savoring a warm
-          drink, or taking a slow walk without music or distractions.
-        </p>
-
-        <h3>End the Day With Reflection</h3>
-        <p>
-          Spend a few minutes each night reflecting on what went well,
-          what you’re grateful for, or what you learned. This trains your
-          mind to look for calm instead of stress.
-        </p>
-
-        <p>
-          Mindful habits don’t eliminate life’s challenges, but they help
-          create moments of steadiness within them. With consistent practice,
-          mindfulness becomes a powerful anchor—one that supports clarity,
-          resilience, and peace in everyday life.
-        </p>
-
-        <div class="post-actions">
-          <a href="index.html#resources" class="btn">Explore More Resources</a>
-        </div>
-      </div>
-
-    </article>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <p>© 2025 Seaglass Sanctuary | A Mental Health Awareness Initiative</p>
-      <p>This website exists for the purpose of a Business Professionals of America competitive event. It is not to be used for mental help and was made by a group of secondary students for competitive purposes.</p>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
