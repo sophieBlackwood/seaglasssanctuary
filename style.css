@@ -4,7 +4,6 @@
 --text: #1C221D;          /* very dark greenish text */
 --accent: #0A7A67;        /* deep teal accent */
 --accent-light: #4FB29F;  /* soft teal highlight */
---accent-dark: #D63E8C;   /* darker accent for buttons */
 --card-bg: #03443C;       /* dark teal card background */
 --muted: #4FB29F;         /* muted teal for secondary text */
 --container: #1C221D;     /* dark greenish container background */
@@ -20,7 +19,6 @@ body.dark {
 --text: #DFFAEA;          /* soft mint-white text */
 --accent: #4FB29F;        /* teal accent */
 --accent-light: #7FD0C2;  /* lighter teal accent */
---accent-dark: #FF8FB7; /* brighter pink for visibility */
 --card-bg: #03443C;       /* dark teal card background */
 --muted: #4FB29F;         /* muted teal text */
 --container: #DFFAEA;  /* light mint container background */
@@ -907,7 +905,7 @@ blockquote,
 /* Dedicated post button (no global conflicts) */
 
 .post-footer .post-btn {
-  background: var(--accent-dark);
+  background: var(--accent);
   color: #ffffff;
   padding: 0.95rem 2.8rem;
   border-radius: 999px;
@@ -919,7 +917,7 @@ blockquote,
 }
 
 .post-footer .post-btn:hover {
-  background: color-mix(in srgb, var(--accent-dark) 85%, black);
+  background: color-mix(in srgb, var(--accent) 85%, black);
   transform: translateY(-2px);
   box-shadow: 0 12px 30px rgba(0,0,0,0.38);
 }
