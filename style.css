@@ -713,7 +713,7 @@ blockquote,
   padding: 1.5rem;
   border-radius: 16px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.12); 
-  color: var(--text);
+  color: var(--always-light;
   text-align: left;
   cursor: pointer;
   transition: none; 
@@ -762,7 +762,7 @@ blockquote,
   font-size: 0.8rem;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--muted);
+  color: #7FD0C2;
 }
 
 .blog-content h4 {
