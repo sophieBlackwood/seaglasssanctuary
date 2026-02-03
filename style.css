@@ -709,17 +709,16 @@ blockquote,
 
 .blog-card-inner {
   width: 100%;
-  background: var(--card-bg); /* match your theme */
+  background: var(--card-bg); 
   padding: 1.5rem;
   border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.12); /* subtle shadow */
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12); 
   color: var(--text);
   text-align: left;
   cursor: pointer;
-
-  transition: none;  /* no animation */
-  transform: none;   /* no scaling */
-  opacity: 1;        /* always visible */
+  transition: none; 
+  transform: none;   
+  opacity: 1;        
 }
 
 /* ================= BUTTONS ================= */
@@ -769,7 +768,7 @@ blockquote,
 .blog-content h4 {
   font-size: 1.2rem;
   margin: 0.5rem 0;
-  color: var(--accent);
+  color: var(--always-light-text);
 }
 
 .blog-content p {
