@@ -3,75 +3,105 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Submission Information</title>
+  <title>Seaglass Sanctuary</title>
   <link rel="stylesheet" href="https://use.typekit.net/rig8hkd.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="icon" type="image/x-icon" href="icon_transparent.png"/>
   <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 
-<!-- Navigation -->
-<header class="navbar">
-  <div class="container nav-container">
-    <a href="index.html">
-      <img class="logo" id="logoImage" src="logo_text.png" alt="logo">
-    </a>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="index.html#mission">Mission</a></li>
-        <li><a href="index.html#resources">Resources</a></li>
-        <li><a href="helplines.html">Helplines</a></li>
-        <li><a href="index.html#support">Support</a></li>
-        <li><a href="index.html#stories">Stories</a></li>
-        <li><a href="index.html#blog">Blog</a></li>
-      </ul>
-    </nav>
+  <!-- Quick Exit Button -->
+<button id="quick-exit" title="Quickly exit to Google">
+  <i class="fa-solid fa-arrow-right-from-bracket"></i> Quick Exit
+</button>
+  
+  <!-- Floating Side Buttons -->
+<div id="floating-buttons">
+  <button id="theme-toggle" title="Toggle theme">
+    <i class="fa-solid fa-moon"></i>
+  </button>
+  <button id="back-to-top" title="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+</div>
+
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html">
+        <img class="logo" id="logoImage" src="logo_text.png" alt="logo">
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#mission">Mission</a></li>
+          <li><a href="index.html#resources">Resources</a></li>
+          <li><a href="helplines.html">Helplines</a></li>
+          <li><a href="index.html#support">Support</a></li>
+          <li><a href="index.html#stories">Stories</a></li>
+          <li><a href="index.html#blog">Blog</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Mobile Side Navigation -->
+<div class="hamburger-menu" onclick="openNav()">
+  &#9776;
+  <img src="icon_transparent.png" alt="Seaglass logo" class="sidenav-img">
+</div>
+<div id="mySidenav" class="sidenav">
+
+  <!-- Header row: logo + close button -->
+  <div class="sidenav-header">
+    <img src="logo_text.png" class="sidenav-logo" alt="Seaglass logo">
+    <span class="closebtn" onclick="closeNav()">×</span>
   </div>
+  <hr>
+
+  <a href="index.html" class="special-link">Home</a>
+  <a href="index.html#mission">Mission</a>
+  <a href="index.html#resources">Resources</a>
+  <a href="helplines.html">Helplines</a>
+  <a href="index.html#support">Support</a>
+  <a href="index.html#stories">Stories</a>
+  <a href="index.html#blog">Blog</a>
+</div>
 </header>
+ <br>
+  <br>
+	
+<!-- Hero Image -->
+	<div class="hero-image" id="home">
+		<div class="hero-text">
 
-<main class="simple-page">
-  <section class="simple-content">
-    <h1>Submission Information</h1>
+			<h1>Submission Information</h1>
+			<p class="paragraph-alignment">Chapter name: Burley High School Chapter</p>
+			<p class="paragraph-alignment">Team Members: Brooklyn Poulson, Lincoln Peterson</p>
+			<p class="paragraph-alignment">Theme: A website for a new restaurant, the Game Day Grill.</p>
+			<p class="paragraph-alignment">School: Burley High School</p>
+			<p class="paragraph-alignment">City: Burley</p>
+			<p class="paragraph-alignment">State: Idaho</p>
+			<p class="paragraph-alignment">Year: 2023-2024</p>
+			<a href="index.html" target="_blank" class="btn">Return to Home Page</a>
+		</div>
+	</div>
 
-    <p><strong>Chapter Name:</strong> Burley High School Chapter</p>
-    <p><strong>School:</strong> Burley High School</p>
-    <p><strong>City & State:</strong> Burley, Idaho</p>
-    <p><strong>Year:</strong> 2025–2026</p>
+ <!-- Footer -->
+  <footer>
+    <div class="container footer">
+      <p>© 2025 Seaglass Sanctuary | A Mental Health Awareness Initiative</p>
+      <p> This website exists for the purpose of a Business Professionals of America competitive event. It is not to be used for mental help and was made by a group of secondary students for competitive purposes. </p>
+    </div>
+  </footer>
 
-    <h2>Team Members</h2>
-    <ul>
-      <li>Brooklyn Poulson</li>
-      <li>Lincoln Peterson</li>
-    </ul>
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="script.js"></script>
 
-    <h2>Project Theme</h2>
-    <p>
-      Seaglass Sanctuary is a mental health awareness website designed to provide
-      accessible information, supportive resources, and a calm digital space for users.
-    </p>
-
-    <h2>Purpose</h2>
-    <p>
-      This website was created for a Business Professionals of America competitive event.
-      Its purpose is to raise awareness about mental health topics and promote emotional well-being.
-    </p>
-
-    <a href="index.html" class="simple-btn">Return to Home</a>
-  </section>
-</main>
-
-<footer>
-  <div class="container">
-    <p>© 2025 Seaglass Sanctuary | A Mental Health Awareness Initiative</p>
-    <p>
-      This website exists for the purpose of a Business Professionals of America competitive event.
-      It is not a substitute for professional mental health services.
-    </p>
-  </div>
-</footer>
-
-<script src="script.js"></script>
 </body>
+</html>
+</body>
+
+
 </html>
