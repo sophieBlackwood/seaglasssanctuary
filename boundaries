@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building Healthy Boundaries</title>
+  <link rel="stylesheet" href="https://use.typekit.net/rig8hkd.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="icon" type="image/x-icon" href="icon_transparent.png"/>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+  <!-- Quick Exit Button -->
+<button id="quick-exit" title="Quickly exit to Google">
+  <i class="fa-solid fa-arrow-right-from-bracket"></i> Quick Exit
+</button>
+  
+  <!-- Floating Side Buttons -->
+<div id="floating-buttons">
+  <button id="theme-toggle" title="Toggle theme">
+    <i class="fa-solid fa-moon"></i>
+  </button>
+  <button id="back-to-top" title="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+</div>
+
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html">
+        <img class="logo" id="logoImage" src="logo_text.png" alt="logo">
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#mission">Mission</a></li>
+          <li><a href="index.html#resources">Resources</a></li>
+          <li><a href="helplines.html">Helplines</a></li>
+          <li><a href="index.html#support">Support</a></li>
+          <li><a href="index.html#stories">Stories</a></li>
+          <li><a href="index.html#blog">Blog</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Mobile Side Navigation -->
+<div class="hamburger-menu" onclick="openNav()">
+  &#9776;
+  <img src="icon_transparent.png" alt="Seaglass logo" class="sidenav-img">
+</div>
+<div id="mySidenav" class="sidenav">
+  <div class="sidenav-header">
+    <img src="logo_text.png" class="sidenav-logo" alt="Seaglass logo">
+    <span class="closebtn" onclick="closeNav()">×</span>
+  </div>
+  <hr>
+
+  <a href="index.html" class="special-link">Home</a>
+  <a href="index.html#mission">Mission</a>
+  <a href="index.html#resources">Resources</a>
+  <a href="helplines.html">Helplines</a>
+  <a href="index.html#support">Support</a>
+  <a href="index.html#stories">Stories</a>
+  <a href="index.html#blog">Blog</a>
+</div>
+</header>
+<br><br>
+
+<main class="post">
+  <article class="post-card">
+
+    <header class="post-header">
+      <span class="post-tag">Mental Health</span>
+      <h1 class="post-title">
+        Building Healthy Boundaries: Protecting Your Mental Space
+      </h1>
+      <p class="post-meta">
+        Published February 15, 2026 · 5 min read
+      </p>
+    </header>
+
+    <div class="post-hero">
+      <img src="boundaries.jpg" alt="Person drawing a protective boundary line">
+    </div>
+
+    <div class="post-content">
+      <p>
+        Healthy boundaries are essential for maintaining emotional well-being. They allow individuals to define their personal limits, protect their energy, and foster respectful relationships.
+      </p>
+
+      <h2>What Are Healthy Boundaries?</h2>
+      <p>
+        Boundaries are the invisible lines that separate your needs, feelings, and responsibilities from others. They can be physical, emotional, or digital, and help ensure that relationships remain supportive rather than draining.
+      </p>
+
+      <h2>Signs You Might Need Stronger Boundaries</h2>
+      <ul>
+        <li>Feeling constantly overwhelmed or stressed by others’ demands</li>
+        <li>Difficulty saying “no” without guilt</li>
+        <li>Feeling resentment toward friends, family, or coworkers</li>
+        <li>Struggling to prioritize your own needs</li>
+      </ul>
+
+      <h2>Strategies for Building Boundaries</h2>
+      <p>
+        <strong>1. Identify Your Limits</strong><br>
+        Reflect on what feels uncomfortable or draining. Understanding your limits is the first step toward communicating them effectively.
+      </p>
+      <p>
+        <strong>2. Communicate Clearly</strong><br>
+        Be direct and respectful when expressing your needs. For example: “I need some time alone after work to recharge.”
+      </p>
+      <p>
+        <strong>3. Practice Saying “No”</strong><br>
+        Saying no is not selfish—it is necessary to protect your mental and emotional energy. Start small and build confidence.
+      </p>
+      <p>
+        <strong>4. Respect Others’ Boundaries</strong><br>
+        Healthy relationships are mutual. By honoring the limits of others, you create a culture of respect and understanding.
+      </p>
+
+      <h2>The Benefits of Healthy Boundaries</h2>
+      <ul>
+        <li>Reduced stress and burnout</li>
+        <li>Improved self-esteem and confidence</li>
+        <li>Stronger, more respectful relationships</li>
+        <li>Greater emotional clarity and resilience</li>
+      </ul>
+
+      <div class="post-callout">
+        "Setting boundaries has helped me honor my needs and build healthier connections with others." – Anonymous
+      </div>
+    </div>
+
+    <div class="post-footer">
+      <a href="index.html#resources" class="post-btn">Explore More Resources</a>
+    </div>
+
+  </article>
+</main>
+
+<footer>
+  <div class="container">
+    <p>© 2025 Seaglass Sanctuary | A Mental Health Awareness Initiative</p>
+    <p>
+      This website exists for the purpose of a Business Professionals of America competitive event.
+      It is not to be used for mental help and was made by a group of secondary students for competitive purposes.
+    </p>
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
