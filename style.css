@@ -628,6 +628,8 @@ a {
 
 .card-grid {
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .testimonial-grid {
