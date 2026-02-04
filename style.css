@@ -946,6 +946,18 @@ blockquote,
   }
 }
 
+/*Submission Page */
+.submission-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.submission-page main,
+.submission-page .section {
+  flex: 1;
+}
+
 /* ================================================= */
 /* RESPONSIVE */
 /* ================================================= */
