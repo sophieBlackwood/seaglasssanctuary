@@ -8,135 +8,72 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="icon" type="image/x-icon" href="icon_transparent.png"/>
   <link rel="stylesheet" href="style.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 
-  <!-- Quick Exit Button -->
-<button id="quick-exit" title="Quickly exit to Google">
-  <i class="fa-solid fa-arrow-right-from-bracket"></i> Quick Exit
-</button>
-  
-  <!-- Floating Side Buttons -->
-<div id="floating-buttons">
-  <button id="theme-toggle" title="Toggle theme">
-    <i class="fa-solid fa-moon"></i>
-  </button>
-  <button id="back-to-top" title="Back to top">
-    <i class="fa-solid fa-arrow-up"></i>
-  </button>
-</div>
-
-  <header class="navbar">
-    <div class="container nav-container">
-      <a href="index.html">
-        <img class="logo" id="logoImage" src="logo_text.png" alt="logo">
-      </a>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="index.html#mission">Mission</a></li>
-          <li><a href="index.html#resources">Resources</a></li>
-          <li><a href="helplines.html">Helplines</a></li>
-          <li><a href="index.html#support">Support</a></li>
-          <li><a href="index.html#stories">Stories</a></li>
-          <li><a href="index.html#blog">Blog</a></li>
-        </ul>
-      </nav>
-    </div>
-
-    <!-- Mobile Side Navigation -->
-<div class="hamburger-menu" onclick="openNav()">
-  &#9776;
-  <img src="icon_transparent.png" alt="Seaglass logo" class="sidenav-img">
-</div>
-<div id="mySidenav" class="sidenav">
-
-  <!-- Header row: logo + close button -->
-  <div class="sidenav-header">
-    <img src="logo_text.png" class="sidenav-logo" alt="Seaglass logo">
-    <span class="closebtn" onclick="closeNav()">×</span>
-  </div>
-  <hr>
-
-  <a href="index.html" class="special-link">Home</a>
-  <a href="index.html#mission">Mission</a>
-  <a href="index.html#resources">Resources</a>
-  <a href="helplines.html">Helplines</a>
-  <a href="index.html#support">Support</a>
-  <a href="index.html#stories">Stories</a>
-  <a href="index.html#blog">Blog</a>
-</div>
-</header>
- <br>
-  <br>
-
-<main class="post">
-  <article class="post-card">
-
-    <header class="post-header">
-      <span class="post-tag">Submission Details</span>
-      <h1 class="post-title">
-        Seaglass Sanctuary – BPA Website Submission
-      </h1>
-      <p class="post-meta">
-        Business Professionals of America · 2025–2026
-      </p>
-    </header>
-
-    <div class="post-content">
-      <h2>Chapter Information</h2>
-      <p>
-        Burley High School Chapter  
-        <br>
-        Burley High School, Burley, Idaho
-      </p>
-
-      <h2>Team Members</h2>
-      <ul>
-        <li>Brooklyn Poulson</li>
-        <li>Lincoln Peterson</li>
-        <li>Keileigh Tolman</li>
-        <li>Charmaine Lowe</li>
+<!-- Navigation -->
+<header class="navbar">
+  <div class="container nav-container">
+    <a href="index.html">
+      <img class="logo" id="logoImage" src="logo_text.png" alt="logo">
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#mission">Mission</a></li>
+        <li><a href="index.html#resources">Resources</a></li>
+        <li><a href="helplines.html">Helplines</a></li>
+        <li><a href="index.html#support">Support</a></li>
+        <li><a href="index.html#stories">Stories</a></li>
+        <li><a href="index.html#blog">Blog</a></li>
       </ul>
+    </nav>
+  </div>
+</header>
 
-      <h2>Project Theme</h2>
-      <p>
-        Seaglass Sanctuary is a mental health awareness website designed to provide
-        accessible information, supportive resources, and a calm digital space for
-        individuals seeking understanding, encouragement, and connection.
-      </p>
+<main class="simple-page">
+  <section class="simple-content">
+    <h1>Submission Information</h1>
 
-      <h2>Purpose of the Website</h2>
-      <p>
-        This project was created for a Business Professionals of America competitive
-        event. The goal of the site is to raise awareness about mental health topics,
-        reduce stigma, and promote emotional well-being through educational content
-        and curated resources.
-      </p>
+    <p><strong>Chapter Name:</strong> Burley High School Chapter</p>
+    <p><strong>School:</strong> Burley High School</p>
+    <p><strong>City & State:</strong> Burley, Idaho</p>
+    <p><strong>Year:</strong> 2025–2026</p>
 
-      <div class="post-callout">
-        Seaglass Sanctuary represents resilience — shaped by challenges, smoothed by time,
-        and still beautiful in every form.
-      </div>
-    </div>
+    <h2>Team Members</h2>
+    <ul>
+      <li>Brooklyn Poulson</li>
+      <li>Lincoln Peterson</li>
+      <li>Keileigh Tolman</li>
+      <li>Charmaine Lowe</li>
+    </ul>
 
-    <div class="post-footer">
-      <a href="index.html" class="post-btn">Return to Home</a>
-    </div>
+    <h2>Project Theme</h2>
+    <p>
+      Seaglass Sanctuary is a mental health awareness website designed to provide
+      accessible information, supportive resources, and a calm digital space for users.
+    </p>
 
-  </article>
+    <h2>Purpose</h2>
+    <p>
+      This website was created for a Business Professionals of America competitive event.
+      Its purpose is to raise awareness about mental health topics and promote emotional well-being.
+    </p>
+
+    <a href="index.html" class="simple-btn">Return to Home</a>
+  </section>
 </main>
 
-  <footer>
-    <div class="container">
-      <p>© 2025 Seaglass Sanctuary | A Mental Health Awareness Initiative</p>
-      <p>
-        This website exists for the purpose of a Business Professionals of America competitive event.
-        It is not to be used for mental help and was made by a group of secondary students for competitive purposes.
-      </p>
-    </div>
-  </footer>
-  <script src="script.js"></script>
+<footer>
+  <div class="container">
+    <p>© 2025 Seaglass Sanctuary | A Mental Health Awareness Initiative</p>
+    <p>
+      This website exists for the purpose of a Business Professionals of America competitive event.
+      It is not a substitute for professional mental health services.
+    </p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
