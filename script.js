@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* -------------------- */
-  /* Theme Toggle (no flicker) */
+  /* Theme Toggle (Light / Dark only, no flicker) */
   const themeToggle = document.getElementById("theme-toggle");
   if (themeToggle) {
     const isDark = document.documentElement.classList.contains("dark");
@@ -44,17 +44,23 @@ document.addEventListener("DOMContentLoaded", () => {
       : '<i class="fa-solid fa-moon"></i>';
 
     themeToggle.addEventListener("click", () => {
+      document.body.classList.add("theme-transition");
+
       document.documentElement.classList.toggle("dark");
-      const darkMode = document.documentElement.classList.contains("dark");
+      const darkMode =
+        document.documentElement.classList.contains("dark");
+
       themeToggle.innerHTML = darkMode
         ? '<i class="fa-regular fa-sun"></i>'
         : '<i class="fa-solid fa-moon"></i>';
+
       localStorage.setItem("theme", darkMode ? "dark" : "light");
+
+      setTimeout(() => {
+        document.body.classList.remove("theme-transition");
+      }, 700);
     });
   }
-
-  /* -------------------- */
-  /* Pink Mode already restored in <head> */
 
   /* -------------------- */
   /* Quick Exit (same tab, instant) */
@@ -73,7 +79,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let holdTimer;
 
   if (backToTop && floatingButtons) {
-    const isMobile = () => window.matchMedia("(max-width: 768px)").matches;
+    const isMobile = () =>
+      window.matchMedia("(max-width: 768px)").matches;
 
     window.addEventListener("scroll", () => {
       if (window.scrollY > 300) {
@@ -101,7 +108,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     ["mouseup", "mouseleave", "touchend"].forEach(evt =>
-      backToTop.addEventListener(evt, () => clearTimeout(holdTimer))
+      backToTop.addEventListener(evt, () =>
+        clearTimeout(holdTimer)
+      )
     );
   }
 
@@ -137,12 +146,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const blogTrack = document.querySelector(".blog-card-grid");
   const blogPrev = document.querySelector(".blog-carousel-btn.prev");
   const blogNext = document.querySelector(".blog-carousel-btn.next");
-  const blogCards = Array.from(document.querySelectorAll(".blog-card"));
+  const blogCards = Array.from(
+    document.querySelectorAll(".blog-card")
+  );
 
   if (blogTrack && blogCards.length > 0) {
     blogTrack.style.opacity = "0"; // prevent flicker
 
-    const gap = parseFloat(getComputedStyle(blogTrack).gap) || 0;
+    const gap =
+      parseFloat(getComputedStyle(blogTrack).gap) || 0;
     const total = blogCards.length;
 
     blogCards.forEach(card =>
@@ -157,7 +169,8 @@ document.addEventListener("DOMContentLoaded", () => {
       blogTrack.style.transition = animate
         ? "transform 0.5s ease"
         : "none";
-      blogTrack.style.transform = `translateX(${-offset}px)`;
+      blogTrack.style.transform =
+        `translateX(${-offset}px)`;
     };
 
     const jumpToStart = () => {
@@ -191,43 +204,11 @@ document.addEventListener("DOMContentLoaded", () => {
     blogPrev?.addEventListener("click", prev);
 
     updateCarousel(false);
-    blogTrack.style.opacity = "1"; // show once ready
+    blogTrack.style.opacity = "1";
 
     window.addEventListener("resize", () =>
       updateCarousel(false)
     );
-  }
-
-  /* -------------------- */
-  /* Konami Code */
-  const konamiCode = [
-    "arrowup","arrowup","arrowdown","arrowdown",
-    "arrowleft","arrowright","arrowleft","arrowright","b","a"
-  ];
-  let konamiPosition = 0;
-
-  document.addEventListener("keydown", (e) => {
-    const key = e.key.toLowerCase();
-    if (key === konamiCode[konamiPosition]) {
-      konamiPosition++;
-      if (konamiPosition === konamiCode.length) {
-        activatePinkMode();
-        konamiPosition = 0;
-      }
-    } else {
-      konamiPosition = 0;
-    }
-  });
-
-  function activatePinkMode() {
-    const enabled =
-      document.documentElement.classList.toggle("pink-mode");
-    localStorage.setItem("pink-mode", enabled ? "on" : "off");
-
-    if (enabled) {
-      const modal = document.getElementById("pink-mode-modal");
-      modal?.classList.add("show");
-    }
   }
 
 });
