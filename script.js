@@ -1,5 +1,5 @@
 /* ================================================= */
-/* MAIN SCRIPT: Seaglass Sanctuary - UPDATED CAROUSEL */
+/* MAIN SCRIPT: Seaglass Sanctuary - PRODUCTION FIXED */
 /* ================================================= */
 
 function openNav() {
@@ -23,6 +23,7 @@ function closeNav() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+
   /* -------------------- */
   /* Accessibility: Reduced Motion */
   const prefersReducedMotion = window.matchMedia(
@@ -34,20 +35,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* -------------------- */
-  /* Theme Toggle */
+  /* Theme Toggle (no flicker) */
   const themeToggle = document.getElementById("theme-toggle");
   if (themeToggle) {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      document.body.classList.add("dark");
-      themeToggle.innerHTML = '<i class="fa-regular fa-sun"></i>';
-    } else {
-      themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
-    }
+    const isDark = document.documentElement.classList.contains("dark");
+    themeToggle.innerHTML = isDark
+      ? '<i class="fa-regular fa-sun"></i>'
+      : '<i class="fa-solid fa-moon"></i>';
 
     themeToggle.addEventListener("click", () => {
-      document.body.classList.toggle("dark");
-      const darkMode = document.body.classList.contains("dark");
+      document.documentElement.classList.toggle("dark");
+      const darkMode = document.documentElement.classList.contains("dark");
       themeToggle.innerHTML = darkMode
         ? '<i class="fa-regular fa-sun"></i>'
         : '<i class="fa-solid fa-moon"></i>';
@@ -56,16 +54,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* -------------------- */
-  /* Restore Pink Mode */
-  const savedPink = localStorage.getItem("pink-mode");
-  if (savedPink === "on") document.body.classList.add("pink-mode");
+  /* Pink Mode already restored in <head> */
 
   /* -------------------- */
-  /* Quick Exit */
+  /* Quick Exit (same tab, instant) */
   const quickExitBtn = document.getElementById("quick-exit");
-  const quickExitURL = "https://www.google.com/search?q=weather+today&safe=active";
+  const quickExitURL =
+    "https://www.google.com/search?q=weather+today&safe=active";
+
   quickExitBtn?.addEventListener("click", () => {
-    window.location.href = quickExitURL;
+    window.location.replace(quickExitURL);
   });
 
   /* -------------------- */
@@ -88,12 +86,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     backToTop.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+      window.scrollTo({
+        top: 0,
+        behavior: prefersReducedMotion ? "auto" : "smooth"
+      });
     });
 
     backToTop.addEventListener("mousedown", () => {
       if (isMobile()) {
-        holdTimer = setTimeout(() => floatingButtons.classList.toggle("reveal"), 600);
+        holdTimer = setTimeout(() => {
+          floatingButtons.classList.toggle("reveal");
+        }, 600);
       }
     });
 
@@ -103,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* -------------------- */
-  /* Smooth Scrolling */
+  /* Smooth Scrolling (hash links only) */
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", function (e) {
       const targetId = this.getAttribute("href");
@@ -128,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ================================================= */
-  /* BLOG CAROUSEL - ARROWS ONLY, SIMPLE LOOP */
+  /* BLOG CAROUSEL - NO FLICKER LOOP */
   /* ================================================= */
 
   const blogTrack = document.querySelector(".blog-card-grid");
@@ -137,18 +140,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const blogCards = Array.from(document.querySelectorAll(".blog-card"));
 
   if (blogTrack && blogCards.length > 0) {
+    blogTrack.style.opacity = "0"; // prevent flicker
+
     const gap = parseFloat(getComputedStyle(blogTrack).gap) || 0;
     const total = blogCards.length;
 
-    // Clone cards to allow smooth looping
-    blogCards.forEach(card => blogTrack.appendChild(card.cloneNode(true)));
+    blogCards.forEach(card =>
+      blogTrack.appendChild(card.cloneNode(true))
+    );
 
     let index = 0;
 
     const updateCarousel = (animate = true) => {
       const cardWidth = blogCards[0].offsetWidth;
       const offset = index * (cardWidth + gap);
-      blogTrack.style.transition = animate ? "transform 0.5s ease" : "none";
+      blogTrack.style.transition = animate
+        ? "transform 0.5s ease"
+        : "none";
       blogTrack.style.transform = `translateX(${-offset}px)`;
     };
 
@@ -160,7 +168,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const next = () => {
       index++;
       updateCarousel();
-      if (index >= total) setTimeout(jumpToStart, 510);
+      if (index >= total) {
+        setTimeout(jumpToStart, 510);
+      }
     };
 
     const prev = () => {
@@ -180,11 +190,12 @@ document.addEventListener("DOMContentLoaded", () => {
     blogNext?.addEventListener("click", next);
     blogPrev?.addEventListener("click", prev);
 
-    // Initial render
     updateCarousel(false);
+    blogTrack.style.opacity = "1"; // show once ready
 
-    // Update on window resize
-    window.addEventListener("resize", () => updateCarousel(false));
+    window.addEventListener("resize", () =>
+      updateCarousel(false)
+    );
   }
 
   /* -------------------- */
@@ -203,11 +214,14 @@ document.addEventListener("DOMContentLoaded", () => {
         activatePinkMode();
         konamiPosition = 0;
       }
-    } else konamiPosition = 0;
+    } else {
+      konamiPosition = 0;
+    }
   });
 
   function activatePinkMode() {
-    const enabled = document.body.classList.toggle("pink-mode");
+    const enabled =
+      document.documentElement.classList.toggle("pink-mode");
     localStorage.setItem("pink-mode", enabled ? "on" : "off");
 
     if (enabled) {
@@ -215,4 +229,5 @@ document.addEventListener("DOMContentLoaded", () => {
       modal?.classList.add("show");
     }
   }
+
 });
