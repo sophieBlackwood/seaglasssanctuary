@@ -25,33 +25,10 @@ body.dark {
 --footer: #0A7A67;        /* dark teal footer background */
 }
 
-/* Secret Pink Light Mode */
-body.pink-mode {
---bg: #FCEFF5;            /* very light blush background */
---text: #4A2C40;          /* deep muted mauve text */
---accent: #D96A8A;        /* medium warm pink accent */
---accent-light: #EFA6BF;  /* soft, friendly hover accent */
---card-bg: #B24366;       /* deep rose plum card background */
---muted: #A8798B;         /* muted mauve for secondary text */
-}
-
-/* Secret Pink Dark Mode */
-body.dark.pink-mode {
---bg: #141014;            /* near-black with rose tint */
---text: #FDECF4;          /* soft pink-white text */
---accent: #FF8FB7;        /* bright, calming pink accent */
---accent-light: #F2B6CD;  /* lighter pink hover accent */
---card-bg: #4A1E2D;       /* rich dark plum-rose background */
---muted: #D6AFC6;         /* muted lavender-pink text */
-}
-
-
 /* Global Transitions */
 :root,
 body,
-body.pink-mode,
-body.dark,
-body.dark.pink-mode {
+body.dark {
   transition:
     background-color 0.6s ease,
     color 0.6s ease,
@@ -561,49 +538,6 @@ a {
   .modal {
     display: none;
   }
-}
-
-/* Pink Mode Modal (matches quick exit) */
-#pink-mode-modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--card-bg);
-  color: var(--always-light-text);
-  padding: 2rem;
-  border-radius: var(--radius);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-  z-index: 2500;
-  display: none;
-  width: 90%;
-  max-width: 400px;
-  text-align: center;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-#pink-mode-modal.show {
-  display: block;
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-/* Buttons inside the modal */
-#pink-mode-modal button {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  border: none;
-  background: #e63946;
-  color: white;
-  border-radius: var(--radius);
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.3s ease;
-  margin-left: 0.5rem;
-}
-
-#pink-mode-modal button:hover {
-  background: #d62839;
 }
 
 /* Sections and Cards */
