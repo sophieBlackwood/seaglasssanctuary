@@ -35,10 +35,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* -------------------- */
-  /* Theme Toggle (Light / Dark only, no flicker) */
+  /* Theme Toggle (Light / Dark ONLY) */
   const themeToggle = document.getElementById("theme-toggle");
+
   if (themeToggle) {
-    const isDark = document.documentElement.classList.contains("dark");
+    // Load saved theme
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      document.body.classList.add("dark");
+    }
+
+    // Set initial icon
+    const isDark = document.body.classList.contains("dark");
     themeToggle.innerHTML = isDark
       ? '<i class="fa-regular fa-sun"></i>'
       : '<i class="fa-solid fa-moon"></i>';
@@ -46,9 +54,9 @@ document.addEventListener("DOMContentLoaded", () => {
     themeToggle.addEventListener("click", () => {
       document.body.classList.add("theme-transition");
 
-      document.documentElement.classList.toggle("dark");
+      document.body.classList.toggle("dark");
       const darkMode =
-        document.documentElement.classList.contains("dark");
+        document.body.classList.contains("dark");
 
       themeToggle.innerHTML = darkMode
         ? '<i class="fa-regular fa-sun"></i>'
@@ -63,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* -------------------- */
-  /* Quick Exit (same tab, instant) */
+  /* Quick Exit */
   const quickExitBtn = document.getElementById("quick-exit");
   const quickExitURL =
     "https://www.google.com/search?q=weather+today&safe=active";
@@ -115,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* -------------------- */
-  /* Smooth Scrolling (hash links only) */
+  /* Smooth Scrolling */
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", function (e) {
       const targetId = this.getAttribute("href");
@@ -151,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   if (blogTrack && blogCards.length > 0) {
-    blogTrack.style.opacity = "0"; // prevent flicker
+    blogTrack.style.opacity = "0";
 
     const gap =
       parseFloat(getComputedStyle(blogTrack).gap) || 0;
