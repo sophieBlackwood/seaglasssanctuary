@@ -75,35 +75,33 @@ a {
   color: #7FD0C2;
 }
 
-/* Navbar */
+/* ==========================
+   NAVBAR (FLUID SYSTEM)
+========================== */
+
 .navbar {
   position: fixed;
   top: 0;
   z-index: 999;
   width: 100%;
-  display: flex;
-  align-items: center;
   background: var(--card-bg);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  min-height: 70px;
-  padding: 0 2rem;
 }
 
-/* Navbar Inner Container */
 .nav-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
   width: 100%;
-  padding: 1.4rem 5rem 1.4rem 2.2rem; 
+  padding: 1.2rem clamp(1rem, 4vw, 3rem);
 }
 
 /* Logo */
 .logo {
-  display: block;
-  height: 48px;
-  width: auto;
-  object-fit: contain;
+  height: 46px;
+  flex-shrink: 0;
   cursor: pointer;
   transition: opacity 0.3s ease;
 }
@@ -112,33 +110,78 @@ a {
   opacity: 0.85;
 }
 
-/* Right Side Navigation */
+/* Right side */
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 2.2rem;
+  gap: clamp(1rem, 2.5vw, 2.5rem);
 }
 
-/* Navigation Links */
+/* Links */
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 1.8rem;
+  gap: clamp(1rem, 2vw, 2rem);
   list-style: none;
-  margin: 0;
-  padding: 0;
 }
 
 .nav-links a {
   color: var(--always-light-text);
   font-weight: 500;
   text-decoration: none;
-  transition: color 0.3s ease;
 }
 
 .nav-links a:hover {
   color: var(--accent-light);
 }
+
+/* Quick Exit INLINE */
+#quick-exit {
+  position: static;
+  background: #e84c5a;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.55rem 1rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+#quick-exit:hover {
+  background: #9b0f18;
+  transform: translateY(-1px);
+}
+
+/* Hamburger */
+.hamburger-menu {
+  display: none;
+  font-size: 32px;
+  cursor: pointer;
+  color: var(--always-light-text);
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .nav-links {
+    display: none;
+  }
+
+  #quick-exit {
+    display: none;
+  }
+
+  .hamburger-menu {
+    display: flex;
+  }
+}
+
 
 /* Sidenav for smaller screens */
 .sidenav {
