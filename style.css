@@ -89,12 +89,10 @@ a {
 .nav-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  position: relative;
-  max-width: 1400px;
-  margin: 0 auto;
-  width: 100%;
+  justify-content: flex-start; 
+  gap: clamp(1rem, 2.5vw, 2.5rem);
   padding: 1.2rem clamp(1rem, 4vw, 3rem);
+  position: relative;
 }
 
 /* Logo */
@@ -136,14 +134,14 @@ a {
 
 /* Quick Exit */
 #quick-exit {
-  margin-left: auto;          /* pushes it to far right */
+  margin-left: auto;       
   background: #e84c5a;
   color: #fff;
   border: none;
-  border-radius: 10px;
-  padding: 0.75rem 1.5rem;   /* bigger to match nav */
+  border-radius: 12px;
+  padding: 0.9rem 1.8rem;    
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.05rem;        
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -822,12 +820,12 @@ footer a {
 }
 
 /* ================================================= */
-/* RESPONSIVE (COMPRESSED & NORMALIZED) */
+/* RESPONSIVE (COMPRESSED & NORMALIZED) - UPDATED */
 /* ================================================= */
 
 /* Phones (≤600px) */
 @media (max-width: 600px) {
-   .nav-container {
+  .nav-container {
     flex-wrap: wrap;
     gap: 0.5rem;
   }
@@ -835,6 +833,8 @@ footer a {
   #quick-exit {
     margin-left: 0;
     width: 100%;
+    font-size: 1rem;
+    padding: 0.85rem 1rem;
   }
 }
 
@@ -843,16 +843,23 @@ footer a {
 
   /* Navbar */
   .nav-container {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row; /* keep horizontal */
+    align-items: center;
     gap: 0.8rem;
   }
 
   .nav-links {
     flex-wrap: wrap;
     gap: 1rem;
-    justify-content: center;
-    width: 100%;
+    justify-content: flex-start;
+    width: auto;
+  }
+
+  #quick-exit {
+    margin-left: auto; /* stay at far right */
+    width: auto;
+    padding: 0.85rem 1.6rem;
+    font-size: 1rem;
   }
 
   /* Hero */
@@ -977,7 +984,7 @@ footer a {
   }
 
   #quick-exit {
-    display: none;
+    display: none; /* hide on mobile nav */
   }
 }
 
