@@ -1,5 +1,5 @@
 /* ================================================= */
-/* MAIN SCRIPT: Seaglass Sanctuary - PRODUCTION FIXED */
+/* MAIN SCRIPT: Seaglass Sanctuary - BUGFIXED */
 /* ================================================= */
 
 function openNav() {
@@ -7,7 +7,7 @@ function openNav() {
   const hamburger = document.querySelector(".hamburger-menu");
   if (!sidenav || !hamburger) return;
 
-  if (window.innerWidth <= 768) {
+  if (window.innerWidth <= 900) {
     sidenav.style.width = "250px";
     hamburger.style.display = "none";
   }
@@ -19,7 +19,7 @@ function closeNav() {
   if (!sidenav || !hamburger) return;
 
   sidenav.style.width = "0";
-  hamburger.style.display = "block";
+  hamburger.style.display = "flex";
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -35,34 +35,34 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* -------------------- */
-  /* Theme Toggle (Light / Dark ONLY) */
+  /* Theme Toggle */
   const themeToggle = document.getElementById("theme-toggle");
 
   if (themeToggle) {
-    // Load saved theme
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") {
       document.body.classList.add("dark");
     }
 
-    // Set initial icon
-    const isDark = document.body.classList.contains("dark");
-    themeToggle.innerHTML = isDark
-      ? '<i class="fa-regular fa-sun"></i>'
-      : '<i class="fa-solid fa-moon"></i>';
+    const setIcon = () => {
+      const isDark = document.body.classList.contains("dark");
+      themeToggle.innerHTML = isDark
+        ? '<i class="fa-regular fa-sun"></i>'
+        : '<i class="fa-solid fa-moon"></i>';
+    };
+
+    setIcon();
 
     themeToggle.addEventListener("click", () => {
       document.body.classList.add("theme-transition");
-
       document.body.classList.toggle("dark");
-      const darkMode =
-        document.body.classList.contains("dark");
 
-      themeToggle.innerHTML = darkMode
-        ? '<i class="fa-regular fa-sun"></i>'
-        : '<i class="fa-solid fa-moon"></i>';
+      localStorage.setItem(
+        "theme",
+        document.body.classList.contains("dark") ? "dark" : "light"
+      );
 
-      localStorage.setItem("theme", darkMode ? "dark" : "light");
+      setIcon();
 
       setTimeout(() => {
         document.body.classList.remove("theme-transition");
@@ -71,14 +71,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* -------------------- */
-  /* Quick Exit */
+  /* Quick Exit (NULL SAFE) */
   const quickExitBtn = document.getElementById("quick-exit");
   const quickExitURL =
-    "https://www.amazon.com/s?k=water+bottle&crid=FX235JQ6MY6D&sprefix=water+bottl%2Caps%2C197&ref=nb_sb_noss_2";
+    "https://www.amazon.com/s?k=water+bottle";
 
-  quickExitBtn?.addEventListener("click", () => {
-    window.location.replace(quickExitURL);
-  });
+  if (quickExitBtn) {
+    quickExitBtn.addEventListener("click", () => {
+      window.location.replace(quickExitURL);
+    });
+  }
 
   /* -------------------- */
   /* Floating Buttons */
@@ -107,7 +109,8 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    backToTop.addEventListener("mousedown", () => {
+    /* Touch-safe long press */
+    backToTop.addEventListener("touchstart", () => {
       if (isMobile()) {
         holdTimer = setTimeout(() => {
           floatingButtons.classList.toggle("reveal");
@@ -115,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    ["mouseup", "mouseleave", "touchend"].forEach(evt =>
+    ["mouseup", "mouseleave", "touchend", "touchcancel"].forEach(evt =>
       backToTop.addEventListener(evt, () =>
         clearTimeout(holdTimer)
       )
@@ -127,6 +130,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", function (e) {
       const targetId = this.getAttribute("href");
+      if (targetId === "#") return;
+
       const targetEl = document.querySelector(targetId);
       if (!targetEl) return;
 
@@ -148,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ================================================= */
-  /* BLOG CAROUSEL - NO FLICKER LOOP */
+  /* BLOG CAROUSEL - STABLE LOOP */
   /* ================================================= */
 
   const blogTrack = document.querySelector(".blog-card-grid");
@@ -174,9 +179,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const updateCarousel = (animate = true) => {
       const cardWidth = blogCards[0].offsetWidth;
       const offset = index * (cardWidth + gap);
+
       blogTrack.style.transition = animate
         ? "transform 0.5s ease"
         : "none";
+
       blogTrack.style.transform =
         `translateX(${-offset}px)`;
     };
@@ -214,9 +221,23 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCarousel(false);
     blogTrack.style.opacity = "1";
 
-    window.addEventListener("resize", () =>
-      updateCarousel(false)
-    );
+    /* Critical fix: reset index on resize */
+    window.addEventListener("resize", () => {
+      index = 0;
+      updateCarousel(false);
+    });
   }
+
+  /* -------------------- */
+  /* Hamburger auto-reset on desktop */
+  window.addEventListener("resize", () => {
+    const sidenav = document.getElementById("mySidenav");
+    const hamburger = document.querySelector(".hamburger-menu");
+
+    if (window.innerWidth > 900 && sidenav && hamburger) {
+      sidenav.style.width = "0";
+      hamburger.style.display = "flex";
+    }
+  });
 
 });
