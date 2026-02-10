@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* Quick Exit */
   const quickExitBtn = document.getElementById("quick-exit");
   const quickExitURL =
-    "https://www.google.com/search?q=weather+today&safe=active";
+    "https://www.amazon.com/s?k=water+bottle&crid=FX235JQ6MY6D&sprefix=water+bottl%2Caps%2C197&ref=nb_sb_noss_2";
 
   quickExitBtn?.addEventListener("click", () => {
     window.location.replace(quickExitURL);
