@@ -135,23 +135,19 @@ a {
 
 /* Quick Exit */
 #quick-exit {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 9999;
-  margin-left: auto;
+ margin-left: auto;      
   background: #e84c5a;
   color: white;
   border: none;
-  border-radius: 10px;
-  padding: 0.55rem 1rem;
-  font-weight: 600;
-  font-size: 0.85rem;
+  border-radius: 12px;
+  padding: 0.7rem 1.4rem; 
+  font-weight: 700;
+  font-size: 0.95rem;       
   cursor: pointer;
   white-space: nowrap;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
   box-shadow: 0 4px 14px rgba(0,0,0,0.2);
   transition: transform 0.2s ease, background 0.2s ease;
 }
