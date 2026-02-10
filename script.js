@@ -1,5 +1,5 @@
 /* ================================================= */
-/* MAIN SCRIPT: Seaglass Sanctuary - BUGFIXED */
+/* MAIN SCRIPT: Seaglass Sanctuary - DEBUGGED & OPTIMIZED */
 /* ================================================= */
 
 function openNav() {
@@ -23,12 +23,9 @@ function closeNav() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-
   /* -------------------- */
   /* Accessibility: Reduced Motion */
-  const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   if (prefersReducedMotion) {
     document.documentElement.style.scrollBehavior = "auto";
@@ -64,17 +61,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
       setIcon();
 
+      // OPTIMIZATION: Read transition duration dynamically from CSS instead of hardcoding 700ms
+      const transitionDuration = parseFloat(getComputedStyle(document.body).transitionDuration) * 1000 || 700;
       setTimeout(() => {
         document.body.classList.remove("theme-transition");
-      }, 700);
+      }, transitionDuration);
     });
   }
 
   /* -------------------- */
   /* Quick Exit (NULL SAFE) */
   const quickExitBtn = document.getElementById("quick-exit");
-  const quickExitURL =
-    "https://www.amazon.com/s?k=water+bottle";
+  const quickExitURL = "https://www.amazon.com/s?k=water+bottle";
 
   if (quickExitBtn) {
     quickExitBtn.addEventListener("click", () => {
@@ -89,8 +87,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let holdTimer;
 
   if (backToTop && floatingButtons) {
-    const isMobile = () =>
-      window.matchMedia("(max-width: 768px)").matches;
+    // OPTIMIZATION: Cache mobile media query to avoid repeated evaluations
+    const mobileMediaQuery = window.matchMedia("(max-width: 768px)");
+    const isMobile = () => mobileMediaQuery.matches;
 
     window.addEventListener("scroll", () => {
       if (window.scrollY > 300) {
@@ -118,10 +117,14 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
+    // OPTIMIZATION: Clear timer on all relevant events to prevent race conditions
     ["mouseup", "mouseleave", "touchend", "touchcancel"].forEach(evt =>
-      backToTop.addEventListener(evt, () =>
-        clearTimeout(holdTimer)
-      )
+      backToTop.addEventListener(evt, () => {
+        if (holdTimer) {
+          clearTimeout(holdTimer);
+          holdTimer = null; // Reset to avoid stale references
+        }
+      })
     );
   }
 
@@ -138,12 +141,9 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
 
       const header = document.querySelector("header");
-      const yOffset = header ? -header.offsetHeight : -80;
+      const yOffset = header ? -header.offsetHeight : -80; // NOTE: Adjust -80 if needed for your layout
 
-      const y =
-        targetEl.getBoundingClientRect().top +
-        window.pageYOffset +
-        yOffset;
+      const y = targetEl.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
       window.scrollTo({
         top: y,
@@ -153,39 +153,42 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ================================================= */
-  /* BLOG CAROUSEL - STABLE LOOP */
+  /* BLOG CAROUSEL - STABLE LOOP (OPTIMIZED) */
   /* ================================================= */
 
   const blogTrack = document.querySelector(".blog-card-grid");
   const blogPrev = document.querySelector(".blog-carousel-btn.prev");
   const blogNext = document.querySelector(".blog-carousel-btn.next");
-  const blogCards = Array.from(
-    document.querySelectorAll(".blog-card")
-  );
+  const blogCards = Array.from(document.querySelectorAll(".blog-card"));
 
   if (blogTrack && blogCards.length > 0) {
-    blogTrack.style.opacity = "0";
-
-    const gap =
-      parseFloat(getComputedStyle(blogTrack).gap) || 0;
+    // OPTIMIZATION: Cache computed styles to avoid repeated getComputedStyle calls
+    const trackStyle = getComputedStyle(blogTrack);
+    const gap = parseFloat(trackStyle.gap) || 0;
+    const transitionDuration = parseFloat(trackStyle.transitionDuration) * 1000 || 500; // Fallback to 500ms
     const total = blogCards.length;
 
-    blogCards.forEach(card =>
-      blogTrack.appendChild(card.cloneNode(true))
-    );
+    // Clone cards for seamless looping
+    blogCards.forEach(card => blogTrack.appendChild(card.cloneNode(true)));
 
     let index = 0;
+    let isTransitioning = false; // OPTIMIZATION: Prevent overlapping transitions
 
     const updateCarousel = (animate = true) => {
+      if (isTransitioning && animate) return; // Skip if already transitioning
+      isTransitioning = animate;
+
       const cardWidth = blogCards[0].offsetWidth;
       const offset = index * (cardWidth + gap);
 
-      blogTrack.style.transition = animate
-        ? "transform 0.5s ease"
-        : "none";
+      blogTrack.style.transition = animate ? `transform ${transitionDuration / 1000}s ease` : "none";
+      blogTrack.style.transform = `translateX(${-offset}px)`;
 
-      blogTrack.style.transform =
-        `translateX(${-offset}px)`;
+      if (animate) {
+        setTimeout(() => (isTransitioning = false), transitionDuration);
+      } else {
+        isTransitioning = false;
+      }
     };
 
     const jumpToStart = () => {
@@ -194,14 +197,16 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const next = () => {
+      if (isTransitioning) return; // DEBUG: Prevent rapid clicks
       index++;
       updateCarousel();
       if (index >= total) {
-        setTimeout(jumpToStart, 510);
+        setTimeout(jumpToStart, transitionDuration + 10); // OPTIMIZATION: Use dynamic duration
       }
     };
 
     const prev = () => {
+      if (isTransitioning) return; // DEBUG: Prevent rapid clicks
       if (index === 0) {
         index = total;
         updateCarousel(false);
@@ -218,13 +223,15 @@ document.addEventListener("DOMContentLoaded", () => {
     blogNext?.addEventListener("click", next);
     blogPrev?.addEventListener("click", prev);
 
-    updateCarousel(false);
-    blogTrack.style.opacity = "1";
+    updateCarousel(false); // Initial setup
 
-    /* Critical fix: reset index on resize */
+    /* OPTIMIZATION: Handle resize smoothly without resetting index */
+    let resizeTimeout;
     window.addEventListener("resize", () => {
-      index = 0;
-      updateCarousel(false);
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        requestAnimationFrame(() => updateCarousel(false)); // Recalculate position without animation
+      }, 100); // Debounce for performance
     });
   }
 
@@ -239,5 +246,4 @@ document.addEventListener("DOMContentLoaded", () => {
       hamburger.style.display = "flex";
     }
   });
-
 });
