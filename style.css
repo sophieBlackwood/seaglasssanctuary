@@ -139,7 +139,7 @@ a {
   top: 1rem;
   right: 1rem;
   z-index: 9999;
-
+  margin-left: auto;
   background: #e84c5a;
   color: white;
   border: none;
