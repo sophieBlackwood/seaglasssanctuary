@@ -90,6 +90,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
   max-width: 1400px;
   margin: 0 auto;
   width: 100%;
@@ -135,14 +136,14 @@ a {
 
 /* Quick Exit */
 #quick-exit {
- margin-left: auto;      
+  margin-left: auto;           /* pushes it to the far right */
   background: #e84c5a;
   color: white;
   border: none;
   border-radius: 12px;
-  padding: 0.7rem 1.4rem; 
+  padding: 0.75rem 1.5rem;     /* bigger hit area */
   font-weight: 700;
-  font-size: 0.95rem;       
+  font-size: 1rem;             /* bigger text to match nav */
   cursor: pointer;
   white-space: nowrap;
   display: flex;
@@ -827,10 +828,12 @@ footer a {
 /* Phones (≤600px) */
 @media (max-width: 600px) {
   #quick-exit {
-    font-size: 0.85rem;
-    padding: 0.6rem 1rem;
+     padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
     right: 0.7rem;
     top: 0.7rem;
+    position: fixed;       
+    margin-left: 0; 
   }
 }
 
