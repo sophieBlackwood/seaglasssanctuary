@@ -89,7 +89,7 @@ a {
 .nav-container {
   display: flex;
   align-items: center;
-  justify-content: flex-start; 
+  justify-content: space-between; /* Changed from flex-start for even distribution */
   gap: clamp(1rem, 2.5vw, 2.5rem);
   padding: 1.2rem clamp(1rem, 4vw, 3rem);
   position: relative;
@@ -107,21 +107,19 @@ a {
   opacity: 0.85;
 }
 
-/* Right side */
 .nav-right {
   display: flex;
   align-items: center;
   gap: clamp(1rem, 2.5vw, 2.5rem);
+  flex: 1; 
+  justify-content: center; 
 }
 
-/* Links */
 .nav-links {
   display: flex;
   align-items: center;
   gap: clamp(1rem, 2vw, 2rem);
-  list-style: none;
 }
-
 .nav-links a {
   color: var(--always-light-text);
   font-weight: 500;
@@ -842,11 +840,20 @@ footer a {
 @media (max-width: 768px) {
 
   /* Navbar */
-  .nav-container {
-    flex-direction: row; /* keep horizontal */
-    align-items: center;
-    gap: 0.8rem;
-  }
+ .nav-right {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 2.5rem);
+  flex: 1; 
+  justify-content: center;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2vw, 2rem);
+  /* No changes needed */
+}
 
   .nav-links {
     flex-wrap: wrap;
@@ -1025,4 +1032,31 @@ footer a {
     max-width: 1500px;
   }
 }
+@media (max-width: 900px) and (min-width: 769px) {
+  .nav-container {
+    justify-content: space-between;
+  }
+  .nav-right {
+    justify-content: center;
+  }
+}
 
+/* At ≤900px, hide nav-right entirely for cleaner hamburger mode */
+@media (max-width: 900px) {
+  .nav-right {
+    display: none; /* Hide the whole container instead of children */
+  }
+  .hamburger-menu {
+    display: flex;
+    position: absolute;
+    left: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .logo {
+    display: none !important;
+  }
+  .nav-container {
+    justify-content: center; /* Center any remaining elements, but since nav-right is hidden, it centers the space */
+  }
+}
