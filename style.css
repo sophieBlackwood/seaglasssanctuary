@@ -136,18 +136,18 @@ a {
 
 /* Quick Exit */
 #quick-exit {
-  margin-left: auto;           /* pushes it to the far right */
+  margin-left: auto;          /* pushes it to far right */
   background: #e84c5a;
-  color: white;
+  color: #fff;
   border: none;
-  border-radius: 12px;
-  padding: 0.75rem 1.5rem;     /* bigger hit area */
+  border-radius: 10px;
+  padding: 0.75rem 1.5rem;   /* bigger to match nav */
   font-weight: 700;
-  font-size: 1rem;             /* bigger text to match nav */
+  font-size: 1rem;
   cursor: pointer;
-  white-space: nowrap;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   box-shadow: 0 4px 14px rgba(0,0,0,0.2);
   transition: transform 0.2s ease, background 0.2s ease;
@@ -827,13 +827,14 @@ footer a {
 
 /* Phones (≤600px) */
 @media (max-width: 600px) {
+   .nav-container {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
   #quick-exit {
-     padding: 0.6rem 1.2rem;
-    font-size: 0.9rem;
-    right: 0.7rem;
-    top: 0.7rem;
-    position: fixed;       
-    margin-left: 0; 
+    margin-left: 0;
+    width: 100%;
   }
 }
 
