@@ -136,6 +136,10 @@ a {
 /* Quick Exit */
 #quick-exit {
   position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 9999;
+
   background: #e84c5a;
   color: white;
   border: none;
