@@ -6,7 +6,6 @@
 --accent-light: #4FB29F;  /* soft teal highlight */
 --card-bg: #03443C;       /* dark teal card background */
 --muted: #4FB29F;         /* muted teal for secondary text */
---container: #1C221D;     /* dark greenish container background */
 --always-light-text: #DFFAEA; /* soft mint-white text for contrast */
 --footer: #0A7A67;        /* dark teal footer background */
 --radius: 12px;          
@@ -136,7 +135,7 @@ a {
 
 /* Quick Exit */
 #quick-exit {
-  position: static;
+  position: fixed;
   background: #e84c5a;
   color: white;
   border: none;
@@ -288,7 +287,7 @@ a {
 
 .btn:hover,
 .schedule-btn:hover {
-  background: color-mix(in srgb, var(--accent) 85%, black);
+  background: var(--accent);
   transform: translateY(-1px);
 }
 
@@ -452,7 +451,7 @@ a {
   background: rgba(0, 0, 0, 0.5);
   opacity: 0;
   visibility: hidden;
-  transition: all 0.4s ease;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
   z-index: 3000;
 }
 
@@ -588,9 +587,6 @@ blockquote,
   color: var(--always-light-text);
   text-align: left;
   cursor: pointer;
-  transition: none; 
-  transform: none;   
-  opacity: 1;        
 }
 
 /* ================= BUTTONS ================= */
