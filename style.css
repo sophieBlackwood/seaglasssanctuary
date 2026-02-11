@@ -85,8 +85,8 @@ a {
   z-index: 999;
   display: flex;
   align-items: center;
-  height: 100px; /* explicit taller navbar */
-  padding: 0 2.5rem; /* horizontal spacing */
+  height: 70px;
+  padding: 0 2.5rem; 
 }
 
 .nav-container {
@@ -106,7 +106,7 @@ a {
 
 /* NAV LINKS */
 nav {
-  margin-left: 5rem; /* pushes nav links further from logo */
+  margin-left: 5rem; 
 }
 
 .nav-links {
