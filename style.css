@@ -142,27 +142,6 @@ nav {
   transform: translateY(-1px);
 }
 
-/* QUICK EXIT */
-#quick-exit {
-  margin-left: auto;
-  background: #e84c5a;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 0.75rem 1.6rem;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: background 0.2s, transform 0.2s;
-}
-
-#quick-exit:hover {
-  background: #9b0f18;
-  transform: translateY(-1px);
-}
-
 /* Sidenav for smaller screens */
 .sidenav {
   height: 100%;
@@ -239,17 +218,6 @@ nav {
   line-height: 1;
   padding: 0;             /* no extra spacing */
   color: var(--always-light-text);
-}
-
-/* Sidenav close button */
-.sidenav .closebtn {
-  font-size: 2rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--always-light-text);
-  line-height: 1;
-  padding: 0;
 }
 
 /* Image next to hamburger icon */
@@ -854,15 +822,15 @@ footer a {
 /* ========================= */
 
 @media (max-width: 900px) {
-
   /* --- NAV STRUCTURE --- */
-
   .nav-container {
     position: relative;
+    justify-content: center; /* Center hamburger + quick exit spacing */
   }
 
-  /* Hide desktop nav links cleanly */
-  nav {
+  /* Hide desktop nav links and logo cleanly */
+  nav,
+  .logo {
     display: none;
   }
 
@@ -871,21 +839,12 @@ footer a {
     display: flex;
     align-items: center;
     justify-content: center;
-
     position: absolute;
     left: 1.5rem;
     top: 50%;
     transform: translateY(-50%);
-
     font-size: 26px;
     z-index: 10;
-  }
-
-  /* Center logo WITHOUT flex fighting */
-  .logo {
-    height: 40px;
-    margin: 0 auto;
-    display: block;
   }
 
   /* Quick Exit (RIGHT) */
@@ -894,19 +853,20 @@ footer a {
     right: 1.5rem;
     top: 50%;
     transform: translateY(-50%);
-
-    padding: 0.55rem 1rem;
-    font-size: 0.85rem;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
   }
 
   /* --- HERO --- */
-
   .hero h2 {
     font-size: 2rem;
   }
 
-  /* --- BLOG CAROUSEL → SCROLL MODE --- */
+  .hero p {
+    font-size: 1rem;
+  }
 
+  /* --- BLOG CAROUSEL → SCROLL MODE --- */
   .blog-carousel-track-container {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -928,23 +888,18 @@ footer a {
   }
 
   /* --- SECTION SPACING --- */
-
   .section {
     padding: 3rem 1.2rem;
   }
 
   /* --- POST LAYOUT --- */
-
-  .post-header {
+  .post-header,
+  .post-content {
     padding: 2rem 1.5rem;
   }
 
   .post-title {
     font-size: 2rem;
-  }
-
-  .post-content {
-    padding: 2rem 1.5rem;
   }
 
   .post-footer .post-btn {
@@ -957,8 +912,8 @@ footer a {
 /* PHONES */
 /* ≤ 600px */
 /* ========================= */
-@media (max-width: 600px) {
 
+@media (max-width: 600px) {
   .hero {
     padding: 4rem 1.2rem;
   }
@@ -996,89 +951,11 @@ footer a {
 }
 
 /* ========================= */
-/* TABLETS + SMALL SCREENS */
-/* 601px - 900px */
-/* ========================= */
-@media (max-width: 900px) {
-
-  /* Navbar adjustments */
-  .logo {
-    display: none; /* hide logo on small screens */
-  }
-
-  .nav-links {
-    display: none; /* hide desktop links */
-  }
-
-  .hamburger-menu {
-    display: block; /* show hamburger */
-  }
-
-  .nav-container {
-    justify-content: center; /* center hamburger + quick exit spacing */
-  }
-
-  #quick-exit {
-    position: absolute;
-    right: 1.5rem;
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 0.6rem 1rem;
-    font-size: 0.9rem;
-  }
-
-  .hero h2 {
-    font-size: 2rem;
-  }
-
-  .hero p {
-    font-size: 1rem;
-  }
-
-  .section {
-    padding: 3rem 1.2rem;
-  }
-
-  .post-header,
-  .post-content {
-    padding: 2rem 1.5rem;
-  }
-
-  .post-title {
-    font-size: 2rem;
-  }
-
-  .post-footer .post-btn {
-    width: 100%;
-    text-align: center;
-  }
-
-  .blog-carousel-track-container {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-  }
-
-  .blog-card-grid {
-    width: max-content;
-    gap: 1.2rem;
-  }
-
-  .blog-card {
-    flex: 0 0 75vw;
-    scroll-snap-align: center;
-  }
-
-  .blog-carousel-btn {
-    display: none;
-  }
-}
-
-/* ========================= */
 /* LARGE DESKTOP */
 /* ≥ 1440px */
 /* ========================= */
-@media (min-width: 1440px) {
 
+@media (min-width: 1440px) {
   .container,
   .container-card {
     max-width: 1350px;
@@ -1093,8 +970,8 @@ footer a {
 /* ULTRA WIDE */
 /* ≥ 1800px */
 /* ========================= */
-@media (min-width: 1800px) {
 
+@media (min-width: 1800px) {
   :root {
     font-size: 17px;
   }
