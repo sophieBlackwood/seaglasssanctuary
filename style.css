@@ -80,7 +80,7 @@ a {
   position: fixed;
   top: 0;
   width: 100%;
-  height: 100px; /* taller navbar */
+  height: 200px;
   background: var(--card-bg);
   z-index: 999;
   display: flex;
@@ -99,7 +99,7 @@ a {
 
 /* LOGO */
 .logo {
-  height: 50px; /* slightly bigger */
+  height: 70px; 
   transition: opacity 0.3s ease;
 }
 
@@ -122,7 +122,7 @@ a {
   background: #e84c5a;
   color: white;
   border: none;
-  border-radius: 12px;
+  border-radius: 5px;
   padding: 0.75rem 1.6rem;
   font-weight: 700;
   cursor: pointer;
