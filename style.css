@@ -890,28 +890,28 @@ footer a {
     transition: opacity 0.3s ease; /* Smooth appearance */
   }
 
-  /* Quick Exit (RIGHT) */
+  /* Quick Exit (RIGHT) - Larger */
   #quick-exit {
     position: absolute;
     right: clamp(0.5rem, 3vw, 1.5rem); /* Fluid right position */
     top: 50%;
     transform: translateY(-50%);
-    padding: clamp(0.5rem, 2vw, 0.6rem) clamp(0.8rem, 3vw, 1rem); /* Fluid padding */
-    font-size: clamp(0.85rem, 2vw, 0.9rem); /* Fluid font size */
+    padding: clamp(0.6rem, 2.5vw, 0.8rem) clamp(1rem, 3vw, 1.2rem); /* Larger fluid padding */
+    font-size: clamp(1rem, 2.5vw, 1.1rem); /* Larger fluid font size */
     transition: transform 0.2s ease; /* Smooth hover */
   }
 
-  /* --- HERO --- */
+  /* --- HERO --- Larger text */
   .hero {
     padding: 5rem clamp(1rem, 4vw, 1.5rem); /* Fluid padding */
   }
 
   .hero h2 {
-    font-size: clamp(1.8rem, 4vw, 2rem); /* Fluid font size */
+    font-size: clamp(2.5rem, 5vw, 3.5rem); /* Larger fluid font size */
   }
 
   .hero p {
-    font-size: clamp(0.95rem, 2vw, 1rem); /* Fluid font size */
+    font-size: clamp(1.1rem, 2.5vw, 1.2rem); /* Larger fluid font size */
   }
 
   /* --- BLOG CAROUSEL → SCROLL MODE --- */
@@ -969,6 +969,14 @@ footer a {
   .team-grid {
     gap: clamp(1rem, 2vw, 2rem); /* Fluid gap */
   }
+
+  /* --- LARGER FLOATING BUTTONS --- */
+  #theme-toggle,
+  #back-to-top {
+    width: clamp(2.5rem, 6vw, 3rem); /* Larger fluid width */
+    height: clamp(2.5rem, 6vw, 3rem); /* Larger fluid height */
+    font-size: clamp(1rem, 2.5vw, 1.1rem); /* Larger fluid font size */
+  }
 }
 
 /* ========================= */
@@ -979,11 +987,11 @@ footer a {
 @media (max-width: 768px) {
   /* Additional tablet-specific tweaks */
   .hero h2 {
-    font-size: clamp(1.9rem, 4vw, 2.1rem);
+    font-size: clamp(2.4rem, 4.5vw, 2.8rem); /* Larger responsive size */
   }
 
   .hero p {
-    font-size: clamp(0.98rem, 2vw, 1.05rem);
+    font-size: clamp(1.05rem, 2.2vw, 1.15rem); /* Larger responsive size */
   }
 
   .counselors-grid {
@@ -992,6 +1000,20 @@ footer a {
 
   .modal {
     display: none; /* Hide modals on tablets for better UX */
+  }
+
+  /* Larger floating buttons */
+  #theme-toggle,
+  #back-to-top {
+    width: clamp(2.4rem, 5.5vw, 2.8rem);
+    height: clamp(2.4rem, 5.5vw, 2.8rem);
+    font-size: clamp(0.95rem, 2.3vw, 1rem);
+  }
+
+  /* Larger quick-exit */
+  #quick-exit {
+    padding: clamp(0.55rem, 2.3vw, 0.75rem) clamp(0.9rem, 2.8vw, 1.1rem);
+    font-size: clamp(0.95rem, 2.3vw, 1rem);
   }
 }
 
@@ -1006,11 +1028,11 @@ footer a {
   }
 
   .hero h2 {
-    font-size: clamp(1.6rem, 5vw, 1.8rem);
+    font-size: clamp(2.2rem, 5.5vw, 2.5rem); /* Larger on phones */
   }
 
   .hero p {
-    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    font-size: clamp(1rem, 2.5vw, 1.1rem); /* Larger on phones */
   }
 
   .card-grid,
@@ -1024,17 +1046,18 @@ footer a {
     padding: clamp(1rem, 3vw, 1.5rem);
   }
 
+  /* Larger floating buttons */
   #theme-toggle,
   #back-to-top {
-    width: clamp(2rem, 5vw, 2.4rem); /* Ensure 44px min touch target */
-    height: clamp(2rem, 5vw, 2.4rem);
-    font-size: clamp(0.8rem, 2vw, 0.85rem);
+    width: clamp(2.5rem, 6vw, 3rem); /* Ensure larger touch targets */
+    height: clamp(2.5rem, 6vw, 3rem);
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
   }
 
-  /* Quick Exit adjustments */
+  /* Larger quick-exit */
   #quick-exit {
-    padding: clamp(0.4rem, 2vw, 0.5rem) clamp(0.7rem, 2.5vw, 0.9rem);
-    font-size: clamp(0.8rem, 2vw, 0.85rem);
+    padding: clamp(0.5rem, 2.2vw, 0.7rem) clamp(0.8rem, 2.8vw, 1rem);
+    font-size: clamp(0.9rem, 2.2vw, 1rem);
   }
 
   /* Blog carousel */
@@ -1061,6 +1084,28 @@ footer a {
   .section {
     padding: 4rem clamp(1.5rem, 5vw, 2rem);
   }
+
+  /* Larger hero text on large screens */
+  .hero h2 {
+    font-size: clamp(3rem, 5.5vw, 4rem);
+  }
+
+  .hero p {
+    font-size: clamp(1.2rem, 2.5vw, 1.3rem);
+  }
+
+  /* Larger buttons on large screens */
+  #theme-toggle,
+  #back-to-top {
+    width: clamp(2.8rem, 6.5vw, 3.2rem);
+    height: clamp(2.8rem, 6.5vw, 3.2rem);
+    font-size: clamp(1.1rem, 2.5vw, 1.2rem);
+  }
+
+  #quick-exit {
+    padding: clamp(0.7rem, 2.5vw, 0.9rem) clamp(1.1rem, 3.2vw, 1.3rem);
+    font-size: clamp(1.1rem, 2.5vw, 1.2rem);
+  }
 }
 
 /* ========================= */
@@ -1081,6 +1126,27 @@ footer a {
   .blog-card {
     flex: 0 0 clamp(350px, 20vw, 400px);
   }
+
+  /* Even larger on ultra-wide */
+  .hero h2 {
+    font-size: clamp(3.2rem, 6vw, 4.2rem);
+  }
+
+  .hero p {
+    font-size: clamp(1.25rem, 2.5vw, 1.35rem);
+  }
+
+  #theme-toggle,
+  #back-to-top {
+    width: clamp(3rem, 7vw, 3.5rem);
+    height: clamp(3rem, 7vw, 3.5rem);
+    font-size: clamp(1.15rem, 2.5vw, 1.25rem);
+  }
+
+  #quick-exit {
+    padding: clamp(0.75rem, 2.5vw, 1rem) clamp(1.2rem, 3.5vw, 1.4rem);
+    font-size: clamp(1.15rem, 2.5vw, 1.25rem);
+  }
 }
 
 /* ========================= */
@@ -1096,6 +1162,27 @@ footer a {
   .container,
   .container-card {
     max-width: 1650px; /* Slightly larger for extreme widths */
+  }
+
+  /* Maximally larger on super ultra-wide */
+  .hero h2 {
+    font-size: clamp(3.5rem, 6.5vw, 4.5rem);
+  }
+
+  .hero p {
+    font-size: clamp(1.3rem, 2.5vw, 1.4rem);
+  }
+
+  #theme-toggle,
+  #back-to-top {
+    width: clamp(3.2rem, 7.5vw, 3.8rem);
+    height: clamp(3.2rem, 7.5vw, 3.8rem);
+    font-size: clamp(1.2rem, 2.5vw, 1.3rem);
+  }
+
+  #quick-exit {
+    padding: clamp(0.8rem, 2.5vw, 1.1rem) clamp(1.3rem, 3.8vw, 1.5rem);
+    font-size: clamp(1.2rem, 2.5vw, 1.3rem);
   }
 }
 
