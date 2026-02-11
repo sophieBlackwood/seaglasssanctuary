@@ -74,7 +74,7 @@ a {
 }
 
 /* ========================= */
-/* NAVBAR LAYOUT */
+/* NAVBAR LAYOUT FIXED */
 /* ========================= */
 .navbar {
   position: fixed;
@@ -84,7 +84,8 @@ a {
   z-index: 999;
   display: flex;
   align-items: center;
-  padding: 1.5rem 2.5rem; /* taller navbar */
+  height: 100px; /* explicit taller navbar */
+  padding: 0 2.5rem; /* horizontal spacing */
 }
 
 .nav-container {
@@ -104,7 +105,7 @@ a {
 
 /* NAV LINKS */
 nav {
-  margin-left: 4rem; /* push links further from logo */
+  margin-left: 5rem; /* pushes nav links further from logo */
 }
 
 .nav-links {
@@ -117,6 +118,27 @@ nav {
   color: var(--always-light-text);
   font-weight: 500;
   text-align: center;
+}
+
+/* QUICK EXIT */
+#quick-exit {
+  margin-left: auto;
+  background: #e84c5a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.75rem 1.6rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.2s, transform 0.2s;
+}
+
+#quick-exit:hover {
+  background: #9b0f18;
+  transform: translateY(-1px);
 }
 
 /* QUICK EXIT */
