@@ -890,14 +890,14 @@ footer a {
     transition: opacity 0.3s ease; /* Smooth appearance */
   }
 
-  /* Quick Exit (RIGHT) - Larger */
+  /* Quick Exit (RIGHT) - Original sizes */
   #quick-exit {
     position: absolute;
     right: clamp(0.5rem, 3vw, 1.5rem); /* Fluid right position */
     top: 50%;
     transform: translateY(-50%);
-    padding: clamp(0.6rem, 2.5vw, 0.8rem) clamp(1rem, 3vw, 1.2rem); /* Larger fluid padding */
-    font-size: clamp(1rem, 2.5vw, 1.1rem); /* Larger fluid font size */
+    padding: clamp(0.5rem, 2vw, 0.6rem) clamp(0.8rem, 3vw, 1rem); /* Original fluid padding */
+    font-size: clamp(0.85rem, 2vw, 0.9rem); /* Original fluid font size */
     transition: transform 0.2s ease; /* Smooth hover */
   }
 
@@ -1010,10 +1010,10 @@ footer a {
     font-size: clamp(0.95rem, 2.3vw, 1rem);
   }
 
-  /* Larger quick-exit */
+  /* Quick-exit - Original sizes */
   #quick-exit {
-    padding: clamp(0.55rem, 2.3vw, 0.75rem) clamp(0.9rem, 2.8vw, 1.1rem);
-    font-size: clamp(0.95rem, 2.3vw, 1rem);
+    padding: clamp(0.5rem, 2vw, 0.6rem) clamp(0.8rem, 3vw, 1rem);
+    font-size: clamp(0.85rem, 2vw, 0.9rem);
   }
 }
 
@@ -1054,10 +1054,10 @@ footer a {
     font-size: clamp(1rem, 2.5vw, 1.1rem);
   }
 
-  /* Larger quick-exit */
+  /* Quick-exit - Original sizes */
   #quick-exit {
-    padding: clamp(0.5rem, 2.2vw, 0.7rem) clamp(0.8rem, 2.8vw, 1rem);
-    font-size: clamp(0.9rem, 2.2vw, 1rem);
+    padding: clamp(0.5rem, 2vw, 0.6rem) clamp(0.8rem, 3vw, 1rem);
+    font-size: clamp(0.85rem, 2vw, 0.9rem);
   }
 
   /* Blog carousel */
@@ -1085,13 +1085,13 @@ footer a {
     padding: 4rem clamp(1.5rem, 5vw, 2rem);
   }
 
-  /* Larger hero text on large screens */
+  /* Reduced hero text on large screens */
   .hero h2 {
-    font-size: clamp(3rem, 5.5vw, 4rem);
+    font-size: clamp(2.5rem, 4vw, 3rem);
   }
 
   .hero p {
-    font-size: clamp(1.2rem, 2.5vw, 1.3rem);
+    font-size: clamp(1rem, 2vw, 1.1rem);
   }
 
   /* Larger buttons on large screens */
@@ -1102,9 +1102,10 @@ footer a {
     font-size: clamp(1.1rem, 2.5vw, 1.2rem);
   }
 
+  /* Quick-exit - Original sizes */
   #quick-exit {
-    padding: clamp(0.7rem, 2.5vw, 0.9rem) clamp(1.1rem, 3.2vw, 1.3rem);
-    font-size: clamp(1.1rem, 2.5vw, 1.2rem);
+    padding: clamp(0.5rem, 2vw, 0.6rem) clamp(0.8rem, 3vw, 1rem);
+    font-size: clamp(0.85rem, 2vw, 0.9rem);
   }
 }
 
@@ -1127,13 +1128,13 @@ footer a {
     flex: 0 0 clamp(350px, 20vw, 400px);
   }
 
-  /* Even larger on ultra-wide */
+  /* Reduced hero text on ultra-wide */
   .hero h2 {
-    font-size: clamp(3.2rem, 6vw, 4.2rem);
+    font-size: clamp(2.7rem, 4.5vw, 3.2rem);
   }
 
   .hero p {
-    font-size: clamp(1.25rem, 2.5vw, 1.35rem);
+    font-size: clamp(1.05rem, 2.2vw, 1.15rem);
   }
 
   #theme-toggle,
@@ -1143,9 +1144,10 @@ footer a {
     font-size: clamp(1.15rem, 2.5vw, 1.25rem);
   }
 
+  /* Quick-exit - Original sizes */
   #quick-exit {
-    padding: clamp(0.75rem, 2.5vw, 1rem) clamp(1.2rem, 3.5vw, 1.4rem);
-    font-size: clamp(1.15rem, 2.5vw, 1.25rem);
+    padding: clamp(0.5rem, 2vw, 0.6rem) clamp(0.8rem, 3vw, 1rem);
+    font-size: clamp(0.85rem, 2vw, 0.9rem);
   }
 }
 
@@ -1164,13 +1166,13 @@ footer a {
     max-width: 1650px; /* Slightly larger for extreme widths */
   }
 
-  /* Maximally larger on super ultra-wide */
+  /* Reduced hero text on super ultra-wide */
   .hero h2 {
-    font-size: clamp(3.5rem, 6.5vw, 4.5rem);
+    font-size: clamp(2.8rem, 5vw, 3.5rem);
   }
 
   .hero p {
-    font-size: clamp(1.3rem, 2.5vw, 1.4rem);
+    font-size: clamp(1.1rem, 2.5vw, 1.2rem);
   }
 
   #theme-toggle,
@@ -1180,9 +1182,10 @@ footer a {
     font-size: clamp(1.2rem, 2.5vw, 1.3rem);
   }
 
+  /* Quick-exit - Original sizes */
   #quick-exit {
-    padding: clamp(0.8rem, 2.5vw, 1.1rem) clamp(1.3rem, 3.8vw, 1.5rem);
-    font-size: clamp(1.2rem, 2.5vw, 1.3rem);
+    padding: clamp(0.5rem, 2vw, 0.6rem) clamp(0.8rem, 3vw, 1rem);
+    font-size: clamp(0.85rem, 2vw, 0.9rem);
   }
 }
 
