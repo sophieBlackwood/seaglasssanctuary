@@ -8,137 +8,132 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="icon" type="image/x-icon" href="icon_transparent.png"/>
   <link rel="stylesheet" href="style.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
   
   <!-- Floating Side Buttons -->
-<div id="floating-buttons">
-  <button id="theme-toggle" title="Toggle theme">
-    <i class="fa-solid fa-moon"></i>
-  </button>
-  <button id="back-to-top" title="Back to top">
-    <i class="fa-solid fa-arrow-up"></i>
-  </button>
-</div>
-
- <header class="navbar">
-  <div class="container nav-container">
-
-    <!-- LEFT: Hamburger (mobile only via CSS) -->
-    <button class="hamburger-menu" onclick="openNav()" aria-label="Open menu">
-      &#9776;
+  <div id="floating-buttons">
+    <button id="theme-toggle" title="Toggle theme">
+      <i class="fa-solid fa-moon"></i>
     </button>
-
-    <!-- LOGO -->
-    <a href="index.html" class="logo-link">
-      <img class="logo" id="logoImage" src="logo_text.png" alt="Seaglass Sanctuary Logo">
-    </a>
-
-    <!-- DESKTOP NAV -->
-    <nav class="desktop-nav">
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="index.html#mission">Mission</a></li>
-        <li><a href="index.html#resources">Resources</a></li>
-        <li><a href="helplines.html">Helplines</a></li>
-        <li><a href="index.html#support">Support</a></li>
-        <li><a href="index.html#stories">Stories</a></li>
-        <li><a href="index.html#blog">Blog</a></li>
-      </ul>
-    </nav>
-
-    <!-- RIGHT: Quick Exit -->
-    <button id="quick-exit" title="Quickly exit to Amazon">
-      <i class="fa-solid fa-arrow-right-from-bracket"></i>
-      <span>Quick Exit</span>
+    <button id="back-to-top" title="Back to top">
+      <i class="fa-solid fa-arrow-up"></i>
     </button>
-
   </div>
 
-  <!-- Mobile Side Navigation -->
-  <div id="mySidenav" class="sidenav">
+  <header class="navbar">
+    <div class="nav-container">  <!-- Removed .container class to avoid constraining navbar width -->
 
-    <div class="sidenav-header">
-      <img src="logo_text.png" class="sidenav-logo" alt="Seaglass logo">
-      <button class="closebtn" onclick="closeNav()" aria-label="Close menu">×</button>
+      <!-- LEFT: Hamburger (mobile only via CSS) -->
+      <button class="hamburger-menu" onclick="openNav()" aria-label="Open menu">
+        &#9776;
+      </button>
+
+      <!-- LOGO -->
+      <a href="index.html" class="logo-link">
+        <img class="logo" id="logoImage" src="logo_text.png" alt="Seaglass Sanctuary Logo">
+      </a>
+
+      <!-- DESKTOP NAV -->
+      <nav class="desktop-nav">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#mission">Mission</a></li>
+          <li><a href="#resources">Resources</a></li>
+          <li><a href="helplines.html">Helplines</a></li>
+          <li><a href="#support">Support</a></li>
+          <li><a href="#stories">Stories</a></li>
+          <li><a href="#blog">Blog</a></li>
+        </ul>
+      </nav>
+
+      <!-- RIGHT: Quick Exit -->
+      <button id="quick-exit" title="Quickly exit to Amazon">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        <span>Quick Exit</span>
+      </button>
+
     </div>
-    <hr>
 
-    <a href="index.html">Home</a>
-    <a href="index.html#mission">Mission</a>
-    <a href="index.html#resources">Resources</a>
-    <a href="helplines.html">Helplines</a>
-    <a href="index.html#support">Support</a>
-    <a href="index.html#stories">Stories</a>
-    <a href="index.html#blog">Blog</a>
-  </div>
-</header>
-</head>
+    <!-- Mobile Side Navigation -->
+    <div id="mySidenav" class="sidenav">
+      <div class="sidenav-header">
+        <img src="logo_text.png" class="sidenav-logo" alt="Seaglass Sanctuary Logo">
+        <button class="closebtn" onclick="closeNav()" aria-label="Close menu">×</button>
+      </div>
+      <hr>
+      <a href="index.html">Home</a>
+      <a href="#mission">Mission</a>
+      <a href="#resources">Resources</a>
+      <a href="helplines.html">Helplines</a>
+      <a href="#support">Support</a>
+      <a href="#stories">Stories</a>
+      <a href="#blog">Blog</a>
+    </div>
+  </header>
+
+  <main>  <!-- Added <main> for semantic structure -->
 
     <!-- Hero Section -->
     <section class="hero">
       <div class="container">
         <h2>Your Mind Matters</h2>
         <p> At Seaglass Sanctuary, we believe in breaking the stigma and providing accessible resources for mental well-being. </p>
-        <a href="#resources" class="btn" id="mission">Find Support</a>
+        <a href="#resources" class="btn">Find Support</a>
       </div>
     </section>
 
     <!-- Mission Section -->
-    <section class="section mission">
+    <section id="mission" class="section mission">  <!-- Added id for linking -->
       <div class="container">
         <h3>Our Mission</h3>
         <p> Seaglass Sanctuary exists to connect individuals with the tools, stories, and communities that promote understanding and healing. We’re here to help everyone find their center. </p>
         <br>
-        <a href="aboutus.html" class="btn-secondary" id="resources">Learn More About Us</a>
+        <a href="aboutus.html" class="btn-secondary">Learn More About Us</a>
       </div>
     </section>
 
     <!-- Resources Section -->
-    <section class="section">
+    <section id="resources" class="section">  <!-- Added id for linking -->
       <div class="container-card">
         <h3>Resources</h3>
-
         <div class="card-grid">
           <div class="card">
             <h4>Helplines And Hotlines</h4>
             <p>Access 24/7 local and national crisis lines and mental health resources.</p>
             <a href="helplines.html" class="link">View helplines →</a>
           </div>
-
           <div class="card">
             <h4>Professional Support</h4>
             <p>Find certified counselors and schedule an online session with a mental health professional.</p>
-            <a href="counselors.html" class="link" id="support">Book an appointment →</a>
+            <a href="counselors.html" class="link">Book an appointment →</a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Support Section -->
-    <section class="section">
+    <section id="support" class="section">  <!-- Added id for linking -->
       <div class="container">
         <h3>Community Support</h3>
         <p> Join our online community to share your experiences, find understanding, and support one another in a safe environment. </p>
         <br>
-        <a href="https://discord.gg/5EyZdy9amY" class="btn-secondary">Visit Forums</a>
+        <a href="https://discord.gg/5EyZdy9amY" class="btn-secondary" target="_blank" rel="noopener">Visit Forums</a>
       </div>
     </section>
 
     <!-- Event Section -->
-    <section class="section events">
+    <section id="stories" class="section events">  <!-- Added id for linking (assuming "stories" refers to events/testimonials) -->
       <div class="container-card">
         <h3>Upcoming Event</h3>
-
         <div class="event-card">
           <h4>Mental Health Awareness Workshop</h4>
           <p><strong>Date:</strong> March 26, 2026</p>
           <p><strong>Time:</strong> 3:00 PM - 5:00 PM</p>
           <p><strong>Location:</strong> Online via Discord (link provided after registration)</p>
-          <p id="stories"> Join us for an interactive workshop focusing on mental health awareness, coping strategies, and community resources. </p>
+          <p> Join us for an interactive workshop focusing on mental health awareness, coping strategies, and community resources. </p>
           <br>
-         <a href="https://discord.gg/tvAZ9DJkHw?event=1470927587034267860" class="btn btn-secondary" id="stories">DIscover More</a>
+          <a href="https://discord.gg/tvAZ9DJkHw?event=1470927587034267860" class="btn btn-secondary" target="_blank" rel="noopener">Discover More</a>  <!-- Fixed typo -->
         </div>
       </div>
     </section>
@@ -147,89 +142,80 @@
     <section class="section testimonials">
       <div class="container-card">
         <h3>Real Stories</h3>
-
         <div class="testimonial-grid">
           <blockquote>
             “Seaglass Sanctuary helped me realize I wasn’t alone. The stories and support changed my perspective.”
             <cite>– Jordan R.</cite><br>
             <a href="jordan.html" class="link">Read more →</a>
           </blockquote>
-
           <blockquote>
             “Finding a counselor here was simple and comforting. I finally feel heard and understood.”
-            <cite id="blog">– Maya P.</cite><br>
+            <cite>– Maya P.</cite><br>  <!-- Removed misplaced id="blog" -->
             <a href="maya.html" class="link">Read more →</a>
           </blockquote>
         </div>
       </div>
     </section>
 
-<!-- Blog Section -->
-<section class="section blog-section">
-  <div class="container-card">
-    <h3>From the Blog</h3>
-
-    <div class="blog-carousel">
-      <!-- Left Arrow -->
-      <button class="blog-carousel-btn prev">&#10094;</button>
-
-      <!-- Carousel Track -->
-      <div class="blog-carousel-track-container">
-        <div class="blog-card-grid">
-
-          <div class="blog-card">
-            <div class="blog-card-inner">
-              <h4>Understanding Disorders</h4>
-              <p>Learn about anxiety, depression, PTSD, bipolar disorder, and other common conditions.</p>
-              <a href="disorders.html" class="link">Learn more →</a>
+    <!-- Blog Section -->
+    <section id="blog" class="section blog-section">  <!-- Added id for linking -->
+      <div class="container-card">
+        <h3>From the Blog</h3>
+        <div class="blog-carousel">
+          <!-- Left Arrow -->
+          <button class="blog-carousel-btn prev" aria-label="Previous blog post">&#10094;</button>
+          <!-- Carousel Track -->
+          <div class="blog-carousel-track-container">
+            <div class="blog-card-grid">
+              <div class="blog-card">
+                <div class="blog-card-inner">
+                  <h4>Understanding Disorders</h4>
+                  <p>Learn about anxiety, depression, PTSD, bipolar disorder, and other common conditions.</p>
+                  <a href="disorders.html" class="link">Learn more →</a>
+                </div>
+              </div>
+              <div class="blog-card">
+                <div class="blog-card-inner">
+                  <h4>Mindful Habits for Everyday Calm</h4>
+                  <p>Simple, practical habits to easily help reduce stress and improve mental clarity daily.</p>
+                  <a href="mindful.html" class="link">Read more →</a>
+                </div>
+              </div>
+              <div class="blog-card">
+                <div class="blog-card-inner">
+                  <h4>Understanding Burnout</h4>
+                  <p>Learn how to recognize the signs and take the right steps toward recovery and self-care.</p>
+                  <a href="burnout.html" class="link">Read more →</a>
+                </div>
+              </div>
+              <div class="blog-card">
+                <div class="blog-card-inner">
+                  <h4>Building Emotional Resilience</h4>
+                  <p>How to strengthen coping skills, adapt to stress, and bounce back from life’s challenges.</p>
+                  <a href="resilience.html" class="link">Read more →</a>
+                </div>
+              </div>
+              <div class="blog-card">
+                <div class="blog-card-inner">
+                  <h4>Building Healthy Boundaries</h4>
+                  <p>Practical strategies to protect your emotional space, reduce stress, and strengthen relationships.</p>
+                  <a href="boundaries.html" class="link">Read more →</a>
+                </div>
+              </div>
             </div>
           </div>
-
-          <div class="blog-card">
-            <div class="blog-card-inner">
-              <h4>Mindful Habits for Everyday Calm</h4>
-              <p>Simple, practical habits to easily help reduce stress and improve mental clarity daily.</p>
-              <a href="mindful.html" class="link">Read more →</a>
-            </div>
-          </div>
-
-          <div class="blog-card">
-            <div class="blog-card-inner">
-              <h4>Understanding Burnout</h4>
-              <p>Learn how to recognize the signs and take the right steps toward recovery and self-care.</p>
-              <a href="burnout.html" class="link">Read more →</a>
-            </div>
-          </div>
-
-          <div class="blog-card">
-            <div class="blog-card-inner">
-              <h4>Building Emotional Resilience</h4>
-              <p>How to strengthen coping skills, adapt to stress, and bounce back from life’s challenges.</p>
-              <a href="resilience.html" class="link">Read more →</a>
-            </div>
-          </div>
-          
-          <div class="blog-card">
-            <div class="blog-card-inner">
-              <h4>Building Healthy Boundaries</h4>
-              <p>Practical strategies to protect your emotional space, reduce stress, and strengthen relationships.</p>
-              <a href="boundaries.html" class="link">Read more →</a>
-            </div>
-          </div>
-       
+          <!-- Right Arrow -->
+          <button class="blog-carousel-btn next" aria-label="Next blog post">&#10095;</button>
         </div>
       </div>
+    </section>
 
-      <!-- Right Arrow -->
-      <button class="blog-carousel-btn next">&#10095;</button>
-    </div>
-  </div>
-</section>
+  </main>
 
   <!-- Quick Exit Popup -->
-  <div id="quick-exit-modal" class="modal" role="dialog" aria-modal="true">
+  <div id="quick-exit-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-content">
-      <h3>Quick Exit Feature</h3>
+      <h3 id="modal-title">Quick Exit Feature</h3>
       <p>Press <strong>ESC 3 times quickly</strong> to leave this site instantly.</p>
       <button id="dismiss-modal" class="btn">Got it</button>
     </div>
@@ -237,15 +223,12 @@
 
   <!-- Footer -->
   <footer>
-    <div class="container footer">
-      <p>© 2025 Seaglass Sanctuary | A Mental Health Awareness Initiative</p>
-      <p> This website exists for the purpose of a Business Professionals of America competitive event. It is not to be used for mental help and was made by a group of secondary students for competitive purposes. </p>
-    </div>
+    <p>© 2025 Seaglass Sanctuary | A Mental Health Awareness Initiative</p>
+    <p> This website exists for the purpose of a Business Professionals of America competitive event. It is not to be used for mental help and was made by a group of secondary students for competitive purposes. </p>
   </footer>
 
   <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <script src="script.js"></script>
+  <script src="script.js"></script>  <!-- Removed duplicate confetti script -->
 
 </body>
 </html>
