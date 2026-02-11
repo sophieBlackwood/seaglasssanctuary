@@ -155,7 +155,7 @@ nav {
   right: 2.5rem; 
   top: 50%;
   transform: translateY(-50%);
-  background: var(--accent);
+  background: #e84c5a;
   color: #ffffff;
   border: none;
   border-radius: var(--radius);
@@ -170,7 +170,7 @@ nav {
 }
 
 #quick-exit:hover {
-  background: color-mix(in srgb, var(--accent) 85%, black);
+  background: #9b0f18;
   transform: translateY(-1px);
 }
 
