@@ -989,11 +989,12 @@ footer a {
   .nav-links {
     display: none;
   }
-
+  
   #quick-exit {
-    display: none; /* hide on mobile nav */
+    display: block;
   }
 }
+
 
 /* Medium desktops (≤1024px) */
 @media (max-width: 1024px) {
