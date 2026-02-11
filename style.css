@@ -200,14 +200,32 @@ a {
 
 /* Hamburger Menu */
 .hamburger-menu {
-  display: none;
-  font-size: 32px;
+  display: none; /* hidden on desktop */
+  position: absolute;
+  left: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;        /* size of the three lines */
+  background: none;       /* remove default button/div background */
+  border: none;           /* remove any border */
+  cursor: pointer;
+  z-index: 1001;          /* above navbar/hero */
+  line-height: 1;
+  padding: 0;             /* no extra spacing */
+  color: var(--always-light-text);
+}
+
+/* Sidenav close button */
+.sidenav .closebtn {
+  font-size: 2rem;
+  background: none;
+  border: none;
   cursor: pointer;
   color: var(--always-light-text);
-  align-items: center;
-  gap: 10px;
-  z-index: 1000;
+  line-height: 1;
+  padding: 0;
 }
+
 /* Image next to hamburger icon */
 .sidenav-img {
   height: 24px;
