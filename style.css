@@ -102,6 +102,7 @@ a {
 .logo {
   height: 50px; 
   transition: opacity 0.3s ease;
+  padding: 2rem 2rem 2rem 2rem;
 }
 
 /* NAV LINKS */
