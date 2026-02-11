@@ -235,7 +235,6 @@ nav {
 }
 
 .closebtn:hover {
-  background-color: var(--accent-light);
   color: var(--card-bg);
   border-radius: 6px;
 }
