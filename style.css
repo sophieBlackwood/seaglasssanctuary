@@ -861,8 +861,8 @@ footer a {
 @media (max-width: 900px) {
   /* --- NAV STRUCTURE --- */
   .navbar {
-    height: 70px; /* Shorter navbar for mobile */
-    padding: 0 clamp(0.5rem, 2vw, 1rem); /* Fluid padding */
+    height: 70px;
+    padding: 0 clamp(0.5rem, 2vw, 1rem);
   }
 
   .nav-container {
@@ -871,7 +871,7 @@ footer a {
   }
 
   /* Hide desktop nav links and logo cleanly */
-  nav,
+   nav,
   .logo {
     display: none;
   }
