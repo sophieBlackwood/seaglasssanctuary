@@ -85,6 +85,7 @@ a {
   z-index: 999;
   display: flex;
   align-items: center;
+  margin-left: 3 rem;
 }
 
 .nav-container {
