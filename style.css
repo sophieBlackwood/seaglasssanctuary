@@ -807,20 +807,6 @@ footer a {
 /* ================================================= */
 
 /* ========================= */
-/* MOBILE FIRST BASE ADJUST */
-/* ========================= */
-
-.navbar {
-  height: 70px;
-}
-
-.nav-container {
-  position: relative;
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 /* Hide hamburger on desktop by default */
 .hamburger-menu {
@@ -834,7 +820,12 @@ footer a {
 
 @media (max-width: 900px) {
 
-  /* Hide desktop nav */
+  .nav-container {
+    position: relative;
+    justify-content: center; /* center logo only */
+  }
+
+  /* Hide desktop links */
   .nav-links {
     display: none;
   }
@@ -846,7 +837,6 @@ footer a {
     left: 1.5rem;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 28px;
   }
 
   /* Center logo */
@@ -900,6 +890,14 @@ footer a {
   .post-footer .post-btn {
     width: 100%;
     text-align: center;
+  }
+
+   #quick-exit {
+    position: absolute;
+    right: 1.5rem;
+    margin-left: 0;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
   }
 }
 
