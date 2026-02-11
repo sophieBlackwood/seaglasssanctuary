@@ -74,36 +74,40 @@ a {
 }
 
 /* ==========================
-   NAVBAR (FIXED ALIGNMENT & RESPONSIVE)
+   NAVBAR (FIXED ALIGNMENT: LOGO FAR LEFT, NAV CENTERED, QUICK-EXIT FAR RIGHT)
 ========================== */
 
 /* Base navbar */
 .navbar {
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 100%; /* Spans full viewport */
   background: var(--card-bg);
   z-index: 999;
   display: flex;
   align-items: center;
-  height: 100px; /* Taller navbar for better presence */
-  padding: 0 clamp(1rem, 4vw, 2.5rem); /* Fluid horizontal spacing instead of fixed 2.5rem */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Added for consistency with original */
+  height: 100px; /* Taller navbar */
+  padding: 0 2.5rem; /* Horizontal padding for logo/quick-exit spacing */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .nav-container {
-  max-width: 1200px;
+  max-width: 1200px; /* Constrains nav links to center */
   margin: 0 auto;
   width: 100%;
   display: flex;
+  justify-content: center; /* Centers nav links within the container */
   align-items: center;
-  justify-content: space-between; /* Spaces logo, nav, and quick-exit evenly */
 }
 
-/* Logo */
+/* Logo - Absolutely positioned far left */
 .logo {
+  position: absolute;
+  left: 2.5rem; /* Matches navbar padding */
+  top: 50%;
+  transform: translateY(-50%);
   height: 70px;
-  flex-shrink: 0; /* Prevents shrinking */
+  flex-shrink: 0;
   cursor: pointer;
   transition: opacity 0.3s ease;
 }
@@ -112,17 +116,15 @@ a {
   opacity: 0.85;
 }
 
-/* Nav links container */
+/* Nav links - Centered in the middle */
 nav {
-  /* Removed margin-left: 4rem; to allow true centering via space-between */
-  flex: 1; /* Allows nav to expand and center between logo and quick-exit */
   display: flex;
-  justify-content: center; /* Centers links within the nav container */
+  justify-content: center; /* Centers links within nav */
 }
 
 .nav-links {
   display: flex;
-  gap: clamp(1rem, 2vw, 2rem); /* Fluid gap for responsiveness */
+  gap: clamp(1rem, 2vw, 2rem);
   list-style: none;
 }
 
@@ -130,14 +132,14 @@ nav {
   color: var(--always-light-text);
   font-weight: 500;
   text-decoration: none;
-  padding: 0.5rem 1rem; /* Added padding for better click targets */
-  border-radius: var(--radius); /* Consistent with your theme */
-  transition: color 0.3s ease, background 0.3s ease; /* Smooth hover */
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  transition: color 0.3s ease, background 0.3s ease;
 }
 
 .nav-links a:hover {
   color: var(--accent-light);
-  background: rgba(255, 255, 255, 0.1); /* Subtle highlight */
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .nav-links a:focus-visible {
@@ -145,10 +147,13 @@ nav {
   outline-offset: 3px;
 }
 
-/* Quick exit */
+/* Quick Exit - Absolutely positioned far right */
 #quick-exit {
-  margin-left: auto; /* Pushes to the right, but space-between handles overall spacing */
-  background: var(--accent); /* Changed to variable for theme consistency (original was #e84c5a, but use --accent for red-like tone if needed; adjust if you prefer hardcoded) */
+  position: absolute;
+  right: 2.5rem; /* Matches navbar padding */
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--accent);
   color: #ffffff;
   border: none;
   border-radius: var(--radius);
@@ -163,7 +168,7 @@ nav {
 }
 
 #quick-exit:hover {
-  background: color-mix(in srgb, var(--accent) 85%, black); /* Darker on hover */
+  background: color-mix(in srgb, var(--accent) 85%, black);
   transform: translateY(-1px);
 }
 
