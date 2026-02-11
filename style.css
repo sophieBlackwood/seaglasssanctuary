@@ -80,7 +80,7 @@ a {
   position: fixed;
   top: 0;
   width: 100%;
-  padding: 0.5rem 2rem;
+  padding: 1 rem 2.5 rem;
   background: var(--card-bg);
   z-index: 999;
   display: flex;
