@@ -74,9 +74,11 @@ a {
   color: #7FD0C2;
 }
 
-/* ========================= */
-/* NAVBAR LAYOUT FIXED */
-/* ========================= */
+/* ==========================
+   NAVBAR (FIXED ALIGNMENT & RESPONSIVE)
+========================== */
+
+/* Base navbar */
 .navbar {
   position: fixed;
   top: 0;
@@ -85,8 +87,9 @@ a {
   z-index: 999;
   display: flex;
   align-items: center;
-  height: 100px; /* taller navbar */
-  padding: 0 2.5rem; /* horizontal spacing */
+  height: 100px; /* Taller navbar for better presence */
+  padding: 0 clamp(1rem, 4vw, 2.5rem); /* Fluid horizontal spacing instead of fixed 2.5rem */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Added for consistency with original */
 }
 
 .nav-container {
@@ -95,51 +98,79 @@ a {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* this will keep space between logo and links */
+  justify-content: space-between; /* Spaces logo, nav, and quick-exit evenly */
 }
 
-/* LOGO */
+/* Logo */
 .logo {
-  height: 70px; 
+  height: 70px;
+  flex-shrink: 0; /* Prevents shrinking */
+  cursor: pointer;
   transition: opacity 0.3s ease;
 }
 
-/* NAV LINKS */
+.logo:hover {
+  opacity: 0.85;
+}
+
+/* Nav links container */
 nav {
-  margin-left: 4rem; /* move links further from logo */
+  /* Removed margin-left: 4rem; to allow true centering via space-between */
+  flex: 1; /* Allows nav to expand and center between logo and quick-exit */
+  display: flex;
+  justify-content: center; /* Centers links within the nav container */
 }
 
 .nav-links {
   display: flex;
-  gap: 2rem;
+  gap: clamp(1rem, 2vw, 2rem); /* Fluid gap for responsiveness */
   list-style: none;
 }
 
 .nav-links a {
   color: var(--always-light-text);
   font-weight: 500;
-  text-align: center;
+  text-decoration: none;
+  padding: 0.5rem 1rem; /* Added padding for better click targets */
+  border-radius: var(--radius); /* Consistent with your theme */
+  transition: color 0.3s ease, background 0.3s ease; /* Smooth hover */
 }
 
-/* QUICK EXIT */
+.nav-links a:hover {
+  color: var(--accent-light);
+  background: rgba(255, 255, 255, 0.1); /* Subtle highlight */
+}
+
+.nav-links a:focus-visible {
+  outline: 3px solid var(--accent-light);
+  outline-offset: 3px;
+}
+
+/* Quick exit */
 #quick-exit {
-  margin-left: auto;
-  background: #e84c5a;
-  color: white;
+  margin-left: auto; /* Pushes to the right, but space-between handles overall spacing */
+  background: var(--accent); /* Changed to variable for theme consistency (original was #e84c5a, but use --accent for red-like tone if needed; adjust if you prefer hardcoded) */
+  color: #ffffff;
   border: none;
-  border-radius: 5px;
+  border-radius: var(--radius);
   padding: 0.75rem 1.6rem;
   font-weight: 700;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  transition: background 0.2s, transform 0.2s;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
 #quick-exit:hover {
-  background: #9b0f18;
+  background: color-mix(in srgb, var(--accent) 85%, black); /* Darker on hover */
   transform: translateY(-1px);
+}
+
+#quick-exit:focus-visible {
+  outline: 3px solid var(--accent-light);
+  outline-offset: 3px;
 }
 
 /* Sidenav for smaller screens */
@@ -823,9 +854,14 @@ footer a {
 
 @media (max-width: 900px) {
   /* --- NAV STRUCTURE --- */
+  .navbar {
+    height: 70px; /* Shorter navbar for mobile */
+    padding: 0 clamp(0.5rem, 2vw, 1rem); /* Fluid padding */
+  }
+
   .nav-container {
     position: relative;
-    justify-content: center; /* Center hamburger + quick exit spacing */
+    justify-content: center; /* Center spacing for hamburger and quick-exit */
   }
 
   /* Hide desktop nav links and logo cleanly */
@@ -840,30 +876,36 @@ footer a {
     align-items: center;
     justify-content: center;
     position: absolute;
-    left: 1.5rem;
+    left: clamp(0.5rem, 3vw, 1.5rem); /* Fluid left position */
     top: 50%;
     transform: translateY(-50%);
-    font-size: 26px;
+    font-size: clamp(24px, 5vw, 26px); /* Fluid font size */
     z-index: 10;
+    transition: opacity 0.3s ease; /* Smooth appearance */
   }
 
   /* Quick Exit (RIGHT) */
   #quick-exit {
     position: absolute;
-    right: 1.5rem;
+    right: clamp(0.5rem, 3vw, 1.5rem); /* Fluid right position */
     top: 50%;
     transform: translateY(-50%);
-    padding: 0.6rem 1rem;
-    font-size: 0.9rem;
+    padding: clamp(0.5rem, 2vw, 0.6rem) clamp(0.8rem, 3vw, 1rem); /* Fluid padding */
+    font-size: clamp(0.85rem, 2vw, 0.9rem); /* Fluid font size */
+    transition: transform 0.2s ease; /* Smooth hover */
   }
 
   /* --- HERO --- */
+  .hero {
+    padding: 5rem clamp(1rem, 4vw, 1.5rem); /* Fluid padding */
+  }
+
   .hero h2 {
-    font-size: 2rem;
+    font-size: clamp(1.8rem, 4vw, 2rem); /* Fluid font size */
   }
 
   .hero p {
-    font-size: 1rem;
+    font-size: clamp(0.95rem, 2vw, 1rem); /* Fluid font size */
   }
 
   /* --- BLOG CAROUSEL → SCROLL MODE --- */
@@ -871,16 +913,24 @@ footer a {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
+    padding: 1rem 0; /* Added padding for better touch scrolling */
   }
 
   .blog-card-grid {
     width: max-content;
-    gap: 1.2rem;
+    gap: clamp(1rem, 2vw, 1.2rem); /* Fluid gap */
+    transform: none !important; /* Ensure no transform conflicts */
+    transition: none !important; /* Disable transitions for scroll mode */
   }
 
   .blog-card {
-    flex: 0 0 75vw;
+    flex: 0 0 clamp(70vw, 75vw, 80vw); /* Fluid width, slightly adjustable */
     scroll-snap-align: center;
+  }
+
+  .blog-card-inner {
+    transform: none !important; /* Reset any desktop transforms */
+    opacity: 1 !important; /* Ensure visibility */
   }
 
   .blog-carousel-btn {
@@ -889,22 +939,53 @@ footer a {
 
   /* --- SECTION SPACING --- */
   .section {
-    padding: 3rem 1.2rem;
+    padding: clamp(2.5rem, 5vw, 3rem) clamp(1rem, 3vw, 1.2rem); /* Fluid padding */
   }
 
   /* --- POST LAYOUT --- */
   .post-header,
   .post-content {
-    padding: 2rem 1.5rem;
+    padding: clamp(1.5rem, 3vw, 2rem) clamp(1rem, 3vw, 1.5rem); /* Fluid padding */
   }
 
   .post-title {
-    font-size: 2rem;
+    font-size: clamp(1.8rem, 4vw, 2rem); /* Fluid font size */
   }
 
   .post-footer .post-btn {
     width: 100%;
     text-align: center;
+  }
+
+  /* --- GRIDS --- */
+  .card-grid,
+  .testimonial-grid,
+  .team-grid {
+    gap: clamp(1rem, 2vw, 2rem); /* Fluid gap */
+  }
+}
+
+/* ========================= */
+/* TABLETS (MID-RANGE) */
+/* ≤ 768px */
+/* ========================= */
+
+@media (max-width: 768px) {
+  /* Additional tablet-specific tweaks */
+  .hero h2 {
+    font-size: clamp(1.9rem, 4vw, 2.1rem);
+  }
+
+  .hero p {
+    font-size: clamp(0.98rem, 2vw, 1.05rem);
+  }
+
+  .counselors-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust for tablets */
+  }
+
+  .modal {
+    display: none; /* Hide modals on tablets for better UX */
   }
 }
 
@@ -915,38 +996,44 @@ footer a {
 
 @media (max-width: 600px) {
   .hero {
-    padding: 4rem 1.2rem;
+    padding: clamp(3rem, 6vw, 4rem) clamp(0.8rem, 3vw, 1.2rem);
   }
 
   .hero h2 {
-    font-size: 1.8rem;
+    font-size: clamp(1.6rem, 5vw, 1.8rem);
   }
 
   .hero p {
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
   }
 
   .card-grid,
   .testimonial-grid,
   .team-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Single column on phones */
+    gap: clamp(1rem, 3vw, 1.5rem);
   }
 
   .event-card {
-    padding: 1.5rem;
+    padding: clamp(1rem, 3vw, 1.5rem);
   }
 
   #theme-toggle,
   #back-to-top {
-    width: 2.4rem;
-    height: 2.4rem;
-    font-size: 0.85rem;
+    width: clamp(2rem, 5vw, 2.4rem); /* Ensure 44px min touch target */
+    height: clamp(2rem, 5vw, 2.4rem);
+    font-size: clamp(0.8rem, 2vw, 0.85rem);
   }
 
   /* Quick Exit adjustments */
   #quick-exit {
-    padding: 0.5rem 0.9rem;
-    font-size: 0.85rem;
+    padding: clamp(0.4rem, 2vw, 0.5rem) clamp(0.7rem, 2.5vw, 0.9rem);
+    font-size: clamp(0.8rem, 2vw, 0.85rem);
+  }
+
+  /* Blog carousel */
+  .blog-card {
+    flex: 0 0 85vw; /* Wider on phones for better visibility */
   }
 }
 
@@ -962,7 +1049,11 @@ footer a {
   }
 
   .blog-card {
-    flex: 0 0 360px;
+    flex: 0 0 clamp(320px, 25vw, 360px); /* Fluid width */
+  }
+
+  .section {
+    padding: 4rem clamp(1.5rem, 5vw, 2rem);
   }
 }
 
@@ -980,5 +1071,39 @@ footer a {
   .container-card {
     max-width: 1500px;
   }
+
+  .blog-card {
+    flex: 0 0 clamp(350px, 20vw, 400px);
+  }
 }
 
+/* ========================= */
+/* SUPER ULTRA WIDE */
+/* ≥ 2200px */
+/* ========================= */
+
+@media (min-width: 2200px) {
+  :root {
+    font-size: 19px;
+  }
+
+  .container,
+  .container-card {
+    max-width: 1650px; /* Slightly larger for extreme widths */
+  }
+}
+
+/* ========================= */
+/* ACCESSIBILITY & PERFORMANCE */
+/* ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .blog-carousel-track-container {
+    scroll-behavior: auto; /* Disable smooth scrolling */
+  }
+
+  .hamburger-menu,
+  #quick-exit {
+    transition: none;
+  }
+}
