@@ -152,8 +152,8 @@ nav {
 /* Quick Exit - Absolutely positioned far right */
 #quick-exit {
   position: absolute;
-  right: 2.5rem; 
-  top: 50%;
+  right: 2.5rem;
+  top: 1.25rem; /* Fixed top value for precise vertical positioning; adjust up/down as needed (e.g., 1rem for higher, 1.5rem for lower) */
   background: #e84c5a;
   color: #ffffff;
   border: none;
