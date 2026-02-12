@@ -154,7 +154,6 @@ nav {
   position: absolute;
   right: 2.5rem; 
   top: 50%;
-  transform: translateY(-50%);
   background: #e84c5a;
   color: #ffffff;
   border: none;
@@ -894,7 +893,6 @@ footer a {
     position: absolute;
     right: clamp(0.5rem, 3vw, 1.5rem); /* Fluid right position */
     top: 50%;
-    transform: translateY(-50%);
     padding: clamp(0.5rem, 2vw, 0.6rem) clamp(0.8rem, 3vw, 1rem); /* Original fluid padding */
     font-size: clamp(0.85rem, 2vw, 0.9rem); /* Original fluid font size */
     transition: transform 0.2s ease; /* Smooth hover */
