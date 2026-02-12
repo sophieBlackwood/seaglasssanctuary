@@ -81,6 +81,29 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* -------------------- */
+/* Triple ESC Rerouting (Quick Exit) */
+let escPressCount = 0;
+let escTimer;
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    escPressCount++;
+    clearTimeout(escTimer); // Reset timer on each press
+
+    if (escPressCount === 3) {
+      // Trigger quick exit after 3 presses (same as button)
+      window.location.replace(quickExitURL);
+      escPressCount = 0; // Reset for safety
+    } else {
+      // Reset count if not 3 presses within 1 second
+      escTimer = setTimeout(() => {
+        escPressCount = 0;
+      }, 1000);
+    }
+  }
+});
+  
+  /* -------------------- */
   /* Floating Buttons */
   const backToTop = document.getElementById("back-to-top");
   const floatingButtons = document.getElementById("floating-buttons");
