@@ -228,13 +228,9 @@ nav {
   position: static;
   font-size: 32px;
   cursor: pointer;
-  color: var(--bg);
+  color: var(--always-light-text);
   padding: 0;
   line-height: 1;
-}
-
-.closebtn:hover {
-  color: var(--card-bg);
   border-radius: 6px;
 }
 
