@@ -232,6 +232,10 @@ nav {
   padding: 0;
   line-height: 1;
   border-radius: 6px;
+   border: none; /* Remove any borders */
+  outline: none; /* Remove focus outlines */
+  background: transparent; /* Ensure no background boxes */
+  box-shadow: none; /
 }
 
 /* Hamburger Menu */
@@ -247,6 +251,16 @@ nav {
   line-height: 1;
   padding: 0;             /* no extra spacing */
   color: var(--always-light-text);
+   border: none; /* Remove any borders */
+  outline: none; /* Remove focus outlines */
+  background: transparent; /* Ensure no background boxes */
+  box-shadow: none; /
+}
+
+.hamburger-menu:focus,
+.closebtn:focus {
+  outline: none; /* Prevent browser default focus outlines */
+  box-shadow: none; /* No shadow on focus */
 }
 
 /* Image next to hamburger icon */
@@ -889,7 +903,9 @@ footer a {
     top: 50%;
     padding: clamp(0.5rem, 2vw, 0.6rem) clamp(0.8rem, 3vw, 1rem); /* Original fluid padding */
     font-size: clamp(0.85rem, 2vw, 0.9rem); /* Original fluid font size */
+    transform: translateY(-50%) translateX(0);
     transition: transform 0.2s ease; /* Smooth hover */
+    margin-top:0;
   }
 
   /* --- HERO --- Larger text */
