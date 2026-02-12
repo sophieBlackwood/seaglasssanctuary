@@ -70,6 +70,25 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* -------------------- */
+  /* Quick Exit Modal (Informational) */
+  const quickExitModal = document.getElementById("quick-exit-modal");
+  const dismissModalBtn = document.getElementById("dismiss-modal");
+
+  if (quickExitModal && dismissModalBtn) {
+    // Show modal on load if not previously dismissed
+    const modalDismissed = localStorage.getItem("quickExitModalDismissed");
+    if (!modalDismissed) {
+      quickExitModal.classList.add("show");
+    }
+
+    // Handle dismiss button
+    dismissModalBtn.addEventListener("click", () => {
+      quickExitModal.classList.remove("show");
+      localStorage.setItem("quickExitModalDismissed", "true"); // Mark as dismissed
+    });
+  }
+
+  /* -------------------- */
   /* Quick Exit (NULL SAFE) */
   const quickExitBtn = document.getElementById("quick-exit");
   const quickExitURL = "https://www.amazon.com/s?k=water+bottle";
@@ -81,28 +100,28 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* -------------------- */
-/* Triple ESC Rerouting (Quick Exit) */
-let escPressCount = 0;
-let escTimer;
+  /* Triple ESC Rerouting (Quick Exit) */
+  let escPressCount = 0;
+  let escTimer;
 
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    escPressCount++;
-    clearTimeout(escTimer); // Reset timer on each press
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      escPressCount++;
+      clearTimeout(escTimer); // Reset timer on each press
 
-    if (escPressCount === 3) {
-      // Trigger quick exit after 3 presses (same as button)
-      window.location.replace(quickExitURL);
-      escPressCount = 0; // Reset for safety
-    } else {
-      // Reset count if not 3 presses within 1 second
-      escTimer = setTimeout(() => {
-        escPressCount = 0;
-      }, 1000);
+      if (escPressCount === 3) {
+        // Trigger quick exit after 3 presses (same as button)
+        window.location.replace(quickExitURL);
+        escPressCount = 0; // Reset for safety
+      } else {
+        // Reset count if not 3 presses within 1 second
+        escTimer = setTimeout(() => {
+          escPressCount = 0;
+        }, 1000);
+      }
     }
-  }
-});
-  
+  });
+
   /* -------------------- */
   /* Floating Buttons */
   const backToTop = document.getElementById("back-to-top");
