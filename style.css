@@ -162,7 +162,7 @@ nav {
   outline-offset: 3px;
 }
 
-/* Quick Exit - Absolutely positioned far right */
+/* Quick Exit */
 #quick-exit {
   position: absolute;
   right: 2.5rem;
@@ -1084,7 +1084,6 @@ footer a {
   #quick-exit {
     right: 1.5rem;
     top: 50%;
-    transform: translateY(-50%);
   }
 
   /* --- HERO --- */
