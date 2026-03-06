@@ -96,8 +96,10 @@ a {
   width: 100%;
   background: var(--card-bg);
   z-index: 999;
+  /* Changed to Flexbox for better alignment */
   display: flex;
   align-items: center;
+  justify-content: space-between; /* Pushes items to edges */
   height: 90px;
   padding: 0 2.5rem; 
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -107,33 +109,33 @@ a {
   max-width: 1200px; 
   margin: 0 auto;
   width: 100%;
+  /* Flex container for the three main elements */
   display: flex;
-  justify-content: center;
   align-items: center;
-position: relative;
-  min-width: 0;
+  justify-content: space-between;
+  position: relative;
 }
 
-/* Logo */
+/* Logo - Removed absolute positioning */
 .logo {
-  position: absolute;
-  left: 4rem; 
-  top: 50%;
-  transform: translateY(-50%);
   height: 60px;
   flex-shrink: 0;
   cursor: pointer;
   transition: opacity 0.3s ease;
+  /* Pushes the logo to the far left */
+  margin-right: auto; 
 }
 
 .logo:hover {
   opacity: 0.85;
 }
 
-/* Nav links */
+/* Nav links - Centered */
 nav {
   display: flex;
   justify-content: center; 
+  /* Allows the nav to grow and take up available space */
+  flex-grow: 1; 
 }
 
 .nav-links {
@@ -144,7 +146,8 @@ nav {
 
 .nav-links a {
   color: var(--always-light-text);
-   font-size: clamp(0.9rem, 1.1vw, 1rem);
+  /* INCREASED FONT SIZE */
+  font-size: clamp(1rem, 1.2vw, 1.1rem); 
   font-weight: 500;
   text-decoration: none;
   padding: 0.5rem 1rem;
@@ -162,11 +165,11 @@ nav {
   outline-offset: 3px;
 }
 
-/* Quick Exit */
+/* Quick Exit - Removed absolute positioning */
 #quick-exit {
-  position: absolute;
-  right: 2.5rem;
-  top: 50%; 
+  /* Pushes the button to the far right */
+  margin-left: auto; 
+  /* Removed top: 50% / transform to let flexbox handle vertical centering */
   background: #e84c5a;
   color: #ffffff;
   border: none;
@@ -179,6 +182,7 @@ nav {
   gap: 0.5rem;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
   transition: background 0.2s ease, transform 0.2s ease;
+  white-space: nowrap; /* Prevents text wrapping */
 }
 
 #quick-exit:hover {
@@ -254,10 +258,7 @@ nav {
 /* Hamburger Menu */
 .hamburger-menu {
   display: none; 
-  position: absolute;
-  left: 1.5rem;
-  top: 50%;
-  transform: translateY(-50%);
+  /* Removed absolute positioning */
   font-size: 2rem; 
   cursor: pointer;
   z-index: 1001;        
@@ -281,6 +282,8 @@ nav {
   height: 24px;
   margin-left: 8px;
 }
+
+
 
 
 /* ==========================
@@ -890,6 +893,7 @@ footer a {
 /* =================================================
    RESPONSIVE SYSTEM
 ================================================= */
+
 /* Ensure hamburger NEVER appears on desktop */
 @media (min-width: 641px) {
   .hamburger-menu {
@@ -910,7 +914,7 @@ footer a {
 
   .nav-container {
     position: relative;
-    justify-content: center;
+    justify-content: space-between; /* Keep items spaced */
   }
 
   nav {
@@ -919,6 +923,7 @@ footer a {
 
   .logo {
     display: block;
+    height: 50px; /* Slightly smaller logo */
   }
 
   .hamburger-menu {
@@ -1008,14 +1013,12 @@ footer a {
   }
 
   .logo {
-    left: 2rem;
     height: 50px;
   }
 
   #quick-exit {
     padding: 0.6rem 1.2rem;
     font-size: 0.85rem;
-    right: 1.5rem;
   }
 
   .nav-links {
@@ -1058,11 +1061,12 @@ footer a {
 }
 
 /* =========================
-   PHONES (≤600px)
+   PHONES (≤640px)
 ========================== */
 @media (max-width: 640px) {
 
   /* --- SWITCH NAV TO HAMBURGER --- */
+  /* Hide the main nav links and logo on mobile */
   nav,
   .logo {
     display: none; 
@@ -1072,17 +1076,15 @@ footer a {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    left: 1.5rem;
-    top: 50%;
-    transform: translateY(-50%);
     font-size: 26px;
     z-index: 10;
   }
 
   #quick-exit {
-    right: 1.5rem;
-    top: 50%;
+    /* Reset margin to auto to keep it on the right */
+    margin-left: auto;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
   }
 
   /* --- HERO --- */
