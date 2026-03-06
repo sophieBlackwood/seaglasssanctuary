@@ -80,7 +80,7 @@ a {
 ========================== */
 
 /* Base navbar */
-.navbar {
+/*.navbar {
   position: fixed;
   top: 0;
   width: 100%;
@@ -100,6 +100,30 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+} */
+.navbar {
+  height: 70px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background: var(--card-bg);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  height: 90px;
+  padding: 0 2.5rem; 
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
 }
 
 /* Logo - Absolutely positioned far left */
