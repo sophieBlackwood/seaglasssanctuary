@@ -1,48 +1,55 @@
-/* Base or Light Mode */
+/* ==========================
+   BASE COLORS (LIGHT MODE)
+========================== */
 :root {
---bg: #F2FBFA;            /* very light mint background */
---text: #1C221D;          /* very dark greenish text */
---accent: #0A7A67;        /* deep teal accent */
---accent-light: #4FB29F;  /* soft teal highlight */
---card-bg: #03443C;       /* dark teal card background */
---muted: #4FB29F;         /* muted teal for secondary text */
---always-light-text: #DFFAEA; /* soft mint-white text for contrast */
---footer: #0A7A67;        /* dark teal footer background */
---radius: 12px;          
---transition: 0.3s ease; 
+  --bg: #F2FBFA;              /* Very light mint background */
+  --text: #1C221D;            /* Very dark greenish text */
+  --accent: #0A7A67;          /* Deep teal accent */
+  --accent-light: #4FB29F;    /* Soft teal highlight */
+  --card-bg: #03443C;         /* Dark teal card background */
+  --muted: #4FB29F;           /* Muted teal for secondary text */
+  --always-light-text: #DFFAEA; /* Soft mint-white text for contrast */
+  --footer: #0A7A67;          /* Dark teal footer background */
+  --radius: 12px;             /* Standard border radius */
+  --transition: 0.3s ease;    /* Standard transition speed */
 }
 
-/* Dark Mode */
+/* ==========================
+   DARK MODE COLORS
+========================== */
 body.dark {
---bg: #0E1211;            /* near-black background */
---text: #DFFAEA;          /* soft mint-white text */
---accent: #4FB29F;        /* teal accent */
---accent-light: #7FD0C2;  /* lighter teal accent */
---card-bg: #03443C;       /* dark teal card background */
---muted: #4FB29F;         /* muted teal text */
---footer: #0A7A67;        /* dark teal footer background */
+  --bg: #0E1211;              /* Near-black background */
+  --text: #DFFAEA;            /* Soft mint-white text */
+  --accent: #4FB29F;          /* Teal accent */
+  --accent-light: #7FD0C2;    /* Lighter teal accent */
+  --card-bg: #03443C;         /* Dark card background */
+  --muted: #4FB29F;           /* Muted teal text */
+  --footer: #0A7A67;          /* Dark teal footer background */
 }
 
-/* Global Transitions */
+/* ==========================
+   GLOBAL TRANSITIONS
+========================== */
 :root,
 body,
 body.dark {
-  transition:
+  transition: 
     background-color 0.6s ease,
     color 0.6s ease,
     border-color 0.6s ease,
     fill 0.6s ease;
-  padding-top: 20px;
-  
+  padding-top: 20px;           /* Prevent content from overlapping top of viewport */
 }
 
-/* Reset & Base */
+/* ==========================
+   RESET & BASE STYLES
+========================== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Inter", "Work Sans", sans-serif;
-  scroll-behavior: smooth;
+  scroll-behavior: smooth;     /* Smooth scrolling for anchor links */
 }
 
 body {
@@ -54,9 +61,12 @@ body {
 
 a {
   color: var(--accent);
-  text-decoration: none;
+  text-decoration: none;       /* Remove default underline */
 }
 
+/* ==========================
+   CONTAINERS
+========================== */
 .container {
   max-width: 1100px;
   margin: 0 auto;
@@ -68,19 +78,18 @@ a {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 1.5rem;
-  color: var(--always-light-text); 
+  color: var(--always-light-text);
 }
 
 .link {
-  color: #7FD0C2;
+  color: #7FD0C2;             /* Lighter teal for inline links */
 }
 
 /* ==========================
-   NAVBAR 
+   NAVBAR (Base commented for reference)
 ========================== */
-
-/* Base navbar */
-/*.navbar {
+/*
+.navbar {
   position: fixed;
   top: 0;
   width: 100%;
@@ -89,36 +98,39 @@ a {
   display: flex;
   align-items: center;
   height: 90px;
-  padding: 0 2.5rem; 
+  padding: 0 2.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .nav-container {
-  max-width: 1200px; 
+  max-width: 1200px;
   margin: 0 auto;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-} */
+}
+*/
+/* ==========================
+   NAVBAR STYLING
+========================== */
 .navbar {
-  height: 70px;
   width: 100%;
-  position: fixed;
+  position: fixed;           /* Fix navbar to top of viewport */
   top: 0;
+  height: 90px;              /* Standard navbar height */
   background: var(--card-bg);
   z-index: 999;
   display: flex;
   align-items: center;
-  height: 90px;
-  padding: 0 2.5rem; 
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 0 2.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow */
 }
 
 .nav-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; /* Logo left, nav links middle/right */
   position: relative;
 
   max-width: 1200px;
@@ -126,10 +138,14 @@ a {
   height: 100%;
 }
 
-/* Logo - Absolutely positioned far left */
+/* ==========================
+   LOGO STYLING
+========================== */
+/* Option 1: Absolute image logo (commented out) */
+/*
 .logo {
   position: absolute;
-  left: 4rem; 
+  left: 4rem;
   top: 50%;
   transform: translateY(-50%);
   height: 60px;
@@ -137,21 +153,40 @@ a {
   cursor: pointer;
   transition: opacity 0.3s ease;
 }
+*/
 
-.logo:hover {
-  opacity: 0.85;
+/* Option 2: Text-based logo (centered with flex fallback) */
+.logo {
+  font-size: 1.3rem;
+  font-weight: 600;
+  white-space: nowrap;
+  left: 4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  flex: 1;
+  text-align: center;
+  height: 60px;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
 }
 
-/* Nav links - Centered in the middle */
+.logo:hover {
+  opacity: 0.85; /* Subtle hover effect for logo */
+}
+
+/* ==========================
+   NAV LINKS
+========================== */
 nav {
   display: flex;
-  justify-content: center; 
+  justify-content: center; /* Center links in navbar */
 }
 
 .nav-links {
   display: flex;
-  gap: clamp(1rem, 2vw, 2rem);
-  list-style: none;
+  gap: clamp(1rem, 2vw, 2rem); /* Responsive spacing between links */
+  list-style: none;             /* Remove default bullets */
 }
 
 .nav-links a {
@@ -165,20 +200,21 @@ nav {
 
 .nav-links a:hover {
   color: var(--accent-light);
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1); /* Light hover highlight */
 }
 
 .nav-links a:focus-visible {
-  outline: 3px solid var(--accent-light);
+  outline: 3px solid var(--accent-light); /* Accessibility focus */
   outline-offset: 3px;
 }
-
-/* Quick Exit - Absolutely positioned far right */
+/* ==========================
+   QUICK EXIT BUTTON
+========================== */
 #quick-exit {
-  position: absolute;
-  right: 2.5rem;
-  top: 1.25rem; /* Fixed top value for precise vertical positioning; adjust up/down as needed (e.g., 1rem for higher, 1.5rem for lower) */
-  background: #e84c5a;
+  position: absolute;            /* Place button relative to navbar */
+  right: 2.5rem;                 /* Far-right placement */
+  top: 1.25rem;                  /* Adjust vertical position as needed */
+  background: #e84c5a;           /* Bright red for visibility */
   color: #ffffff;
   border: none;
   border-radius: var(--radius);
@@ -187,35 +223,37 @@ nav {
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.5rem;                   /* Space between icon/text if any */
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
 #quick-exit:hover {
-  background: #9b0f18;
-  transform: translateY(-1px);
+  background: #9b0f18;           /* Darker red on hover */
+  transform: translateY(-1px);   /* Slight lift effect */
 }
 
 #quick-exit:focus-visible {
-  outline: 3px solid var(--accent-light);
+  outline: 3px solid var(--accent-light); /* Accessibility focus */
   outline-offset: 3px;
 }
 
-/* Sidenav for smaller screens */
+/* ==========================
+   SIDE NAVIGATION (MOBILE)
+========================== */
 .sidenav {
-  height: 100%;
-  width: 0;
+  height: 100%;                  /* Full viewport height */
+  width: 0;                       /* Hidden by default */
   position: fixed;
   top: 0;
   left: 0;
   background-color: var(--card-bg);
-  overflow-x: hidden;
-  transition: width 0.5s ease;
-  z-index: 9999;
+  overflow-x: hidden;            /* Prevent horizontal scroll */
+  transition: width 0.5s ease;   /* Smooth open/close */
+  z-index: 9999;                  /* Above all other content */
   display: flex;
   flex-direction: column;
-  padding-top: 0; 
+  padding-top: 0;                 /* Optional top padding for header */
 }
 
 .sidenav-header {
@@ -223,16 +261,16 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 12px 24px;   
-  margin-bottom: 10px;     
+  margin-bottom: 10px;           /* Space below header */
 }
 
-/* Sidenav Logo */
+/* Logo inside sidenav */
 .sidenav-logo {
   height: 36px;
   width: auto;
 }
 
-/* Sidenav Links */
+/* Sidenav links */
 .sidenav a {
   padding: 12px 24px;
   text-decoration: none;
@@ -244,73 +282,76 @@ nav {
 
 .sidenav a:hover {
   background-color: var(--accent-light);
-  color: var(--card-bg);
+  color: var(--card-bg);          /* Invert text for contrast on hover */
 }
 
-/* Close Button */
+/* Close button for sidenav */
 .closebtn {
-  position: static;
+  position: static;               /* Inline inside header */
   font-size: 32px;
   cursor: pointer;
   color: var(--always-light-text);
   padding: 0;
   line-height: 1;
   border-radius: 6px;
-   border: none; /* Remove any borders */
-  outline: none; /* Remove focus outlines */
-  background: transparent; /* Ensure no background boxes */
-  box-shadow: none; /
+  border: none;                   /* Clean button style */
+  outline: none;                  /* Remove default focus outline */
+  background: transparent;        /* No background */
+  box-shadow: none;               /* Remove shadow */
 }
-
-/* Hamburger Menu */
+/* ==========================
+   HAMBURGER MENU (MOBILE)
+========================== */
 .hamburger-menu {
-  display: none; /* hidden on desktop */
+  display: none;                 /* Hide by default on desktop */
   position: absolute;
-  left: 1.5rem;
-  top: 50%;
+  left: 1.5rem;                  /* Far-left placement */
+  top: 50%;                       /* Vertically centered */
   transform: translateY(-50%);
-  font-size: 2rem; 
+  font-size: 2rem;
   cursor: pointer;
-  z-index: 1001;          /* above navbar/hero */
+  z-index: 1001;                 /* Above navbar/hero */
   line-height: 1;
-  padding: 0;             /* no extra spacing */
+  padding: 0;                     /* No extra spacing */
   color: var(--always-light-text);
-   border: none; /* Remove any borders */
-  outline: none; /* Remove focus outlines */
-  background: transparent; /* Ensure no background boxes */
-  box-shadow: none; /
+  border: none;                   /* Clean button style */
+  outline: none;                  /* Remove focus outlines */
+  background: transparent;        /* No background box */
+  box-shadow: none;               /* No shadow */
 }
 
 .hamburger-menu:focus,
 .closebtn:focus {
-  outline: none; /* Prevent browser default focus outlines */
-  box-shadow: none; /* No shadow on focus */
+  outline: none;                  /* Remove browser focus outline */
+  box-shadow: none;               /* No shadow on focus */
 }
 
-/* Image next to hamburger icon */
+/* Small image/icon next to hamburger */
 .sidenav-img {
   height: 24px;
   margin-left: 8px;
 }
 
-/* Hero Sections */
+/* ==========================
+   HERO SECTIONS
+========================== */
 .hero,
 .hero-helplines,
 .hero-about {
   color: var(--always-light-text);
-  padding: 6rem 1.5rem;
+  padding: 6rem 1.5rem;           /* Generous top/bottom spacing */
   text-align: center;
-  border-radius: 0 0 40px 40px;
+  border-radius: 0 0 40px 40px;   /* Rounded bottom corners */
 }
 
 .hero {
-  background: linear-gradient(135deg, #0A7A67, #4FB29F);
+  background: linear-gradient(135deg, #0A7A67, #4FB29F); /* Gradient hero background */
   color: var(--always-light-text);
 }
 
 .hero img {
   width: 100%;
-  max-width: 800px; 
+  max-width: 800px;
   height: auto;
   margin: 0 auto 2rem;
   display: block;
@@ -330,7 +371,9 @@ nav {
   color: var(--always-light-text);
 }
 
-/* Primary Buttons */
+/* ==========================
+   PRIMARY BUTTONS
+========================== */
 .btn,
 .schedule-btn {
   background: var(--accent);
@@ -347,7 +390,7 @@ nav {
 .btn:hover,
 .schedule-btn:hover {
   background: var(--accent);
-  transform: translateY(-1px);
+  transform: translateY(-1px);    /* Slight lift on hover */
 }
 
 .btn:focus-visible,
@@ -356,7 +399,9 @@ nav {
   outline-offset: 3px;
 }
 
-/* Secondary Buttons */
+/* ==========================
+   SECONDARY BUTTONS
+========================== */
 .btn-secondary {
   display: inline-block;
   border: 2px solid var(--accent);
@@ -374,8 +419,9 @@ nav {
   box-shadow: 0 4px 14px rgba(0,0,0,0.18);
 }
 
-/* Floating Buttons */
-
+/* ==========================
+   FLOATING BUTTONS (THEME & BACK-TO-TOP)
+========================== */
 #floating-buttons {
   position: fixed;
   right: 1.5rem;
@@ -383,14 +429,14 @@ nav {
   display: flex;
   flex-direction: column-reverse;
   gap: 1rem;
-  z-index: 2000;
+  z-index: 2000;                 /* Always on top */
 }
 
 #theme-toggle,
 #back-to-top {
   width: 3rem;
   height: 3rem;
-  border-radius: 50%;
+  border-radius: 50%;             /* Circular buttons */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -403,45 +449,50 @@ nav {
   transition: background var(--transition), transform var(--transition);
 }
 
+/* ==========================
+   FLOATING BUTTON HOVER EFFECTS
+========================== */
 #theme-toggle:hover,
 #back-to-top:hover {
+  /* Slightly darken accent and add lift on hover */
   background: color-mix(in srgb, var(--accent) 85%, black);
   transform: scale(1.05);
 }
 
 #back-to-top {
-  opacity: 0;
-  pointer-events: none;
+  opacity: 0;                 /* Hidden by default */
+  pointer-events: none;       /* Prevent clicks */
 }
 
 #back-to-top.visible {
-  opacity: 1;
-  pointer-events: auto;
+  opacity: 1;                 /* Show when active */
+  pointer-events: auto;       
 }
 
-/* Counselor Cards Grid */
+/* ==========================
+   COUNSELOR CARDS GRID
+========================== */
 .counselors-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  max-width: calc(3 * 280px + 2 * 2rem);
+  max-width: calc(3 * 280px + 2 * 2rem); /* Limit total width for up to 3 cards */
   gap: 2rem;
-  margin-top: 1.5rem;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 1.5rem auto 0;      /* Center grid with margin-top */
 }
 
-/* Individual counselor card */
 .counselor {
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
   text-align: center;
 }
 
-/* Avatar */
+/* ==========================
+   COUNSELOR AVATARS
+========================== */
 .counselor .avatar {
-  width: 110px;        
-  height: 80px;       
+  width: 110px;
+  height: 80px;
   border-radius: 14px;
   margin-bottom: 1rem;
   background-size: cover;
@@ -455,7 +506,7 @@ nav {
   );
 }
 
-/* Avatar overrides */
+/* Avatar image overrides */
 .avatar[data-avatar="evelyn"] { background-image: url("evelyn.jpg"); }
 .avatar[data-avatar="marcus"] { background-image: url("marcus.jpg"); }
 .avatar[data-avatar="jasmine"] { background-image: url("jasmine.jpg"); }
@@ -463,7 +514,9 @@ nav {
 .avatar[data-avatar="lauren"] { background-image: url("lauren.jpg"); }
 .avatar[data-avatar="samuel"] { background-image: url("samuel.jpg"); }
 
-/* Counselor card spacing */
+/* ==========================
+   COUNSELOR CARD TEXT
+========================== */
 .counselor .card-body h4 {
   margin-bottom: 0.35rem;
   font-size: 1.1rem;
@@ -482,32 +535,34 @@ nav {
   margin-bottom: 0.8rem;
 }
 
-/* Schedule CTA */
+/* ==========================
+   SCHEDULE BUTTON CTA
+========================== */
 .schedule-cta {
   display: flex;
   justify-content: center;
   margin-top: 3rem;
 }
 
-/* Schedule button */
 .schedule-btn {
-  padding: 0.9rem 3.2rem; 
+  padding: 0.9rem 3.2rem;     /* Slightly larger for CTA */
   font-size: 1.05rem;
   font-weight: 600;
   border-radius: var(--radius);
   text-align: center;
-  min-width: 260px; 
+  min-width: 260px;
 }
 
-
-/* Modals */
+/* ==========================
+   MODALS
+========================== */
 .modal {
   position: fixed;
-  inset: 0;
+  inset: 0;                   /* Full screen overlay */
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.4s ease, visibility 0.4s ease;
@@ -531,10 +586,12 @@ nav {
 }
 
 .modal.show .modal-content {
-  transform: translateY(0);
+  transform: translateY(0);     /* Slide up when visible */
 }
 
-/* Sections and Cards */
+/* ==========================
+   SECTIONS & CARD GRIDS
+========================== */
 .section {
   padding: 4rem 1.5rem;
   text-align: center;
@@ -546,7 +603,6 @@ nav {
   color: var(--accent);
 }
 
-/* Grid layouts */
 .card-grid,
 .testimonial-grid,
 .team-grid {
@@ -554,23 +610,28 @@ nav {
   gap: 2rem;
 }
 
+/* Cards */
 .card-grid {
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   max-width: 1100px;
   margin: 0 auto;
 }
 
+/* Testimonials */
 .testimonial-grid {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   margin-top: 2rem;
 }
 
+/* Team */
 .team-grid {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   margin-top: 2rem;
 }
 
-/* Shared card styles */
+/* ==========================
+   SHARED CARD STYLES
+========================== */
 .team-member,
 .card,
 blockquote,
@@ -583,10 +644,9 @@ blockquote,
   color: var(--always-light-text);
 }
 
-/* Hover lift */
 .card:hover,
 .team-member:hover {
-  transform: translateY(-4px);
+  transform: translateY(-4px);  /* Slight lift on hover */
   box-shadow: 0 6px 16px rgba(0,0,0,0.12);
 }
 
@@ -596,12 +656,13 @@ blockquote,
   border-radius: var(--radius);
 }
 
-/* Blog Carosel */
-
+/* ==========================
+   BLOG CAROUSEL
+========================== */
 .blog-section {
   padding: 4rem 1.5rem;
   text-align: center;
-  overflow: hidden;
+  overflow: hidden;            /* Prevent overflow for carousel */
 }
 
 .blog-carousel {
@@ -616,43 +677,44 @@ blockquote,
   padding: 3rem 0;
   position: relative;
 }
-
-/* ================= TRACK ================= */
-
+/* ==========================
+   BLOG CAROUSEL TRACK
+========================== */
 .blog-card-grid {
-  display: flex;
-  gap: 2rem;
-  will-change: transform;
+  display: flex;               /* Arrange cards in a horizontal row */
+  gap: 2rem;                   /* Space between cards */
+  will-change: transform;      /* Hint for smooth transform animations */
   transition: transform 0.5s ease;
 }
 
-/* ================= CARD (POSITIONING ONLY) ================= */
-
+/* ==========================
+   INDIVIDUAL BLOG CARD
+========================== */
 .blog-card {
-  flex: 0 0 320px; /* uniform width */
+  flex: 0 0 320px;             /* Fixed card width, no shrink/grow */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* ================= CARD INNER (VISUAL ONLY) ================= */
-
+/* Inner content of blog card */
 .blog-card-inner {
   width: 100%;
-  background: var(--card-bg); 
+  background: var(--card-bg);
   padding: 1.5rem;
   border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.12); 
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
   color: var(--always-light-text);
   text-align: left;
-  cursor: pointer;
+  cursor: pointer;             /* Indicate clickability */
 }
 
-/* ================= BUTTONS ================= */
-
+/* ==========================
+   CAROUSEL BUTTONS
+========================== */
 .blog-carousel-btn {
   position: absolute;
-  top: 50%;
+  top: 50%;                     /* Center vertically */
   transform: translateY(-50%);
   width: 46px;
   height: 46px;
@@ -671,25 +733,26 @@ blockquote,
 }
 
 .blog-carousel-btn.prev {
-  left: -22px;
+  left: -22px;                 /* Position left button slightly outside */
 }
 
 .blog-carousel-btn.next {
-  right: -22px;
+  right: -22px;                /* Position right button slightly outside */
 }
 
 .blog-carousel-btn:hover {
   background: var(--accent);
-  color: white;
+  color: white;                /* Invert color on hover */
 }
 
-/* ================= CONTENT ================= */
-
+/* ==========================
+   BLOG CARD CONTENT
+========================== */
 .blog-content .date {
   font-size: 0.8rem;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: #7FD0C2;
+  color: #7FD0C2;             /* Soft accent color for date */
 }
 
 .blog-content h4 {
@@ -701,16 +764,15 @@ blockquote,
 .blog-content p {
   font-size: 0.95rem;
   line-height: 1.6;
-  display: -webkit-box;
+  display: -webkit-box;       /* Clamp text to 3 lines */
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
 /* ==========================
-   FINAL POST SYSTEM (STABLE)
+   FINAL POST SYSTEM
 ========================== */
-
 .post {
   max-width: 900px;
   margin: 6rem auto;
@@ -724,8 +786,7 @@ blockquote,
   box-shadow: 0 12px 36px rgba(0,0,0,0.22);
 }
 
-/* ---------- Header ---------- */
-
+/* ---------- HEADER ---------- */
 .post-header {
   padding: 3rem 3rem 1.8rem;
   text-align: center;
@@ -752,8 +813,7 @@ blockquote,
   color: var(--muted);
 }
 
-/* ---------- Hero ---------- */
-
+/* ---------- HERO IMAGE ---------- */
 .post-hero img {
   width: 100%;
   display: block;
@@ -761,8 +821,7 @@ blockquote,
   object-fit: cover;
 }
 
-/* ---------- Content ---------- */
-
+/* ---------- POST CONTENT ---------- */
 .post-content {
   padding: 2.8rem 3rem;
   line-height: 1.85;
@@ -777,11 +836,10 @@ blockquote,
 
 .post-content em,
 .post-content small {
-  color: var(--muted);
+  color: var(--muted);          /* Secondary text for emphasis/small text */
 }
 
-/* Headings */
-
+/* Headings inside post */
 .post-content h2 {
   margin-top: 3rem;
   margin-bottom: 1rem;
@@ -790,7 +848,6 @@ blockquote,
 }
 
 /* Lists */
-
 .post-content ul {
   margin-left: 1.2rem;
   margin-bottom: 2rem;
@@ -800,11 +857,12 @@ blockquote,
   margin-bottom: 0.5rem;
 }
 
-/* ---------- Callout ---------- */
-
+/* ==========================
+   POST CALLOUT
+========================== */
 .post-callout {
-  background: color-mix(in srgb, var(--card-bg) 85%, white);
-  border-left: 4px solid var(--accent);
+  background: color-mix(in srgb, var(--card-bg) 85%, white); /* lightened card background */
+  border-left: 4px solid var(--accent);                      /* accent border on left */
   padding: 1.4rem 1.6rem;
   border-radius: 14px;
   margin: 2.8rem 0;
@@ -812,14 +870,14 @@ blockquote,
   color: var(--always-light-text);
 }
 
-/* Vertical rhythm */
-
+/* Vertical rhythm for post content */
 .post-content > * {
   margin-bottom: 1.6rem;
 }
 
-/* ---------- Footer CTA ---------- */
-
+/* ==========================
+   POST FOOTER CTA
+========================== */
 .post-footer {
   padding: 2.6rem 2.5rem 3rem;
   display: flex;
@@ -828,13 +886,12 @@ blockquote,
   border-top: 1px solid color-mix(in srgb, var(--card-bg) 75%, white);
 }
 
-/* Dedicated post button (no global conflicts) */
-
+/* Dedicated button in post footer */
 .post-footer .post-btn {
   background: var(--accent);
   color: #ffffff;
   padding: 0.95rem 2.8rem;
-  border-radius: 999px;
+  border-radius: 999px; /* pill-shaped button */
   font-weight: 700;
   text-decoration: none;
   letter-spacing: 0.3px;
@@ -843,12 +900,14 @@ blockquote,
 }
 
 .post-footer .post-btn:hover {
-  background: color-mix(in srgb, var(--accent) 85%, black);
+  background: color-mix(in srgb, var(--accent) 85%, black); /* slightly darker on hover */
   transform: translateY(-2px);
   box-shadow: 0 12px 30px rgba(0,0,0,0.38);
 }
 
-/*Submission Page */
+/* ==========================
+   SUBMISSION PAGE
+========================== */
 .submission-page {
   min-height: 100vh;
   display: flex;
@@ -857,13 +916,12 @@ blockquote,
 
 .submission-page main,
 .submission-page .section {
-  flex: 1;
+  flex: 1; /* take up remaining vertical space */
 }
 
-/* ================================================= */
-/* FOOTER (SAFE & READABLE) */
-/* ================================================= */
-
+/* ==========================
+   FOOTER
+========================== */
 footer {
   background-color: var(--footer);
   color: var(--always-light-text);
@@ -876,23 +934,19 @@ footer,
 footer p,
 footer span,
 footer a {
-  color: var(--always-light-text);
+  color: var(--always-light-text); /* ensure all text in footer is readable */
 }
 
-/* ================================================= */
-/* RESPONSIVE SYSTEM (REFINED & STABLE) */
-/* ================================================= */
+/* =================================================
+   RESPONSIVE SYSTEM
+================================================= */
 
-
-/* ========================= */
-/* TABLETS + SMALL LAPTOPS */
-/* ≤ 900px */
-/* ========================= */
-
+/* =========================
+   TABLETS + SMALL LAPTOPS (≤900px)
+========================== */
 @media (max-width: 900px) {
 
-  /* --- NAV STRUCTURE --- */
-
+  /* --- NAVBAR --- */
   .navbar {
     height: 70px;
     padding: 0 clamp(0.5rem, 2vw, 1rem);
@@ -903,23 +957,19 @@ footer a {
     justify-content: center;
   }
 
-  /* Keep normal navigation visible on tablets */
   nav {
-    display: flex;
+    display: flex;  /* keep navigation visible on tablets */
   }
 
   .logo {
     display: block;
   }
 
-  /* Ensure hamburger stays hidden */
   .hamburger-menu {
-    display: none;
+    display: none;  /* hide hamburger on larger devices */
   }
 
-
   /* --- HERO --- */
-
   .hero {
     padding: 5rem clamp(1rem, 4vw, 1.5rem);
   }
@@ -932,9 +982,7 @@ footer a {
     font-size: clamp(1.1rem, 2.5vw, 1.2rem);
   }
 
-
   /* --- BLOG CAROUSEL → SCROLL MODE --- */
-
   .blog-carousel-track-container {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -955,19 +1003,15 @@ footer a {
   }
 
   .blog-carousel-btn {
-    display: none;
+    display: none; /* hide arrows on scrollable mobile view */
   }
 
-
   /* --- SECTION SPACING --- */
-
   .section {
     padding: clamp(2.5rem, 5vw, 3rem) clamp(1rem, 3vw, 1.2rem);
   }
 
-
   /* --- POST LAYOUT --- */
-
   .post-header,
   .post-content {
     padding: clamp(1.5rem, 3vw, 2rem) clamp(1rem, 3vw, 1.5rem);
@@ -978,21 +1022,17 @@ footer a {
   }
 
   .post-footer .post-btn {
-    width: 100%;
+    width: 100%; /* full width buttons */
   }
 
-
   /* --- GRID GAP --- */
-
   .card-grid,
   .testimonial-grid,
   .team-grid {
     gap: clamp(1rem, 2vw, 2rem);
   }
 
-
   /* --- FLOATING BUTTONS --- */
-
   #theme-toggle,
   #back-to-top {
     width: clamp(2.5rem, 6vw, 3rem);
@@ -1001,12 +1041,9 @@ footer a {
   }
 }
 
-
-/* ========================= */
-/* TABLETS */
-/* ≤ 768px */
-/* ========================= */
-
+/* =========================
+   TABLETS (≤768px)
+========================== */
 @media (max-width: 768px) {
 
   .hero h2 {
@@ -1022,7 +1059,7 @@ footer a {
   }
 
   .modal {
-    display: none;
+    display: none; /* hide modals on smaller screens */
   }
 
   #theme-toggle,
@@ -1031,22 +1068,17 @@ footer a {
     height: clamp(2.4rem, 5.5vw, 2.8rem);
     font-size: clamp(0.95rem, 2.3vw, 1rem);
   }
-
 }
 
-
-/* ========================= */
-/* PHONES */
-/* ≤ 600px */
-/* ========================= */
-
+/* =========================
+   PHONES (≤600px)
+========================== */
 @media (max-width: 600px) {
 
   /* --- SWITCH NAV TO HAMBURGER --- */
-
   nav,
   .logo {
-    display: none;
+    display: none;  /* hide standard nav, logo */
   }
 
   .hamburger-menu {
@@ -1067,9 +1099,7 @@ footer a {
     transform: translateY(-50%);
   }
 
-
   /* --- HERO --- */
-
   .hero {
     padding: clamp(3rem, 6vw, 4rem) clamp(0.8rem, 3vw, 1.2rem);
   }
@@ -1082,9 +1112,7 @@ footer a {
     font-size: clamp(1rem, 2.5vw, 1.1rem);
   }
 
-
   /* --- SINGLE COLUMN LAYOUT --- */
-
   .card-grid,
   .testimonial-grid,
   .team-grid {
@@ -1096,21 +1124,19 @@ footer a {
     padding: clamp(1rem, 3vw, 1.5rem);
   }
 
-
   /* --- BLOG --- */
-
   .blog-card {
     flex: 0 0 85vw;
   }
+}
 
+/* ==========================
+   FLOATING BUTTONS RESPONSIVE
+========================== */
 
-  /* --- FLOATING BUTTONS --- */
-
-  #theme-toggle,
-  #back-to-top {
-    width: clamp(2.5rem, 6vw, 3rem);
-    height: clamp(2.5rem, 6vw, 3rem);
-    font-size: clamp(1rem, 2.5vw, 1.1rem);
-  }
-
+#theme-toggle,
+#back-to-top {
+  width: clamp(2.5rem, 6vw, 3rem);   /* responsive width */
+  height: clamp(2.5rem, 6vw, 3rem);  /* responsive height */
+  font-size: clamp(1rem, 2.5vw, 1.1rem); /* responsive icon/text size */
 }
