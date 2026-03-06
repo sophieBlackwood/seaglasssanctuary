@@ -242,10 +242,10 @@ nav {
   padding: 0;
   line-height: 1;
   border-radius: 6px;
-   border: none; /* Remove any borders */
-  outline: none; /* Remove focus outlines */
-  background: transparent; /* Ensure no background boxes */
-  box-shadow: none; /
+  border: none;
+  outline: none;
+  background: transparent;
+  box-shadow: none;
 }
 
 /* Hamburger Menu */
@@ -264,7 +264,7 @@ nav {
    border: none; /* Remove any borders */
   outline: none; /* Remove focus outlines */
   background: transparent; /* Ensure no background boxes */
-  box-shadow: none; /
+  box-shadow: none; 
 }
 
 .hamburger-menu:focus,
