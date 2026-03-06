@@ -110,6 +110,8 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+position: relative;
+  min-width: 0;
 }
 
 /* Logo - Absolutely positioned far left */
@@ -142,6 +144,7 @@ nav {
 
 .nav-links a {
   color: var(--always-light-text);
+   font-size: clamp(0.9rem, 1.1vw, 1rem);
   font-weight: 500;
   text-decoration: none;
   padding: 0.5rem 1rem;
@@ -994,6 +997,37 @@ footer a {
     height: clamp(2.5rem, 6vw, 3rem);
     font-size: clamp(1rem, 2.5vw, 1.1rem);
   }
+}
+
+/* =========================
+   MID WIDTH (Chromebook / Half Screens)
+========================== */
+
+@media (max-width: 1000px) {
+
+  .navbar {
+    height: 75px;
+  }
+
+  .logo {
+    left: 2rem;
+    height: 50px;
+  }
+
+  #quick-exit {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+    right: 1.5rem;
+  }
+
+  .nav-links {
+    gap: clamp(0.6rem, 1.5vw, 1.2rem);
+  }
+
+  .nav-links a {
+    padding: 0.4rem 0.7rem;
+  }
+
 }
 
 /* =========================
