@@ -86,9 +86,10 @@ a {
 }
 
 /* ==========================
-   NAVBAR (Base commented for reference)
+   NAVBAR 
 ========================== */
-/*
+
+/* Base navbar */
 .navbar {
   position: fixed;
   top: 0;
@@ -98,73 +99,25 @@ a {
   display: flex;
   align-items: center;
   height: 90px;
-  padding: 0 2.5rem;
+  padding: 0 2.5rem; 
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .nav-container {
-  max-width: 1200px;
+  max-width: 1200px; 
   margin: 0 auto;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-*/
-/* ==========================
-   NAVBAR STYLING
-========================== */
-.navbar {
-  width: 100%;
-  position: fixed;           /* Fix navbar to top of viewport */
-  top: 0;
-  height: 90px;              /* Standard navbar height */
-  background: var(--card-bg);
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  padding: 0 2.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow */
-}
 
-.nav-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* Logo left, nav links middle/right */
-  position: relative;
-
-  max-width: 1200px;
-  margin: 0 auto;
-  height: 100%;
-}
-
-/* ==========================
-   LOGO STYLING
-========================== */
-/* Option 1: Absolute image logo (commented out) */
-/*
+/* Logo - Absolutely positioned far left */
 .logo {
   position: absolute;
-  left: 4rem;
+  left: 4rem; 
   top: 50%;
   transform: translateY(-50%);
-  height: 60px;
-  flex-shrink: 0;
-  cursor: pointer;
-  transition: opacity 0.3s ease;
-}
-*/
-
-/* Option 2: Text-based logo (centered with flex fallback) */
-.logo {
-  font-size: 1.3rem;
-  font-weight: 600;
-  white-space: nowrap;
-  left: 4rem;
-  top: 50%;
-  transform: translateY(-50%);
-  flex: 1;
-  text-align: center;
   height: 60px;
   flex-shrink: 0;
   cursor: pointer;
@@ -172,21 +125,19 @@ a {
 }
 
 .logo:hover {
-  opacity: 0.85; /* Subtle hover effect for logo */
+  opacity: 0.85;
 }
 
-/* ==========================
-   NAV LINKS
-========================== */
+/* Nav links - Centered in the middle */
 nav {
   display: flex;
-  justify-content: center; /* Center links in navbar */
+  justify-content: center; 
 }
 
 .nav-links {
   display: flex;
-  gap: clamp(1rem, 2vw, 2rem); /* Responsive spacing between links */
-  list-style: none;             /* Remove default bullets */
+  gap: clamp(1rem, 2vw, 2rem);
+  list-style: none;
 }
 
 .nav-links a {
@@ -200,21 +151,20 @@ nav {
 
 .nav-links a:hover {
   color: var(--accent-light);
-  background: rgba(255, 255, 255, 0.1); /* Light hover highlight */
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .nav-links a:focus-visible {
-  outline: 3px solid var(--accent-light); /* Accessibility focus */
+  outline: 3px solid var(--accent-light);
   outline-offset: 3px;
 }
-/* ==========================
-   QUICK EXIT BUTTON
-========================== */
+
+/* Quick Exit - Absolutely positioned far right */
 #quick-exit {
-  position: absolute;            /* Place button relative to navbar */
-  right: 2.5rem;                 /* Far-right placement */
-  top: 1.25rem;                  /* Adjust vertical position as needed */
-  background: #e84c5a;           /* Bright red for visibility */
+  position: absolute;
+  right: 2.5rem;
+  top: 1.25rem; /* Fixed top value for precise vertical positioning; adjust up/down as needed (e.g., 1rem for higher, 1.5rem for lower) */
+  background: #e84c5a;
   color: #ffffff;
   border: none;
   border-radius: var(--radius);
@@ -223,37 +173,35 @@ nav {
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.5rem;                   /* Space between icon/text if any */
+  gap: 0.5rem;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
 #quick-exit:hover {
-  background: #9b0f18;           /* Darker red on hover */
-  transform: translateY(-1px);   /* Slight lift effect */
+  background: #9b0f18;
+  transform: translateY(-1px);
 }
 
 #quick-exit:focus-visible {
-  outline: 3px solid var(--accent-light); /* Accessibility focus */
+  outline: 3px solid var(--accent-light);
   outline-offset: 3px;
 }
 
-/* ==========================
-   SIDE NAVIGATION (MOBILE)
-========================== */
+/* Sidenav for smaller screens */
 .sidenav {
-  height: 100%;                  /* Full viewport height */
-  width: 0;                       /* Hidden by default */
+  height: 100%;
+  width: 0;
   position: fixed;
   top: 0;
   left: 0;
   background-color: var(--card-bg);
-  overflow-x: hidden;            /* Prevent horizontal scroll */
-  transition: width 0.5s ease;   /* Smooth open/close */
-  z-index: 9999;                  /* Above all other content */
+  overflow-x: hidden;
+  transition: width 0.5s ease;
+  z-index: 9999;
   display: flex;
   flex-direction: column;
-  padding-top: 0;                 /* Optional top padding for header */
+  padding-top: 0; 
 }
 
 .sidenav-header {
@@ -261,16 +209,16 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 12px 24px;   
-  margin-bottom: 10px;           /* Space below header */
+  margin-bottom: 10px;     
 }
 
-/* Logo inside sidenav */
+/* Sidenav Logo */
 .sidenav-logo {
   height: 36px;
   width: auto;
 }
 
-/* Sidenav links */
+/* Sidenav Links */
 .sidenav a {
   padding: 12px 24px;
   text-decoration: none;
@@ -282,55 +230,55 @@ nav {
 
 .sidenav a:hover {
   background-color: var(--accent-light);
-  color: var(--card-bg);          /* Invert text for contrast on hover */
+  color: var(--card-bg);
 }
 
-/* Close button for sidenav */
+/* Close Button */
 .closebtn {
-  position: static;               /* Inline inside header */
+  position: static;
   font-size: 32px;
   cursor: pointer;
   color: var(--always-light-text);
   padding: 0;
   line-height: 1;
   border-radius: 6px;
-  border: none;                   /* Clean button style */
-  outline: none;                  /* Remove default focus outline */
-  background: transparent;        /* No background */
-  box-shadow: none;               /* Remove shadow */
+   border: none; /* Remove any borders */
+  outline: none; /* Remove focus outlines */
+  background: transparent; /* Ensure no background boxes */
+  box-shadow: none; /
 }
-/* ==========================
-   HAMBURGER MENU (MOBILE)
-========================== */
+
+/* Hamburger Menu */
 .hamburger-menu {
-  display: none;                 /* Hide by default on desktop */
+  display: none; /* hidden on desktop */
   position: absolute;
-  left: 1.5rem;                  /* Far-left placement */
-  top: 50%;                       /* Vertically centered */
+  left: 1.5rem;
+  top: 50%;
   transform: translateY(-50%);
-  font-size: 2rem;
+  font-size: 2rem; 
   cursor: pointer;
-  z-index: 1001;                 /* Above navbar/hero */
+  z-index: 1001;          /* above navbar/hero */
   line-height: 1;
-  padding: 0;                     /* No extra spacing */
+  padding: 0;             /* no extra spacing */
   color: var(--always-light-text);
-  border: none;                   /* Clean button style */
-  outline: none;                  /* Remove focus outlines */
-  background: transparent;        /* No background box */
-  box-shadow: none;               /* No shadow */
+   border: none; /* Remove any borders */
+  outline: none; /* Remove focus outlines */
+  background: transparent; /* Ensure no background boxes */
+  box-shadow: none; /
 }
 
 .hamburger-menu:focus,
 .closebtn:focus {
-  outline: none;                  /* Remove browser focus outline */
-  box-shadow: none;               /* No shadow on focus */
+  outline: none; /* Prevent browser default focus outlines */
+  box-shadow: none; /* No shadow on focus */
 }
 
-/* Small image/icon next to hamburger */
+/* Image next to hamburger icon */
 .sidenav-img {
   height: 24px;
   margin-left: 8px;
 }
+
 
 /* ==========================
    HERO SECTIONS
