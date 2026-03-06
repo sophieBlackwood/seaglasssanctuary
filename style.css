@@ -888,6 +888,12 @@ footer a {
 /* =================================================
    RESPONSIVE SYSTEM
 ================================================= */
+/* Ensure hamburger NEVER appears on desktop */
+@media (min-width: 641px) {
+  .hamburger-menu {
+    display: none !important;
+  }
+}
 
 /* =========================
    TABLETS + SMALL LAPTOPS (≤900px)
@@ -1021,7 +1027,7 @@ footer a {
 /* =========================
    PHONES (≤600px)
 ========================== */
-@media (max-width: 600px) {
+@media (max-width: 640px) {
 
   /* --- SWITCH NAV TO HAMBURGER --- */
   nav,
