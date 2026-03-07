@@ -668,35 +668,37 @@ blockquote,
 ========================== */
 .blog-carousel-btn {
   position: absolute;
-  top: 50%;                 
+  top: 50%;
   transform: translateY(-50%);
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
+
+  background: transparent;
   border: none;
-  background: white;
-  color: var(--accent);
-  font-size: 1.4rem;
+
+  color: var(--text); /* auto-contrasts with theme */
+
+  font-size: 2.2rem;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+
   z-index: 10;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.25s ease, color 0.25s ease;
+
+  transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
 .blog-carousel-btn.prev {
-  left: -22px;                
+  left: -30px;
 }
 
 .blog-carousel-btn.next {
-  right: -22px;              
+  right: -30px;
 }
 
 .blog-carousel-btn:hover {
-  background: var(--accent);
-  color: white;                
+  transform: translateY(-50%) scale(1.15);
+  opacity: 0.75;
 }
 
 /* ==========================
