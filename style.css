@@ -348,7 +348,7 @@ nav {
 .btn:hover,
 .schedule-btn:hover {
   background: var(--accent);
-  transform: translateY(-1px);  
+  transform: translateY(-2px);  
 }
 
 .btn:focus-visible,
