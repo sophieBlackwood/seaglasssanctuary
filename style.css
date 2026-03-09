@@ -343,9 +343,8 @@ nav {
 }
 
 #hero-btn:hover {
-  background: #0A7A67;
+  background: var(--accent-light);
   transform: translateY(-2px); 
-   transition: background var(--transition), color var(--transition), box-shadow var(--transition);
 }
 
 #hero-btn:focus-visible {
