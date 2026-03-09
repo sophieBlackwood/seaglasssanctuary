@@ -966,8 +966,11 @@ footer a {
   }
 
   .nav-container {
+    display: flex;
     position: relative;
     justify-content: space-between;
+    align-items: center;
+    width: 100%;
   }
 
   nav {
@@ -981,6 +984,11 @@ footer a {
 
   .hamburger-menu {
     display: none;  
+  }
+
+  #quick-exit {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
   }
 
   /* --- HERO --- */
@@ -1095,7 +1103,11 @@ footer a {
   }
 
   .nav-container {
+    display: flex;
     justify-content: space-between;
+    align-items: center;
+    position: relative; /* for absolute hamburger */
+    width: 100%;
   }
 
   /* --- SWITCH NAV TO HAMBURGER --- */
@@ -1111,9 +1123,9 @@ footer a {
     font-size: 26px;
     z-index: 10;
 
-    position: absolute;      /* ADDED */
-    left: 1.3rem;            /* CHANGED */
-    top: 55%;                /* CHANGED */
+    position: absolute;
+    left: 1.3rem;     /* slightly inward */
+    top: 50%;         /* vertically centered */
     transform: translateY(-50%);
   }
 
