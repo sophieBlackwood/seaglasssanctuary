@@ -119,6 +119,40 @@ a {
   min-width: 0; 
 }
 
+/* Dropdown Container */
+.blog-dropdown {
+  position: relative;
+}
+
+.blog-dropdown .dropdown-menu {
+  display: none;         
+  position: absolute;      
+  top: 100%;
+  left: 0;
+  background: var(--bg);
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
+  min-width: 160px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  z-index: 100;
+}
+
+.blog-dropdown:hover .dropdown-menu {
+  display: block;         
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 0.6rem 1rem;
+  color: var(--text);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.dropdown-menu li a:hover {
+  background: var(--accent-light);
+  color: white;
+}
 /* Logo */
 .logo {
   height: 60px;
