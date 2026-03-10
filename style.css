@@ -119,39 +119,61 @@ a {
   min-width: 0; 
 }
 
+/* ================================================== */
+/* REFORMATTED BLOG DROPDOWN */
+/* ================================================== */
+
 /* Dropdown Container */
 .blog-dropdown {
   position: relative;
+  display: inline-block;
 }
 
+/* Dropdown Menu - Desktop */
 .blog-dropdown .dropdown-menu {
   display: none;         
   position: absolute;      
   top: 100%;
   left: 0;
-  background: var(--bg);
-  border: 1px solid #ccc;
+  background: var(--bg);       /* match navbar background */
+  border: none;                /* remove default border */
   border-radius: var(--radius);
-  min-width: 160px;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  min-width: 180px;            /* slightly wider for readability */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12); /* subtle shadow */
   z-index: 100;
+  padding: 0.4rem 0;
 }
 
+/* Show dropdown on hover */
 .blog-dropdown:hover .dropdown-menu {
-  display: block;         
+  display: block;
 }
 
+/* Dropdown Links */
 .dropdown-menu li a {
   display: block;
-  padding: 0.6rem 1rem;
+  padding: 0.55rem 1rem;
   color: var(--text);
   font-weight: 500;
   text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
+/* Hover effect */
 .dropdown-menu li a:hover {
   background: var(--accent-light);
   color: white;
+}
+
+/* Caret Styling */
+.blog-dropdown .caret {
+  font-size: 0.7em;
+  margin-left: 0.25rem;
+  transition: transform 0.2s ease;
+}
+
+.blog-dropdown:hover .caret {
+  transform: rotate(180deg); /* subtle flip on hover */
 }
 /* Logo */
 .logo {
@@ -1205,39 +1227,77 @@ footer a {
     padding: clamp(1rem, 3vw, 1.5rem);
   }
 
-  /* --- BLOG --- */
-  .blog-card {
-    flex: 0 0 85vw;
-  }
-    .post-footer {
-    display: flex;
-    flex-direction: column; 
-    align-items: stretch;   
-    gap: 0.6rem;            
-  }
-
-  .post-footer .post-btn {
-    width: 100%;          
-    text-align: center;      
-    padding: 1.2rem 0;    
-    font-size: clamp(0.85rem, 2.2vw, 0.95rem);
-    margin: 0;               
-    box-sizing: border-box;
-      border-radius: var(--radius);
-  }
-   
-    .dropdown-menu {
-    position: relative;
-    border: none;
-    box-shadow: none;
-    display: none;
-  }
-
-  .dropdown-menu.show {
-    display: block;
-  }
+ /* --- BLOG CARD (MOBILE OPTIMIZED) --- */
+.blog-card {
+  flex: 0 0 85vw;               /* full-width card for small screens */
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--card-bg);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.blog-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.18);
+}
+
+/* --- POST FOOTER CTA BUTTONS --- */
+.post-footer {
+  display: flex;
+  flex-direction: column;       /* stack buttons vertically on mobile */
+  align-items: stretch;         /* full width */
+  gap: 0.6rem;                  /* spacing between buttons */
+  padding: 1.5rem 1rem 2rem;    /* adjust vertical spacing */
+}
+
+.post-footer .post-btn {
+  width: 100%;                  /* full-width buttons */
+  text-align: center;
+  padding: 1.2rem 0;
+  font-size: clamp(0.85rem, 2.2vw, 0.95rem);
+  margin: 0;
+  box-sizing: border-box;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post-footer .post-btn:hover {
+  background: color-mix(in srgb, var(--accent) 85%, black);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.38);
+}
+
+/* --- DROPDOWN MENU (MOBILE) --- */
+.dropdown-menu {
+  position: relative;
+  border: none;
+  box-shadow: none;
+  display: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-menu.show {
+  display: block;               /* show when toggled via JS */
+}
+
+.dropdown-menu li a {
+  padding: 0.7rem 1.2rem;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.dropdown-menu li:last-child a {
+  border-bottom: none;          /* remove bottom border for last item */
+}
 /* ==========================
    FLOATING BUTTONS RESPONSIVE
 ========================== */
