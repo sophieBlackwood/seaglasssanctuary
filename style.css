@@ -120,7 +120,7 @@ a {
 }
 
 /* ================================================== */
-/* REFORMATTED BLOG DROPDOWN */
+/* REFORMATTED BLOG DROPDOWN (NAVBAR GREEN & HOVER) */
 /* ================================================== */
 
 /* Dropdown Container */
@@ -130,20 +130,20 @@ a {
   cursor: pointer;
 }
 
-/* Dropdown Menu - Desktop */
+/* Dropdown Menu - Desktop & Mobile */
 .blog-dropdown .dropdown-menu {
   display: none;
   position: absolute;
   top: 100%;
   left: 0;
-  background: var(--bg);            
-  border: none;                    
+  background: var(--accent);           /* match navbar green */
+  border: none;
   border-radius: var(--radius);
-  min-width: 180px;                  
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12); 
+  min-width: 180px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
   z-index: 100;
-  padding: 0.4rem 0;
-  list-style: none;                
+  padding: 0.3rem 0;
+  list-style: none;
   margin: 0;
 }
 
@@ -155,18 +155,24 @@ a {
 /* Dropdown Links */
 .dropdown-menu li a {
   display: block;
-  padding: 0.55rem 1rem;
-  color: var(--text);
+  padding: 0.65rem 1.2rem;               /* touch-friendly spacing */
+  color: #fff;                           /* white text for contrast */
   font-weight: 500;
   text-decoration: none;
   transition: background 0.2s ease, color 0.2s ease;
+  border-bottom: 1px solid rgba(255,255,255,0.15); /* subtle separation */
+}
+
+/* Remove bottom border for last link */
+.dropdown-menu li:last-child a {
+  border-bottom: none;
 }
 
 /* Hover effect */
 .dropdown-menu li a:hover {
-  background: var(--accent-light);
-  color: white;
-  border-radius: var(--radius);       
+  background: color-mix(in srgb, var(--accent) 85%, black); /* slightly darker green */
+  color: #fff;
+  border-radius: var(--radius);
 }
 
 /* Caret Styling */
@@ -1278,17 +1284,17 @@ footer a {
   box-shadow: 0 12px 30px rgba(0,0,0,0.38);
 }
 
-/* --- DROPDOWN MENU (MOBILE) --- */
+/* --- DROPDOWN MENU (MOBILE) - GREEN STYLE --- */
 .dropdown-menu {
-  position: relative;           /* stack links below parent */
-  display: none;                /* hidden by default */
-  background: var(--bg);        /* match navbar background */
+  position: relative;                   /* stack links below parent */
+  display: none;                        /* hidden by default */
+  background: var(--accent);            /* match navbar green */
   border: none;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* subtle shadow for depth */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12); /* subtle shadow for depth */
   border-radius: var(--radius);
-  padding: 0.4rem 0;            /* vertical spacing inside menu */
+  padding: 0.3rem 0;                    /* vertical spacing inside menu */
   margin: 0;
-  list-style: none;             /* remove bullets */
+  list-style: none;                     /* remove bullets */
 }
 
 /* Show dropdown when toggled via JS */
@@ -1299,12 +1305,12 @@ footer a {
 /* Links inside the dropdown */
 .dropdown-menu li a {
   display: block;
-  padding: 0.75rem 1.2rem;      /* larger tap-friendly padding */
-  color: var(--text);
+  padding: 0.7rem 1.2rem;               /* tap-friendly padding */
+  color: #fff;                           /* white text for contrast */
   font-weight: 500;
   text-decoration: none;
   transition: background 0.2s ease, color 0.2s ease;
-  border-bottom: 1px solid rgba(0,0,0,0.08); /* subtle separation */
+  border-bottom: 1px solid rgba(255,255,255,0.15); /* subtle separation */
 }
 
 /* Remove bottom border for last link */
@@ -1314,7 +1320,7 @@ footer a {
 
 /* Hover / active effect */
 .dropdown-menu li a:hover {
-  background: var(--accent-light);
+  background: color-mix(in srgb, var(--accent) 85%, black); /* darker green on hover */
   color: #fff;
   border-radius: var(--radius);
 }
