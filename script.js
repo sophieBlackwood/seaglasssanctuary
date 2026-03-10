@@ -61,7 +61,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       setIcon();
 
-      // OPTIMIZATION: Read transition duration dynamically from CSS instead of hardcoding 700ms
       const transitionDuration = parseFloat(getComputedStyle(document.body).transitionDuration) * 1000 || 700;
       setTimeout(() => {
         document.body.classList.remove("theme-transition");
@@ -70,26 +69,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* -------------------- */
-  /* Quick Exit Modal (Informational) */
+  /* Quick Exit Modal */
   const quickExitModal = document.getElementById("quick-exit-modal");
   const dismissModalBtn = document.getElementById("dismiss-modal");
 
   if (quickExitModal && dismissModalBtn) {
-    // Show modal on load if not previously dismissed
     const modalDismissed = localStorage.getItem("quickExitModalDismissed");
-    if (!modalDismissed) {
-      quickExitModal.classList.add("show");
-    }
+    if (!modalDismissed) quickExitModal.classList.add("show");
 
-    // Handle dismiss button
     dismissModalBtn.addEventListener("click", () => {
       quickExitModal.classList.remove("show");
-      localStorage.setItem("quickExitModalDismissed", "true"); // Mark as dismissed
+      localStorage.setItem("quickExitModalDismissed", "true");
     });
   }
 
   /* -------------------- */
-  /* Quick Exit (NULL SAFE) */
+  /* Quick Exit */
   const quickExitBtn = document.getElementById("quick-exit");
   const quickExitURL = "https://www.amazon.com/s?k=water+bottle";
 
@@ -100,24 +95,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* -------------------- */
-  /* Triple ESC Rerouting (Quick Exit) */
+  /* Triple ESC Rerouting */
   let escPressCount = 0;
   let escTimer;
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       escPressCount++;
-      clearTimeout(escTimer); // Reset timer on each press
-
+      clearTimeout(escTimer);
       if (escPressCount === 3) {
-        // Trigger quick exit after 3 presses (same as button)
         window.location.replace(quickExitURL);
-        escPressCount = 0; // Reset for safety
+        escPressCount = 0;
       } else {
-        // Reset count if not 3 presses within 1 second
-        escTimer = setTimeout(() => {
-          escPressCount = 0;
-        }, 1000);
+        escTimer = setTimeout(() => { escPressCount = 0; }, 1000);
       }
     }
   });
@@ -129,7 +119,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let holdTimer;
 
   if (backToTop && floatingButtons) {
-    // OPTIMIZATION: Cache mobile media query to avoid repeated evaluations
     const mobileMediaQuery = window.matchMedia("(max-width: 768px)");
     const isMobile = () => mobileMediaQuery.matches;
 
@@ -144,29 +133,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     backToTop.addEventListener("click", () => {
-      window.scrollTo({
-        top: 0,
-        behavior: prefersReducedMotion ? "auto" : "smooth"
-      });
+      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
     });
 
-    /* Touch-safe long press */
     backToTop.addEventListener("touchstart", () => {
       if (isMobile()) {
-        holdTimer = setTimeout(() => {
-          floatingButtons.classList.toggle("reveal");
-        }, 600);
+        holdTimer = setTimeout(() => { floatingButtons.classList.toggle("reveal"); }, 600);
       }
     });
 
-    // OPTIMIZATION: Clear timer on all relevant events to prevent race conditions
     ["mouseup", "mouseleave", "touchend", "touchcancel"].forEach(evt =>
-      backToTop.addEventListener(evt, () => {
-        if (holdTimer) {
-          clearTimeout(holdTimer);
-          holdTimer = null; // Reset to avoid stale references
-        }
-      })
+      backToTop.addEventListener(evt, () => { if (holdTimer) { clearTimeout(holdTimer); holdTimer = null; } })
     );
   }
 
@@ -176,105 +153,57 @@ document.addEventListener("DOMContentLoaded", () => {
     anchor.addEventListener("click", function (e) {
       const targetId = this.getAttribute("href");
       if (targetId === "#") return;
-
       const targetEl = document.querySelector(targetId);
       if (!targetEl) return;
-
       e.preventDefault();
-
       const header = document.querySelector("header");
-      const yOffset = header ? -header.offsetHeight : -80; // NOTE: Adjust -80 if needed for your layout
-
+      const yOffset = header ? -header.offsetHeight : -80;
       const y = targetEl.getBoundingClientRect().top + window.pageYOffset + yOffset;
-
-      window.scrollTo({
-        top: y,
-        behavior: prefersReducedMotion ? "auto" : "smooth"
-      });
+      window.scrollTo({ top: y, behavior: prefersReducedMotion ? "auto" : "smooth" });
     });
   });
 
   /* ================================================= */
-  /* BLOG CAROUSEL - STABLE LOOP (OPTIMIZED) */
+  /* BLOG CAROUSEL */
   /* ================================================= */
-
   const blogTrack = document.querySelector(".blog-card-grid");
   const blogPrev = document.querySelector(".blog-carousel-btn.prev");
   const blogNext = document.querySelector(".blog-carousel-btn.next");
   const blogCards = Array.from(document.querySelectorAll(".blog-card"));
 
   if (blogTrack && blogCards.length > 0) {
-    // OPTIMIZATION: Cache computed styles to avoid repeated getComputedStyle calls
     const trackStyle = getComputedStyle(blogTrack);
     const gap = parseFloat(trackStyle.gap) || 0;
-    const transitionDuration = parseFloat(trackStyle.transitionDuration) * 1000 || 500; // Fallback to 500ms
+    const transitionDuration = parseFloat(trackStyle.transitionDuration) * 1000 || 500;
     const total = blogCards.length;
 
-    // Clone cards for seamless looping
     blogCards.forEach(card => blogTrack.appendChild(card.cloneNode(true)));
 
     let index = 0;
-    let isTransitioning = false; // OPTIMIZATION: Prevent overlapping transitions
+    let isTransitioning = false;
 
     const updateCarousel = (animate = true) => {
-      if (isTransitioning && animate) return; // Skip if already transitioning
+      if (isTransitioning && animate) return;
       isTransitioning = animate;
-
       const cardWidth = blogCards[0].offsetWidth;
       const offset = index * (cardWidth + gap);
-
       blogTrack.style.transition = animate ? `transform ${transitionDuration / 1000}s ease` : "none";
       blogTrack.style.transform = `translateX(${-offset}px)`;
-
-      if (animate) {
-        setTimeout(() => (isTransitioning = false), transitionDuration);
-      } else {
-        isTransitioning = false;
-      }
+      if (animate) setTimeout(() => (isTransitioning = false), transitionDuration);
+      else isTransitioning = false;
     };
 
-    const jumpToStart = () => {
-      index = 0;
-      updateCarousel(false);
-    };
-
-    const next = () => {
-      if (isTransitioning) return; // DEBUG: Prevent rapid clicks
-      index++;
-      updateCarousel();
-      if (index >= total) {
-        setTimeout(jumpToStart, transitionDuration + 10); // OPTIMIZATION: Use dynamic duration
-      }
-    };
-
-    const prev = () => {
-      if (isTransitioning) return; // DEBUG: Prevent rapid clicks
-      if (index === 0) {
-        index = total;
-        updateCarousel(false);
-        requestAnimationFrame(() => {
-          index--;
-          updateCarousel();
-        });
-      } else {
-        index--;
-        updateCarousel();
-      }
-    };
+    const jumpToStart = () => { index = 0; updateCarousel(false); };
+    const next = () => { if (isTransitioning) return; index++; updateCarousel(); if (index >= total) setTimeout(jumpToStart, transitionDuration + 10); };
+    const prev = () => { if (isTransitioning) return; if (index === 0) { index = total; updateCarousel(false); requestAnimationFrame(() => { index--; updateCarousel(); }); } else { index--; updateCarousel(); } };
 
     blogNext?.addEventListener("click", next);
     blogPrev?.addEventListener("click", prev);
 
-    updateCarousel(false); // Initial setup
+    updateCarousel(false);
 
-    /* OPTIMIZATION: Handle resize smoothly without resetting index */
     let resizeTimeout;
-    window.addEventListener("resize", () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        requestAnimationFrame(() => updateCarousel(false)); // Recalculate position without animation
-      }, 100); // Debounce for performance
-    });
+    window.addEventListener("resize", () => { clearTimeout(resizeTimeout); resizeTimeout = setTimeout(() => { requestAnimationFrame(() => updateCarousel(false)); }, 100); });
   }
 
   /* -------------------- */
@@ -282,10 +211,21 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", () => {
     const sidenav = document.getElementById("mySidenav");
     const hamburger = document.querySelector(".hamburger-menu");
+    if (window.innerWidth > 900 && sidenav && hamburger) { sidenav.style.width = "0"; hamburger.style.display = "flex"; }
+  });
 
-    if (window.innerWidth > 900 && sidenav && hamburger) {
-      sidenav.style.width = "0";
-      hamburger.style.display = "flex";
-    }
+  /* ================================================= */
+  /* BLOG DROPDOWN NAVIGATION */
+  /* ================================================= */
+  const blogDropdownLinks = document.querySelectorAll('.blog-dropdown > a');
+  blogDropdownLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      // On mobile only, toggle dropdown menu
+      if (window.innerWidth <= 640) {
+        e.preventDefault();
+        const menu = link.nextElementSibling;
+        menu.classList.toggle('show');
+      }
+    });
   });
 });
