@@ -1225,6 +1225,17 @@ footer a {
     box-sizing: border-box;
       border-radius: var(--radius);
   }
+   
+    .dropdown-menu {
+    position: relative;
+    border: none;
+    box-shadow: none;
+    display: none;
+  }
+
+  .dropdown-menu.show {
+    display: block;
+  }
 }
 
 /* ==========================
