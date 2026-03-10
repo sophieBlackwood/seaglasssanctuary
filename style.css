@@ -393,7 +393,24 @@ nav {
 
 .btn-secondary:hover {
   background: var(--accent);
-  color: #ffffff;
+  color: var(--always-light-text);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+}
+
+#discover-btn-secondary {
+  display: inline-block;
+  border: 2px solid #4FB29F;
+  color: #4FB29F;
+  background: transparent;
+  padding: 0.85rem 2rem;
+  border-radius: var(--radius);
+  font-weight: 700;
+  transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+}
+
+#discover-btn-secondary:hover {
+  background: #4FB29F;
+  color: var(--always-light-text);
   box-shadow: 0 4px 14px rgba(0,0,0,0.18);
 }
 
