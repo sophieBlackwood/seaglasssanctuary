@@ -136,7 +136,7 @@ a {
   position: absolute;
   top: 100%;
   left: 0;
-  background: var(--accent);           /* match navbar green */
+  background: var(--card-bg);           /* match navbar green */
   border: none;
   border-radius: var(--radius);
   min-width: 180px;
