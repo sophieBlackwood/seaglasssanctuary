@@ -869,7 +869,7 @@ blockquote,
    POST FOOTER CTA
 ========================== */
 .post-footer {
-  padding: 2.6rem 2.5rem 3rem;
+  padding: 2.6rem 2.5rem 1.5rem;
   display: flex;
   justify-content: center;
   background: var(--card-bg);
@@ -879,7 +879,7 @@ blockquote,
 /* Dedicated button in post footer */
 .post-footer .post-btn {
   background: var(--accent);
-  color: #ffffff;
+  color: var(--always-light-text);
   padding: 0.95rem 2.8rem;
   border-radius: var(--radius); 
   font-weight: 700;
