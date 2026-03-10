@@ -127,24 +127,27 @@ a {
 .blog-dropdown {
   position: relative;
   display: inline-block;
+  cursor: pointer;
 }
 
 /* Dropdown Menu - Desktop */
 .blog-dropdown .dropdown-menu {
-  display: none;         
-  position: absolute;      
+  display: none;
+  position: absolute;
   top: 100%;
   left: 0;
-  background: var(--bg);       /* match navbar background */
-  border: none;                /* remove default border */
+  background: var(--bg);            
+  border: none;                    
   border-radius: var(--radius);
-  min-width: 180px;            /* slightly wider for readability */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12); /* subtle shadow */
+  min-width: 180px;                  
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12); 
   z-index: 100;
   padding: 0.4rem 0;
+  list-style: none;                
+  margin: 0;
 }
 
-/* Show dropdown on hover */
+/* Show dropdown on hover (desktop) */
 .blog-dropdown:hover .dropdown-menu {
   display: block;
 }
@@ -163,6 +166,7 @@ a {
 .dropdown-menu li a:hover {
   background: var(--accent-light);
   color: white;
+  border-radius: var(--radius);       
 }
 
 /* Caret Styling */
@@ -172,9 +176,11 @@ a {
   transition: transform 0.2s ease;
 }
 
+/* Caret rotation on hover */
 .blog-dropdown:hover .caret {
-  transform: rotate(180deg); /* subtle flip on hover */
+  transform: rotate(180deg);
 }
+
 /* Logo */
 .logo {
   height: 60px;
@@ -1274,30 +1280,45 @@ footer a {
 
 /* --- DROPDOWN MENU (MOBILE) --- */
 .dropdown-menu {
-  position: relative;
+  position: relative;           /* stack links below parent */
+  display: none;                /* hidden by default */
+  background: var(--bg);        /* match navbar background */
   border: none;
-  box-shadow: none;
-  display: none;
-  background: transparent;
-  padding: 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* subtle shadow for depth */
+  border-radius: var(--radius);
+  padding: 0.4rem 0;            /* vertical spacing inside menu */
   margin: 0;
+  list-style: none;             /* remove bullets */
 }
 
+/* Show dropdown when toggled via JS */
 .dropdown-menu.show {
-  display: block;               /* show when toggled via JS */
+  display: block;
 }
 
+/* Links inside the dropdown */
 .dropdown-menu li a {
-  padding: 0.7rem 1.2rem;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+  display: block;
+  padding: 0.75rem 1.2rem;      /* larger tap-friendly padding */
   color: var(--text);
-  text-decoration: none;
   font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+  border-bottom: 1px solid rgba(0,0,0,0.08); /* subtle separation */
 }
 
+/* Remove bottom border for last link */
 .dropdown-menu li:last-child a {
-  border-bottom: none;          /* remove bottom border for last item */
+  border-bottom: none;
 }
+
+/* Hover / active effect */
+.dropdown-menu li a:hover {
+  background: var(--accent-light);
+  color: #fff;
+  border-radius: var(--radius);
+}
+   
 /* ==========================
    FLOATING BUTTONS RESPONSIVE
 ========================== */
