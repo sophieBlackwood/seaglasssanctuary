@@ -1241,7 +1241,7 @@ footer a {
 
  /* --- BLOG CARD (MOBILE OPTIMIZED) --- */
 .blog-card {
-  flex: 0 0 85vw;               /* full-width card for small screens */
+  flex: 0 0 85vw;               
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--card-bg);
@@ -1272,7 +1272,7 @@ footer a {
   box-sizing: border-box;
   border-radius: var(--radius);
   background: var(--accent);
-  color: #fff;
+  color: var(--always-light-text);
   font-weight: 700;
   text-decoration: none;
   transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
@@ -1299,7 +1299,7 @@ footer a {
     left: 0;
     width: max-content;       
     min-width: 140px;        
-    background: #0A7A67; 
+    background: var(--card-bg); 
     border: none;
     border-radius: 0;         
     box-shadow: 0 4px 8px rgba(0,0,0,0.12);
