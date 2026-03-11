@@ -253,7 +253,6 @@ nav {
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
   transition: background 0.2s ease, transform 0.2s ease;
   white-space: nowrap;
-  /* Allow button to shrink */
   flex-shrink: 1;
   min-width: 0;
 }
@@ -321,7 +320,7 @@ nav {
   color: var(--always-light-text);
   padding: 0;
   line-height: 1;
-  border-radius: var(--radius); /* 6px */
+  border-radius: var(--radius); 
   border: none;
   outline: none;
   background: transparent;
@@ -365,7 +364,7 @@ nav {
   color: var(--always-light-text);
   padding: 6rem 1.5rem;           
   text-align: center;
-  border-radius: var(--radius);   /* 0 0 40px 40px */
+  border-radius: var(--radius);  
 }
 
 .hero {
@@ -555,7 +554,7 @@ nav {
 .counselor .avatar {
   width: 110px;
   height: 80px;
-  border-radius: var(--radius); /* 14 px */
+  border-radius: var(--radius); 
   margin-bottom: 1rem;
   background-size: cover;
   background-position: center;
@@ -639,7 +638,7 @@ nav {
 .modal-content {
   background: var(--card-bg);
   color: var(--always-light-text);
-  border-radius: var(--radius); /* 12px 12px 0 0 */
+  border-radius: var(--radius); 
   max-width: 400px;
   padding: 2rem;
   text-align: center;
@@ -739,6 +738,7 @@ blockquote,
   padding: 3rem 0;
   position: relative;
 }
+
 /* ==========================
    BLOG CAROUSEL TRACK
 ========================== */
@@ -759,12 +759,11 @@ blockquote,
   align-items: center;
 }
 
-/* Inner content of blog card */
 .blog-card-inner {
   width: 100%;
   background: var(--card-bg);
   padding: 1.5rem;
-  border-radius: var(--radius); /* 16px */
+  border-radius: var(--radius); 
   box-shadow: 0 6px 20px rgba(0,0,0,0.12);
   color: var(--always-light-text);
   text-align: left;
@@ -837,10 +836,9 @@ blockquote,
   padding: 0 1.5rem;
 }
 
-/* Card shell */
 .post-card {
   background: var(--card-bg);
-  border-radius: var(--radius); /*22px*/
+  border-radius: var(--radius); 
   box-shadow: 0 12px 36px rgba(0,0,0,0.22);
 }
 
@@ -897,7 +895,6 @@ blockquote,
   color: var(--muted);         
 }
 
-/* Headings inside post */
 .post-content h2 {
   margin-top: 3rem;
   margin-bottom: 1rem;
@@ -905,7 +902,6 @@ blockquote,
   color: var(--accent-light);
 }
 
-/* Lists */
 .post-content ul {
   margin-left: 1.2rem;
   margin-bottom: 2rem;
@@ -922,13 +918,12 @@ blockquote,
   background: color-mix(in srgb, var(--card-bg) 85%, white); 
   border-left: 4px solid var(--accent);                     
   padding: 1.4rem 1.6rem;
-  border-radius: var(--radius); /* 14px */
+  border-radius: var(--radius); 
   margin: 2.8rem 0;
   font-style: italic;
   color: var(--always-light-text);
 }
 
-/* Vertical rhythm for post content */
 .post-content > * {
   margin-bottom: 1.6rem;
 }
@@ -944,7 +939,6 @@ blockquote,
   border-top: 1px solid color-mix(in srgb, var(--card-bg) 75%, white);
 }
 
-/* Dedicated button in post footer */
 .post-footer .post-btn {
   background: var(--accent);
   color: var(--always-light-text);
@@ -1008,7 +1002,6 @@ footer a {
 
 /* =========================
    MID WIDTH (Chromebook / Half Screens)
-   MUST COME BEFORE 900px!
 ========================== */
 @media (max-width: 1000px) {
   .navbar {
@@ -1257,14 +1250,14 @@ footer a {
 /* --- POST FOOTER CTA BUTTONS --- */
 .post-footer {
   display: flex;
-  flex-direction: column;       /* stack buttons vertically on mobile */
-  align-items: stretch;         /* full width */
-  gap: 0.6rem;                  /* spacing between buttons */
-  padding: 1.5rem 1rem 2rem;    /* adjust vertical spacing */
+  flex-direction: column;      
+  align-items: stretch;         
+  gap: 0.6rem;                 
+  padding: 1.5rem 1rem 2rem;   
 }
 
 .post-footer .post-btn {
-  width: 100%;                  /* full-width buttons */
+  width: 100%;                  
   text-align: center;
   padding: 1.2rem 0;
   font-size: clamp(0.85rem, 2.2vw, 0.95rem);
