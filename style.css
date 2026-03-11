@@ -120,7 +120,7 @@ a {
 }
 
 /* ================================================== */
-/* REFORMATTED BLOG DROPDOWN (NAVBAR GREEN & HOVER) */
+/* BLOG DROPDOWN */
 /* ================================================== */
 
 /* Dropdown Container */
@@ -136,7 +136,7 @@ a {
   position: absolute;
   top: 100%;
   left: 0;
-  background: var(--card-bg);           /* match navbar green */
+  background: var(--card-bg);          
   border: none;
   border-radius: var(--radius);
   min-width: 180px;
@@ -155,12 +155,11 @@ a {
 /* Dropdown Links */
 .dropdown-menu li a {
   display: block;
-  padding: 0.65rem 1.2rem;               /* touch-friendly spacing */
-  color: #fff;                           /* white text for contrast */
+  padding: 0.65rem 1.2rem;               
+  color: var(--always-light-text);                      
   font-weight: 500;
   text-decoration: none;
   transition: background 0.2s ease, color 0.2s ease;
-  border-bottom: 1px solid rgba(255,255,255,0.15); /* subtle separation */
 }
 
 /* Remove bottom border for last link */
@@ -170,9 +169,8 @@ a {
 
 /* Hover effect */
 .dropdown-menu li a:hover {
-  background: color-mix(in srgb, var(--accent) 85%, black); /* slightly darker green */
-  color: #fff;
-  border-radius: var(--radius);
+  background: #0A7A67; 
+  color: var(--always-light-text);
 }
 
 /* Caret Styling */
