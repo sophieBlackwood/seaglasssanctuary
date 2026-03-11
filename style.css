@@ -410,12 +410,12 @@ nav {
 }
 
 #hero-btn:hover {
-  background: var(--footer);
+  background: var(--accent-light);
   transform: translateY(-2px); 
 }
 
 #hero-btn:focus-visible {
-  outline: 3px solid var(--footer);
+  outline: 3px solid var(--accent-light);
   outline-offset: 3px;
 }
 
