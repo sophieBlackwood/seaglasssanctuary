@@ -36,16 +36,28 @@
 
       <!-- Desktop Nav -->
       <nav class="desktop-nav">
-        <ul class="nav-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="index.html#mission">Mission</a></li>
-          <li><a href="index.html#resources">Resources</a></li>
-          <li><a href="helplines.html">Helplines</a></li>
-          <li><a href="index.html#support">Support</a></li>
-          <li><a href="index.html#stories">Stories</a></li>
-          <li><a href="index.html#blog">Blog</a></li>
-        </ul>
-      </nav>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#mission">Mission</a></li>
+    <li><a href="index.html#resources">Resources</a></li>
+    <li><a href="helplines.html">Helplines</a></li>
+    <li><a href="index.html#support">Support</a></li>
+    <li><a href="index.html#stories">Stories</a></li>
+
+    <!-- Blog Dropdown -->
+   <li class="nav-item blog-dropdown"> <a>Blog <span class="caret">▼</span></a>
+      <ul class="dropdown-menu">
+        <li><a href="add.html">ADD</a></li>
+        <li><a href="adhd.html">ADHD</a></li>
+        <li><a href="anxiety.html">Anxiety</a></li>
+        <li><a href="depression.html">Depression</a></li>
+        <li><a href="ocd.html">OCD</a></li>
+        <li><a href="index.html#blog">Featured</a></li>
+      </ul>
+    </li>
+
+  </ul>
+</nav>
 
       <!-- Quick Exit  -->
       <button id="quick-exit" title="Quickly exit to Amazon">
@@ -54,24 +66,36 @@
       </button>
     </div>
 
-    <!-- Side Nav -->
-    <div id="mySidenav" class="sidenav">
-      <div class="sidenav-header">
-        <img src="logo_text.png" class="sidenav-logo" alt="Seaglass Sanctuary Logo">
-        <button class="closebtn" onclick="closeNav()" aria-label="Close menu">×</button>
-      </div>
-      <hr>
-      <a href="index.html">Home</a>
-      <a href="index.html#mission">Mission</a>
-      <a href="index.html#resources">Resources</a>
-      <a href="helplines.html">Helplines</a>
-      <a href="index.html#support">Support</a>
-      <a href="index.html#stories">Stories</a>
-      <a href="index.html#blog">Blog</a>
-    </div>
+    <!-- Side Nav (Mobile) -->
+<div id="mySidenav" class="sidenav">
+  <div class="sidenav-header">
+    <img src="logo_text.png" class="sidenav-logo" alt="Seaglass Sanctuary Logo">
+    <button class="closebtn" onclick="closeNav()" aria-label="Close menu">×</button>
+  </div>
+  <hr>
+  <a href="index.html">Home</a>
+  <a href="index.html#mission">Mission</a>
+  <a href="index.html#resources">Resources</a>
+  <a href="helplines.html">Helplines</a>
+  <a href="index.htm#support">Support</a>
+  <a href="index.html#stories">Stories</a>
+
+  <!-- Blog Dropdown Mobile -->
+  <div class="mobile-dropdown" data-dropdown>
+    <a>Blog <span class="caret">▼</span></a>
+    <ul class="dropdown-menu">
+      <li><a href="add.html">ADD</a></li>
+      <li><a href="adhd.html">ADHD</a></li>
+      <li><a href="anxiety.html">Anxiety</a></li>
+      <li><a href="depression.html">Depression</a></li>
+      <li><a href="ocd.html">OCD</a></li>
+       <li><a href="index.html#blog">Featured</a></li>
+    </ul>
+  </div>
+</div>
   </header>
-  
-  <main>
+ <main>
+
 <main class="post">
   <article class="post-card">
 
