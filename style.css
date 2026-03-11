@@ -179,7 +179,7 @@ a {
   font-size: 0.7em;
   margin-left: 0.25rem;
   transition: transform 0.2s ease;
-  display: inline-block; /* allows rotation */
+  display: inline-block; 
 }
 
 /* Caret rotation on hover */
@@ -1317,7 +1317,7 @@ footer a {
   .mobile-dropdown .dropdown-menu li a {
     display: block;
     padding: 0.55rem 1rem;    
-    color: #fff;
+    color: var(--always-light-text);
     font-weight: 500;
     text-decoration: none;
     transition: background 0.2s ease;
@@ -1330,7 +1330,7 @@ footer a {
 
   .mobile-dropdown .dropdown-menu li a:hover,
   .mobile-dropdown .dropdown-menu li a:active {
-    background: color-mix(in srgb, var(--accent) 85%, black); 
+    background: #0A7A67; 
   }
 
   /* Caret rotation */
