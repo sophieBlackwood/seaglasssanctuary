@@ -1284,45 +1284,39 @@ footer a {
   box-shadow: 0 12px 30px rgba(0,0,0,0.38);
 }
 
-/* --- DROPDOWN MENU (MOBILE) - GREEN STYLE --- */
 .dropdown-menu {
-  position: relative;                   /* stack links below parent */
-  display: none;                        /* hidden by default */
-  background: var(--accent);            /* match navbar green */
+  position: relative;
+  display: none;
+  background: var(--accent);
   border: none;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12); /* subtle shadow for depth */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
   border-radius: var(--radius);
-  padding: 0.3rem 0;                    /* vertical spacing inside menu */
+  padding: 0.3rem 0;
   margin: 0;
-  list-style: none;                     /* remove bullets */
+  list-style: none;
 }
 
-/* Show dropdown when toggled via JS */
 .dropdown-menu.show {
   display: block;
 }
 
-/* Links inside the dropdown */
 .dropdown-menu li a {
   display: block;
-  padding: 0.7rem 1.2rem;               /* tap-friendly padding */
-  color: #fff;                           /* white text for contrast */
+  padding: 0.85rem 1.2rem;
+  color: #fff;
   font-weight: 500;
   text-decoration: none;
-  transition: background 0.2s ease, color 0.2s ease;
-  border-bottom: 1px solid rgba(255,255,255,0.15); /* subtle separation */
+  transition: background 0.2s ease;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
 }
 
-/* Remove bottom border for last link */
 .dropdown-menu li:last-child a {
   border-bottom: none;
 }
 
-/* Hover / active effect */
-.dropdown-menu li a:hover {
-  background: color-mix(in srgb, var(--accent) 85%, black); /* darker green on hover */
-  color: #fff;
-  border-radius: var(--radius);
+.dropdown-menu li a:hover,
+.dropdown-menu li a:active {
+  background: color-mix(in srgb, var(--accent) 85%, black);
 }
    
 /* ==========================
