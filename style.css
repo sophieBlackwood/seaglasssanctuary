@@ -155,10 +155,11 @@ a {
 /* Dropdown Links */
 .dropdown-menu li a {
   display: block;
-  padding: 0.65rem 1.2rem;               
-  color: var(--always-light-text);                      
+  padding: 0.65rem 1.2rem;
+  color: var(--always-light-text);
   font-weight: 500;
   text-decoration: none;
+  border-radius: 0;
   transition: background 0.2s ease, color 0.2s ease;
 }
 
@@ -178,6 +179,7 @@ a {
   font-size: 0.7em;
   margin-left: 0.25rem;
   transition: transform 0.2s ease;
+  display: inline-block; /* allows rotation */
 }
 
 /* Caret rotation on hover */
