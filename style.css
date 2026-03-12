@@ -8,8 +8,8 @@
   --muted: #4FB29F;           /* Muted teal for secondary text */
   --always-light-text: #DFFAEA; /* Soft mint-white text for contrast */
   --footer: #0A7A67;          /* Dark teal footer background */
-  --radius: 12px;             /* Standard border radius */
-  --transition: 0.3s ease;    /* Standard transition speed */
+  --radius: 12px;            
+  --transition: 0.3s ease;    
 }
 
 /* Dark Mode Colors */
