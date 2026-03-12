@@ -1,6 +1,4 @@
-/* ==========================
-   BASE COLORS (LIGHT MODE)
-========================== */
+/* Base Colors (Light Mode) */
 :root {
   --bg: #F2FBFA;              /* Very light mint background */
   --text: #1C221D;            /* Very dark greenish text */
@@ -14,9 +12,7 @@
   --transition: 0.3s ease;    /* Standard transition speed */
 }
 
-/* ==========================
-   DARK MODE COLORS
-========================== */
+/* Dark Mode Colors */
 body.dark {
   --bg: #0E1211;              /* Near-black background */
   --text: #DFFAEA;            /* Soft mint-white text */
@@ -27,9 +23,7 @@ body.dark {
   --footer: #0A7A67;          /* Dark teal footer background */
 }
 
-/* ==========================
-   GLOBAL TRANSITIONS
-========================== */
+/* Global Transitions */
 :root,
 body,
 body.dark {
@@ -41,9 +35,7 @@ body.dark {
   padding-top: 20px;         
 }
 
-/* ==========================
-   RESET & BASE STYLES
-========================== */
+/* Reset and Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -64,9 +56,7 @@ a {
   text-decoration: none;       
 }
 
-/* ==========================
-   CONTAINERS
-========================== */
+/* Containers */
 .container {
   max-width: 1100px;
   margin: 0 auto;
@@ -86,11 +76,7 @@ a {
   color: #7FD0C2;             
 }
 
-/* ==========================
-   NAVBAR 
-========================== */
-
-/* Base navbar */
+/* Navbar */
 .navbar {
   position: fixed;
   top: 0;
@@ -104,7 +90,6 @@ a {
   height: 90px;
   padding: 0 2.5rem; 
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  /* Allow wrapping if needed */
   flex-wrap: wrap; 
 }
 
@@ -119,18 +104,13 @@ a {
   min-width: 0; 
 }
 
-/* ================================================== */
-/* BLOG DROPDOWN */
-/* ================================================== */
-
-/* Dropdown Container */
+/* Blog Dropdown */
 .blog-dropdown {
   position: relative;
   display: inline-block;
   cursor: pointer;
 }
 
-/* Dropdown Menu - Desktop & Mobile */
 .blog-dropdown .dropdown-menu {
   display: none;
   position: absolute;
@@ -147,12 +127,10 @@ a {
   margin: 0;
 }
 
-/* Show dropdown on hover (desktop) */
 .blog-dropdown:hover .dropdown-menu {
   display: block;
 }
 
-/* Dropdown Links */
 .dropdown-menu li a {
   display: block;
   padding: 0.65rem 1.2rem;
@@ -163,12 +141,10 @@ a {
   transition: background 0.2s ease, color 0.2s ease;
 }
 
-/* Remove bottom border for last link */
 .dropdown-menu li:last-child a {
   border-bottom: none;
 }
 
-/* Hover effect */
 .dropdown-menu li a:hover {
   background: #0A7A67; 
   color: var(--always-light-text);
@@ -182,7 +158,6 @@ a {
   display: inline-block; 
 }
 
-/* Caret rotation on hover */
 .blog-dropdown:hover .caret {
   transform: rotate(180deg);
 }
@@ -291,13 +266,11 @@ nav {
   margin-bottom: 10px;     
 }
 
-/* Sidenav Logo */
 .sidenav-logo {
   height: 36px;
   width: auto;
 }
 
-/* Sidenav Links */
 .sidenav a {
   padding: 12px 24px;
   text-decoration: none;
@@ -347,17 +320,13 @@ nav {
   outline: none; 
   box-shadow: none; 
 }
-
-/* Image next to hamburger icon */
 .sidenav-img {
   height: 24px;
   margin-left: 8px;
 }
 
 
-/* ==========================
-   HERO SECTIONS
-========================== */
+/* Hero Sections */
 .hero,
 .hero-helplines,
 .hero-about {
@@ -394,9 +363,7 @@ nav {
   color: var(--always-light-text);
 }
 
-/* ==========================
-   PRIMARY BUTTONS
-========================== */
+/* Primary Buttons */
 #hero-btn {
    background: #0A7A67;
   color: var(--always-light-text);
@@ -444,9 +411,7 @@ nav {
   outline-offset: 3px;
 }
 
-/* ==========================
-   SECONDARY BUTTONS
-========================== */
+/* Secondary Buttons */
 .btn-secondary {
   display: inline-block;
   border: 2px solid var(--accent);
@@ -481,9 +446,7 @@ nav {
   box-shadow: 0 4px 14px rgba(0,0,0,0.18);
 }
 
-/* ==========================
-   FLOATING BUTTONS (THEME & BACK-TO-TOP)
-========================== */
+/* Floating Buttons */
 #floating-buttons {
   position: fixed;
   right: 1.5rem;
@@ -511,9 +474,6 @@ nav {
   transition: background var(--transition), transform var(--transition);
 }
 
-/* ==========================
-   FLOATING BUTTON HOVER EFFECTS
-========================== */
 #theme-toggle:hover,
 #back-to-top:hover {
   background: color-mix(in srgb, var(--accent) 85%, black);
@@ -530,9 +490,7 @@ nav {
   pointer-events: auto;       
 }
 
-/* ==========================
-   COUNSELOR CARDS GRID
-========================== */
+/* Counselor Cards */
 .counselors-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -548,9 +506,6 @@ nav {
   text-align: center;
 }
 
-/* ==========================
-   COUNSELOR AVATARS
-========================== */
 .counselor .avatar {
   width: 110px;
   height: 80px;
@@ -567,7 +522,6 @@ nav {
   );
 }
 
-/* Avatar image overrides */
 .avatar[data-avatar="evelyn"] { background-image: url("evelyn.jpg"); }
 .avatar[data-avatar="marcus"] { background-image: url("marcus.jpg"); }
 .avatar[data-avatar="jasmine"] { background-image: url("jasmine.jpg"); }
@@ -575,9 +529,6 @@ nav {
 .avatar[data-avatar="lauren"] { background-image: url("lauren.jpg"); }
 .avatar[data-avatar="samuel"] { background-image: url("samuel.jpg"); }
 
-/* ==========================
-   COUNSELOR CARD TEXT
-========================== */
 .counselor .card-body h4 {
   margin-bottom: 0.35rem;
   font-size: 1.1rem;
@@ -596,9 +547,6 @@ nav {
   margin-bottom: 0.8rem;
 }
 
-/* ==========================
-   SCHEDULE BUTTON CTA
-========================== */
 .schedule-cta {
   display: flex;
   justify-content: center;
@@ -614,9 +562,7 @@ nav {
   min-width: 260px;
 }
 
-/* ==========================
-   MODALS
-========================== */
+/* Modals */
 .modal {
   position: fixed;
   inset: 0;                  
@@ -650,9 +596,7 @@ nav {
   transform: translateY(0);   
 }
 
-/* ==========================
-   SECTIONS & CARD GRIDS
-========================== */
+/* Sections and Card Grids */
 .section {
   padding: 4rem 1.5rem;
   text-align: center;
@@ -671,28 +615,22 @@ nav {
   gap: 2rem;
 }
 
-/* Cards */
 .card-grid {
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   max-width: 1100px;
   margin: 0 auto;
 }
 
-/* Testimonials */
 .testimonial-grid {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   margin-top: 2rem;
 }
 
-/* Team */
 .team-grid {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   margin-top: 2rem;
 }
 
-/* ==========================
-   SHARED CARD STYLES
-========================== */
 .team-member,
 .card,
 blockquote,
@@ -717,9 +655,7 @@ blockquote,
   border-radius: var(--radius);
 }
 
-/* ==========================
-   BLOG CAROUSEL
-========================== */
+/* Blog Carousel */
 .blog-section {
   padding: 4rem 1.5rem;
   text-align: center;
@@ -739,9 +675,6 @@ blockquote,
   position: relative;
 }
 
-/* ==========================
-   BLOG CAROUSEL TRACK
-========================== */
 .blog-card-grid {
   display: flex;               
   gap: 2rem;                  
@@ -749,9 +682,6 @@ blockquote,
   transition: transform 0.5s ease;
 }
 
-/* ==========================
-   INDIVIDUAL BLOG CARD
-========================== */
 .blog-card {
   flex: 0 0 320px;            
   display: flex;
@@ -770,9 +700,6 @@ blockquote,
   cursor: pointer;           
 }
 
-/* ==========================
-   CAROUSEL BUTTONS
-========================== */
 .blog-carousel-btn {
   position: absolute;
   top: 50%;
@@ -802,9 +729,6 @@ blockquote,
   opacity: 0.75;
 }
 
-/* ==========================
-   BLOG CARD CONTENT
-========================== */
 .blog-content .date {
   font-size: 0.8rem;
   letter-spacing: 1px;
@@ -827,9 +751,7 @@ blockquote,
   overflow: hidden;
 }
 
-/* ==========================
-   FINAL POST SYSTEM
-========================== */
+/* Post System */
 .post {
   max-width: 900px;
   margin: 6rem auto;
@@ -842,7 +764,6 @@ blockquote,
   box-shadow: 0 12px 36px rgba(0,0,0,0.22);
 }
 
-/* ---------- HEADER ---------- */
 .post-header {
   padding: 3rem 3rem 1.8rem;
   text-align: center;
@@ -869,7 +790,6 @@ blockquote,
   color: var(--muted);
 }
 
-/* ---------- HERO IMAGE ---------- */
 .post-hero img {
   width: 100%;
   display: block;
@@ -877,7 +797,6 @@ blockquote,
   object-fit: cover;
 }
 
-/* ---------- POST CONTENT ---------- */
 .post-content {
   padding: 2.8rem 3rem;
   line-height: 1.85;
@@ -911,9 +830,6 @@ blockquote,
   margin-bottom: 0.5rem;
 }
 
-/* ==========================
-   POST CALLOUT
-========================== */
 .post-callout {
   background: color-mix(in srgb, var(--card-bg) 85%, white); 
   border-left: 4px solid var(--accent);                     
@@ -928,9 +844,6 @@ blockquote,
   margin-bottom: 1.6rem;
 }
 
-/* ==========================
-   POST FOOTER CTA
-========================== */
 .post-footer {
   padding: 2.6rem 2.5rem 1.5rem;
   display: flex;
@@ -957,9 +870,7 @@ blockquote,
   box-shadow: 0 12px 30px rgba(0,0,0,0.38);
 }
 
-/* ==========================
-   SUBMISSION PAGE
-========================== */
+/* Submission Page */
 .submission-page {
   min-height: 100vh;
   display: flex;
@@ -971,9 +882,7 @@ blockquote,
   flex: 1; 
 }
 
-/* ==========================
-   FOOTER
-========================== */
+/* Footer */
 footer {
   background-color: var(--footer);
   color: var(--always-light-text);
@@ -989,20 +898,14 @@ footer a {
   color: var(--always-light-text); 
 }
 
-/* =================================================
-   RESPONSIVE SYSTEM
-================================================= */
-
-/* Ensure hamburger NEVER appears on desktop */
+/* Responsive System */
 @media (min-width: 641px) {
   .hamburger-menu {
     display: none !important;
   }
 }
 
-/* =========================
-   MID WIDTH (Chromebook / Half Screens)
-========================== */
+/* Mid Width */
 @media (max-width: 1000px) {
   .navbar {
     height: 75px;
@@ -1026,12 +929,8 @@ footer a {
   }
 }
 
-/* =========================
-   TABLETS + SMALL LAPTOPS (≤900px)
-========================== */
+/* Tablets and Small Laptops */
 @media (max-width: 900px) {
-
-  /* --- NAVBAR --- */
   .navbar {
     height: 70px;
     padding: 0 clamp(0.5rem, 2vw, 1rem);
@@ -1063,7 +962,6 @@ footer a {
     font-size: 0.85rem;
   }
 
-  /* --- HERO --- */
   .hero {
     padding: 5rem clamp(1rem, 4vw, 1.5rem);
   }
@@ -1075,8 +973,7 @@ footer a {
   .hero p {
     font-size: clamp(1.1rem, 2.5vw, 1.2rem);
   }
-
-  /* --- BLOG CAROUSEL → SCROLL MODE --- */
+   
   .blog-carousel-track-container {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -1100,12 +997,10 @@ footer a {
     display: none; 
   }
 
-  /* --- SECTION SPACING --- */
   .section {
     padding: clamp(2.5rem, 5vw, 3rem) clamp(1rem, 3vw, 1.2rem);
   }
 
-  /* --- POST LAYOUT --- */
   .post-header,
   .post-content {
     padding: clamp(1.5rem, 3vw, 2rem) clamp(1rem, 3vw, 1.5rem);
@@ -1119,14 +1014,12 @@ footer a {
     width: 100%; 
   }
 
-  /* --- GRID GAP --- */
   .card-grid,
   .testimonial-grid,
   .team-grid {
     gap: clamp(1rem, 2vw, 2rem);
   }
 
-  /* --- FLOATING BUTTONS --- */
   #theme-toggle,
   #back-to-top {
     width: clamp(2.5rem, 6vw, 3rem);
@@ -1135,9 +1028,7 @@ footer a {
   }
 }
 
-/* =========================
-   TABLETS (≤768px)
-========================== */
+/* Tablets */
 @media (max-width: 768px) {
 
   .hero h2 {
@@ -1164,12 +1055,9 @@ footer a {
   }
 }
 
-/* =========================
-   PHONES (≤640px)
-========================== */
+/* Phones */
 @media (max-width: 640px) {
 
-  /* --- NAVBAR STRUCTURE --- */
   .navbar {
     padding: 0 1rem;
   }
@@ -1181,8 +1069,7 @@ footer a {
     position: relative; 
     width: 100%;
   }
-
-  /* --- SWITCH NAV TO HAMBURGER --- */
+   
   nav,
   .logo {
     display: none; 
@@ -1207,7 +1094,6 @@ footer a {
     font-size: 0.8rem;
   }
 
-  /* --- HERO --- */
   .hero {
     padding: clamp(4rem, 8vw, 5rem) clamp(0.8rem, 3vw, 1.2rem);
   }
@@ -1220,7 +1106,6 @@ footer a {
     font-size: clamp(1rem, 2.5vw, 1.1rem);
   }
 
-  /* --- SINGLE COLUMN LAYOUT --- */
   .card-grid,
   .testimonial-grid,
   .team-grid {
@@ -1232,7 +1117,6 @@ footer a {
     padding: clamp(1rem, 3vw, 1.5rem);
   }
 
- /* --- BLOG CARD (MOBILE OPTIMIZED) --- */
 .blog-card {
   flex: 0 0 85vw;               
   border-radius: var(--radius);
@@ -1246,8 +1130,7 @@ footer a {
   transform: translateY(-2px);
   box-shadow: 0 8px 22px rgba(0,0,0,0.18);
 }
-
-/* --- POST FOOTER CTA BUTTONS --- */
+   
 .post-footer {
   display: flex;
   flex-direction: column;      
@@ -1277,10 +1160,7 @@ footer a {
   box-shadow: 0 12px 30px rgba(0,0,0,0.38);
 }
 
-/* =============================== */
-/* Mobile Dropdown Menu Styling     */
-/* =============================== */
-
+/* Mobile Dropdown Menu */
 .mobile-dropdown {
   position: relative;
   width: 100%;           
@@ -1330,11 +1210,8 @@ footer a {
   transform: rotate(180deg);
   transition: transform 0.2s ease;
 }
-
-   
-/* ==========================
-   FLOATING BUTTONS RESPONSIVE
-========================== */
+ 
+/* Floating Buttons Responsive */
 #theme-toggle,
 #back-to-top {
   width: clamp(2.5rem, 6vw, 3rem); 
