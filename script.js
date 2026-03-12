@@ -1,7 +1,3 @@
-/* ================================================= */
-/* MAIN SCRIPT: Seaglass Sanctuary - DEBUGGED & OPTIMIZED */
-/* ================================================= */
-
 function openNav() {
   const sidenav = document.getElementById("mySidenav");
   const hamburger = document.querySelector(".hamburger-menu");
@@ -22,8 +18,7 @@ function closeNav() {
   hamburger.style.display = "flex";
 }
 
-  /* -------------------- */
-  /* Accessibility: Reduced Motion */
+  // Accessibility: Reduced Motion  
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   if (prefersReducedMotion) {
@@ -35,17 +30,16 @@ function closeNav() {
 
   mobileDropdowns.forEach(link => {
     link.addEventListener('click', e => {
-      if (window.innerWidth <= 640) {  // only on mobile
+      if (window.innerWidth <= 640) {  
         e.preventDefault();
-        const menu = link.nextElementSibling;       // the <ul class="dropdown-menu">
-        menu.classList.toggle('show');              // show/hide menu
-        link.classList.toggle('open');              // toggle caret rotation
+        const menu = link.nextElementSibling;       
+        menu.classList.toggle('show');              
+        link.classList.toggle('open');              
       }
     });
   });
   
-  /* -------------------- */
-  /* Theme Toggle */
+  // Theme Toggle  
   const themeToggle = document.getElementById("theme-toggle");
 
   if (themeToggle) {
@@ -81,8 +75,7 @@ function closeNav() {
     });
   }
 
-  /* -------------------- */
-  /* Quick Exit Modal */
+  // Quick Exit Modal  
   const quickExitModal = document.getElementById("quick-exit-modal");
   const dismissModalBtn = document.getElementById("dismiss-modal");
 
@@ -96,8 +89,7 @@ function closeNav() {
     });
   }
 
-  /* -------------------- */
-  /* Quick Exit */
+  // Quick Exit  
   const quickExitBtn = document.getElementById("quick-exit");
   const quickExitURL = "https://www.amazon.com/s?k=water+bottle";
 
@@ -107,8 +99,7 @@ function closeNav() {
     });
   }
 
-  /* -------------------- */
-  /* Triple ESC Rerouting */
+  // Triple ESC Rerouting  
   let escPressCount = 0;
   let escTimer;
 
@@ -125,8 +116,7 @@ function closeNav() {
     }
   });
 
-  /* -------------------- */
-  /* Floating Buttons */
+  // Floating Buttons  
   const backToTop = document.getElementById("back-to-top");
   const floatingButtons = document.getElementById("floating-buttons");
   let holdTimer;
@@ -160,8 +150,7 @@ function closeNav() {
     );
   }
 
-  /* -------------------- */
-  /* Smooth Scrolling */
+  // Smooth Scrolling  
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", function (e) {
       const targetId = this.getAttribute("href");
@@ -176,9 +165,7 @@ function closeNav() {
     });
   });
 
-  /* ================================================= */
-  /* BLOG CAROUSEL */
-  /* ================================================= */
+  // Blog Carousel  
   const blogTrack = document.querySelector(".blog-card-grid");
   const blogPrev = document.querySelector(".blog-carousel-btn.prev");
   const blogNext = document.querySelector(".blog-carousel-btn.next");
@@ -219,21 +206,17 @@ function closeNav() {
     window.addEventListener("resize", () => { clearTimeout(resizeTimeout); resizeTimeout = setTimeout(() => { requestAnimationFrame(() => updateCarousel(false)); }, 100); });
   }
 
-  /* -------------------- */
-  /* Hamburger auto-reset on desktop */
+  // Hamburger auto-reset on desktop 
   window.addEventListener("resize", () => {
     const sidenav = document.getElementById("mySidenav");
     const hamburger = document.querySelector(".hamburger-menu");
     if (window.innerWidth > 900 && sidenav && hamburger) { sidenav.style.width = "0"; hamburger.style.display = "flex"; }
   });
 
-  /* ================================================= */
-  /* BLOG DROPDOWN NAVIGATION */
-  /* ================================================= */
+// Blog Dropdown Navigation 
   const blogDropdownLinks = document.querySelectorAll('.blog-dropdown > a');
   blogDropdownLinks.forEach(link => {
     link.addEventListener('click', e => {
-      // On mobile only, toggle dropdown menu
       if (window.innerWidth <= 640) {
         e.preventDefault();
         const menu = link.nextElementSibling;
