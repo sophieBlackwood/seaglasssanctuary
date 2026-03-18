@@ -906,17 +906,11 @@ footer a {
 }
 
 /* Mid Width */
-@media (max-width: 1001px) {
+@media (max-width: 1000px) {
   .navbar {
     height: 75px;
-  nav {
-    display: flex;
   }
 
-  .hamburger-menu {
-    display: none;
-  }
-    
   .logo {
     height: 50px;
   }
@@ -934,63 +928,39 @@ footer a {
     padding: 0.4rem 0.7rem;
   }
 }
-  
 
-/* =============================== */
-/* Tablets & Small Laptops (MID)  */
-/* =============================== */
-@media (max-width: 1000px) and (min-width: 641px) {
+/* Tablets and Small Laptops */
+@media (max-width: 900px) {
+  .navbar {
+    height: 70px;
+    padding: 0 clamp(0.5rem, 2vw, 1rem);
+  }
 
- /* =============================== */
-/* Scrollable Nav (MID SCREENS)   */
-/* =============================== */
+  .nav-container {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
 
-nav {
-  display: flex;
-  flex: 1 1 auto;
-  min-width: 0;                /* 🔥 CRITICAL: allows shrinking */
-  justify-content: flex-start;
-  overflow: hidden;            /* prevents bleed into button */
-}
+  nav {
+    display: flex;  
+  }
 
-.nav-links {
-  display: flex;
-  gap: 0.8rem;
+  .logo {
+    display: block;
+    height: 50px;
+  }
 
-  flex-wrap: nowrap;           /* 🔥 force single row */
-  overflow-x: auto;            /* 🔥 enable horizontal scroll */
-  overflow-y: hidden;
+  .hamburger-menu {
+    display: none;  
+  }
 
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;       /* Firefox */
-}
-
-.nav-links::-webkit-scrollbar {
-  display: none;               /* Chrome/Safari */
-}
-
-.nav-links a {
-  flex: 0 0 auto;              /* 🔥 prevents shrinking weirdly */
-  white-space: nowrap;
-
-  font-size: 0.9rem;
-  padding: 0.35rem 0.6rem;
-}
-  
-  nav::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: 100%;
-  width: 30px;
-  pointer-events: none;
-
-  background: linear-gradient(to right, transparent, var(--bg));
-}
-  /* =============================== */
-  /* EXISTING CONTENT (unchanged)   */
-  /* =============================== */
+  #quick-exit {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+  }
 
   .hero {
     padding: 5rem clamp(1rem, 4vw, 1.5rem);
@@ -1058,10 +1028,7 @@ nav {
   }
 }
 
-
-/* =============================== */
-/* Tablets (SMALLER)              */
-/* =============================== */
+/* Tablets */
 @media (max-width: 768px) {
 
   .hero h2 {
@@ -1251,3 +1218,5 @@ nav {
   height: clamp(2.5rem, 6vw, 3rem); 
   font-size: clamp(1rem, 2.5vw, 1.1rem); 
 }
+
+
