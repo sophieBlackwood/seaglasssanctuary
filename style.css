@@ -906,17 +906,17 @@ footer a {
 }
 
 /* Mid Width */
-@media (max-width: 1000px) {
+@media (max-width: 1001px) {
   .navbar {
     height: 75px;
-  }
- nav {
-    display: none;
+  nav {
+    display: flex;
   }
 
   .hamburger-menu {
-    display: flex;
+    display: none;
   }
+    
   .logo {
     height: 50px;
   }
@@ -934,12 +934,16 @@ footer a {
     padding: 0.4rem 0.7rem;
   }
 }
+  
 
-/* Tablets and Small Laptops */
-@media (max-width: 900px) {
+/* =============================== */
+/* Tablets & Small Laptops (MID)  */
+/* =============================== */
+@media (max-width: 1000px) and (min-width: 641px) {
+
   .navbar {
     height: 70px;
-    padding: 0 clamp(0.5rem, 2vw, 1rem);
+    padding: 0 1.2rem;
   }
 
   .nav-container {
@@ -950,23 +954,45 @@ footer a {
     width: 100%;
   }
 
+  /* ✅ Keep desktop nav, but make it adaptive */
   nav {
-    display: flex;  
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;              /* 🔥 FIX: prevents overflow */
+    justify-content: center;
+  }
+
+  .nav-links a {
+    font-size: 0.9rem;
+    padding: 0.35rem 0.6rem;
+    white-space: nowrap;
   }
 
   .logo {
     display: block;
-    height: 50px;
+    height: 48px;
   }
 
+  /* ✅ Hide hamburger ONLY in this range */
   .hamburger-menu {
-    display: none;  
+    display: none;
   }
 
+  /* ✅ Reduce pressure from button */
   #quick-exit {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.85rem;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.8rem;
   }
+
+  /* =============================== */
+  /* EXISTING CONTENT (unchanged)   */
+  /* =============================== */
 
   .hero {
     padding: 5rem clamp(1rem, 4vw, 1.5rem);
@@ -1034,7 +1060,10 @@ footer a {
   }
 }
 
-/* Tablets */
+
+/* =============================== */
+/* Tablets (SMALLER)              */
+/* =============================== */
 @media (max-width: 768px) {
 
   .hero h2 {
