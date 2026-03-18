@@ -941,55 +941,53 @@ footer a {
 /* =============================== */
 @media (max-width: 1000px) and (min-width: 641px) {
 
-  .navbar {
-    height: 70px;
-    padding: 0 1.2rem;
-  }
+ /* =============================== */
+/* Scrollable Nav (MID SCREENS)   */
+/* =============================== */
 
-  .nav-container {
-    display: flex;
-    position: relative;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
+nav {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;                /* 🔥 CRITICAL: allows shrinking */
+  justify-content: flex-start;
+  overflow: hidden;            /* prevents bleed into button */
+}
 
-  /* ✅ Keep desktop nav, but make it adaptive */
-  nav {
-    display: flex;
-    flex-grow: 1;
-    justify-content: center;
-  }
+.nav-links {
+  display: flex;
+  gap: 0.8rem;
 
-  .nav-links {
-    display: flex;
-    gap: 0.8rem;
-    flex-wrap: wrap;              /* 🔥 FIX: prevents overflow */
-    justify-content: center;
-  }
+  flex-wrap: nowrap;           /* 🔥 force single row */
+  overflow-x: auto;            /* 🔥 enable horizontal scroll */
+  overflow-y: hidden;
 
-  .nav-links a {
-    font-size: 0.9rem;
-    padding: 0.35rem 0.6rem;
-    white-space: nowrap;
-  }
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;       /* Firefox */
+}
 
-  .logo {
-    display: block;
-    height: 48px;
-  }
+.nav-links::-webkit-scrollbar {
+  display: none;               /* Chrome/Safari */
+}
 
-  /* ✅ Hide hamburger ONLY in this range */
-  .hamburger-menu {
-    display: none;
-  }
+.nav-links a {
+  flex: 0 0 auto;              /* 🔥 prevents shrinking weirdly */
+  white-space: nowrap;
 
-  /* ✅ Reduce pressure from button */
-  #quick-exit {
-    padding: 0.45rem 0.9rem;
-    font-size: 0.8rem;
-  }
+  font-size: 0.9rem;
+  padding: 0.35rem 0.6rem;
+}
+  
+  nav::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 30px;
+  pointer-events: none;
 
+  background: linear-gradient(to right, transparent, var(--bg));
+}
   /* =============================== */
   /* EXISTING CONTENT (unchanged)   */
   /* =============================== */
