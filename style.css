@@ -910,7 +910,13 @@ footer a {
   .navbar {
     height: 75px;
   }
+ nav {
+    display: none;
+  }
 
+  .hamburger-menu {
+    display: flex;
+  }
   .logo {
     height: 50px;
   }
