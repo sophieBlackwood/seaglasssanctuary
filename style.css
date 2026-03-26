@@ -30,7 +30,7 @@ body.dark {
   transition: 
     background-color 0.6s ease,
     color 0.6s ease,
-    border-color 0.6s ease,
+    border-color 0.6s ease;
   padding-top: 20px;         
 }
 
@@ -406,7 +406,10 @@ nav {
   border: none;
   cursor: pointer;
   transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
-  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);   
+  font-size: 1.05rem;
+  text-align: center;
+  min-width: 260px;
 }
 
 .btn:hover,
@@ -487,7 +490,7 @@ nav {
 
 #theme-toggle:hover,
 #back-to-top:hover {
-  background: color-mix(in srgb, var(--accent) 85%, black);
+  background: var(--accent);
   transform: scale(1.05);
 }
 
@@ -505,7 +508,7 @@ nav {
 .counselors-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  max-width: calc(3 * 280px + 2 * 2rem); 
+  max-width: calc(840px + 4rem); 
   gap: 2rem;
   margin: 1.5rem auto 0;   
 }
@@ -564,14 +567,7 @@ nav {
   margin-top: 3rem;
 }
 
-.schedule-btn {
-  padding: 0.9rem 3.2rem;     
-  font-size: 1.05rem;
-  font-weight: 600;
-  border-radius: var(--radius);
-  text-align: center;
-  min-width: 260px;
-}
+
 
 /* Modals */
 .modal {
@@ -842,7 +838,7 @@ blockquote,
 }
 
 .post-callout {
-  background: color-mix(in srgb, var(--card-bg) 85%, white); 
+  background: var(--card-bg); 
   border-left: 4px solid var(--accent);                     
   padding: 1.4rem 1.6rem;
   border-radius: var(--radius); 
@@ -860,7 +856,7 @@ blockquote,
   display: flex;
   justify-content: center;
   background: var(--card-bg);
-  border-top: 1px solid color-mix(in srgb, var(--card-bg) 75%, white);
+  border-top: 1px solid var(--card-bg);
 }
 
 .post-footer .post-btn {
