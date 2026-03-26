@@ -926,6 +926,7 @@ footer a {
 
 /* Tablets and Small Laptops */
 @media (max-width: 900px) {
+
   .navbar {
     height: 70px;
     padding: 0 clamp(0.5rem, 2vw, 1rem);
@@ -946,76 +947,74 @@ footer a {
 
   .hamburger-menu {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    z-index: 10;
+
+    position: absolute;
+    left: 1.3rem;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   #quick-exit {
+    margin-left: auto;
     padding: 0.6rem 1.2rem;
     font-size: 0.85rem;
   }
 
-  .hero {
-    padding: 5rem clamp(1rem, 4vw, 1.5rem);
+  /* Mobile Dropdown */
+
+  .mobile-dropdown {
+    width: 100%;
   }
 
-  .hero h2 {
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
+  .mobile-dropdown > a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
-  .hero p {
-    font-size: clamp(1.1rem, 2.5vw, 1.2rem);
-  }
-   
-  .blog-carousel-track-container {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    padding: 1rem 0;
+  .mobile-dropdown .dropdown-menu {
+    position: relative;
+    width: 100%;
+    background: color-mix(in srgb, var(--card-bg) 90%, black); 
+    display: block;
+
+    max-height: 0;
+    overflow: hidden;
+
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    transition: max-height 0.25s ease;
   }
 
-  .blog-card-grid {
-    width: max-content;
-    gap: clamp(1rem, 2vw, 1.2rem);
-    transform: none !important;
-    transition: none !important;
+  .mobile-dropdown .dropdown-menu.show {
+    max-height: 500px;
   }
 
-  .blog-card {
-    flex: 0 0 clamp(70vw, 75vw, 80vw);
-    scroll-snap-align: center;
+  .mobile-dropdown .dropdown-menu li a {
+    display: block;
+    width: 100%;
+    padding: 0.6rem 1.2rem 0.6rem 2.2rem; 
+    color: var(--always-light-text);
+    text-decoration: none;
+    border-bottom: none;
+    opacity: 0.9;
+    transition: background 0.2s ease, opacity 0.2s ease;
   }
 
-  .blog-carousel-btn {
-    display: none; 
+  .mobile-dropdown .dropdown-menu li a:hover {
+    background: var(--accent);
+    opacity: 1;
   }
 
-  .section {
-    padding: clamp(2.5rem, 5vw, 3rem) clamp(1rem, 3vw, 1.2rem);
-  }
-
-  .post-header,
-  .post-content {
-    padding: clamp(1.5rem, 3vw, 2rem) clamp(1rem, 3vw, 1.5rem);
-  }
-
-  .post-title {
-    font-size: clamp(1.8rem, 4vw, 2rem);
-  }
-
-  .post-footer .post-btn {
-    width: 100%; 
-  }
-
-  .card-grid,
-  .testimonial-grid,
-  .team-grid {
-    gap: clamp(1rem, 2vw, 2rem);
-  }
-
-  #theme-toggle,
-  #back-to-top {
-    width: clamp(2.5rem, 6vw, 3rem);
-    height: clamp(2.5rem, 6vw, 3rem);
-    font-size: clamp(1rem, 2.5vw, 1.1rem);
+  .mobile-dropdown a.open .caret {
+    transform: rotate(180deg);
+    transition: transform 0.25s ease;
   }
 }
 
@@ -1061,23 +1060,6 @@ footer a {
     width: 100%;
   }
    
-  nav,
-  .logo {
-    display: none; 
-  }
-
-  .hamburger-menu {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 26px;
-    z-index: 10;
-
-    position: absolute;
-    left: 1.3rem;     
-    top: 50%;      
-    transform: translateY(-50%);
-  }
 
   #quick-exit {
     margin-left: auto;
