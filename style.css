@@ -926,7 +926,6 @@ footer a {
 
 /* Tablets and Small Laptops */
 @media (max-width: 900px) {
-
   .navbar {
     height: 70px;
     padding: 0 clamp(0.5rem, 2vw, 1rem);
@@ -970,16 +969,19 @@ footer a {
 
   .mobile-dropdown > a {
     display: flex;
-    align-items: center;
-    gap: 0.3rem; 
     justify-content: flex-start;
-    cursor: pointer;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .mobile-dropdown .caret {
+    margin-left: 0; 
   }
 
   .mobile-dropdown .dropdown-menu {
     position: relative;
     width: 100%;
-    background: var(--card-bg); 
+    background: var(--card-bg);
     display: block;
     max-height: 0;
     overflow: hidden;
@@ -992,22 +994,23 @@ footer a {
   .mobile-dropdown .dropdown-menu.show {
     max-height: 500px;
   }
-
+  
   .mobile-dropdown .dropdown-menu li a {
     display: block;
     width: 100%;
-    padding: 0.6rem 1.2rem 0.6rem 1.5rem; 
+    padding: 0.6rem 1.2rem 0.6rem 1.8rem; 
     color: var(--always-light-text);
     text-decoration: none;
     font-weight: 500;
-    border-bottom: none; 
+    border-bottom: none;
     opacity: 0.9;
     transition: background 0.2s ease, opacity 0.2s ease;
+    background-color: #022E2A; 
   }
 
   .mobile-dropdown .dropdown-menu li a:hover,
   .mobile-dropdown .dropdown-menu li a:active {
-    background: var(--accent);
+    background-color: var(--accent);
     opacity: 1;
   }
 
@@ -1019,7 +1022,6 @@ footer a {
 
 /* Tablets */
 @media (max-width: 768px) {
-
   .hero h2 {
     font-size: clamp(2.4rem, 4.5vw, 2.8rem);
   }
@@ -1046,7 +1048,6 @@ footer a {
 
 /* Phones */
 @media (max-width: 640px) {
-
   .navbar {
     padding: 0 1rem;
   }
@@ -1126,7 +1127,7 @@ footer a {
   }
 
   .post-footer .post-btn:hover {
-    background: color-mix(in srgb, var(--accent) 85%, black);
+    background: var(--accent-light);
     transform: translateY(-2px);
     box-shadow: 0 12px 30px rgba(0,0,0,0.38);
   }
@@ -1139,5 +1140,4 @@ footer a {
     font-size: clamp(1rem, 2.5vw, 1.1rem); 
   }
 }
-
 
