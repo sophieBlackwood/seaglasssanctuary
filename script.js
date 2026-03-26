@@ -3,7 +3,7 @@ function openNav() {
   const hamburger = document.querySelector(".hamburger-menu");
   if (!sidenav || !hamburger) return;
 
-  if (window.innerWidth <= 900) {
+  if (window.innerWidth <= 650) { // updated breakpoint
     sidenav.style.width = "250px";
     hamburger.style.display = "none";
   }
@@ -15,7 +15,9 @@ function closeNav() {
   if (!sidenav || !hamburger) return;
 
   sidenav.style.width = "0";
-  hamburger.style.display = "flex";
+  if (window.innerWidth <= 650) {
+    hamburger.style.display = "flex";
+  }
 }
 
 // Accessibility: Reduced Motion  
@@ -32,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   mobileDropdowns.forEach(link => {
     link.addEventListener('click', e => {
-      if (window.innerWidth <= 900) {  
+      if (window.innerWidth <= 650) {  // updated breakpoint
         e.preventDefault();
         const menu = link.nextElementSibling;       
         menu.classList.toggle('show');              
@@ -46,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   blogDropdownLinks.forEach(link => {
     link.addEventListener('click', e => {
-      if (window.innerWidth <= 900) {
+      if (window.innerWidth <= 650) { // updated breakpoint
         e.preventDefault();
         const menu = link.nextElementSibling;
         menu.classList.toggle('show');
@@ -280,7 +282,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const sidenav = document.getElementById("mySidenav");
     const hamburger = document.querySelector(".hamburger-menu");
 
-    if (window.innerWidth > 900 && sidenav && hamburger) {
+    if (window.innerWidth > 650 && sidenav && hamburger) { // updated breakpoint
       sidenav.style.width = "0";
       hamburger.style.display = "flex";
     }
