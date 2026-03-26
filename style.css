@@ -899,11 +899,6 @@ footer a {
 }
 
 /* Responsive System */
-@media (min-width: 641px) {
-  .hamburger-menu {
-    display: none !important;
-  }
-}
 
 /* Mid Width */
 @media (max-width: 1000px) {
@@ -944,17 +939,13 @@ footer a {
     width: 100%;
   }
 
-  nav {
-    display: flex;  
-  }
-
+  nav,
   .logo {
-    display: block;
-    height: 50px;
+    display: none;
   }
 
   .hamburger-menu {
-    display: none;  
+    display: flex;
   }
 
   #quick-exit {
