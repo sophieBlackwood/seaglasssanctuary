@@ -942,7 +942,7 @@ nav,
 }
 
 /* Tablets and Small Laptops */
-@media (max-width: 900px) {
+@media (max-width: 850px) {
   .navbar {
     height: 70px;
     padding: 0 clamp(0.5rem, 2vw, 1rem);
