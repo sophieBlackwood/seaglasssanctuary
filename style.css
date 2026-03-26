@@ -31,7 +31,6 @@ body.dark {
     background-color 0.6s ease,
     color 0.6s ease,
     border-color 0.6s ease,
-    fill 0.6s ease;
   padding-top: 20px;         
 }
 
@@ -315,8 +314,8 @@ nav {
   box-shadow: none; 
 }
 
-.hamburger-menu:focus,
-.closebtn:focus {
+.hamburger-menu:focus-visible,
+.closebtn:focus-visible {
   outline: none; 
   box-shadow: none; 
 }
@@ -364,8 +363,20 @@ nav {
 }
 
 /* Primary Buttons */
+.btn {
+  background: var(--accent);
+  color: var(--always-light-text);
+  padding: 0.95rem 2.4rem;
+  border-radius: var(--radius);
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+}
+
 #hero-btn {
-   background: #0A7A67;
+  background: #0A7A67;
   color: var(--always-light-text);
   padding: 0.95rem 2.4rem;
   border-radius: var(--radius);
