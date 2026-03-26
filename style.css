@@ -905,9 +905,9 @@ footer a {
   color: var(--always-light-text); 
 }
 
-/* Responsive System  */
+/* Responsive System */
 
-/* Desktop default (>900px) */
+/* Desktop default (>1000px) */
 nav,
 .logo {
   display: flex;
@@ -917,7 +917,7 @@ nav,
   display: none;
 }
 
-/* Mid Width */
+/* Mid Width: 1000px down */
 @media (max-width: 1000px) {
   .navbar {
     height: 75px;
@@ -941,11 +941,38 @@ nav,
   }
 }
 
-/* Tablets and Small Laptops */
-@media (max-width: 850px) {
+/* Gradual scaling: 900px → 650px */
+@media (max-width: 900px) {
   .navbar {
-    height: 70px;
+    height: clamp(60px, 8vw, 70px);
     padding: 0 clamp(0.5rem, 2vw, 1rem);
+  }
+
+  .logo {
+    height: clamp(40px, 6vw, 50px);
+  }
+
+  #quick-exit {
+    padding: clamp(0.5rem, 1vw, 0.6rem) clamp(1rem, 2vw, 1.2rem);
+    font-size: clamp(0.8rem, 1.2vw, 0.85rem);
+    margin-left: auto;
+  }
+
+  .nav-links {
+    gap: clamp(0.5rem, 1vw, 1.2rem);
+  }
+
+  .nav-links a {
+    padding: clamp(0.3rem, 0.8vw, 0.4rem) clamp(0.5rem, 1vw, 0.7rem);
+  }
+
+  nav,
+  .logo {
+    display: flex;
+  }
+
+  .hamburger-menu {
+    display: none;
   }
 
   .nav-container {
@@ -955,7 +982,10 @@ nav,
     align-items: center;
     width: 100%;
   }
+}
 
+/* Hamburger break below 650px */
+@media (max-width: 650px) {
   nav,
   .logo {
     display: none;
@@ -975,8 +1005,16 @@ nav,
 
   #quick-exit {
     margin-left: auto;
-    padding: 0.6rem 1.2rem;
-    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 100%;
   }
 
   /* Mobile Dropdown */
