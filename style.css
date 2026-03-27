@@ -721,7 +721,6 @@ blockquote,
   align-items: center;
   justify-content: center;
   transition: transform 0.25s ease, opacity 0.25s ease;
-  padding: 0 3rem;
 }
 
 .blog-carousel-btn.prev {
