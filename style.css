@@ -1161,11 +1161,35 @@ nav,
     padding: clamp(1rem, 3vw, 1.5rem);
   }
 
+  /* Mobile blog carousel scroll */
+  .blog-card-grid {
+    display: flex;                    
+    overflow-x: auto;             
+    scroll-snap-type: x mandatory;     
+    gap: 1rem;                         
+    padding-bottom: 1rem;              
+  }
+
+  .blog-card-grid::-webkit-scrollbar {
+    height: 6px;                        
+  }
+
+  .blog-card-grid::-webkit-scrollbar-thumb {
+    background-color: var(--accent);
+    border-radius: 3px;
+  }
+
+  .blog-card-grid::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
   .blog-card {
-    flex: 0 0 85vw;
+    flex: 0 0 auto;                     
+    scroll-snap-align: start;           
+    min-width: 85vw;                   
     border-radius: var(--radius);
     overflow: hidden;
-    background: #022E2A; 
+    background: #022E2A;
     box-shadow: 0 4px 18px rgba(0,0,0,0.12);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
