@@ -1,10 +1,9 @@
-const MOBILE_BREAKPOINT = 560;
-
 function openNav() {
   const sidenav = document.getElementById("mySidenav");
   const hamburger = document.querySelector(".hamburger-menu");
   if (!sidenav || !hamburger) return;
-  if (window.innerWidth <= MOBILE_BREAKPOINT) {
+
+  if (window.innerWidth <= 900) {
     sidenav.style.width = "250px";
     hamburger.style.display = "none";
   }
@@ -14,52 +13,40 @@ function closeNav() {
   const sidenav = document.getElementById("mySidenav");
   const hamburger = document.querySelector(".hamburger-menu");
   if (!sidenav || !hamburger) return;
+
   sidenav.style.width = "0";
-  if (window.innerWidth <= MOBILE_BREAKPOINT) {
-    hamburger.style.display = "flex";
+  hamburger.style.display = "flex";
+}
+
+  // Accessibility: Reduced Motion  
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (prefersReducedMotion) {
+    document.documentElement.style.scrollBehavior = "auto";
   }
-}
 
-// Accessibility: Reduced Motion
-const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-if (prefersReducedMotion) {
-  document.documentElement.style.scrollBehavior = "auto";
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  // Mobile Dropdowns
+  document.addEventListener("DOMContentLoaded", () => {
   const mobileDropdowns = document.querySelectorAll('.mobile-dropdown > a');
+
   mobileDropdowns.forEach(link => {
     link.addEventListener('click', e => {
-      if (window.innerWidth <= MOBILE_BREAKPOINT) {
+      if (window.innerWidth <= 640) {  
         e.preventDefault();
-        const menu = link.nextElementSibling;
-        menu.classList.toggle('show');
-        link.classList.toggle('open');
+        const menu = link.nextElementSibling;       
+        menu.classList.toggle('show');              
+        link.classList.toggle('open');              
       }
     });
   });
-
-  // Blog Dropdown (mobile only)
-  const blogDropdownLinks = document.querySelectorAll('.blog-dropdown > a');
-  blogDropdownLinks.forEach(link => {
-    link.addEventListener('click', e => {
-      if (window.innerWidth <= MOBILE_BREAKPOINT) {
-        e.preventDefault();
-        const menu = link.nextElementSibling;
-        menu.classList.toggle('show');
-      }
-    });
-  });
-
-  // -----------------------
-  // Theme Toggle
-  // -----------------------
+  
+  // Theme Toggle  
   const themeToggle = document.getElementById("theme-toggle");
+
   if (themeToggle) {
     const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") document.body.classList.add("dark");
+    if (savedTheme === "dark") {
+      document.body.classList.add("dark");
+    }
 
     const setIcon = () => {
       const isDark = document.body.classList.contains("dark");
@@ -67,51 +54,56 @@ document.addEventListener("DOMContentLoaded", () => {
         ? '<i class="fa-regular fa-sun"></i>'
         : '<i class="fa-solid fa-moon"></i>';
     };
+
     setIcon();
 
     themeToggle.addEventListener("click", () => {
       document.body.classList.add("theme-transition");
       document.body.classList.toggle("dark");
+
       localStorage.setItem(
         "theme",
         document.body.classList.contains("dark") ? "dark" : "light"
       );
+
       setIcon();
-      const transitionDuration =
-        parseFloat(getComputedStyle(document.body).transitionDuration) * 1000 || 700;
-      setTimeout(() => document.body.classList.remove("theme-transition"), transitionDuration);
+
+      const transitionDuration = parseFloat(getComputedStyle(document.body).transitionDuration) * 1000 || 700;
+      setTimeout(() => {
+        document.body.classList.remove("theme-transition");
+      }, transitionDuration);
     });
   }
 
-  // -----------------------
-  // Quick Exit Modal
-  // -----------------------
+  // Quick Exit Modal  
   const quickExitModal = document.getElementById("quick-exit-modal");
   const dismissModalBtn = document.getElementById("dismiss-modal");
+
   if (quickExitModal && dismissModalBtn) {
     const modalDismissed = localStorage.getItem("quickExitModalDismissed");
     if (!modalDismissed) quickExitModal.classList.add("show");
+
     dismissModalBtn.addEventListener("click", () => {
       quickExitModal.classList.remove("show");
       localStorage.setItem("quickExitModalDismissed", "true");
     });
   }
 
-  // -----------------------
-  // Quick Exit Button
-  // -----------------------
+  // Quick Exit  
   const quickExitBtn = document.getElementById("quick-exit");
   const quickExitURL = "https://www.amazon.com/s?k=water+bottle";
+
   if (quickExitBtn) {
-    quickExitBtn.addEventListener("click", () => window.location.replace(quickExitURL));
+    quickExitBtn.addEventListener("click", () => {
+      window.location.replace(quickExitURL);
+    });
   }
 
-  // -----------------------
-  // Triple ESC Rerouting
-  // -----------------------
+  // Triple ESC Rerouting  
   let escPressCount = 0;
   let escTimer;
-  document.addEventListener("keydown", e => {
+
+  document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       escPressCount++;
       clearTimeout(escTimer);
@@ -124,9 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // -----------------------
-  // Floating Buttons
-  // -----------------------
+  // Floating Buttons  
   const backToTop = document.getElementById("back-to-top");
   const floatingButtons = document.getElementById("floating-buttons");
   let holdTimer;
@@ -146,33 +136,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     backToTop.addEventListener("click", () => {
-      window.scrollTo({
-        top: 0,
-        behavior: prefersReducedMotion ? "auto" : "smooth"
-      });
+      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
     });
 
     backToTop.addEventListener("touchstart", () => {
       if (isMobile()) {
-        holdTimer = setTimeout(() => {
-          floatingButtons.classList.toggle("reveal");
-        }, 600);
+        holdTimer = setTimeout(() => { floatingButtons.classList.toggle("reveal"); }, 600);
       }
     });
 
-    ["mouseup", "mouseleave", "touchend", "touchcancel"].forEach(evt => {
-      backToTop.addEventListener(evt, () => {
-        if (holdTimer) {
-          clearTimeout(holdTimer);
-          holdTimer = null;
-        }
-      });
-    });
+    ["mouseup", "mouseleave", "touchend", "touchcancel"].forEach(evt =>
+      backToTop.addEventListener(evt, () => { if (holdTimer) { clearTimeout(holdTimer); holdTimer = null; } })
+    );
   }
 
-  // -----------------------
-  // Smooth Scrolling
-  // -----------------------
+  // Smooth Scrolling  
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", function (e) {
       const targetId = this.getAttribute("href");
@@ -187,69 +165,65 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // -----------------------
-  // Blog Carousel: Seamless Infinite
-  // -----------------------
+  // Blog Carousel  
   const blogTrack = document.querySelector(".blog-card-grid");
+  const blogPrev = document.querySelector(".blog-carousel-btn.prev");
+  const blogNext = document.querySelector(".blog-carousel-btn.next");
   const blogCards = Array.from(document.querySelectorAll(".blog-card"));
 
   if (blogTrack && blogCards.length > 0) {
-    const gap = parseFloat(getComputedStyle(blogTrack).gap) || 0;
+    const trackStyle = getComputedStyle(blogTrack);
+    const gap = parseFloat(trackStyle.gap) || 0;
+    const transitionDuration = parseFloat(trackStyle.transitionDuration) * 1000 || 500;
     const total = blogCards.length;
 
-    // Clone cards at start and end for seamless infinite scroll
-    const clonesStart = blogCards.map(card => card.cloneNode(true));
-    const clonesEnd = blogCards.map(card => card.cloneNode(true));
-    clonesStart.forEach(clone => blogTrack.insertBefore(clone, blogTrack.firstChild));
-    clonesEnd.forEach(clone => blogTrack.appendChild(clone));
+    blogCards.forEach(card => blogTrack.appendChild(card.cloneNode(true)));
 
-    // Card width and start position
-    let cardWidth = blogCards[0].offsetWidth + gap;
-    const startPosition = total * cardWidth;
     let index = 0;
-    blogTrack.scrollLeft = startPosition;
+    let isTransitioning = false;
 
-    // Scroll function
-    const scrollToIndex = (i, smooth = true) => {
-      blogTrack.scrollTo({
-        left: startPosition + i * cardWidth,
-        behavior: smooth ? "smooth" : "auto"
-      });
+    const updateCarousel = (animate = true) => {
+      if (isTransitioning && animate) return;
+      isTransitioning = animate;
+      const cardWidth = blogCards[0].offsetWidth;
+      const offset = index * (cardWidth + gap);
+      blogTrack.style.transition = animate ? `transform ${transitionDuration / 1000}s ease` : "none";
+      blogTrack.style.transform = `translateX(${-offset}px)`;
+      if (animate) setTimeout(() => (isTransitioning = false), transitionDuration);
+      else isTransitioning = false;
     };
 
-    // Next / Prev arrows (desktop only)
-    const blogPrev = document.querySelector(".blog-carousel-btn.prev");
-    const blogNext = document.querySelector(".blog-carousel-btn.next");
-
-    const next = () => { index++; scrollToIndex(index); };
-    const prev = () => { index--; scrollToIndex(index); };
+    const jumpToStart = () => { index = 0; updateCarousel(false); };
+    const next = () => { if (isTransitioning) return; index++; updateCarousel(); if (index >= total) setTimeout(jumpToStart, transitionDuration + 10); };
+    const prev = () => { if (isTransitioning) return; if (index === 0) { index = total; updateCarousel(false); requestAnimationFrame(() => { index--; updateCarousel(); }); } else { index--; updateCarousel(); } };
 
     blogNext?.addEventListener("click", next);
     blogPrev?.addEventListener("click", prev);
 
-    // Infinite scroll reset when reaching clones
-    blogTrack.addEventListener("scroll", () => {
-      if (blogTrack.scrollLeft <= 0 || blogTrack.scrollLeft >= (total * 3) * cardWidth) {
-        blogTrack.scrollLeft = startPosition + index * cardWidth;
-      }
-    });
+    updateCarousel(false);
 
-    // Resize
-    window.addEventListener("resize", () => {
-      cardWidth = blogCards[0].offsetWidth + gap;
-      blogTrack.scrollLeft = startPosition + index * cardWidth;
-    });
+    let resizeTimeout;
+    window.addEventListener("resize", () => { clearTimeout(resizeTimeout); resizeTimeout = setTimeout(() => { requestAnimationFrame(() => updateCarousel(false)); }, 100); });
   }
 
-  // -----------------------
-  // Resize Sync Fix
-  // -----------------------
+  // Hamburger auto-reset on desktop 
   window.addEventListener("resize", () => {
     const sidenav = document.getElementById("mySidenav");
     const hamburger = document.querySelector(".hamburger-menu");
-    if (window.innerWidth > MOBILE_BREAKPOINT && sidenav && hamburger) {
-      sidenav.style.width = "0";
-      hamburger.style.display = "flex";
-    }
+    if (window.innerWidth > 900 && sidenav && hamburger) { sidenav.style.width = "0"; hamburger.style.display = "flex"; }
+  });
+
+// Blog Dropdown Navigation 
+  const blogDropdownLinks = document.querySelectorAll('.blog-dropdown > a');
+  blogDropdownLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      if (window.innerWidth <= 640) {
+        e.preventDefault();
+        const menu = link.nextElementSibling;
+        menu.classList.toggle('show');
+      }
+    });
   });
 });
+
+
