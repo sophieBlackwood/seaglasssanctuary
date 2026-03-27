@@ -226,6 +226,11 @@ nav {
 .more-dropdown:hover .dropdown-menu {
   display: block;
 }
+
+.more-dropdown {
+  display: none;
+}
+
 /* Quick Exit */
 #quick-exit {
   margin-left: auto;
