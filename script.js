@@ -27,7 +27,6 @@ function closeNav() {
 // Accessibility: Reduced Motion
 // =========================
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
 if (prefersReducedMotion) {
   document.documentElement.style.scrollBehavior = "auto";
 }
@@ -41,7 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // 🔥 Dynamic "More" Menu
   // =========================
   const moreMenu = document.querySelector(".more-menu");
-  const hiddenItems = document.querySelectorAll(".hide-on-mid");
 
   const populateMoreMenu = () => {
     if (!moreMenu) return;
@@ -49,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     moreMenu.innerHTML = "";
 
     if (isMid()) {
-      hiddenItems.forEach(item => {
+      document.querySelectorAll(".hide-on-mid").forEach(item => {
         const link = item.querySelector("a");
         if (!link) return;
 
@@ -63,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   populateMoreMenu();
 
-  // Re-run on resize (stable, debounced)
+  // Re-run on resize (debounced)
   let moreResizeTimeout;
   window.addEventListener("resize", () => {
     clearTimeout(moreResizeTimeout);
@@ -93,9 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (themeToggle) {
     const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      document.body.classList.add("dark");
-    }
+    if (savedTheme === "dark") document.body.classList.add("dark");
 
     const setIcon = () => {
       const isDark = document.body.classList.contains("dark");
@@ -121,9 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const durations = getComputedStyle(document.body).transitionDuration.split(',');
       const maxDuration = Math.max(...durations.map(d => parseFloat(d))) * 1000 || 700;
 
-      setTimeout(() => {
-        document.body.classList.remove("theme-transition");
-      }, maxDuration);
+      setTimeout(() => document.body.classList.remove("theme-transition"), maxDuration);
     });
   }
 
@@ -150,9 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const quickExitURL = "https://www.amazon.com/s?k=water+bottle";
 
   if (quickExitBtn) {
-    quickExitBtn.addEventListener("click", () => {
-      window.location.replace(quickExitURL);
-    });
+    quickExitBtn.addEventListener("click", () => window.location.replace(quickExitURL));
   }
 
   // =========================
@@ -183,7 +175,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let holdTimer;
 
   if (backToTop && floatingButtons) {
-
     window.addEventListener("scroll", () => {
       if (window.scrollY > 300) {
         backToTop.classList.add("visible");
@@ -239,10 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const yOffset = header ? -header.offsetHeight : -80;
       const y = targetEl.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
-      window.scrollTo({
-        top: y,
-        behavior: prefersReducedMotion ? "auto" : "smooth"
-      });
+      window.scrollTo({ top: y, behavior: prefersReducedMotion ? "auto" : "smooth" });
     });
   });
 
@@ -257,6 +245,9 @@ document.addEventListener("DOMContentLoaded", () => {
       sidenav.style.width = "0";
       hamburger.style.display = "flex";
     }
+
+    // Update More Menu dynamically on resize
+    populateMoreMenu();
   });
 
   // =========================
