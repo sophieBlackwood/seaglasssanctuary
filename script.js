@@ -1,4 +1,4 @@
-const MOBILE_BREAKPOINT = 560; // ✅ matches your CSS
+const MOBILE_BREAKPOINT = 640; // matches updated mobile CSS
 
 function openNav() {
   const sidenav = document.getElementById("mySidenav");
@@ -9,7 +9,6 @@ function openNav() {
     sidenav.style.width = "250px";
     hamburger.style.display = "none";
 
-    // Reset dropdowns when opening
     sidenav.querySelectorAll(".show").forEach(el => el.classList.remove("show"));
     sidenav.querySelectorAll(".open").forEach(el => el.classList.remove("open"));
   }
@@ -25,21 +24,18 @@ function closeNav() {
   if (window.innerWidth <= MOBILE_BREAKPOINT) {
     hamburger.style.display = "flex";
 
-    // Reset dropdowns when closing
     sidenav.querySelectorAll(".show").forEach(el => el.classList.remove("show"));
     sidenav.querySelectorAll(".open").forEach(el => el.classList.remove("open"));
   }
 }
 
-// Accessibility: Reduced Motion  
+// Accessibility: Reduced Motion
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
 if (prefersReducedMotion) {
   document.documentElement.style.scrollBehavior = "auto";
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-
   // Mobile Dropdown
   const mobileDropdowns = document.querySelectorAll('.mobile-dropdown > a');
   mobileDropdowns.forEach(link => {
@@ -53,26 +49,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Blog Dropdown (mobile only behavior)
-  const blogDropdownLinks = document.querySelectorAll('.blog-dropdown > a');
-  blogDropdownLinks.forEach(link => {
-    link.addEventListener('click', e => {
-      if (window.innerWidth <= MOBILE_BREAKPOINT) {
-        e.preventDefault();
-        const menu = link.nextElementSibling;
-        menu.classList.toggle('show');
-      }
-    });
-  });
-
   // Theme Toggle  
   const themeToggle = document.getElementById("theme-toggle");
-
   if (themeToggle) {
     const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      document.body.classList.add("dark");
-    }
+    if (savedTheme === "dark") document.body.classList.add("dark");
 
     const setIcon = () => {
       const isDark = document.body.classList.contains("dark");
@@ -80,72 +61,53 @@ document.addEventListener("DOMContentLoaded", () => {
         ? '<i class="fa-regular fa-sun"></i>'
         : '<i class="fa-solid fa-moon"></i>';
     };
-
     setIcon();
 
     themeToggle.addEventListener("click", () => {
       document.body.classList.add("theme-transition");
       document.body.classList.toggle("dark");
-
       localStorage.setItem(
         "theme",
         document.body.classList.contains("dark") ? "dark" : "light"
       );
-
       setIcon();
-
       const transitionDuration =
         parseFloat(getComputedStyle(document.body).transitionDuration) * 1000 || 700;
-
-      setTimeout(() => {
-        document.body.classList.remove("theme-transition");
-      }, transitionDuration);
+      setTimeout(() => document.body.classList.remove("theme-transition"), transitionDuration);
     });
   }
 
   // Quick Exit Modal  
   const quickExitModal = document.getElementById("quick-exit-modal");
   const dismissModalBtn = document.getElementById("dismiss-modal");
-
   if (quickExitModal && dismissModalBtn) {
     const modalDismissed = localStorage.getItem("quickExitModalDismissed");
-
-    if (!modalDismissed) {
-      quickExitModal.classList.add("show");
-    }
-
+    if (!modalDismissed) quickExitModal.classList.add("show");
     dismissModalBtn.addEventListener("click", () => {
       quickExitModal.classList.remove("show");
       localStorage.setItem("quickExitModalDismissed", "true");
     });
   }
 
-  // Quick Exit  
+  // Quick Exit Button
   const quickExitBtn = document.getElementById("quick-exit");
   const quickExitURL = "https://www.amazon.com/s?k=water+bottle";
-
   if (quickExitBtn) {
-    quickExitBtn.addEventListener("click", () => {
-      window.location.replace(quickExitURL);
-    });
+    quickExitBtn.addEventListener("click", () => window.location.replace(quickExitURL));
   }
 
   // Triple ESC Rerouting  
   let escPressCount = 0;
   let escTimer;
-
-  document.addEventListener("keydown", (e) => {
+  document.addEventListener("keydown", e => {
     if (e.key === "Escape") {
       escPressCount++;
       clearTimeout(escTimer);
-
       if (escPressCount === 3) {
         window.location.replace(quickExitURL);
         escPressCount = 0;
       } else {
-        escTimer = setTimeout(() => {
-          escPressCount = 0;
-        }, 1000);
+        escTimer = setTimeout(() => { escPressCount = 0; }, 1000);
       }
     }
   });
@@ -194,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Smooth Scrolling  
+  // Smooth Scrolling Anchors  
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", function (e) {
       const targetId = this.getAttribute("href");
@@ -204,138 +166,76 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!targetEl) return;
 
       e.preventDefault();
-
       const header = document.querySelector("header");
       const yOffset = header ? -header.offsetHeight : -80;
-      const y =
-        targetEl.getBoundingClientRect().top +
-        window.pageYOffset +
-        yOffset;
-
-      window.scrollTo({
-        top: y,
-        behavior: prefersReducedMotion ? "auto" : "smooth"
-      });
+      const y = targetEl.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: prefersReducedMotion ? "auto" : "smooth" });
     });
   });
 
-  // Blog Carousel / Scroll on Mobile
+  // Blog Carousel
   const blogTrack = document.querySelector(".blog-card-grid");
   const blogPrev = document.querySelector(".blog-carousel-btn.prev");
   const blogNext = document.querySelector(".blog-carousel-btn.next");
   const blogCards = Array.from(document.querySelectorAll(".blog-card"));
 
+  const isMobileView = () => window.innerWidth <= MOBILE_BREAKPOINT;
+
   if (blogTrack && blogCards.length > 0) {
-    const isMobileView = window.innerWidth <= 640; // mobile threshold
-    if (!isMobileView) {
-      // Only run JS carousel on tablet/desktop
-      const trackStyle = getComputedStyle(blogTrack);
-      const gap = parseFloat(trackStyle.gap) || 0;
-      const transitionDuration =
-        parseFloat(trackStyle.transitionDuration) * 1000 || 500;
-      const total = blogCards.length;
+    let index = 0;
+    const gap = parseFloat(getComputedStyle(blogTrack).gap) || 0;
 
-      blogCards.forEach(card =>
-        blogTrack.appendChild(card.cloneNode(true))
-      );
+    const scrollToIndex = (i) => {
+      const cardWidth = blogCards[0].offsetWidth + gap;
+      blogTrack.scrollTo({ left: i * cardWidth, behavior: "smooth" });
+    };
 
-      let index = 0;
-      let isTransitioning = false;
-
-      const updateCarousel = (animate = true) => {
-        if (isTransitioning && animate) return;
-
-        isTransitioning = animate;
-
-        const cardWidth = blogCards[0].offsetWidth;
-        const offset = index * (cardWidth + gap);
-
-        blogTrack.style.transition = animate
-          ? `transform ${transitionDuration / 1000}s ease`
-          : "none";
-
-        blogTrack.style.transform = `translateX(${-offset}px)`;
-
-        if (animate) {
-          setTimeout(() => (isTransitioning = false), transitionDuration);
-        } else {
-          isTransitioning = false;
-        }
-      };
-
-      const jumpToStart = () => {
-        index = 0;
-        updateCarousel(false);
-      };
-
-      const next = () => {
-        if (isTransitioning) return;
-
+    const next = () => {
+      if (index < blogCards.length - 1) {
         index++;
-        updateCarousel();
+        scrollToIndex(index);
+      }
+    };
 
-        if (index >= total) {
-          setTimeout(jumpToStart, transitionDuration + 10);
-        }
-      };
+    const prev = () => {
+      if (index > 0) {
+        index--;
+        scrollToIndex(index);
+      }
+    };
 
-      const prev = () => {
-        if (isTransitioning) return;
-
-        if (index === 0) {
-          index = total;
-          updateCarousel(false);
-
-          requestAnimationFrame(() => {
-            index--;
-            updateCarousel();
-          });
-        } else {
-          index--;
-          updateCarousel();
-        }
-      };
-
+    if (!isMobileView()) {
       blogNext?.addEventListener("click", next);
       blogPrev?.addEventListener("click", prev);
-
-      updateCarousel(false);
-
-      let resizeTimeout;
-
-      window.addEventListener("resize", () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-          const isMobileResize = window.innerWidth <= 640;
-          if (isMobileResize) {
-            blogTrack.style.transform = "none"; // reset for mobile scroll
-          } else {
-            requestAnimationFrame(() => updateCarousel(false));
-          }
-        }, 100);
-      });
     } else {
-      // Mobile: reset any carousel transform to allow scroll
-      blogTrack.style.transform = "none";
-      blogTrack.style.transition = "none";
+      // Hide arrows on mobile
+      if (blogPrev) blogPrev.style.display = "none";
+      if (blogNext) blogNext.style.display = "none";
     }
+
+    window.addEventListener("resize", () => {
+      if (isMobileView()) {
+        if (blogPrev) blogPrev.style.display = "none";
+        if (blogNext) blogNext.style.display = "none";
+      } else {
+        if (blogPrev) blogPrev.style.display = "block";
+        if (blogNext) blogNext.style.display = "block";
+      }
+    });
   }
 
   // Resize Sync Fix
   window.addEventListener("resize", () => {
     const sidenav = document.getElementById("mySidenav");
     const hamburger = document.querySelector(".hamburger-menu");
-
     if (!sidenav || !hamburger) return;
 
     if (window.innerWidth > MOBILE_BREAKPOINT) {
-      // Desktop: reset nav
       sidenav.style.width = "0";
       hamburger.style.display = "flex";
       sidenav.querySelectorAll(".show").forEach(el => el.classList.remove("show"));
       sidenav.querySelectorAll(".open").forEach(el => el.classList.remove("open"));
     } else {
-      // Mobile: show hamburger if nav closed
       if (sidenav.style.width === "0px" || !sidenav.style.width) {
         hamburger.style.display = "flex";
       } else {
@@ -343,5 +243,4 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
-
 });
