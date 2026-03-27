@@ -35,6 +35,40 @@ if (prefersReducedMotion) {
 document.addEventListener("DOMContentLoaded", () => {
 
   const isMobile = () => window.matchMedia("(max-width: 640px)").matches;
+  const isMid = () => window.matchMedia("(max-width: 1000px)").matches;
+
+  // =========================
+  // 🔥 Dynamic "More" Menu
+  // =========================
+  const moreMenu = document.querySelector(".more-menu");
+  const hiddenItems = document.querySelectorAll(".hide-on-mid");
+
+  const populateMoreMenu = () => {
+    if (!moreMenu) return;
+
+    moreMenu.innerHTML = "";
+
+    if (isMid()) {
+      hiddenItems.forEach(item => {
+        const link = item.querySelector("a");
+        if (!link) return;
+
+        const clone = link.cloneNode(true);
+        const li = document.createElement("li");
+        li.appendChild(clone);
+        moreMenu.appendChild(li);
+      });
+    }
+  };
+
+  populateMoreMenu();
+
+  // Re-run on resize (stable, debounced)
+  let moreResizeTimeout;
+  window.addEventListener("resize", () => {
+    clearTimeout(moreResizeTimeout);
+    moreResizeTimeout = setTimeout(populateMoreMenu, 150);
+  });
 
   // =========================
   // Mobile Dropdowns
@@ -84,7 +118,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       setIcon();
 
-      // Better transition duration handling
       const durations = getComputedStyle(document.body).transitionDuration.split(',');
       const maxDuration = Math.max(...durations.map(d => parseFloat(d))) * 1000 || 700;
 
@@ -212,94 +245,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   });
-
-  // =========================
-  // Blog Carousel (Desktop only)
-  // =========================
-  const blogTrack = document.querySelector(".blog-card-grid");
-  const blogPrev = document.querySelector(".blog-carousel-btn.prev");
-  const blogNext = document.querySelector(".blog-carousel-btn.next");
-  const blogCards = Array.from(document.querySelectorAll(".blog-card"));
-
-  if (blogTrack && blogCards.length > 0 && !isMobile()) {
-
-    const trackStyle = getComputedStyle(blogTrack);
-    const gap = parseFloat(trackStyle.gap) || 0;
-    const durations = trackStyle.transitionDuration.split(',');
-    const transitionDuration = Math.max(...durations.map(d => parseFloat(d))) * 1000 || 500;
-
-    const total = blogCards.length;
-
-    blogCards.forEach(card => blogTrack.appendChild(card.cloneNode(true)));
-
-    let index = 0;
-    let isTransitioning = false;
-
-    const updateCarousel = (animate = true) => {
-      if (isTransitioning && animate) return;
-      isTransitioning = animate;
-
-      const cardWidth = blogCards[0].offsetWidth;
-      const offset = index * (cardWidth + gap);
-
-      blogTrack.style.transition = animate
-        ? `transform ${transitionDuration / 1000}s ease`
-        : "none";
-
-      blogTrack.style.transform = `translateX(${-offset}px)`;
-
-      if (animate) {
-        setTimeout(() => (isTransitioning = false), transitionDuration);
-      } else {
-        isTransitioning = false;
-      }
-    };
-
-    const jumpToStart = () => {
-      index = 0;
-      updateCarousel(false);
-    };
-
-    const next = () => {
-      if (isTransitioning) return;
-      index++;
-      updateCarousel();
-
-      if (index >= total) {
-        setTimeout(jumpToStart, transitionDuration + 10);
-      }
-    };
-
-    const prev = () => {
-      if (isTransitioning) return;
-
-      if (index === 0) {
-        index = total;
-        updateCarousel(false);
-
-        requestAnimationFrame(() => {
-          index--;
-          updateCarousel();
-        });
-      } else {
-        index--;
-        updateCarousel();
-      }
-    };
-
-    blogNext?.addEventListener("click", next);
-    blogPrev?.addEventListener("click", prev);
-
-    updateCarousel(false);
-
-    let resizeTimeout;
-    window.addEventListener("resize", () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        requestAnimationFrame(() => updateCarousel(false));
-      }, 100);
-    });
-  }
 
   // =========================
   // Resize Reset (Hamburger)
