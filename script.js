@@ -1,9 +1,11 @@
+const MOBILE_BREAKPOINT = 560; // ✅ matches your CSS
+
 function openNav() {
   const sidenav = document.getElementById("mySidenav");
   const hamburger = document.querySelector(".hamburger-menu");
   if (!sidenav || !hamburger) return;
 
-  if (window.innerWidth <= 650) { // updated breakpoint
+  if (window.innerWidth <= MOBILE_BREAKPOINT) {
     sidenav.style.width = "250px";
     hamburger.style.display = "none";
   }
@@ -15,7 +17,8 @@ function closeNav() {
   if (!sidenav || !hamburger) return;
 
   sidenav.style.width = "0";
-  if (window.innerWidth <= 650) {
+
+  if (window.innerWidth <= MOBILE_BREAKPOINT) {
     hamburger.style.display = "flex";
   }
 }
@@ -34,21 +37,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   mobileDropdowns.forEach(link => {
     link.addEventListener('click', e => {
-      if (window.innerWidth <= 650) {  // updated breakpoint
+      if (window.innerWidth <= MOBILE_BREAKPOINT) {
         e.preventDefault();
-        const menu = link.nextElementSibling;       
-        menu.classList.toggle('show');              
-        link.classList.toggle('open');              
+        const menu = link.nextElementSibling;
+        menu.classList.toggle('show');
+        link.classList.toggle('open');
       }
     });
   });
 
-  // Desktop Blog Dropdown
+  // Blog Dropdown (mobile only behavior)
   const blogDropdownLinks = document.querySelectorAll('.blog-dropdown > a');
 
   blogDropdownLinks.forEach(link => {
     link.addEventListener('click', e => {
-      if (window.innerWidth <= 650) { // updated breakpoint
+      if (window.innerWidth <= MOBILE_BREAKPOINT) {
         e.preventDefault();
         const menu = link.nextElementSibling;
         menu.classList.toggle('show');
@@ -85,7 +88,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       setIcon();
 
-      const transitionDuration = parseFloat(getComputedStyle(document.body).transitionDuration) * 1000 || 700;
+      const transitionDuration =
+        parseFloat(getComputedStyle(document.body).transitionDuration) * 1000 || 700;
+
       setTimeout(() => {
         document.body.classList.remove("theme-transition");
       }, transitionDuration);
@@ -98,7 +103,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (quickExitModal && dismissModalBtn) {
     const modalDismissed = localStorage.getItem("quickExitModalDismissed");
-    if (!modalDismissed) quickExitModal.classList.add("show");
+
+    if (!modalDismissed) {
+      quickExitModal.classList.add("show");
+    }
 
     dismissModalBtn.addEventListener("click", () => {
       quickExitModal.classList.remove("show");
@@ -124,11 +132,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Escape") {
       escPressCount++;
       clearTimeout(escTimer);
+
       if (escPressCount === 3) {
         window.location.replace(quickExitURL);
         escPressCount = 0;
       } else {
-        escTimer = setTimeout(() => { escPressCount = 0; }, 1000);
+        escTimer = setTimeout(() => {
+          escPressCount = 0;
+        }, 1000);
       }
     }
   });
@@ -153,23 +164,28 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     backToTop.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+      window.scrollTo({
+        top: 0,
+        behavior: prefersReducedMotion ? "auto" : "smooth"
+      });
     });
 
     backToTop.addEventListener("touchstart", () => {
       if (isMobile()) {
-        holdTimer = setTimeout(() => { floatingButtons.classList.toggle("reveal"); }, 600);
+        holdTimer = setTimeout(() => {
+          floatingButtons.classList.toggle("reveal");
+        }, 600);
       }
     });
 
-    ["mouseup", "mouseleave", "touchend", "touchcancel"].forEach(evt =>
+    ["mouseup", "mouseleave", "touchend", "touchcancel"].forEach(evt => {
       backToTop.addEventListener(evt, () => {
         if (holdTimer) {
           clearTimeout(holdTimer);
           holdTimer = null;
         }
-      })
-    );
+      });
+    });
   }
 
   // Smooth Scrolling  
@@ -185,7 +201,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const header = document.querySelector("header");
       const yOffset = header ? -header.offsetHeight : -80;
-      const y = targetEl.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      const y =
+        targetEl.getBoundingClientRect().top +
+        window.pageYOffset +
+        yOffset;
 
       window.scrollTo({
         top: y,
@@ -203,10 +222,13 @@ document.addEventListener("DOMContentLoaded", () => {
   if (blogTrack && blogCards.length > 0) {
     const trackStyle = getComputedStyle(blogTrack);
     const gap = parseFloat(trackStyle.gap) || 0;
-    const transitionDuration = parseFloat(trackStyle.transitionDuration) * 1000 || 500;
+    const transitionDuration =
+      parseFloat(trackStyle.transitionDuration) * 1000 || 500;
     const total = blogCards.length;
 
-    blogCards.forEach(card => blogTrack.appendChild(card.cloneNode(true)));
+    blogCards.forEach(card =>
+      blogTrack.appendChild(card.cloneNode(true))
+    );
 
     let index = 0;
     let isTransitioning = false;
@@ -239,6 +261,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const next = () => {
       if (isTransitioning) return;
+
       index++;
       updateCarousel();
 
@@ -270,6 +293,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCarousel(false);
 
     let resizeTimeout;
+
     window.addEventListener("resize", () => {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {
@@ -278,11 +302,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Resize Sync Fix
   window.addEventListener("resize", () => {
     const sidenav = document.getElementById("mySidenav");
     const hamburger = document.querySelector(".hamburger-menu");
 
-    if (window.innerWidth > 650 && sidenav && hamburger) { // updated breakpoint
+    if (window.innerWidth > MOBILE_BREAKPOINT && sidenav && hamburger) {
       sidenav.style.width = "0";
       hamburger.style.display = "flex";
     }
