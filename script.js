@@ -1,4 +1,4 @@
-const MOBILE_BREAKPOINT = 560; // ✅ matches your CSS
+const MOBILE_BREAKPOINT = 560;
 
 function openNav() {
   const sidenav = document.getElementById("mySidenav");
