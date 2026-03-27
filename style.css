@@ -904,9 +904,13 @@ footer a {
   color: var(--always-light-text); 
 }
 
-/* Responsive System */
+/* =========================
+   Responsive System
+   ========================= */
 
-/* Desktop default (>1000px) */
+/* -------------------------
+   Desktop default (>1000px)
+   ------------------------- */
 nav,
 .logo {
   display: flex;
@@ -916,7 +920,9 @@ nav,
   display: none;
 }
 
-/* Mid Width: 1000px down */
+/* -------------------------
+   Mid Width: 1000px down
+   ------------------------- */
 @media (max-width: 1000px) {
   .navbar {
     height: 75px;
@@ -940,7 +946,9 @@ nav,
   }
 }
 
-/* Gradual scaling: 900px → 560px */
+/* -------------------------
+   Gradual scaling: 900px → 560px
+   ------------------------- */
 @media (max-width: 900px) {
   .navbar {
     height: clamp(60px, 8vw, 70px);
@@ -984,8 +992,12 @@ nav,
   }
 }
 
-/* Mobile: 560px */
+/* -------------------------
+   Mobile: <=560px
+   ------------------------- */
 @media (max-width: 560px) {
+
+  /* Navbar */
   nav,
   .logo {
     display: none;
@@ -1001,7 +1013,6 @@ nav,
     left: 1.3rem;
     top: 50%;
     transform: translateY(-50%);
-    cursor: pointer;
   }
 
   #quick-exit {
@@ -1018,22 +1029,6 @@ nav,
     width: 100%;
   }
 
-  /* Sidenav */
-  #mySidenav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 0;
-    background: #022E2A;
-    overflow-x: hidden;
-    transition: width 0.3s ease;
-    z-index: 999;
-    display: flex;
-    flex-direction: column;
-    padding-top: 4rem;
-  }
-
   /* Mobile Dropdown */
   .mobile-dropdown {
     width: 100%;
@@ -1044,18 +1039,16 @@ nav,
     justify-content: flex-start;
     align-items: center;
     gap: 0.3rem;
-    cursor: pointer;
   }
 
   .mobile-dropdown .caret {
-    margin-left: auto;
-    transition: transform 0.25s ease;
+    margin-left: 0;
   }
 
   .mobile-dropdown .dropdown-menu {
     position: relative;
     width: 100%;
-    background: #022E2A; 
+    background: #022E2A;
     display: block;
     max-height: 0;
     overflow: hidden;
@@ -1090,10 +1083,13 @@ nav,
 
   .mobile-dropdown a.open .caret {
     transform: rotate(180deg);
+    transition: transform 0.25s ease;
   }
 }
 
-/* Tablets */
+/* -------------------------
+   Tablets: <=768px
+   ------------------------- */
 @media (max-width: 768px) {
   .hero h2 {
     font-size: clamp(2.4rem, 4.5vw, 2.8rem);
@@ -1119,9 +1115,10 @@ nav,
   }
 }
 
-/* Phones */
+/* -------------------------
+   Phones: <=640px
+   ------------------------- */
 @media (max-width: 640px) {
-  /* Navbar adjustments */
   .navbar {
     padding: 0 1rem;
   }
@@ -1130,8 +1127,8 @@ nav,
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
     position: relative;
+    width: 100%;
   }
 
   #quick-exit {
@@ -1140,7 +1137,6 @@ nav,
     font-size: 0.8rem;
   }
 
-  /* Hero */
   .hero {
     padding: clamp(4rem, 8vw, 5rem) clamp(0.8rem, 3vw, 1.2rem);
   }
@@ -1153,7 +1149,6 @@ nav,
     font-size: clamp(1rem, 2.5vw, 1.1rem);
   }
 
-  /* Grids */
   .card-grid,
   .testimonial-grid,
   .team-grid {
@@ -1165,36 +1160,20 @@ nav,
     padding: clamp(1rem, 3vw, 1.5rem);
   }
 
-  /* Mobile Blog Carousel Scroll */
+  /* =========================
+     Blog Cards - Slide Styling
+     ========================= */
   .blog-card-grid {
     display: flex;
+    gap: clamp(1rem, 3vw, 1.5rem);
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    gap: 1rem;
-    padding-bottom: 1rem; /* space for scrollbar */
   }
 
-  /* Scrollbar styling */
-  .blog-card-grid::-webkit-scrollbar {
-    height: 6px;
-  }
-
-  .blog-card-grid::-webkit-scrollbar-thumb {
-    background-color: var(--accent);
-    border-radius: 3px;
-  }
-
-  .blog-card-grid::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  /* Blog cards */
-  .blog-card-grid > .blog-card {
-    flex: 0 0 100%; /* full width for one card per scroll */
+  .blog-card {
+    flex: 0 0 85vw;
     scroll-snap-align: start;
-    display: flex;
-    flex-direction: column;
     border-radius: var(--radius);
     overflow: hidden;
     background: #022E2A;
@@ -1202,26 +1181,24 @@ nav,
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
-  .blog-card-grid > .blog-card:hover {
+  .blog-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 22px rgba(0,0,0,0.18);
   }
 
-  /* Post footer: taller buttons */
   .post-footer {
     display: flex;
     flex-direction: column;
     align-items: stretch;
     gap: 0.6rem;
     padding: 1.5rem 1rem 2rem;
-    margin-top: auto; /* push buttons to bottom */
   }
 
   .post-footer .post-btn {
     width: 100%;
     text-align: center;
-    padding: 1.5rem 0;
-    font-size: 1rem;
+    padding: 1.2rem 0;
+    font-size: clamp(0.85rem, 2.2vw, 0.95rem);
     margin: 0;
     box-sizing: border-box;
     border-radius: var(--radius);
@@ -1236,12 +1213,6 @@ nav,
     background: var(--accent-light);
     transform: translateY(-2px);
     box-shadow: 0 12px 30px rgba(0,0,0,0.38);
-  }
-
-  /* Hide carousel arrows on mobile */
-  .blog-carousel-btn.prev,
-  .blog-carousel-btn.next {
-    display: none !important;
   }
 
   /* Floating Buttons Responsive */
