@@ -1,16 +1,12 @@
-const MOBILE_BREAKPOINT = 640; // matches updated mobile CSS
+const MOBILE_BREAKPOINT = 560; // ✅ matches your CSS
 
 function openNav() {
   const sidenav = document.getElementById("mySidenav");
   const hamburger = document.querySelector(".hamburger-menu");
   if (!sidenav || !hamburger) return;
-
   if (window.innerWidth <= MOBILE_BREAKPOINT) {
     sidenav.style.width = "250px";
     hamburger.style.display = "none";
-
-    sidenav.querySelectorAll(".show").forEach(el => el.classList.remove("show"));
-    sidenav.querySelectorAll(".open").forEach(el => el.classList.remove("open"));
   }
 }
 
@@ -18,14 +14,9 @@ function closeNav() {
   const sidenav = document.getElementById("mySidenav");
   const hamburger = document.querySelector(".hamburger-menu");
   if (!sidenav || !hamburger) return;
-
   sidenav.style.width = "0";
-
   if (window.innerWidth <= MOBILE_BREAKPOINT) {
     hamburger.style.display = "flex";
-
-    sidenav.querySelectorAll(".show").forEach(el => el.classList.remove("show"));
-    sidenav.querySelectorAll(".open").forEach(el => el.classList.remove("open"));
   }
 }
 
@@ -49,7 +40,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Theme Toggle  
+  // Blog Dropdown (mobile only behavior)
+  const blogDropdownLinks = document.querySelectorAll('.blog-dropdown > a');
+  blogDropdownLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      if (window.innerWidth <= MOBILE_BREAKPOINT) {
+        e.preventDefault();
+        const menu = link.nextElementSibling;
+        menu.classList.toggle('show');
+      }
+    });
+  });
+
+  // Theme Toggle
   const themeToggle = document.getElementById("theme-toggle");
   if (themeToggle) {
     const savedTheme = localStorage.getItem("theme");
@@ -77,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Quick Exit Modal  
+  // Quick Exit Modal
   const quickExitModal = document.getElementById("quick-exit-modal");
   const dismissModalBtn = document.getElementById("dismiss-modal");
   if (quickExitModal && dismissModalBtn) {
@@ -89,14 +92,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Quick Exit Button
+  // Quick Exit
   const quickExitBtn = document.getElementById("quick-exit");
   const quickExitURL = "https://www.amazon.com/s?k=water+bottle";
   if (quickExitBtn) {
     quickExitBtn.addEventListener("click", () => window.location.replace(quickExitURL));
   }
 
-  // Triple ESC Rerouting  
+  // Triple ESC Rerouting
   let escPressCount = 0;
   let escTimer;
   document.addEventListener("keydown", e => {
@@ -112,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Floating Buttons  
+  // Floating Buttons
   const backToTop = document.getElementById("back-to-top");
   const floatingButtons = document.getElementById("floating-buttons");
   let holdTimer;
@@ -156,15 +159,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Smooth Scrolling Anchors  
+  // Smooth Scrolling
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", function (e) {
       const targetId = this.getAttribute("href");
       if (targetId === "#") return;
-
       const targetEl = document.querySelector(targetId);
       if (!targetEl) return;
-
       e.preventDefault();
       const header = document.querySelector("header");
       const yOffset = header ? -header.offsetHeight : -80;
@@ -173,67 +174,65 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Blog Carousel
+  // Blog Carousel with Scrollbar
   const blogTrack = document.querySelector(".blog-card-grid");
   const blogPrev = document.querySelector(".blog-carousel-btn.prev");
   const blogNext = document.querySelector(".blog-carousel-btn.next");
   const blogCards = Array.from(document.querySelectorAll(".blog-card"));
 
-  const isMobileView = () => window.innerWidth <= MOBILE_BREAKPOINT;
-
   if (blogTrack && blogCards.length > 0) {
-    let index = 0;
     const gap = parseFloat(getComputedStyle(blogTrack).gap) || 0;
+    const total = blogCards.length;
+    let index = 0;
 
-    const scrollToIndex = (i) => {
+    // Clone cards for infinite loop
+    blogCards.forEach(card => blogTrack.appendChild(card.cloneNode(true)));
+
+    // Enable native horizontal scrollbar
+    blogTrack.style.overflowX = "auto";
+
+    const scrollToIndex = (i, smooth = true) => {
       const cardWidth = blogCards[0].offsetWidth + gap;
-      blogTrack.scrollTo({ left: i * cardWidth, behavior: "smooth" });
+      blogTrack.scrollTo({
+        left: i * cardWidth,
+        behavior: smooth ? "smooth" : "auto"
+      });
+    };
+
+    const jumpToStart = () => {
+      index = 0;
+      scrollToIndex(index, false);
     };
 
     const next = () => {
-      if (index < blogCards.length - 1) {
-        index++;
-        scrollToIndex(index);
-      }
+      index++;
+      scrollToIndex(index);
+      if (index >= total) setTimeout(jumpToStart, 500);
     };
 
     const prev = () => {
-      if (index > 0) {
-        index--;
-        scrollToIndex(index);
-      }
+      if (index === 0) index = total;
+      index--;
+      scrollToIndex(index);
     };
 
-    // Attach arrows once
-    if (blogPrev) blogPrev.addEventListener("click", prev);
-    if (blogNext) blogNext.addEventListener("click", next);
+    blogNext?.addEventListener("click", next);
+    blogPrev?.addEventListener("click", prev);
 
-    const updateArrows = () => {
-      if (blogPrev) blogPrev.style.display = isMobileView() ? "none" : "block";
-      if (blogNext) blogNext.style.display = isMobileView() ? "none" : "block";
-    };
+    scrollToIndex(index, false);
 
-    updateArrows();
-    window.addEventListener("resize", updateArrows);
+    window.addEventListener("resize", () => {
+      requestAnimationFrame(() => scrollToIndex(index, false));
+    });
   }
 
-  // Resize Sync Fix for Sidenav
+  // Resize Sync Fix
   window.addEventListener("resize", () => {
     const sidenav = document.getElementById("mySidenav");
     const hamburger = document.querySelector(".hamburger-menu");
-    if (!sidenav || !hamburger) return;
-
-    if (window.innerWidth > MOBILE_BREAKPOINT) {
+    if (window.innerWidth > MOBILE_BREAKPOINT && sidenav && hamburger) {
       sidenav.style.width = "0";
       hamburger.style.display = "flex";
-      sidenav.querySelectorAll(".show").forEach(el => el.classList.remove("show"));
-      sidenav.querySelectorAll(".open").forEach(el => el.classList.remove("open"));
-    } else {
-      if (sidenav.style.width === "0px" || !sidenav.style.width) {
-        hamburger.style.display = "flex";
-      } else {
-        hamburger.style.display = "none";
-      }
     }
   });
 });
