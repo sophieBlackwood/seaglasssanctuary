@@ -721,14 +721,15 @@ blockquote,
   align-items: center;
   justify-content: center;
   transition: transform 0.25s ease, opacity 0.25s ease;
+  padding: 0 3rem;
 }
 
 .blog-carousel-btn.prev {
-  left: -30px;
+  left: 0px; /* -30px */
 }
 
 .blog-carousel-btn.next {
-  right: -30px;
+  right: 0px; /* -30 px */
 }
 
 .blog-carousel-btn:hover {
