@@ -734,7 +734,6 @@ blockquote,
 
 .blog-carousel-btn:hover {
   transform: translateY(-50%) scale(1.15);
-  opacity: 0.75;
 }
 
 .blog-content .date {
