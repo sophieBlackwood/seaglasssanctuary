@@ -1,9 +1,14 @@
+// =========================
+// Sidenav
+// =========================
 function openNav() {
   const sidenav = document.getElementById("mySidenav");
   const hamburger = document.querySelector(".hamburger-menu");
   if (!sidenav || !hamburger) return;
 
-  if (window.innerWidth <= 900) {
+  const isMobile = window.matchMedia("(max-width: 640px)").matches;
+
+  if (isMobile) {
     sidenav.style.width = "250px";
     hamburger.style.display = "none";
   }
@@ -18,28 +23,38 @@ function closeNav() {
   hamburger.style.display = "flex";
 }
 
-  // Accessibility: Reduced Motion  
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+// =========================
+// Accessibility: Reduced Motion
+// =========================
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  if (prefersReducedMotion) {
-    document.documentElement.style.scrollBehavior = "auto";
-  }
+if (prefersReducedMotion) {
+  document.documentElement.style.scrollBehavior = "auto";
+}
 
-  document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
+
+  const isMobile = () => window.matchMedia("(max-width: 640px)").matches;
+
+  // =========================
+  // Mobile Dropdowns
+  // =========================
   const mobileDropdowns = document.querySelectorAll('.mobile-dropdown > a');
 
   mobileDropdowns.forEach(link => {
     link.addEventListener('click', e => {
-      if (window.innerWidth <= 640) {  
+      if (isMobile()) {
         e.preventDefault();
-        const menu = link.nextElementSibling;       
-        menu.classList.toggle('show');              
-        link.classList.toggle('open');              
+        const menu = link.nextElementSibling;
+        if (menu) menu.classList.toggle('show');
+        link.classList.toggle('open');
       }
     });
   });
-  
-  // Theme Toggle  
+
+  // =========================
+  // Theme Toggle
+  // =========================
   const themeToggle = document.getElementById("theme-toggle");
 
   if (themeToggle) {
@@ -53,6 +68,7 @@ function closeNav() {
       themeToggle.innerHTML = isDark
         ? '<i class="fa-regular fa-sun"></i>'
         : '<i class="fa-solid fa-moon"></i>';
+      themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
     };
 
     setIcon();
@@ -68,14 +84,19 @@ function closeNav() {
 
       setIcon();
 
-      const transitionDuration = parseFloat(getComputedStyle(document.body).transitionDuration) * 1000 || 700;
+      // Better transition duration handling
+      const durations = getComputedStyle(document.body).transitionDuration.split(',');
+      const maxDuration = Math.max(...durations.map(d => parseFloat(d))) * 1000 || 700;
+
       setTimeout(() => {
         document.body.classList.remove("theme-transition");
-      }, transitionDuration);
+      }, maxDuration);
     });
   }
 
-  // Quick Exit Modal  
+  // =========================
+  // Quick Exit Modal
+  // =========================
   const quickExitModal = document.getElementById("quick-exit-modal");
   const dismissModalBtn = document.getElementById("dismiss-modal");
 
@@ -89,7 +110,9 @@ function closeNav() {
     });
   }
 
-  // Quick Exit  
+  // =========================
+  // Quick Exit
+  // =========================
   const quickExitBtn = document.getElementById("quick-exit");
   const quickExitURL = "https://www.amazon.com/s?k=water+bottle";
 
@@ -99,7 +122,9 @@ function closeNav() {
     });
   }
 
-  // Triple ESC Rerouting  
+  // =========================
+  // Triple ESC
+  // =========================
   let escPressCount = 0;
   let escTimer;
 
@@ -107,7 +132,8 @@ function closeNav() {
     if (e.key === "Escape") {
       escPressCount++;
       clearTimeout(escTimer);
-      if (escPressCount === 3) {
+
+      if (escPressCount >= 3) {
         window.location.replace(quickExitURL);
         escPressCount = 0;
       } else {
@@ -116,14 +142,14 @@ function closeNav() {
     }
   });
 
-  // Floating Buttons  
+  // =========================
+  // Floating Buttons
+  // =========================
   const backToTop = document.getElementById("back-to-top");
   const floatingButtons = document.getElementById("floating-buttons");
   let holdTimer;
 
   if (backToTop && floatingButtons) {
-    const mobileMediaQuery = window.matchMedia("(max-width: 768px)");
-    const isMobile = () => mobileMediaQuery.matches;
 
     window.addEventListener("scroll", () => {
       if (window.scrollY > 300) {
@@ -141,40 +167,67 @@ function closeNav() {
 
     backToTop.addEventListener("touchstart", () => {
       if (isMobile()) {
-        holdTimer = setTimeout(() => { floatingButtons.classList.toggle("reveal"); }, 600);
+        holdTimer = setTimeout(() => {
+          floatingButtons.classList.toggle("reveal");
+        }, 600);
       }
     });
 
     ["mouseup", "mouseleave", "touchend", "touchcancel"].forEach(evt =>
-      backToTop.addEventListener(evt, () => { if (holdTimer) { clearTimeout(holdTimer); holdTimer = null; } })
+      backToTop.addEventListener(evt, () => {
+        if (holdTimer) {
+          clearTimeout(holdTimer);
+          holdTimer = null;
+        }
+      })
     );
   }
 
-  // Smooth Scrolling  
+  // =========================
+  // Smooth Scrolling
+  // =========================
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", function (e) {
       const targetId = this.getAttribute("href");
       if (targetId === "#") return;
-      const targetEl = document.querySelector(targetId);
+
+      let targetEl;
+      try {
+        targetEl = document.querySelector(targetId);
+      } catch {
+        return;
+      }
+
       if (!targetEl) return;
+
       e.preventDefault();
+
       const header = document.querySelector("header");
       const yOffset = header ? -header.offsetHeight : -80;
       const y = targetEl.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: prefersReducedMotion ? "auto" : "smooth" });
+
+      window.scrollTo({
+        top: y,
+        behavior: prefersReducedMotion ? "auto" : "smooth"
+      });
     });
   });
 
-  // Blog Carousel  
+  // =========================
+  // Blog Carousel (Desktop only)
+  // =========================
   const blogTrack = document.querySelector(".blog-card-grid");
   const blogPrev = document.querySelector(".blog-carousel-btn.prev");
   const blogNext = document.querySelector(".blog-carousel-btn.next");
   const blogCards = Array.from(document.querySelectorAll(".blog-card"));
 
-  if (blogTrack && blogCards.length > 0) {
+  if (blogTrack && blogCards.length > 0 && !isMobile()) {
+
     const trackStyle = getComputedStyle(blogTrack);
     const gap = parseFloat(trackStyle.gap) || 0;
-    const transitionDuration = parseFloat(trackStyle.transitionDuration) * 1000 || 500;
+    const durations = trackStyle.transitionDuration.split(',');
+    const transitionDuration = Math.max(...durations.map(d => parseFloat(d))) * 1000 || 500;
+
     const total = blogCards.length;
 
     blogCards.forEach(card => blogTrack.appendChild(card.cloneNode(true)));
@@ -185,17 +238,54 @@ function closeNav() {
     const updateCarousel = (animate = true) => {
       if (isTransitioning && animate) return;
       isTransitioning = animate;
+
       const cardWidth = blogCards[0].offsetWidth;
       const offset = index * (cardWidth + gap);
-      blogTrack.style.transition = animate ? `transform ${transitionDuration / 1000}s ease` : "none";
+
+      blogTrack.style.transition = animate
+        ? `transform ${transitionDuration / 1000}s ease`
+        : "none";
+
       blogTrack.style.transform = `translateX(${-offset}px)`;
-      if (animate) setTimeout(() => (isTransitioning = false), transitionDuration);
-      else isTransitioning = false;
+
+      if (animate) {
+        setTimeout(() => (isTransitioning = false), transitionDuration);
+      } else {
+        isTransitioning = false;
+      }
     };
 
-    const jumpToStart = () => { index = 0; updateCarousel(false); };
-    const next = () => { if (isTransitioning) return; index++; updateCarousel(); if (index >= total) setTimeout(jumpToStart, transitionDuration + 10); };
-    const prev = () => { if (isTransitioning) return; if (index === 0) { index = total; updateCarousel(false); requestAnimationFrame(() => { index--; updateCarousel(); }); } else { index--; updateCarousel(); } };
+    const jumpToStart = () => {
+      index = 0;
+      updateCarousel(false);
+    };
+
+    const next = () => {
+      if (isTransitioning) return;
+      index++;
+      updateCarousel();
+
+      if (index >= total) {
+        setTimeout(jumpToStart, transitionDuration + 10);
+      }
+    };
+
+    const prev = () => {
+      if (isTransitioning) return;
+
+      if (index === 0) {
+        index = total;
+        updateCarousel(false);
+
+        requestAnimationFrame(() => {
+          index--;
+          updateCarousel();
+        });
+      } else {
+        index--;
+        updateCarousel();
+      }
+    };
 
     blogNext?.addEventListener("click", next);
     blogPrev?.addEventListener("click", prev);
@@ -203,27 +293,40 @@ function closeNav() {
     updateCarousel(false);
 
     let resizeTimeout;
-    window.addEventListener("resize", () => { clearTimeout(resizeTimeout); resizeTimeout = setTimeout(() => { requestAnimationFrame(() => updateCarousel(false)); }, 100); });
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        requestAnimationFrame(() => updateCarousel(false));
+      }, 100);
+    });
   }
 
-  // Hamburger auto-reset on desktop 
+  // =========================
+  // Resize Reset (Hamburger)
+  // =========================
   window.addEventListener("resize", () => {
     const sidenav = document.getElementById("mySidenav");
     const hamburger = document.querySelector(".hamburger-menu");
-    if (window.innerWidth > 900 && sidenav && hamburger) { sidenav.style.width = "0"; hamburger.style.display = "flex"; }
+
+    if (!isMobile() && sidenav && hamburger) {
+      sidenav.style.width = "0";
+      hamburger.style.display = "flex";
+    }
   });
 
-// Blog Dropdown Navigation 
+  // =========================
+  // Blog Dropdown (Mobile)
+  // =========================
   const blogDropdownLinks = document.querySelectorAll('.blog-dropdown > a');
+
   blogDropdownLinks.forEach(link => {
     link.addEventListener('click', e => {
-      if (window.innerWidth <= 640) {
+      if (isMobile()) {
         e.preventDefault();
         const menu = link.nextElementSibling;
-        menu.classList.toggle('show');
+        if (menu) menu.classList.toggle('show');
       }
     });
   });
+
 });
-
-
