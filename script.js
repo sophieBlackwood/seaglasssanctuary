@@ -204,27 +204,20 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
-    if (!isMobileView()) {
-      blogNext?.addEventListener("click", next);
-      blogPrev?.addEventListener("click", prev);
-    } else {
-      // Hide arrows on mobile
-      if (blogPrev) blogPrev.style.display = "none";
-      if (blogNext) blogNext.style.display = "none";
-    }
+    // Attach arrows once
+    if (blogPrev) blogPrev.addEventListener("click", prev);
+    if (blogNext) blogNext.addEventListener("click", next);
 
-    window.addEventListener("resize", () => {
-      if (isMobileView()) {
-        if (blogPrev) blogPrev.style.display = "none";
-        if (blogNext) blogNext.style.display = "none";
-      } else {
-        if (blogPrev) blogPrev.style.display = "block";
-        if (blogNext) blogNext.style.display = "block";
-      }
-    });
+    const updateArrows = () => {
+      if (blogPrev) blogPrev.style.display = isMobileView() ? "none" : "block";
+      if (blogNext) blogNext.style.display = isMobileView() ? "none" : "block";
+    };
+
+    updateArrows();
+    window.addEventListener("resize", updateArrows);
   }
 
-  // Resize Sync Fix
+  // Resize Sync Fix for Sidenav
   window.addEventListener("resize", () => {
     const sidenav = document.getElementById("mySidenav");
     const hamburger = document.querySelector(".hamburger-menu");
