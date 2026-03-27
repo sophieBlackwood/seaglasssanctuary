@@ -8,6 +8,10 @@ function openNav() {
   if (window.innerWidth <= MOBILE_BREAKPOINT) {
     sidenav.style.width = "250px";
     hamburger.style.display = "none";
+
+    // Reset dropdowns when opening
+    sidenav.querySelectorAll(".show").forEach(el => el.classList.remove("show"));
+    sidenav.querySelectorAll(".open").forEach(el => el.classList.remove("open"));
   }
 }
 
@@ -20,6 +24,10 @@ function closeNav() {
 
   if (window.innerWidth <= MOBILE_BREAKPOINT) {
     hamburger.style.display = "flex";
+
+    // Reset dropdowns when closing
+    sidenav.querySelectorAll(".show").forEach(el => el.classList.remove("show"));
+    sidenav.querySelectorAll(".open").forEach(el => el.classList.remove("open"));
   }
 }
 
@@ -34,7 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Mobile Dropdown
   const mobileDropdowns = document.querySelectorAll('.mobile-dropdown > a');
-
   mobileDropdowns.forEach(link => {
     link.addEventListener('click', e => {
       if (window.innerWidth <= MOBILE_BREAKPOINT) {
@@ -48,7 +55,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Blog Dropdown (mobile only behavior)
   const blogDropdownLinks = document.querySelectorAll('.blog-dropdown > a');
-
   blogDropdownLinks.forEach(link => {
     link.addEventListener('click', e => {
       if (window.innerWidth <= MOBILE_BREAKPOINT) {
@@ -302,14 +308,26 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Resize Sync Fix
+  // Resize Sync Fix (updated)
   window.addEventListener("resize", () => {
     const sidenav = document.getElementById("mySidenav");
     const hamburger = document.querySelector(".hamburger-menu");
 
-    if (window.innerWidth > MOBILE_BREAKPOINT && sidenav && hamburger) {
+    if (!sidenav || !hamburger) return;
+
+    if (window.innerWidth > MOBILE_BREAKPOINT) {
+      // Desktop: reset nav
       sidenav.style.width = "0";
       hamburger.style.display = "flex";
+      sidenav.querySelectorAll(".show").forEach(el => el.classList.remove("show"));
+      sidenav.querySelectorAll(".open").forEach(el => el.classList.remove("open"));
+    } else {
+      // Mobile: show hamburger if nav closed
+      if (sidenav.style.width === "0px" || !sidenav.style.width) {
+        hamburger.style.display = "flex";
+      } else {
+        hamburger.style.display = "none";
+      }
     }
   });
 
