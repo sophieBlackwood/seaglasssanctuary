@@ -942,7 +942,7 @@ nav,
   }
 }
 
-/* Gradual scaling: 900px → 650px */
+/* Gradual scaling: 900px → 560px */
 @media (max-width: 900px) {
   .navbar {
     height: clamp(60px, 8vw, 70px);
@@ -960,11 +960,12 @@ nav,
   }
 
   .nav-links {
-    gap: clamp(0.5rem, 1vw, 1.2rem);
+    gap: clamp(0.4rem, 0.8vw, 1rem);
   }
 
   .nav-links a {
     padding: clamp(0.3rem, 0.8vw, 0.4rem) clamp(0.5rem, 1vw, 0.7rem);
+    font-size: clamp(0.8rem, 1vw, 0.95rem);
   }
 
   nav,
@@ -985,8 +986,7 @@ nav,
   }
 }
 
-/* Hamburger break below 650px */
-@media (max-width: 650px) {
+@media (max-width: 560px) {
   nav,
   .logo {
     display: none;
@@ -1196,4 +1196,3 @@ nav,
     font-size: clamp(1rem, 2.5vw, 1.1rem);
   }
 }
-
