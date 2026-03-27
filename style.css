@@ -1121,6 +1121,7 @@ nav,
 
 /* Phones */
 @media (max-width: 640px) {
+  /* Navbar adjustments */
   .navbar {
     padding: 0 1rem;
   }
@@ -1130,6 +1131,7 @@ nav,
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    position: relative;
   }
 
   #quick-exit {
@@ -1138,6 +1140,7 @@ nav,
     font-size: 0.8rem;
   }
 
+  /* Hero */
   .hero {
     padding: clamp(4rem, 8vw, 5rem) clamp(0.8rem, 3vw, 1.2rem);
   }
@@ -1150,6 +1153,7 @@ nav,
     font-size: clamp(1rem, 2.5vw, 1.1rem);
   }
 
+  /* Grids */
   .card-grid,
   .testimonial-grid,
   .team-grid {
@@ -1161,16 +1165,14 @@ nav,
     padding: clamp(1rem, 3vw, 1.5rem);
   }
 
-  /* Mobile blog carousel scroll */
-@media (max-width: 640px) {
+  /* Mobile Blog Carousel Scroll */
   .blog-card-grid {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
+    -webkit-overflow-scrolling: touch;
     gap: 1rem;
     padding-bottom: 1rem; /* space for scrollbar */
-    align-items: stretch; /* ensures all cards same height */
   }
 
   /* Scrollbar styling */
@@ -1187,12 +1189,12 @@ nav,
     background: rgba(255, 255, 255, 0.1);
   }
 
-  /* Blog card sizing for full scroll */
-  .blog-card {
+  /* Blog cards */
+  .blog-card-grid > .blog-card {
     flex: 0 0 100%; /* full width for one card per scroll */
     scroll-snap-align: start;
     display: flex;
-    flex-direction: column; /* footer sticks at bottom */
+    flex-direction: column;
     border-radius: var(--radius);
     overflow: hidden;
     background: #022E2A;
@@ -1200,7 +1202,7 @@ nav,
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
-  .blog-card:hover {
+  .blog-card-grid > .blog-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 22px rgba(0,0,0,0.18);
   }
@@ -1218,7 +1220,7 @@ nav,
   .post-footer .post-btn {
     width: 100%;
     text-align: center;
-    padding: 1.5rem 0; /* taller button */
+    padding: 1.5rem 0;
     font-size: 1rem;
     margin: 0;
     box-sizing: border-box;
@@ -1241,7 +1243,6 @@ nav,
   .blog-carousel-btn.next {
     display: none !important;
   }
-}
 
   /* Floating Buttons Responsive */
   #theme-toggle,
