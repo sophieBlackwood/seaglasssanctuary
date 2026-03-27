@@ -212,23 +212,58 @@ nav {
   outline-offset: 3px;
 }
 
-/* Mid Size Nav */
+/* Mid Size Nav - Updated More Dropdown */
+.more-dropdown {
+  position: relative;     
+  display: inline-block;    
+  cursor: pointer;         
+}
+
 .more-dropdown .dropdown-menu {
   display: none;
-  position: absolute;
+  position: absolute;      
   top: 100%;
   left: 0;
   background: var(--card-bg);
+  border: none;
   border-radius: var(--radius);
   min-width: 180px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  z-index: 100;
+  padding: 0.3rem 0;
+  list-style: none;
+  margin: 0;
 }
 
 .more-dropdown:hover .dropdown-menu {
   display: block;
 }
 
-.more-dropdown {
-  display: none;
+.more-dropdown .dropdown-menu li a {
+  display: block;
+  padding: 0.65rem 1.2rem;
+  color: var(--always-light-text);
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 0;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.more-dropdown .dropdown-menu li a:hover {
+  background: #0A7A67;
+  color: var(--always-light-text);
+}
+
+/* Caret styling */
+.more-dropdown > a .caret {
+  font-size: 0.7em;
+  margin-left: 0.25rem;
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+
+.more-dropdown:hover > a .caret {
+  transform: rotate(180deg);
 }
 
 /* Quick Exit */
