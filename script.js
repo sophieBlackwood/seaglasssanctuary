@@ -27,9 +27,8 @@ if (prefersReducedMotion) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // -----------------------
+
   // Mobile Dropdowns
-  // -----------------------
   const mobileDropdowns = document.querySelectorAll('.mobile-dropdown > a');
   mobileDropdowns.forEach(link => {
     link.addEventListener('click', e => {
