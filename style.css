@@ -1170,6 +1170,7 @@ nav,
     -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
     gap: 1rem;
     padding-bottom: 1rem; /* space for scrollbar */
+    align-items: stretch; /* ensures all cards same height */
   }
 
   /* Scrollbar styling */
@@ -1188,8 +1189,10 @@ nav,
 
   /* Blog card sizing for full scroll */
   .blog-card {
-    flex: 0 0 85%; /* one card per scroll */
+    flex: 0 0 100%; /* full width for one card per scroll */
     scroll-snap-align: start;
+    display: flex;
+    flex-direction: column; /* footer sticks at bottom */
     border-radius: var(--radius);
     overflow: hidden;
     background: #022E2A;
@@ -1202,10 +1205,35 @@ nav,
     box-shadow: 0 8px 22px rgba(0,0,0,0.18);
   }
 
-  /* Taller buttons for mobile */
+  /* Post footer: taller buttons */
+  .post-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+    padding: 1.5rem 1rem 2rem;
+    margin-top: auto; /* push buttons to bottom */
+  }
+
   .post-footer .post-btn {
+    width: 100%;
+    text-align: center;
     padding: 1.5rem 0; /* taller button */
     font-size: 1rem;
+    margin: 0;
+    box-sizing: border-box;
+    border-radius: var(--radius);
+    background: var(--accent);
+    color: var(--always-light-text);
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .post-footer .post-btn:hover {
+    background: var(--accent-light);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.38);
   }
 
   /* Hide carousel arrows on mobile */
@@ -1213,6 +1241,7 @@ nav,
   .blog-carousel-btn.next {
     display: none !important;
   }
+}
 
   /* Floating Buttons Responsive */
   #theme-toggle,
