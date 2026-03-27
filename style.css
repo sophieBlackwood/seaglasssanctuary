@@ -725,11 +725,11 @@ blockquote,
 }
 
 .blog-carousel-btn.prev {
-  left: 0px; /* -30px */
+  left: -35px;
 }
 
 .blog-carousel-btn.next {
-  right: 0px; /* -30 px */
+  right: -30px; 
 }
 
 .blog-carousel-btn:hover {
