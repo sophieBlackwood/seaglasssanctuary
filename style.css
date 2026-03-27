@@ -1162,16 +1162,19 @@ nav,
   }
 
   /* Mobile blog carousel scroll */
+@media (max-width: 640px) {
   .blog-card-grid {
-    display: flex;                    
-    overflow-x: auto;             
-    scroll-snap-type: x mandatory;     
-    gap: 1rem;                         
-    padding-bottom: 1rem;              
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
+    gap: 1rem;
+    padding-bottom: 1rem; /* space for scrollbar */
   }
 
+  /* Scrollbar styling */
   .blog-card-grid::-webkit-scrollbar {
-    height: 6px;                        
+    height: 6px;
   }
 
   .blog-card-grid::-webkit-scrollbar-thumb {
@@ -1183,10 +1186,10 @@ nav,
     background: rgba(255, 255, 255, 0.1);
   }
 
+  /* Blog card sizing for full scroll */
   .blog-card {
-    flex: 0 0 auto;                     
-    scroll-snap-align: start;           
-    min-width: 85vw;                   
+    flex: 0 0 85%; /* one card per scroll */
+    scroll-snap-align: start;
     border-radius: var(--radius);
     overflow: hidden;
     background: #022E2A;
@@ -1199,33 +1202,16 @@ nav,
     box-shadow: 0 8px 22px rgba(0,0,0,0.18);
   }
 
-  .post-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.6rem;
-    padding: 1.5rem 1rem 2rem;
-  }
-
+  /* Taller buttons for mobile */
   .post-footer .post-btn {
-    width: 100%;
-    text-align: center;
-    padding: 1.2rem 0;
-    font-size: clamp(0.85rem, 2.2vw, 0.95rem);
-    margin: 0;
-    box-sizing: border-box;
-    border-radius: var(--radius);
-    background: var(--accent);
-    color: var(--always-light-text);
-    font-weight: 700;
-    text-decoration: none;
-    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    padding: 1.5rem 0; /* taller button */
+    font-size: 1rem;
   }
 
-  .post-footer .post-btn:hover {
-    background: var(--accent-light);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.38);
+  /* Hide carousel arrows on mobile */
+  .blog-carousel-btn.prev,
+  .blog-carousel-btn.next {
+    display: none !important;
   }
 
   /* Floating Buttons Responsive */
@@ -1235,5 +1221,4 @@ nav,
     height: clamp(2.5rem, 6vw, 3rem);
     font-size: clamp(1rem, 2.5vw, 1.1rem);
   }
-}
 }
