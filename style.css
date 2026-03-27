@@ -212,6 +212,20 @@ nav {
   outline-offset: 3px;
 }
 
+/* Mid Size Nav */
+.more-dropdown .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  min-width: 180px;
+}
+
+.more-dropdown:hover .dropdown-menu {
+  display: block;
+}
 /* Quick Exit */
 #quick-exit {
   margin-left: auto;
@@ -927,6 +941,18 @@ footer a {
   .nav-links a {
     padding: 0.4rem 0.7rem;
   }
+
+  .nav-links .hide-on-mid {
+    display: none;
+  }
+
+  .more-dropdown {
+    display: inline-block;
+}
+
+.more-dropdown {
+  display: none;
+}
 }
 
 /* Tablets and Small Laptops */
