@@ -280,7 +280,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-    /* ================================================= */
+  /* ================================================= */
   /* BLOG CAROUSEL - STABLE LOOP (OPTIMIZED) */
   /* ================================================= */
 
@@ -321,7 +321,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const jumpToStart = () => {
       index = 0;
-      updateCarousel(false);
+      blogTrack.style.transition = "none"; // Disable transition temporarily
+      updateCarousel(false); // Jump to the start immediately
+      setTimeout(() => {
+        blogTrack.style.transition = `transform ${transitionDuration / 1000}s ease`; // Re-enable transition
+      }, 50); // Small timeout to re-enable transition
     };
 
     const next = () => {
