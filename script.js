@@ -281,50 +281,70 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // =========================
-  // 🆕 Blog Carousel (Desktop Arrows)
+  // 🔁 Infinite Blog Carousel
   // =========================
   const track = document.querySelector(".blog-card-grid");
   const prevBtn = document.querySelector(".blog-carousel-btn.prev");
   const nextBtn = document.querySelector(".blog-carousel-btn.next");
 
   if (track && prevBtn && nextBtn) {
-    let currentIndex = 0;
-    const cards = document.querySelectorAll(".blog-card");
-
+    const cards = Array.from(document.querySelectorAll(".blog-card"));
     const isMobileView = () => window.innerWidth <= 900;
 
-    const updateCarousel = () => {
-      if (isMobileView()) return;
+    let currentIndex = 1;
+    let cardWidth;
 
-      const cardWidth = cards[0].offsetWidth + 32; // matches 2rem gap
+    const firstClone = cards[0].cloneNode(true);
+    const lastClone = cards[cards.length - 1].cloneNode(true);
+
+    firstClone.classList.add("clone");
+    lastClone.classList.add("clone");
+
+    track.appendChild(firstClone);
+    track.insertBefore(lastClone, track.firstChild);
+
+    const allCards = document.querySelectorAll(".blog-card");
+
+    const setPosition = () => {
+      cardWidth = allCards[0].offsetWidth + 32;
+      track.style.transition = "none";
+      track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+    };
+
+    const moveToIndex = () => {
+      track.style.transition = "transform 0.5s ease";
       track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
     };
 
     nextBtn.addEventListener("click", () => {
       if (isMobileView()) return;
-
-      const maxIndex = cards.length - 3; // adjust if needed
-      if (currentIndex < maxIndex) {
-        currentIndex++;
-        updateCarousel();
-      }
+      currentIndex++;
+      moveToIndex();
     });
 
     prevBtn.addEventListener("click", () => {
       if (isMobileView()) return;
+      currentIndex--;
+      moveToIndex();
+    });
 
-      if (currentIndex > 0) {
-        currentIndex--;
-        updateCarousel();
+    track.addEventListener("transitionend", () => {
+      const all = document.querySelectorAll(".blog-card");
+
+      if (currentIndex === all.length - 1) {
+        currentIndex = 1;
+        setPosition();
+      }
+
+      if (currentIndex === 0) {
+        currentIndex = all.length - 2;
+        setPosition();
       }
     });
 
-    window.addEventListener("resize", () => {
-      currentIndex = 0;
-      updateCarousel();
-    });
+    window.addEventListener("resize", setPosition);
 
-    updateCarousel();
+    setPosition();
   }
 
 });
