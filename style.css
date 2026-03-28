@@ -955,9 +955,15 @@ blockquote,
   flex-direction: column;
 }
 
-.submission-page main,
-.submission-page .section {
-  flex: 1; 
+.submission-page main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+}
+
+.submission-page footer {
+  margin-top: auto;
 }
 
 /* Footer */
