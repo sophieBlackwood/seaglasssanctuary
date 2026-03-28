@@ -281,7 +281,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // =========================
-  // 🔁 Truly Seamless Infinite Blog Carousel
+  // 🔁 Continuous Infinite Blog Carousel
   // =========================
   const carouselTrack = document.querySelector(".blog-card-grid");
   const prevBtn = document.querySelector(".blog-carousel-btn.prev");
@@ -290,70 +290,53 @@ document.addEventListener("DOMContentLoaded", () => {
   if (carouselTrack && prevBtn && nextBtn) {
     const isMobileView = () => window.innerWidth <= 900;
 
-    const setupCarousel = () => {
-      // Remove old clones
+    const setupContinuousCarousel = () => {
       document.querySelectorAll(".blog-card.clone").forEach(el => el.remove());
 
       const cards = Array.from(carouselTrack.querySelectorAll(".blog-card"));
       if (!cards.length) return;
 
-      const containerWidth = carouselTrack.parentElement.offsetWidth;
       const cardWidth = cards[0].offsetWidth + 32;
-      const visibleCards = Math.floor(containerWidth / cards[0].offsetWidth);
 
-      // Clone cards for seamless looping
-      const startClones = cards.slice(-visibleCards).map(c => {
+      // Clone all cards for seamless loop
+      cards.forEach(c => {
         const clone = c.cloneNode(true);
         clone.classList.add("clone");
-        return clone;
-      });
-      const endClones = cards.slice(0, visibleCards).map(c => {
-        const clone = c.cloneNode(true);
-        clone.classList.add("clone");
-        return clone;
+        carouselTrack.appendChild(clone);
       });
 
-      startClones.forEach(clone => carouselTrack.insertBefore(clone, carouselTrack.firstChild));
-      endClones.forEach(clone => carouselTrack.appendChild(clone));
+      let position = 0;
+      const speed = 1; // px/frame, adjust for smoothness
+      let direction = 0; // 1=next, -1=prev, 0=idle
 
-      const allCards = Array.from(carouselTrack.children);
-      let currentIndex = visibleCards;
-
-      const setPosition = (animate = true) => {
-        carouselTrack.style.transition = animate ? "transform 0.5s ease" : "none";
-        carouselTrack.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-      };
-
-      // Next/Prev buttons
-      nextBtn.onclick = () => {
-        if (isMobileView()) return;
-        currentIndex++;
-        setPosition(true);
-      };
-
-      prevBtn.onclick = () => {
-        if (isMobileView()) return;
-        currentIndex--;
-        setPosition(true);
-      };
-
-      // Transitionend for seamless jump
-      carouselTrack.addEventListener("transitionend", () => {
-        if (currentIndex >= allCards.length - visibleCards) {
-          currentIndex = visibleCards;
-          setPosition(false); // instant jump
+      const move = () => {
+        if (!isMobileView()) {
+          position += speed * direction;
+          const totalWidth = cards.length * cardWidth;
+          if (position >= totalWidth) position = 0;
+          if (position < 0) position = totalWidth;
+          carouselTrack.style.transform = `translateX(-${position}px)`;
         }
-        if (currentIndex < visibleCards) {
-          currentIndex = allCards.length - visibleCards * 2;
-          setPosition(false); // instant jump
-        }
-      });
+        requestAnimationFrame(move);
+      };
 
-      setPosition(false);
-      window.addEventListener("resize", () => setPosition(false));
+      requestAnimationFrame(move);
+
+      nextBtn.onmousedown = () => direction = 1;
+      nextBtn.onmouseup = () => direction = 0;
+      nextBtn.onmouseleave = () => direction = 0;
+
+      prevBtn.onmousedown = () => direction = -1;
+      prevBtn.onmouseup = () => direction = 0;
+      prevBtn.onmouseleave = () => direction = 0;
+
+      nextBtn.onclick = () => { if (!isMobileView()) position += cardWidth; };
+      prevBtn.onclick = () => { if (!isMobileView()) position -= cardWidth; };
+
+      window.addEventListener("resize", setupContinuousCarousel);
     };
 
-    setupCarousel();
+    setupContinuousCarousel();
   }
 
 });
