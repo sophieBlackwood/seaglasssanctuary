@@ -60,15 +60,14 @@ document.addEventListener("DOMContentLoaded", () => {
         moreMenu.appendChild(li);
       });
 
-      moreDropdown.style.display = "inline-block"; // show "More"
+      moreDropdown.style.display = "inline-block";
     } else {
-      moreDropdown.style.display = "none"; // hide "More"
+      moreDropdown.style.display = "none";
     }
   };
 
   populateMoreMenu();
 
-  // Re-run on resize (stable, debounced)
   let moreResizeTimeout;
   window.addEventListener("resize", () => {
     clearTimeout(moreResizeTimeout);
@@ -263,7 +262,7 @@ document.addEventListener("DOMContentLoaded", () => {
       hamburger.style.display = "flex";
     }
 
-    populateMoreMenu(); // re-check "More" on resize
+    populateMoreMenu();
   });
 
   // =========================
@@ -280,5 +279,52 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+  // =========================
+  // 🆕 Blog Carousel (Desktop Arrows)
+  // =========================
+  const track = document.querySelector(".blog-card-grid");
+  const prevBtn = document.querySelector(".blog-carousel-btn.prev");
+  const nextBtn = document.querySelector(".blog-carousel-btn.next");
+
+  if (track && prevBtn && nextBtn) {
+    let currentIndex = 0;
+    const cards = document.querySelectorAll(".blog-card");
+
+    const isMobileView = () => window.innerWidth <= 900;
+
+    const updateCarousel = () => {
+      if (isMobileView()) return;
+
+      const cardWidth = cards[0].offsetWidth + 32; // matches 2rem gap
+      track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+    };
+
+    nextBtn.addEventListener("click", () => {
+      if (isMobileView()) return;
+
+      const maxIndex = cards.length - 3; // adjust if needed
+      if (currentIndex < maxIndex) {
+        currentIndex++;
+        updateCarousel();
+      }
+    });
+
+    prevBtn.addEventListener("click", () => {
+      if (isMobileView()) return;
+
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateCarousel();
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      currentIndex = 0;
+      updateCarousel();
+    });
+
+    updateCarousel();
+  }
 
 });
