@@ -280,8 +280,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // =========================
-  // Blog Carousel - Infinite Seamless Loop
+   // =========================
+  // Blog Carousel - Stable Loop with No Delay
   // =========================
   const blogTrack = document.querySelector(".blog-card-grid");
   const blogPrev = document.querySelector(".blog-carousel-btn.prev");
@@ -289,60 +289,88 @@ document.addEventListener("DOMContentLoaded", () => {
   const blogCards = Array.from(document.querySelectorAll(".blog-card"));
 
   if (blogTrack && blogCards.length > 0) {
-    const gap = parseFloat(getComputedStyle(blogTrack).gap) || 0;
-    const transitionDuration = parseFloat(getComputedStyle(blogTrack).transitionDuration) * 1000 || 500;
+    // OPTIMIZATION: Cache computed styles
+    const trackStyle = getComputedStyle(blogTrack);
+    const gap = parseFloat(trackStyle.gap) || 0;
+    const transitionDuration = parseFloat(trackStyle.transitionDuration) * 1000 || 500; // Fallback to 500ms
     const total = blogCards.length;
-    const cardWidth = blogCards[0].offsetWidth;
 
-    const visibleCount = Math.floor(blogTrack.offsetWidth / (cardWidth + gap));
+    // Clone cards for seamless looping
+    blogCards.forEach(card => blogTrack.appendChild(card.cloneNode(true)));
 
-    // Clone for seamless looping
-    const prependClones = blogCards.slice(-visibleCount).map(c => c.cloneNode(true));
-    const appendClones = blogCards.slice(0, visibleCount).map(c => c.cloneNode(true));
+    // Set initial visibility
+    blogTrack.style.visibility = "hidden"; // Hide it until JS sets up the carousel
 
-    prependClones.forEach(c => blogTrack.insertBefore(c, blogTrack.firstChild));
-    appendClones.forEach(c => blogTrack.appendChild(c));
-
-    let index = visibleCount; // start at first original card
-    let isTransitioning = false;
+    let index = 0;
+    let isTransitioning = false; // Prevent overlapping transitions
 
     const updateCarousel = (animate = true) => {
-      blogTrack.style.transition = animate ? `transform ${transitionDuration/1000}s ease` : "none";
-      blogTrack.style.transform = `translateX(${-index * (cardWidth + gap)}px)`;
-      if (animate) isTransitioning = true;
+      if (isTransitioning && animate) return; // Prevent overlapping animations
+      isTransitioning = animate;
+
+      const cardWidth = blogCards[0].offsetWidth;
+      const offset = index * (cardWidth + gap);
+
+      blogTrack.style.transition = animate ? `transform ${transitionDuration / 1000}s ease` : "none";
+      blogTrack.style.transform = `translateX(${-offset}px)`;
+
+      if (animate) {
+        setTimeout(() => (isTransitioning = false), transitionDuration);
+      } else {
+        isTransitioning = false;
+      }
     };
 
-    blogTrack.addEventListener("transitionend", () => {
-      isTransitioning = false;
-
-      // Forward reset
-      if (index >= total + visibleCount) {
-        index = visibleCount;
-        updateCarousel(false);
-      }
-      // Backward reset
-      if (index < visibleCount) {
-        index = total + visibleCount - 1;
-        updateCarousel(false);
-      }
-    });
+    const jumpToStart = () => {
+      index = 0;
+      updateCarousel(false);
+    };
 
     const next = () => {
-      if (isTransitioning) return;
+      if (isTransitioning) return; // Prevent rapid clicks
       index++;
       updateCarousel();
+      if (index >= total) {
+        setTimeout(jumpToStart, transitionDuration + 10); // Go to the start after the last card
+      }
     };
 
     const prev = () => {
-      if (isTransitioning) return;
-      index--;
-      updateCarousel();
+      if (isTransitioning) return; // Prevent rapid clicks
+      if (index === 0) {
+        index = total;
+        updateCarousel(false);
+        requestAnimationFrame(() => {
+          index--;
+          updateCarousel();
+        });
+      } else {
+        index--;
+        updateCarousel();
+      }
     };
 
     blogNext?.addEventListener("click", next);
     blogPrev?.addEventListener("click", prev);
 
-    updateCarousel(false); // initial position
+    // Immediately show and set initial position after setup
+    setTimeout(() => {
+      index = 0; // Start at the first card
+      blogTrack.style.transform = `translateX(${-index * (blogCards[0].offsetWidth + gap)}px)`;
+      blogTrack.style.transition = "none"; // Disable transition initially to prevent the flash
+      blogTrack.style.visibility = "visible"; // Now show the track
+    }, 0);
+
+    updateCarousel(false); // Initial setup (no animation)
+
+    // Handle resize smoothly without resetting index
+    let resizeTimeout;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        requestAnimationFrame(() => updateCarousel(false)); // Recalculate position without animation
+      }, 100); // Debounce for performance
+    });
   }
 
 });
