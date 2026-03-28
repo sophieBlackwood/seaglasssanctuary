@@ -281,62 +281,40 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // =========================
-  // 🔁 Continuous Infinite Blog Carousel
+  // 🔁 Smooth Infinite Blog Carousel
   // =========================
   const carouselTrack = document.querySelector(".blog-card-grid");
-  const prevBtn = document.querySelector(".blog-carousel-btn.prev");
-  const nextBtn = document.querySelector(".blog-carousel-btn.next");
+  const carouselCards = Array.from(document.querySelectorAll(".blog-card"));
 
-  if (carouselTrack && prevBtn && nextBtn) {
-    const isMobileView = () => window.innerWidth <= 900;
+  if (carouselTrack && carouselCards.length > 0) {
+    // Clone all cards for seamless loop
+    carouselCards.forEach(card => {
+      const clone = card.cloneNode(true);
+      clone.classList.add("clone");
+      carouselTrack.appendChild(clone);
+    });
 
-    const setupContinuousCarousel = () => {
-      document.querySelectorAll(".blog-card.clone").forEach(el => el.remove());
+    let cardWidth = carouselCards[0].offsetWidth + 32;
+    let currentX = 0;
+    const speed = 1; 
 
-      const cards = Array.from(carouselTrack.querySelectorAll(".blog-card"));
-      if (!cards.length) return;
+    const animateCarousel = () => {
+      currentX += speed;
+      const totalWidth = cardWidth * carouselCards.length;
 
-      const cardWidth = cards[0].offsetWidth + 32;
+      if (currentX >= totalWidth) {
+        currentX = 0; 
+      }
 
-      // Clone all cards for seamless loop
-      cards.forEach(c => {
-        const clone = c.cloneNode(true);
-        clone.classList.add("clone");
-        carouselTrack.appendChild(clone);
-      });
-
-      let position = 0;
-      const speed = 1; // px/frame, adjust for smoothness
-      let direction = 0; // 1=next, -1=prev, 0=idle
-
-      const move = () => {
-        if (!isMobileView()) {
-          position += speed * direction;
-          const totalWidth = cards.length * cardWidth;
-          if (position >= totalWidth) position = 0;
-          if (position < 0) position = totalWidth;
-          carouselTrack.style.transform = `translateX(-${position}px)`;
-        }
-        requestAnimationFrame(move);
-      };
-
-      requestAnimationFrame(move);
-
-      nextBtn.onmousedown = () => direction = 1;
-      nextBtn.onmouseup = () => direction = 0;
-      nextBtn.onmouseleave = () => direction = 0;
-
-      prevBtn.onmousedown = () => direction = -1;
-      prevBtn.onmouseup = () => direction = 0;
-      prevBtn.onmouseleave = () => direction = 0;
-
-      nextBtn.onclick = () => { if (!isMobileView()) position += cardWidth; };
-      prevBtn.onclick = () => { if (!isMobileView()) position -= cardWidth; };
-
-      window.addEventListener("resize", setupContinuousCarousel);
+      carouselTrack.style.transform = `translateX(-${currentX}px)`;
+      requestAnimationFrame(animateCarousel);
     };
 
-    setupContinuousCarousel();
+    requestAnimationFrame(animateCarousel);
+
+    window.addEventListener("resize", () => {
+      cardWidth = carouselCards[0].offsetWidth + 32;
+    });
   }
 
 });
