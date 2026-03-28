@@ -97,7 +97,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (themeToggle) {
     const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") document.body.classList.add("dark");
+    if (savedTheme === "dark") {
+      document.body.classList.add("dark");
+    }
 
     const setIcon = () => {
       const isDark = document.body.classList.contains("dark");
@@ -279,7 +281,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // =========================
-  // BLOG CAROUSEL - TRUE INFINITE LOOP
+  // Blog Carousel - Infinite Seamless Loop
   // =========================
   const blogTrack = document.querySelector(".blog-card-grid");
   const blogPrev = document.querySelector(".blog-carousel-btn.prev");
@@ -287,78 +289,60 @@ document.addEventListener("DOMContentLoaded", () => {
   const blogCards = Array.from(document.querySelectorAll(".blog-card"));
 
   if (blogTrack && blogCards.length > 0) {
-    const trackStyle = getComputedStyle(blogTrack);
-    const gap = parseFloat(trackStyle.gap) || 0;
-    const transitionDuration = parseFloat(trackStyle.transitionDuration) * 1000 || 500;
+    const gap = parseFloat(getComputedStyle(blogTrack).gap) || 0;
+    const transitionDuration = parseFloat(getComputedStyle(blogTrack).transitionDuration) * 1000 || 500;
     const total = blogCards.length;
-
     const cardWidth = blogCards[0].offsetWidth;
+
     const visibleCount = Math.floor(blogTrack.offsetWidth / (cardWidth + gap));
 
-    // Clone cards for seamless looping
+    // Clone for seamless looping
     const prependClones = blogCards.slice(-visibleCount).map(c => c.cloneNode(true));
     const appendClones = blogCards.slice(0, visibleCount).map(c => c.cloneNode(true));
 
     prependClones.forEach(c => blogTrack.insertBefore(c, blogTrack.firstChild));
     appendClones.forEach(c => blogTrack.appendChild(c));
 
-    let index = visibleCount; // Start at first original card
+    let index = visibleCount; // start at first original card
     let isTransitioning = false;
 
     const updateCarousel = (animate = true) => {
-      if (isTransitioning && animate) return;
-      isTransitioning = animate;
-
-      const offset = index * (cardWidth + gap);
       blogTrack.style.transition = animate ? `transform ${transitionDuration/1000}s ease` : "none";
-      blogTrack.style.transform = `translateX(${-offset}px)`;
-
-      if (animate) setTimeout(() => { isTransitioning = false; }, transitionDuration);
-      else isTransitioning = false;
+      blogTrack.style.transform = `translateX(${-index * (cardWidth + gap)}px)`;
+      if (animate) isTransitioning = true;
     };
+
+    blogTrack.addEventListener("transitionend", () => {
+      isTransitioning = false;
+
+      // Forward reset
+      if (index >= total + visibleCount) {
+        index = visibleCount;
+        updateCarousel(false);
+      }
+      // Backward reset
+      if (index < visibleCount) {
+        index = total + visibleCount - 1;
+        updateCarousel(false);
+      }
+    });
 
     const next = () => {
       if (isTransitioning) return;
       index++;
       updateCarousel();
-
-      if (index >= total + visibleCount) {
-        setTimeout(() => {
-          index = visibleCount;
-          updateCarousel(false);
-        }, transitionDuration);
-      }
     };
 
     const prev = () => {
       if (isTransitioning) return;
       index--;
       updateCarousel();
-
-      if (index < 0) {
-        setTimeout(() => {
-          index = total - 1;
-          updateCarousel(false);
-        }, transitionDuration);
-      }
     };
 
     blogNext?.addEventListener("click", next);
     blogPrev?.addEventListener("click", prev);
 
-    updateCarousel(false);
-
-    let resizeTimeout;
-    window.addEventListener("resize", () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        requestAnimationFrame(() => {
-          const newCardWidth = blogCards[0].offsetWidth;
-          const newVisible = Math.floor(blogTrack.offsetWidth / (newCardWidth + gap));
-          updateCarousel(false);
-        });
-      }, 100);
-    });
+    updateCarousel(false); // initial position
   }
 
 });
