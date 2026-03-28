@@ -281,72 +281,44 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 // =========================
-// 🔁 Manual Infinite Blog Carousel (Updated)
+// 🔁 Smooth Manual Blog Carousel (No Glitches)
 // =========================
 const carouselTrack = document.querySelector(".blog-card-grid");
 const carouselCards = Array.from(document.querySelectorAll(".blog-card"));
 
 if (carouselTrack && carouselCards.length > 0) {
-  // Clone first and last cards for seamless looping
-  const firstClone = carouselCards[0].cloneNode(true);
-  const lastClone = carouselCards[carouselCards.length - 1].cloneNode(true);
+  let cardWidth = carouselCards[0].offsetWidth + 32;
+  let currentIndex = 0;
 
-  firstClone.classList.add("clone");
-  lastClone.classList.add("clone");
-
-  carouselTrack.appendChild(firstClone);
-  carouselTrack.insertBefore(lastClone, carouselTrack.firstChild);
-
-  const allCards = document.querySelectorAll(".blog-card");
-  let cardWidth = allCards[0].offsetWidth + 32;
-  let currentIndex = 1; // Start at the first real card
-
-  // Set the position of the carousel
   const setPosition = (instant = true) => {
     carouselTrack.style.transition = instant ? "none" : "transform 0.5s ease";
     carouselTrack.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
   };
 
-  setPosition(); // Initially set position
+  setPosition();
 
-  // Handle transition end to jump to the correct card without glitch
-  const handleTransitionEnd = () => {
-    if (currentIndex === allCards.length - 1) {
-      // If we reach the last cloned card, jump back to the first real card
-      currentIndex = 1;
-      setPosition(false); // Smooth transition to the first card
-    } else if (currentIndex === 0) {
-      // If we reach the first cloned card, jump to the last real card
-      currentIndex = allCards.length - 2;
-      setPosition(false); // Smooth transition to the last card
-    }
-  };
-
-  // Buttons for manual control
   const prevBtn = document.querySelector(".blog-carousel-btn.prev");
   const nextBtn = document.querySelector(".blog-carousel-btn.next");
 
   const moveNext = () => {
     currentIndex++;
-    setPosition(false); // Smooth scroll forward
-    carouselTrack.addEventListener("transitionend", handleTransitionEnd, { once: true });
+    if (currentIndex >= carouselCards.length) currentIndex = 0; // Loop without clone
+    setPosition(false);
   };
 
   const movePrev = () => {
     currentIndex--;
-    setPosition(false); // Smooth scroll backward
-    carouselTrack.addEventListener("transitionend", handleTransitionEnd, { once: true });
+    if (currentIndex < 0) currentIndex = carouselCards.length - 1; // Loop without clone
+    setPosition(false);
   };
 
-  // Add event listeners for the buttons
   if (prevBtn && nextBtn) {
     prevBtn.addEventListener("click", movePrev);
     nextBtn.addEventListener("click", moveNext);
   }
 
-  // Responsive resizing for correct card width
   window.addEventListener("resize", () => {
-    cardWidth = allCards[0].offsetWidth + 32;
+    cardWidth = carouselCards[0].offsetWidth + 32;
     setPosition();
   });
 }
