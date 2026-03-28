@@ -354,7 +354,6 @@ if (carouselTrack && carouselCards.length > 0) {
     nextBtn.addEventListener("click", moveNext);
   }
 
-  // Update the card width on window resize to ensure proper positioning
   window.addEventListener("resize", () => {
     cardWidth = allCards[0].offsetWidth + 32; // Update card width based on screen size
     setPosition(true); // Reposition immediately without transition
