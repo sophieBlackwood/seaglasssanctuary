@@ -287,13 +287,14 @@ const carouselTrack = document.querySelector(".blog-card-grid");
 const carouselCards = Array.from(document.querySelectorAll(".blog-card"));
 
 if (carouselTrack && carouselCards.length > 0) {
-  // Clone all the cards to create a seamless infinite loop
+  // Step 1: Duplicate all the cards to form the seamless loop
   const clones = [...carouselCards].map(card => card.cloneNode(true));
 
-  // Append the cloned cards after the original set to form a seamless loop
+  // Step 2: Append all cloned cards after the original ones to create a loop
   clones.forEach(clone => carouselTrack.appendChild(clone));
 
-  const allCards = [...carouselCards, ...clones]; // Now we have all the original cards + clones
+  // Now all cards + duplicates (2x the original count)
+  const allCards = [...carouselCards, ...clones];
 
   let cardWidth = allCards[0].offsetWidth + 32; // width of one card + margin
   let currentIndex = carouselCards.length; // Start from the first original card (after the last clone)
