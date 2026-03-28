@@ -280,74 +280,70 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
- // =========================
-// 🔁 Smooth Infinite Blog Carousel
-// =========================
-const carouselTrack = document.querySelector(".blog-card-grid");
-const carouselCards = Array.from(document.querySelectorAll(".blog-card"));
+  // =========================
+  // 🔁 Manual Infinite Blog Carousel
+  // =========================
+  const carouselTrack = document.querySelector(".blog-card-grid");
+  const carouselCards = Array.from(document.querySelectorAll(".blog-card"));
 
-if (carouselTrack && carouselCards.length > 0) {
-  // Clone the first and last cards for seamless infinite scrolling
-  const firstClone = carouselCards[0].cloneNode(true);
-  const lastClone = carouselCards[carouselCards.length - 1].cloneNode(true);
-  
-  firstClone.classList.add("clone");
-  lastClone.classList.add("clone");
+  if (carouselTrack && carouselCards.length > 0) {
+    // Clone first and last cards for seamless looping
+    const firstClone = carouselCards[0].cloneNode(true);
+    const lastClone = carouselCards[carouselCards.length - 1].cloneNode(true);
 
-  carouselTrack.appendChild(firstClone);
-  carouselTrack.insertBefore(lastClone, carouselTrack.firstChild);
+    firstClone.classList.add("clone");
+    lastClone.classList.add("clone");
 
-  const allCards = document.querySelectorAll(".blog-card");
+    carouselTrack.appendChild(firstClone);
+    carouselTrack.insertBefore(lastClone, carouselTrack.firstChild);
 
-  let cardWidth = allCards[0].offsetWidth + 32;
-  let currentIndex = 1; // Start at first real card
+    const allCards = document.querySelectorAll(".blog-card");
+    let cardWidth = allCards[0].offsetWidth + 32;
+    let currentIndex = 1; // Start at the first real card
 
-  const setPosition = (instant = true) => {
-    carouselTrack.style.transition = instant ? "none" : "transform 0.5s ease";
-    carouselTrack.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-  };
+    const setPosition = (instant = true) => {
+      carouselTrack.style.transition = instant ? "none" : "transform 0.5s ease";
+      carouselTrack.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+    };
 
-  setPosition();
-
-  // Buttons
-  const prevBtn = document.querySelector(".blog-carousel-btn.prev");
-  const nextBtn = document.querySelector(".blog-carousel-btn.next");
-
-  const moveNext = () => {
-    currentIndex++;
-    setPosition(false);
-
-    carouselTrack.addEventListener("transitionend", handleTransitionEnd);
-  };
-
-  const movePrev = () => {
-    currentIndex--;
-    setPosition(false);
-
-    carouselTrack.addEventListener("transitionend", handleTransitionEnd);
-  };
-
-  const handleTransitionEnd = () => {
-    if (currentIndex === allCards.length - 1) {
-      currentIndex = 1; // jump back to first real card
-      setPosition();
-    } else if (currentIndex === 0) {
-      currentIndex = allCards.length - 2; // jump to last real card
-      setPosition();
-    }
-    carouselTrack.removeEventListener("transitionend", handleTransitionEnd);
-  };
-
-  if (prevBtn && nextBtn) {
-    prevBtn.addEventListener("click", movePrev);
-    nextBtn.addEventListener("click", moveNext);
-  }
-
-  // Responsive
-  window.addEventListener("resize", () => {
-    cardWidth = allCards[0].offsetWidth + 32;
     setPosition();
-  });
-}
 
+    // Buttons
+    const prevBtn = document.querySelector(".blog-carousel-btn.prev");
+    const nextBtn = document.querySelector(".blog-carousel-btn.next");
+
+    const moveNext = () => {
+      currentIndex++;
+      setPosition(false);
+      carouselTrack.addEventListener("transitionend", handleTransitionEnd);
+    };
+
+    const movePrev = () => {
+      currentIndex--;
+      setPosition(false);
+      carouselTrack.addEventListener("transitionend", handleTransitionEnd);
+    };
+
+    const handleTransitionEnd = () => {
+      if (currentIndex === allCards.length - 1) {
+        currentIndex = 1; // jump back to first real card
+        setPosition();
+      } else if (currentIndex === 0) {
+        currentIndex = allCards.length - 2; // jump to last real card
+        setPosition();
+      }
+      carouselTrack.removeEventListener("transitionend", handleTransitionEnd);
+    };
+
+    if (prevBtn && nextBtn) {
+      prevBtn.addEventListener("click", movePrev);
+      nextBtn.addEventListener("click", moveNext);
+    }
+
+    // Responsive
+    window.addEventListener("resize", () => {
+      cardWidth = allCards[0].offsetWidth + 32;
+      setPosition();
+    });
+  }
 });
