@@ -251,7 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // =========================
-  // Resize Reset (Hamburger)
+  // Resize Reset
   // =========================
   window.addEventListener("resize", () => {
     const sidenav = document.getElementById("mySidenav");
@@ -266,108 +266,85 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // =========================
-  // Blog Dropdown (Mobile)
+  // 🔁 Infinite Blog Carousel (FINAL FIX)
   // =========================
-  const blogDropdownLinks = document.querySelectorAll('.blog-dropdown > a');
+  const track = document.querySelector(".blog-card-grid");
+  const prevBtn = document.querySelector(".blog-carousel-btn.prev");
+  const nextBtn = document.querySelector(".blog-carousel-btn.next");
 
-  blogDropdownLinks.forEach(link => {
-    link.addEventListener('click', e => {
-      if (isMobile()) {
-        e.preventDefault();
-        const menu = link.nextElementSibling;
-        if (menu) menu.classList.toggle('show');
-      }
-    });
-  });
+  if (track && prevBtn && nextBtn) {
+    const isMobileView = () => window.innerWidth <= 900;
 
-  // =========================
-// 🔁 Infinite Blog Carousel (REAL FIX)
-// =========================
-const track = document.querySelector(".blog-card-grid");
-const prevBtn = document.querySelector(".blog-carousel-btn.prev");
-const nextBtn = document.querySelector(".blog-carousel-btn.next");
+    let currentIndex = 0;
+    let cardWidth;
+    let visibleCards;
+    let originalCards = [];
 
-if (track && prevBtn && nextBtn) {
-  const isMobileView = () => window.innerWidth <= 900;
+    const getVisibleCards = () => {
+      const container = document.querySelector(".blog-carousel-track-container");
+      return Math.round(container.offsetWidth / originalCards[0].offsetWidth);
+    };
 
-  let currentIndex = 0;
-  let cardWidth;
-  let visibleCards;
+    const setupClones = () => {
+      document.querySelectorAll(".clone").forEach(el => el.remove());
 
-  let cards = Array.from(document.querySelectorAll(".blog-card"));
+      originalCards = Array.from(track.children).filter(c => !c.classList.contains("clone"));
+      visibleCards = getVisibleCards();
 
-  const getVisibleCards = () => {
-    const container = document.querySelector(".blog-carousel-track-container");
-    return Math.round(container.offsetWidth / cards[0].offsetWidth);
-  };
+      const startClones = originalCards.slice(-visibleCards).map(card => {
+        const clone = card.cloneNode(true);
+        clone.classList.add("clone");
+        return clone;
+      });
 
-  const setupClones = () => {
-    cards = Array.from(document.querySelectorAll(".blog-card"));
+      const endClones = originalCards.slice(0, visibleCards).map(card => {
+        const clone = card.cloneNode(true);
+        clone.classList.add("clone");
+        return clone;
+      });
 
-    visibleCards = getVisibleCards();
+      startClones.forEach(clone => track.insertBefore(clone, track.firstChild));
+      endClones.forEach(clone => track.appendChild(clone));
 
-    // remove old clones (on resize)
-    document.querySelectorAll(".clone").forEach(el => el.remove());
-
-    const startClones = cards.slice(-visibleCards).map(card => {
-      const clone = card.cloneNode(true);
-      clone.classList.add("clone");
-      return clone;
-    });
-
-    const endClones = cards.slice(0, visibleCards).map(card => {
-      const clone = card.cloneNode(true);
-      clone.classList.add("clone");
-      return clone;
-    });
-
-    startClones.forEach(clone => track.insertBefore(clone, track.firstChild));
-    endClones.forEach(clone => track.appendChild(clone));
-
-    currentIndex = visibleCards;
-    updatePosition(true);
-  };
-
-  const updatePosition = (noAnim = false) => {
-    cardWidth = cards[0].offsetWidth + 32;
-
-    track.style.transition = noAnim ? "none" : "transform 0.5s ease";
-    track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-  };
-
-  nextBtn.addEventListener("click", () => {
-    if (isMobileView()) return;
-
-    currentIndex++;
-    updatePosition();
-  });
-
-  prevBtn.addEventListener("click", () => {
-    if (isMobileView()) return;
-
-    currentIndex--;
-    updatePosition();
-  });
-
-  track.addEventListener("transitionend", () => {
-    const totalCards = document.querySelectorAll(".blog-card").length;
-
-    // jumped past end
-    if (currentIndex >= totalCards - visibleCards) {
       currentIndex = visibleCards;
       updatePosition(true);
-    }
+    };
 
-    // jumped before start
-    if (currentIndex < visibleCards) {
-      currentIndex = totalCards - (visibleCards * 2);
-      updatePosition(true);
-    }
-  });
+    const updatePosition = (noAnim = false) => {
+      cardWidth = originalCards[0].offsetWidth + 32;
+      track.style.transition = noAnim ? "none" : "transform 0.5s ease";
+      track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+    };
 
-  window.addEventListener("resize", () => {
+    nextBtn.addEventListener("click", () => {
+      if (isMobileView()) return;
+      currentIndex++;
+      updatePosition();
+    });
+
+    prevBtn.addEventListener("click", () => {
+      if (isMobileView()) return;
+      currentIndex--;
+      updatePosition();
+    });
+
+    track.addEventListener("transitionend", () => {
+      const total = originalCards.length;
+
+      if (currentIndex >= total + visibleCards) {
+        currentIndex = visibleCards;
+        updatePosition(true);
+      }
+
+      if (currentIndex < visibleCards) {
+        currentIndex = total + visibleCards - 1;
+        updatePosition(true);
+      }
+    });
+
+    window.addEventListener("resize", setupClones);
+
     setupClones();
-  });
+  }
 
-  setupClones();
-}
+});
