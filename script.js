@@ -289,37 +289,43 @@ const carouselCards = Array.from(document.querySelectorAll(".blog-card"));
 if (carouselTrack && carouselCards.length > 0) {
   let cardWidth = carouselCards[0].offsetWidth + 32;
   let currentIndex = 0;
-
+  
+  // Helper function to set position of the carousel
   const setPosition = (instant = true) => {
     carouselTrack.style.transition = instant ? "none" : "transform 0.5s ease";
     carouselTrack.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
   };
-
+  
+  // Initial setup to position at the first card
   setPosition();
-
-  const prevBtn = document.querySelector(".blog-carousel-btn.prev");
-  const nextBtn = document.querySelector(".blog-carousel-btn.next");
-
+  
+  // Function to move to the next card
   const moveNext = () => {
     currentIndex++;
-    if (currentIndex >= carouselCards.length) currentIndex = 0; // Loop without clone
-    setPosition(false);
+    if (currentIndex >= carouselCards.length) currentIndex = 0; // Loop back to first card
+    setPosition(false); // Apply transition for smooth move
   };
 
+  // Function to move to the previous card
   const movePrev = () => {
     currentIndex--;
-    if (currentIndex < 0) currentIndex = carouselCards.length - 1; // Loop without clone
-    setPosition(false);
+    if (currentIndex < 0) currentIndex = carouselCards.length - 1; // Loop back to last card
+    setPosition(false); // Apply transition for smooth move
   };
+
+  // Next and Previous buttons
+  const prevBtn = document.querySelector(".blog-carousel-btn.prev");
+  const nextBtn = document.querySelector(".blog-carousel-btn.next");
 
   if (prevBtn && nextBtn) {
     prevBtn.addEventListener("click", movePrev);
     nextBtn.addEventListener("click", moveNext);
   }
 
+  // Update the card width on window resize to ensure proper positioning
   window.addEventListener("resize", () => {
-    cardWidth = carouselCards[0].offsetWidth + 32;
-    setPosition();
+    cardWidth = carouselCards[0].offsetWidth + 32; // Update card width based on screen size
+    setPosition(); // Reposition the carousel after resize
   });
 }
 });
