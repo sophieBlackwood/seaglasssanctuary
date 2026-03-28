@@ -7,7 +7,6 @@ function openNav() {
   if (!sidenav || !hamburger) return;
 
   const isMobile = window.matchMedia("(max-width: 640px)").matches;
-
   if (isMobile) {
     sidenav.style.width = "250px";
     hamburger.style.display = "none";
@@ -27,7 +26,6 @@ function closeNav() {
 // Accessibility: Reduced Motion
 // =========================
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
 if (prefersReducedMotion) {
   document.documentElement.style.scrollBehavior = "auto";
 }
@@ -78,7 +76,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Mobile Dropdowns
   // =========================
   const mobileDropdowns = document.querySelectorAll('.mobile-dropdown > a');
-
   mobileDropdowns.forEach(link => {
     link.addEventListener('click', e => {
       if (isMobile()) {
@@ -94,12 +91,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Theme Toggle
   // =========================
   const themeToggle = document.getElementById("theme-toggle");
-
   if (themeToggle) {
     const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      document.body.classList.add("dark");
-    }
+    if (savedTheme === "dark") document.body.classList.add("dark");
 
     const setIcon = () => {
       const isDark = document.body.classList.contains("dark");
@@ -136,7 +130,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
   const quickExitModal = document.getElementById("quick-exit-modal");
   const dismissModalBtn = document.getElementById("dismiss-modal");
-
   if (quickExitModal && dismissModalBtn) {
     const modalDismissed = localStorage.getItem("quickExitModalDismissed");
     if (!modalDismissed) quickExitModal.classList.add("show");
@@ -152,11 +145,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
   const quickExitBtn = document.getElementById("quick-exit");
   const quickExitURL = "https://www.amazon.com/s?k=water+bottle";
-
   if (quickExitBtn) {
-    quickExitBtn.addEventListener("click", () => {
-      window.location.replace(quickExitURL);
-    });
+    quickExitBtn.addEventListener("click", () => window.location.replace(quickExitURL));
   }
 
   // =========================
@@ -164,12 +154,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
   let escPressCount = 0;
   let escTimer;
-
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       escPressCount++;
       clearTimeout(escTimer);
-
       if (escPressCount >= 3) {
         window.location.replace(quickExitURL);
         escPressCount = 0;
@@ -185,9 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const backToTop = document.getElementById("back-to-top");
   const floatingButtons = document.getElementById("floating-buttons");
   let holdTimer;
-
   if (backToTop && floatingButtons) {
-
     window.addEventListener("scroll", () => {
       if (window.scrollY > 300) {
         backToTop.classList.add("visible");
@@ -229,24 +215,15 @@ document.addEventListener("DOMContentLoaded", () => {
       if (targetId === "#") return;
 
       let targetEl;
-      try {
-        targetEl = document.querySelector(targetId);
-      } catch {
-        return;
-      }
-
+      try { targetEl = document.querySelector(targetId); } catch { return; }
       if (!targetEl) return;
 
       e.preventDefault();
-
       const header = document.querySelector("header");
       const yOffset = header ? -header.offsetHeight : -80;
       const y = targetEl.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
-      window.scrollTo({
-        top: y,
-        behavior: prefersReducedMotion ? "auto" : "smooth"
-      });
+      window.scrollTo({ top: y, behavior: prefersReducedMotion ? "auto" : "smooth" });
     });
   });
 
@@ -256,12 +233,10 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", () => {
     const sidenav = document.getElementById("mySidenav");
     const hamburger = document.querySelector(".hamburger-menu");
-
     if (!isMobile() && sidenav && hamburger) {
       sidenav.style.width = "0";
       hamburger.style.display = "flex";
     }
-
     populateMoreMenu();
   });
 
@@ -269,7 +244,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Blog Dropdown (Mobile)
   // =========================
   const blogDropdownLinks = document.querySelectorAll('.blog-dropdown > a');
-
   blogDropdownLinks.forEach(link => {
     link.addEventListener('click', e => {
       if (isMobile()) {
@@ -280,8 +254,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-   // =========================
-  // Blog Carousel - Stable Loop with No Delay
+  // =========================
+  // Blog Carousel - Infinite Loop
   // =========================
   const blogTrack = document.querySelector(".blog-card-grid");
   const blogPrev = document.querySelector(".blog-carousel-btn.prev");
@@ -289,87 +263,65 @@ document.addEventListener("DOMContentLoaded", () => {
   const blogCards = Array.from(document.querySelectorAll(".blog-card"));
 
   if (blogTrack && blogCards.length > 0) {
-    // OPTIMIZATION: Cache computed styles
     const trackStyle = getComputedStyle(blogTrack);
     const gap = parseFloat(trackStyle.gap) || 0;
-    const transitionDuration = parseFloat(trackStyle.transitionDuration) * 1000 || 500; // Fallback to 500ms
+    const transitionDuration = parseFloat(trackStyle.transitionDuration) * 1000 || 500;
     const total = blogCards.length;
 
-    // Clone cards for seamless looping
-    blogCards.forEach(card => blogTrack.appendChild(card.cloneNode(true)));
+    // Clone cards before and after originals
+    const clonesBefore = blogCards.map(c => c.cloneNode(true));
+    const clonesAfter = blogCards.map(c => c.cloneNode(true));
+    clonesBefore.forEach(c => blogTrack.insertBefore(c, blogTrack.firstChild));
+    clonesAfter.forEach(c => blogTrack.appendChild(c));
 
-    // Set initial visibility
-    blogTrack.style.visibility = "hidden"; // Hide it until JS sets up the carousel
-
-    let index = 0;
-    let isTransitioning = false; // Prevent overlapping transitions
+    let index = total; // Start at the first original card
+    let isTransitioning = false;
 
     const updateCarousel = (animate = true) => {
-      if (isTransitioning && animate) return; // Prevent overlapping animations
-      isTransitioning = animate;
-
       const cardWidth = blogCards[0].offsetWidth;
       const offset = index * (cardWidth + gap);
-
-      blogTrack.style.transition = animate ? `transform ${transitionDuration / 1000}s ease` : "none";
+      blogTrack.style.transition = animate ? `transform ${transitionDuration/1000}s ease` : "none";
       blogTrack.style.transform = `translateX(${-offset}px)`;
-
-      if (animate) {
-        setTimeout(() => (isTransitioning = false), transitionDuration);
-      } else {
-        isTransitioning = false;
-      }
-    };
-
-    const jumpToStart = () => {
-      index = 0;
-      updateCarousel(false);
+      if (animate) isTransitioning = true;
+      if (animate) setTimeout(() => isTransitioning = false, transitionDuration);
     };
 
     const next = () => {
-      if (isTransitioning) return; // Prevent rapid clicks
+      if (isTransitioning) return;
       index++;
       updateCarousel();
-      if (index >= total) {
-        setTimeout(jumpToStart, transitionDuration + 10); // Go to the start after the last card
+      if (index >= total*2) {
+        setTimeout(() => {
+          index = total; // jump back to first original
+          updateCarousel(false);
+        }, transitionDuration);
       }
     };
 
     const prev = () => {
-      if (isTransitioning) return; // Prevent rapid clicks
-      if (index === 0) {
-        index = total;
-        updateCarousel(false);
-        requestAnimationFrame(() => {
-          index--;
-          updateCarousel();
-        });
-      } else {
-        index--;
-        updateCarousel();
+      if (isTransitioning) return;
+      index--;
+      updateCarousel();
+      if (index < 0) {
+        setTimeout(() => {
+          index = total-1; // jump to last original
+          updateCarousel(false);
+        }, transitionDuration);
       }
     };
 
     blogNext?.addEventListener("click", next);
     blogPrev?.addEventListener("click", prev);
 
-    // Immediately show and set initial position after setup
-    setTimeout(() => {
-      index = 0; // Start at the first card
-      blogTrack.style.transform = `translateX(${-index * (blogCards[0].offsetWidth + gap)}px)`;
-      blogTrack.style.transition = "none"; // Disable transition initially to prevent the flash
-      blogTrack.style.visibility = "visible"; // Now show the track
-    }, 0);
+    // Initial setup
+    blogTrack.style.transition = "none";
+    updateCarousel(false);
 
-    updateCarousel(false); // Initial setup (no animation)
-
-    // Handle resize smoothly without resetting index
+    // Handle resize smoothly
     let resizeTimeout;
     window.addEventListener("resize", () => {
       clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        requestAnimationFrame(() => updateCarousel(false)); // Recalculate position without animation
-      }, 100); // Debounce for performance
+      resizeTimeout = setTimeout(() => requestAnimationFrame(() => updateCarousel(false)), 100);
     });
   }
 
