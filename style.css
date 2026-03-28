@@ -734,6 +734,7 @@ blockquote,
   gap: 2rem;                  
   will-change: transform;    
   transition: transform 0.5s ease;
+  visibility: hidden;
 }
 
 .blog-card {
