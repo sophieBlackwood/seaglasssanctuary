@@ -418,6 +418,18 @@ nav {
 }
 
 /* Primary Buttons */
+.btn {
+  background: var(--accent);
+  color: var(--always-light-text);
+  padding: 0.85rem 2rem;
+  border-radius: var(--radius);
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+}
+
 #hero-btn {
    background: #0A7A67;
   color: var(--always-light-text);
