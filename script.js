@@ -280,92 +280,45 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-// Blog Carousel  
-const blogTrack = document.querySelector(".blog-card-grid");
-const blogPrev = document.querySelector(".blog-carousel-btn.prev");
-const blogNext = document.querySelector(".blog-carousel-btn.next");
-const blogCards = Array.from(document.querySelectorAll(".blog-card"));
+  // Blog Carousel  
+  const blogTrack = document.querySelector(".blog-card-grid");
+  const blogPrev = document.querySelector(".blog-carousel-btn.prev");
+  const blogNext = document.querySelector(".blog-carousel-btn.next");
+  const blogCards = Array.from(document.querySelectorAll(".blog-card"));
 
-if (blogTrack && blogCards.length > 0) {
-  const trackStyle = getComputedStyle(blogTrack);
-  const gap = parseFloat(trackStyle.gap) || 0;
-  const transitionDuration = parseFloat(trackStyle.transitionDuration) * 1000 || 500;
-  const total = blogCards.length;
+  if (blogTrack && blogCards.length > 0) {
+    const trackStyle = getComputedStyle(blogTrack);
+    const gap = parseFloat(trackStyle.gap) || 0;
+    const transitionDuration = parseFloat(trackStyle.transitionDuration) * 1000 || 500;
+    const total = blogCards.length;
 
-  // Step 1: Duplicate all cards (original + clones)
-  const clones = [...blogCards].map(card => card.cloneNode(true));
-  clones.forEach(clone => blogTrack.appendChild(clone));
+    blogCards.forEach(card => blogTrack.appendChild(card.cloneNode(true)));
 
-  const allCards = [...blogCards, ...clones]; // Combining original and cloned cards
-  let index = blogCards.length; // Start from the first original card after the last clone
-  let isTransitioning = false;
+    let index = 0;
+    let isTransitioning = false;
 
-  // Helper function to update the carousel's position
-  const updateCarousel = (animate = true) => {
-    if (isTransitioning && animate) return;
-    isTransitioning = animate;
+    const updateCarousel = (animate = true) => {
+      if (isTransitioning && animate) return;
+      isTransitioning = animate;
+      const cardWidth = blogCards[0].offsetWidth;
+      const offset = index * (cardWidth + gap);
+      blogTrack.style.transition = animate ? `transform ${transitionDuration / 1000}s ease` : "none";
+      blogTrack.style.transform = `translateX(${-offset}px)`;
+      if (animate) setTimeout(() => (isTransitioning = false), transitionDuration);
+      else isTransitioning = false;
+    };
 
-    const cardWidth = blogCards[0].offsetWidth;  // Get card width (same for all cards)
-    const offset = index * (cardWidth + gap);  // Calculate the offset based on the current index
-    blogTrack.style.transition = animate ? `transform ${transitionDuration / 1000}s ease` : "none";
-    blogTrack.style.transform = `translateX(${-offset}px)`;  // Apply transform
+    const jumpToStart = () => { index = 0; updateCarousel(false); };
+    const next = () => { if (isTransitioning) return; index++; updateCarousel(); if (index >= total) setTimeout(jumpToStart, transitionDuration + 10); };
+    const prev = () => { if (isTransitioning) return; if (index === 0) { index = total; updateCarousel(false); requestAnimationFrame(() => { index--; updateCarousel(); }); } else { index--; updateCarousel(); } };
 
-    // Reset the transition and allow further interaction after the animation is complete
-    if (animate) setTimeout(() => (isTransitioning = false), transitionDuration);
-    else isTransitioning = false;
-  };
+    blogNext?.addEventListener("click", next);
+    blogPrev?.addEventListener("click", prev);
 
-  // Function to jump to the start (first card)
-  const jumpToStart = () => {
-    index = 0;
-    updateCarousel(false); // Instantly reset position without transition
-  };
+    updateCarousel(false);
 
-  // Function to move to the next card
-  const next = () => {
-    if (isTransitioning) return;  // Prevent multiple clicks during transition
-    index++;  // Move forward
+    let resizeTimeout;
+    window.addEventListener("resize", () => { clearTimeout(resizeTimeout); resizeTimeout = setTimeout(() => { requestAnimationFrame(() => updateCarousel(false)); }, 100); });
+  }
 
-    // If we reach the last card (clone), reset to the first original card
-    if (index >= allCards.length) {
-      setTimeout(jumpToStart, transitionDuration + 10);
-    } else {
-      updateCarousel(); // Apply normal transition
-    }
-  };
-
-  // Function to move to the previous card
-  const prev = () => {
-    if (isTransitioning) return;  // Prevent multiple clicks during transition
-
-    // If we are at the first card (the first clone), reset to the last original card
-    if (index === 0) {
-      index = allCards.length - 1;
-      updateCarousel(false); // Instantly reset position without transition
-      requestAnimationFrame(() => {
-        index--; // Move to the actual last card
-        updateCarousel();  // Apply transition
-      });
-    } else {
-      index--; // Move backward
-      updateCarousel();  // Apply normal transition
-    }
-  };
-
-  // Event listeners for next/previous buttons
-  blogNext?.addEventListener("click", next);
-  blogPrev?.addEventListener("click", prev);
-
-  // Initial setup (without transition)
-  updateCarousel(false);
-
-  // Reposition carousel on window resize
-  let resizeTimeout;
-  window.addEventListener("resize", () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-      requestAnimationFrame(() => updateCarousel(false));
-    }, 100);
-  });
-}
 });
