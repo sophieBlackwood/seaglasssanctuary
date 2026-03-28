@@ -7,7 +7,6 @@ function openNav() {
   if (!sidenav || !hamburger) return;
 
   const isMobile = window.matchMedia("(max-width: 640px)").matches;
-
   if (isMobile) {
     sidenav.style.width = "250px";
     hamburger.style.display = "none";
@@ -27,13 +26,9 @@ function closeNav() {
 // Accessibility: Reduced Motion
 // =========================
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-if (prefersReducedMotion) {
-  document.documentElement.style.scrollBehavior = "auto";
-}
+if (prefersReducedMotion) document.documentElement.style.scrollBehavior = "auto";
 
 document.addEventListener("DOMContentLoaded", () => {
-
   const isMobile = () => window.matchMedia("(max-width: 640px)").matches;
   const isMid = () => window.matchMedia("(max-width: 1000px)").matches;
 
@@ -46,28 +41,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const populateMoreMenu = () => {
     if (!moreMenu || !moreDropdown) return;
-
     moreMenu.innerHTML = "";
-
     if (isMid() && !isMobile()) {
       hiddenItems.forEach(item => {
         const link = item.querySelector("a");
         if (!link) return;
-
-        const clone = link.cloneNode(true);
         const li = document.createElement("li");
-        li.appendChild(clone);
+        li.appendChild(link.cloneNode(true));
         moreMenu.appendChild(li);
       });
-
       moreDropdown.style.display = "inline-block";
-    } else {
-      moreDropdown.style.display = "none";
-    }
+    } else moreDropdown.style.display = "none";
   };
-
   populateMoreMenu();
-
   let moreResizeTimeout;
   window.addEventListener("resize", () => {
     clearTimeout(moreResizeTimeout);
@@ -77,16 +63,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
   // Mobile Dropdowns
   // =========================
-  const mobileDropdowns = document.querySelectorAll('.mobile-dropdown > a');
-
-  mobileDropdowns.forEach(link => {
+  document.querySelectorAll('.mobile-dropdown > a').forEach(link => {
     link.addEventListener('click', e => {
-      if (isMobile()) {
-        e.preventDefault();
-        const menu = link.nextElementSibling;
-        if (menu) menu.classList.toggle('show');
-        link.classList.toggle('open');
-      }
+      if (!isMobile()) return;
+      e.preventDefault();
+      const menu = link.nextElementSibling;
+      if (menu) menu.classList.toggle('show');
+      link.classList.toggle('open');
     });
   });
 
@@ -94,13 +77,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Theme Toggle
   // =========================
   const themeToggle = document.getElementById("theme-toggle");
-
   if (themeToggle) {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      document.body.classList.add("dark");
-    }
-
+    if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark");
     const setIcon = () => {
       const isDark = document.body.classList.contains("dark");
       themeToggle.innerHTML = isDark
@@ -108,26 +86,15 @@ document.addEventListener("DOMContentLoaded", () => {
         : '<i class="fa-solid fa-moon"></i>';
       themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
     };
-
     setIcon();
-
     themeToggle.addEventListener("click", () => {
       document.body.classList.add("theme-transition");
       document.body.classList.toggle("dark");
-
-      localStorage.setItem(
-        "theme",
-        document.body.classList.contains("dark") ? "dark" : "light"
-      );
-
+      localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
       setIcon();
-
       const durations = getComputedStyle(document.body).transitionDuration.split(',');
       const maxDuration = Math.max(...durations.map(d => parseFloat(d))) * 1000 || 700;
-
-      setTimeout(() => {
-        document.body.classList.remove("theme-transition");
-      }, maxDuration);
+      setTimeout(() => document.body.classList.remove("theme-transition"), maxDuration);
     });
   }
 
@@ -136,11 +103,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
   const quickExitModal = document.getElementById("quick-exit-modal");
   const dismissModalBtn = document.getElementById("dismiss-modal");
-
   if (quickExitModal && dismissModalBtn) {
-    const modalDismissed = localStorage.getItem("quickExitModalDismissed");
-    if (!modalDismissed) quickExitModal.classList.add("show");
-
+    if (!localStorage.getItem("quickExitModalDismissed")) quickExitModal.classList.add("show");
     dismissModalBtn.addEventListener("click", () => {
       quickExitModal.classList.remove("show");
       localStorage.setItem("quickExitModalDismissed", "true");
@@ -152,30 +116,18 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
   const quickExitBtn = document.getElementById("quick-exit");
   const quickExitURL = "https://www.amazon.com/s?k=water+bottle";
-
-  if (quickExitBtn) {
-    quickExitBtn.addEventListener("click", () => {
-      window.location.replace(quickExitURL);
-    });
-  }
+  if (quickExitBtn) quickExitBtn.addEventListener("click", () => window.location.replace(quickExitURL));
 
   // =========================
   // Triple ESC
   // =========================
-  let escPressCount = 0;
-  let escTimer;
-
-  document.addEventListener("keydown", (e) => {
+  let escPressCount = 0, escTimer;
+  document.addEventListener("keydown", e => {
     if (e.key === "Escape") {
       escPressCount++;
       clearTimeout(escTimer);
-
-      if (escPressCount >= 3) {
-        window.location.replace(quickExitURL);
-        escPressCount = 0;
-      } else {
-        escTimer = setTimeout(() => { escPressCount = 0; }, 1000);
-      }
+      if (escPressCount >= 3) { window.location.replace(quickExitURL); escPressCount = 0; }
+      else escTimer = setTimeout(() => escPressCount = 0, 1000);
     }
   });
 
@@ -185,9 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const backToTop = document.getElementById("back-to-top");
   const floatingButtons = document.getElementById("floating-buttons");
   let holdTimer;
-
   if (backToTop && floatingButtons) {
-
     window.addEventListener("scroll", () => {
       if (window.scrollY > 300) {
         backToTop.classList.add("visible");
@@ -197,154 +147,104 @@ document.addEventListener("DOMContentLoaded", () => {
         floatingButtons.classList.remove("compact", "reveal");
       }
     });
-
     backToTop.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
     });
-
     backToTop.addEventListener("touchstart", () => {
-      if (isMobile()) {
-        holdTimer = setTimeout(() => {
-          floatingButtons.classList.toggle("reveal");
-        }, 600);
-      }
+      if (isMobile()) holdTimer = setTimeout(() => floatingButtons.classList.toggle("reveal"), 600);
     });
-
-    ["mouseup", "mouseleave", "touchend", "touchcancel"].forEach(evt =>
-      backToTop.addEventListener(evt, () => {
-        if (holdTimer) {
-          clearTimeout(holdTimer);
-          holdTimer = null;
-        }
-      })
-    );
+    ["mouseup","mouseleave","touchend","touchcancel"].forEach(evt => {
+      backToTop.addEventListener(evt, () => { if (holdTimer) clearTimeout(holdTimer); holdTimer = null; });
+    });
   }
 
   // =========================
   // Smooth Scrolling
   // =========================
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener("click", function (e) {
+    anchor.addEventListener("click", function(e) {
       const targetId = this.getAttribute("href");
       if (targetId === "#") return;
-
-      let targetEl;
-      try {
-        targetEl = document.querySelector(targetId);
-      } catch {
-        return;
-      }
-
+      let targetEl; try { targetEl = document.querySelector(targetId); } catch { return; }
       if (!targetEl) return;
-
       e.preventDefault();
-
       const header = document.querySelector("header");
       const yOffset = header ? -header.offsetHeight : -80;
       const y = targetEl.getBoundingClientRect().top + window.pageYOffset + yOffset;
-
-      window.scrollTo({
-        top: y,
-        behavior: prefersReducedMotion ? "auto" : "smooth"
-      });
+      window.scrollTo({ top: y, behavior: prefersReducedMotion ? "auto" : "smooth" });
     });
   });
 
   // =========================
-  // Resize Reset
+  // Resize Reset (Hamburger)
   // =========================
   window.addEventListener("resize", () => {
     const sidenav = document.getElementById("mySidenav");
     const hamburger = document.querySelector(".hamburger-menu");
-
     if (!isMobile() && sidenav && hamburger) {
       sidenav.style.width = "0";
       hamburger.style.display = "flex";
     }
-
     populateMoreMenu();
   });
 
   // =========================
-  // 🔁 Infinite Blog Carousel (FINAL FIX)
+  // Blog Dropdown (Mobile)
+  // =========================
+  document.querySelectorAll('.blog-dropdown > a').forEach(link => {
+    link.addEventListener('click', e => {
+      if (!isMobile()) return;
+      e.preventDefault();
+      const menu = link.nextElementSibling;
+      if (menu) menu.classList.toggle('show');
+    });
+  });
+
+  // =========================
+  // 🔁 Infinite Blog Carousel
   // =========================
   const track = document.querySelector(".blog-card-grid");
   const prevBtn = document.querySelector(".blog-carousel-btn.prev");
   const nextBtn = document.querySelector(".blog-carousel-btn.next");
-
   if (track && prevBtn && nextBtn) {
+    const cards = Array.from(track.children);
     const isMobileView = () => window.innerWidth <= 900;
 
-    let currentIndex = 0;
-    let cardWidth;
-    let visibleCards;
-    let originalCards = [];
+    let currentIndex = 1;
+    const firstClone = cards[0].cloneNode(true);
+    const lastClone = cards[cards.length-1].cloneNode(true);
+    firstClone.classList.add("clone");
+    lastClone.classList.add("clone");
+    track.appendChild(firstClone);
+    track.insertBefore(lastClone, track.firstChild);
 
-    const getVisibleCards = () => {
-      const container = document.querySelector(".blog-carousel-track-container");
-      return Math.round(container.offsetWidth / originalCards[0].offsetWidth);
-    };
+    const allCards = Array.from(track.children);
+    let cardWidth = allCards[0].offsetWidth + 32;
 
-    const setupClones = () => {
-      document.querySelectorAll(".clone").forEach(el => el.remove());
-
-      originalCards = Array.from(track.children).filter(c => !c.classList.contains("clone"));
-      visibleCards = getVisibleCards();
-
-      const startClones = originalCards.slice(-visibleCards).map(card => {
-        const clone = card.cloneNode(true);
-        clone.classList.add("clone");
-        return clone;
-      });
-
-      const endClones = originalCards.slice(0, visibleCards).map(card => {
-        const clone = card.cloneNode(true);
-        clone.classList.add("clone");
-        return clone;
-      });
-
-      startClones.forEach(clone => track.insertBefore(clone, track.firstChild));
-      endClones.forEach(clone => track.appendChild(clone));
-
-      currentIndex = visibleCards;
-      updatePosition(true);
-    };
-
-    const updatePosition = (noAnim = false) => {
-      cardWidth = originalCards[0].offsetWidth + 32;
+    const setPosition = (noAnim = true) => {
       track.style.transition = noAnim ? "none" : "transform 0.5s ease";
-      track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+      track.style.transform = `translateX(-${currentIndex*cardWidth}px)`;
     };
+    setPosition();
 
     nextBtn.addEventListener("click", () => {
       if (isMobileView()) return;
       currentIndex++;
-      updatePosition();
+      setPosition(false);
     });
-
     prevBtn.addEventListener("click", () => {
       if (isMobileView()) return;
       currentIndex--;
-      updatePosition();
+      setPosition(false);
     });
 
     track.addEventListener("transitionend", () => {
-      const total = originalCards.length;
-
-      if (currentIndex >= total + visibleCards) {
-        currentIndex = visibleCards;
-        updatePosition(true);
-      }
-
-      if (currentIndex < visibleCards) {
-        currentIndex = total + visibleCards - 1;
-        updatePosition(true);
-      }
+      if (currentIndex === allCards.length - 1) currentIndex = 1;
+      if (currentIndex === 0) currentIndex = allCards.length - 2;
+      setPosition(true);
     });
 
-    window.addEventListener("resize", setupClones);
-
-    setupClones();
+    window.addEventListener("resize", () => { cardWidth = allCards[0].offsetWidth + 32; setPosition(true); });
   }
 
 });
