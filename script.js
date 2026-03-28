@@ -281,70 +281,93 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // =========================
-  // 🔁 Infinite Blog Carousel
-  // =========================
-  const track = document.querySelector(".blog-card-grid");
-  const prevBtn = document.querySelector(".blog-carousel-btn.prev");
-  const nextBtn = document.querySelector(".blog-carousel-btn.next");
+// 🔁 Infinite Blog Carousel (REAL FIX)
+// =========================
+const track = document.querySelector(".blog-card-grid");
+const prevBtn = document.querySelector(".blog-carousel-btn.prev");
+const nextBtn = document.querySelector(".blog-carousel-btn.next");
 
-  if (track && prevBtn && nextBtn) {
-    const cards = Array.from(document.querySelectorAll(".blog-card"));
-    const isMobileView = () => window.innerWidth <= 900;
+if (track && prevBtn && nextBtn) {
+  const isMobileView = () => window.innerWidth <= 900;
 
-    let currentIndex = 1;
-    let cardWidth;
+  let currentIndex = 0;
+  let cardWidth;
+  let visibleCards;
 
-    const firstClone = cards[0].cloneNode(true);
-    const lastClone = cards[cards.length - 1].cloneNode(true);
+  let cards = Array.from(document.querySelectorAll(".blog-card"));
 
-    firstClone.classList.add("clone");
-    lastClone.classList.add("clone");
+  const getVisibleCards = () => {
+    const container = document.querySelector(".blog-carousel-track-container");
+    return Math.round(container.offsetWidth / cards[0].offsetWidth);
+  };
 
-    track.appendChild(firstClone);
-    track.insertBefore(lastClone, track.firstChild);
+  const setupClones = () => {
+    cards = Array.from(document.querySelectorAll(".blog-card"));
 
-    const allCards = document.querySelectorAll(".blog-card");
+    visibleCards = getVisibleCards();
 
-    const setPosition = () => {
-      cardWidth = allCards[0].offsetWidth + 32;
-      track.style.transition = "none";
-      track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-    };
+    // remove old clones (on resize)
+    document.querySelectorAll(".clone").forEach(el => el.remove());
 
-    const moveToIndex = () => {
-      track.style.transition = "transform 0.5s ease";
-      track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-    };
-
-    nextBtn.addEventListener("click", () => {
-      if (isMobileView()) return;
-      currentIndex++;
-      moveToIndex();
+    const startClones = cards.slice(-visibleCards).map(card => {
+      const clone = card.cloneNode(true);
+      clone.classList.add("clone");
+      return clone;
     });
 
-    prevBtn.addEventListener("click", () => {
-      if (isMobileView()) return;
-      currentIndex--;
-      moveToIndex();
+    const endClones = cards.slice(0, visibleCards).map(card => {
+      const clone = card.cloneNode(true);
+      clone.classList.add("clone");
+      return clone;
     });
 
-    track.addEventListener("transitionend", () => {
-      const all = document.querySelectorAll(".blog-card");
+    startClones.forEach(clone => track.insertBefore(clone, track.firstChild));
+    endClones.forEach(clone => track.appendChild(clone));
 
-      if (currentIndex === all.length - 1) {
-        currentIndex = 1;
-        setPosition();
-      }
+    currentIndex = visibleCards;
+    updatePosition(true);
+  };
 
-      if (currentIndex === 0) {
-        currentIndex = all.length - 2;
-        setPosition();
-      }
-    });
+  const updatePosition = (noAnim = false) => {
+    cardWidth = cards[0].offsetWidth + 32;
 
-    window.addEventListener("resize", setPosition);
+    track.style.transition = noAnim ? "none" : "transform 0.5s ease";
+    track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+  };
 
-    setPosition();
-  }
+  nextBtn.addEventListener("click", () => {
+    if (isMobileView()) return;
 
-});
+    currentIndex++;
+    updatePosition();
+  });
+
+  prevBtn.addEventListener("click", () => {
+    if (isMobileView()) return;
+
+    currentIndex--;
+    updatePosition();
+  });
+
+  track.addEventListener("transitionend", () => {
+    const totalCards = document.querySelectorAll(".blog-card").length;
+
+    // jumped past end
+    if (currentIndex >= totalCards - visibleCards) {
+      currentIndex = visibleCards;
+      updatePosition(true);
+    }
+
+    // jumped before start
+    if (currentIndex < visibleCards) {
+      currentIndex = totalCards - (visibleCards * 2);
+      updatePosition(true);
+    }
+  });
+
+  window.addEventListener("resize", () => {
+    setupClones();
+  });
+
+  setupClones();
+}
