@@ -281,84 +281,88 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // =========================
-  // BLOG CAROUSEL - SEAMLESS LOOP
-  // =========================
-  const blogTrack = document.querySelector(".blog-card-grid");
-  const blogPrev = document.querySelector(".blog-carousel-btn.prev");
-  const blogNext = document.querySelector(".blog-carousel-btn.next");
-  const blogCards = Array.from(document.querySelectorAll(".blog-card"));
+// BLOG CAROUSEL - TRUE INFINITE LOOP
+// =========================
+const blogTrack = document.querySelector(".blog-card-grid");
+const blogPrev = document.querySelector(".blog-carousel-btn.prev");
+const blogNext = document.querySelector(".blog-carousel-btn.next");
+const blogCards = Array.from(document.querySelectorAll(".blog-card"));
 
-  if (blogTrack && blogCards.length > 0) {
-    const trackStyle = getComputedStyle(blogTrack);
-    const gap = parseFloat(trackStyle.gap) || 0;
-    const transitionDuration = parseFloat(trackStyle.transitionDuration) * 1000 || 500;
-    const total = blogCards.length;
+if (blogTrack && blogCards.length > 0) {
+  const trackStyle = getComputedStyle(blogTrack);
+  const gap = parseFloat(trackStyle.gap) || 0;
+  const transitionDuration = parseFloat(trackStyle.transitionDuration) * 1000 || 500;
+  const total = blogCards.length;
 
-    // Clone cards for seamless looping
-    blogCards.forEach(card => blogTrack.appendChild(card.cloneNode(true)));
+  // Determine how many visible cards fit in viewport
+  const cardWidth = blogCards[0].offsetWidth;
+  const visibleCount = Math.floor(blogTrack.offsetWidth / (cardWidth + gap));
 
-    let index = 0;
-    let isTransitioning = false;
+  // Clone only the minimum needed for seamless looping
+  const prependClones = blogCards.slice(-visibleCount).map(c => c.cloneNode(true));
+  const appendClones = blogCards.slice(0, visibleCount).map(c => c.cloneNode(true));
 
-    const updateCarousel = (animate = true) => {
-      if (isTransitioning && animate) return;
-      isTransitioning = animate;
+  prependClones.forEach(c => blogTrack.insertBefore(c, blogTrack.firstChild));
+  appendClones.forEach(c => blogTrack.appendChild(c));
 
-      const cardWidth = blogCards[0].offsetWidth;
-      const offset = index * (cardWidth + gap);
+  // Adjust starting index to account for prepended clones
+  let index = visibleCount;
+  let isTransitioning = false;
 
-      blogTrack.style.transition = animate ? `transform ${transitionDuration / 1000}s ease` : "none";
-      blogTrack.style.transform = `translateX(${-offset}px)`;
+  const updateCarousel = (animate = true) => {
+    if (isTransitioning && animate) return;
+    isTransitioning = animate;
 
-      if (animate) setTimeout(() => (isTransitioning = false), transitionDuration);
-      else isTransitioning = false;
-    };
+    const offset = index * (cardWidth + gap);
+    blogTrack.style.transition = animate ? `transform ${transitionDuration / 1000}s ease` : "none";
+    blogTrack.style.transform = `translateX(${-offset}px)`;
 
-    const jumpToStart = () => {
-      index = 0;
-      blogTrack.style.transition = "none";
-      updateCarousel(false);
+    if (animate) setTimeout(() => (isTransitioning = false), transitionDuration);
+    else isTransitioning = false;
+  };
+
+  const next = () => {
+    if (isTransitioning) return;
+    index++;
+    updateCarousel();
+
+    // If we moved into appended clones, jump back to original cards
+    if (index >= total + visibleCount) {
       setTimeout(() => {
-        blogTrack.style.transition = `transform ${transitionDuration / 1000}s ease`;
-      }, 50);
-    };
-
-    const next = () => {
-      if (isTransitioning) return;
-      index++;
-      updateCarousel();
-      if (index >= total * 2) {
-        setTimeout(jumpToStart, transitionDuration + 10);
-      }
-    };
-
-    const prev = () => {
-      if (isTransitioning) return;
-      if (index === 0) {
-        index = total;
+        index = visibleCount;
         updateCarousel(false);
-        requestAnimationFrame(() => {
-          index--;
-          updateCarousel();
-        });
-      } else {
-        index--;
-        updateCarousel();
-      }
-    };
+      }, transitionDuration);
+    }
+  };
 
-    blogNext?.addEventListener("click", next);
-    blogPrev?.addEventListener("click", prev);
+  const prev = () => {
+    if (isTransitioning) return;
+    index--;
+    updateCarousel();
 
-    updateCarousel(false);
+    // If we moved into prepended clones, jump forward to original cards
+    if (index < visibleCount) {
+      setTimeout(() => {
+        index = total + visibleCount - 1;
+        updateCarousel(false);
+      }, transitionDuration);
+    }
+  };
 
-    let resizeTimeout;
-    window.addEventListener("resize", () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        requestAnimationFrame(() => updateCarousel(false));
-      }, 100);
-    });
-  }
+  blogNext?.addEventListener("click", next);
+  blogPrev?.addEventListener("click", prev);
+
+  // Initial setup
+  updateCarousel(false);
+
+  // Handle resize
+  let resizeTimeout;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      updateCarousel(false); // recalc position
+    }, 100);
+  });
+}
 
 });
