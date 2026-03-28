@@ -280,7 +280,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
- // =========================
+// =========================
 // 🔁 Manual Infinite Blog Carousel (Updated)
 // =========================
 const carouselTrack = document.querySelector(".blog-card-grid");
@@ -307,18 +307,18 @@ if (carouselTrack && carouselCards.length > 0) {
     carouselTrack.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
   };
 
-  setPosition();
+  setPosition(); // Initially set position
 
   // Handle transition end to jump to the correct card without glitch
   const handleTransitionEnd = () => {
     if (currentIndex === allCards.length - 1) {
       // If we reach the last cloned card, jump back to the first real card
       currentIndex = 1;
-      setPosition();
+      setPosition(false); // Smooth transition to the first card
     } else if (currentIndex === 0) {
       // If we reach the first cloned card, jump to the last real card
       currentIndex = allCards.length - 2;
-      setPosition();
+      setPosition(false); // Smooth transition to the last card
     }
   };
 
@@ -328,13 +328,13 @@ if (carouselTrack && carouselCards.length > 0) {
 
   const moveNext = () => {
     currentIndex++;
-    setPosition(false);
+    setPosition(false); // Smooth scroll forward
     carouselTrack.addEventListener("transitionend", handleTransitionEnd, { once: true });
   };
 
   const movePrev = () => {
     currentIndex--;
-    setPosition(false);
+    setPosition(false); // Smooth scroll backward
     carouselTrack.addEventListener("transitionend", handleTransitionEnd, { once: true });
   };
 
