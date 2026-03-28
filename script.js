@@ -7,6 +7,7 @@ function openNav() {
   if (!sidenav || !hamburger) return;
 
   const isMobile = window.matchMedia("(max-width: 640px)").matches;
+
   if (isMobile) {
     sidenav.style.width = "250px";
     hamburger.style.display = "none";
@@ -26,9 +27,12 @@ function closeNav() {
 // Accessibility: Reduced Motion
 // =========================
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-if (prefersReducedMotion) document.documentElement.style.scrollBehavior = "auto";
+if (prefersReducedMotion) {
+  document.documentElement.style.scrollBehavior = "auto";
+}
 
 document.addEventListener("DOMContentLoaded", () => {
+
   const isMobile = () => window.matchMedia("(max-width: 640px)").matches;
   const isMid = () => window.matchMedia("(max-width: 1000px)").matches;
 
@@ -41,19 +45,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const populateMoreMenu = () => {
     if (!moreMenu || !moreDropdown) return;
+
     moreMenu.innerHTML = "";
+
     if (isMid() && !isMobile()) {
       hiddenItems.forEach(item => {
         const link = item.querySelector("a");
         if (!link) return;
+        const clone = link.cloneNode(true);
         const li = document.createElement("li");
-        li.appendChild(link.cloneNode(true));
+        li.appendChild(clone);
         moreMenu.appendChild(li);
       });
       moreDropdown.style.display = "inline-block";
-    } else moreDropdown.style.display = "none";
+    } else {
+      moreDropdown.style.display = "none";
+    }
   };
+
   populateMoreMenu();
+
   let moreResizeTimeout;
   window.addEventListener("resize", () => {
     clearTimeout(moreResizeTimeout);
@@ -63,13 +74,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
   // Mobile Dropdowns
   // =========================
-  document.querySelectorAll('.mobile-dropdown > a').forEach(link => {
+  const mobileDropdowns = document.querySelectorAll('.mobile-dropdown > a');
+  mobileDropdowns.forEach(link => {
     link.addEventListener('click', e => {
-      if (!isMobile()) return;
-      e.preventDefault();
-      const menu = link.nextElementSibling;
-      if (menu) menu.classList.toggle('show');
-      link.classList.toggle('open');
+      if (isMobile()) {
+        e.preventDefault();
+        const menu = link.nextElementSibling;
+        if (menu) menu.classList.toggle('show');
+        link.classList.toggle('open');
+      }
     });
   });
 
@@ -78,7 +91,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
   const themeToggle = document.getElementById("theme-toggle");
   if (themeToggle) {
-    if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark");
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") document.body.classList.add("dark");
+
     const setIcon = () => {
       const isDark = document.body.classList.contains("dark");
       themeToggle.innerHTML = isDark
@@ -87,13 +102,16 @@ document.addEventListener("DOMContentLoaded", () => {
       themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
     };
     setIcon();
+
     themeToggle.addEventListener("click", () => {
       document.body.classList.add("theme-transition");
       document.body.classList.toggle("dark");
       localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
       setIcon();
+
       const durations = getComputedStyle(document.body).transitionDuration.split(',');
       const maxDuration = Math.max(...durations.map(d => parseFloat(d))) * 1000 || 700;
+
       setTimeout(() => document.body.classList.remove("theme-transition"), maxDuration);
     });
   }
@@ -104,7 +122,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const quickExitModal = document.getElementById("quick-exit-modal");
   const dismissModalBtn = document.getElementById("dismiss-modal");
   if (quickExitModal && dismissModalBtn) {
-    if (!localStorage.getItem("quickExitModalDismissed")) quickExitModal.classList.add("show");
+    const modalDismissed = localStorage.getItem("quickExitModalDismissed");
+    if (!modalDismissed) quickExitModal.classList.add("show");
+
     dismissModalBtn.addEventListener("click", () => {
       quickExitModal.classList.remove("show");
       localStorage.setItem("quickExitModalDismissed", "true");
@@ -112,22 +132,29 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // =========================
-  // Quick Exit
+  // Quick Exit Button
   // =========================
   const quickExitBtn = document.getElementById("quick-exit");
   const quickExitURL = "https://www.amazon.com/s?k=water+bottle";
-  if (quickExitBtn) quickExitBtn.addEventListener("click", () => window.location.replace(quickExitURL));
+  if (quickExitBtn) {
+    quickExitBtn.addEventListener("click", () => window.location.replace(quickExitURL));
+  }
 
   // =========================
-  // Triple ESC
+  // Triple ESC Quick Exit
   // =========================
   let escPressCount = 0, escTimer;
-  document.addEventListener("keydown", e => {
+  document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       escPressCount++;
       clearTimeout(escTimer);
-      if (escPressCount >= 3) { window.location.replace(quickExitURL); escPressCount = 0; }
-      else escTimer = setTimeout(() => escPressCount = 0, 1000);
+
+      if (escPressCount >= 3) {
+        window.location.replace(quickExitURL);
+        escPressCount = 0;
+      } else {
+        escTimer = setTimeout(() => { escPressCount = 0; }, 1000);
+      }
     }
   });
 
@@ -137,6 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const backToTop = document.getElementById("back-to-top");
   const floatingButtons = document.getElementById("floating-buttons");
   let holdTimer;
+
   if (backToTop && floatingButtons) {
     window.addEventListener("scroll", () => {
       if (window.scrollY > 300) {
@@ -147,30 +175,39 @@ document.addEventListener("DOMContentLoaded", () => {
         floatingButtons.classList.remove("compact", "reveal");
       }
     });
+
     backToTop.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
     });
+
     backToTop.addEventListener("touchstart", () => {
-      if (isMobile()) holdTimer = setTimeout(() => floatingButtons.classList.toggle("reveal"), 600);
+      if (isMobile()) {
+        holdTimer = setTimeout(() => floatingButtons.classList.toggle("reveal"), 600);
+      }
     });
-    ["mouseup","mouseleave","touchend","touchcancel"].forEach(evt => {
-      backToTop.addEventListener(evt, () => { if (holdTimer) clearTimeout(holdTimer); holdTimer = null; });
-    });
+
+    ["mouseup", "mouseleave", "touchend", "touchcancel"].forEach(evt =>
+      backToTop.addEventListener(evt, () => { if (holdTimer) { clearTimeout(holdTimer); holdTimer = null; } })
+    );
   }
 
   // =========================
   // Smooth Scrolling
   // =========================
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener("click", function(e) {
+    anchor.addEventListener("click", function (e) {
       const targetId = this.getAttribute("href");
       if (targetId === "#") return;
-      let targetEl; try { targetEl = document.querySelector(targetId); } catch { return; }
+
+      let targetEl;
+      try { targetEl = document.querySelector(targetId); } catch { return; }
       if (!targetEl) return;
+
       e.preventDefault();
       const header = document.querySelector("header");
       const yOffset = header ? -header.offsetHeight : -80;
       const y = targetEl.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
       window.scrollTo({ top: y, behavior: prefersReducedMotion ? "auto" : "smooth" });
     });
   });
@@ -186,17 +223,20 @@ document.addEventListener("DOMContentLoaded", () => {
       hamburger.style.display = "flex";
     }
     populateMoreMenu();
+    setupCarousel(); // rebuild carousel on resize
   });
 
   // =========================
   // Blog Dropdown (Mobile)
   // =========================
-  document.querySelectorAll('.blog-dropdown > a').forEach(link => {
+  const blogDropdownLinks = document.querySelectorAll('.blog-dropdown > a');
+  blogDropdownLinks.forEach(link => {
     link.addEventListener('click', e => {
-      if (!isMobile()) return;
-      e.preventDefault();
-      const menu = link.nextElementSibling;
-      if (menu) menu.classList.toggle('show');
+      if (isMobile()) {
+        e.preventDefault();
+        const menu = link.nextElementSibling;
+        if (menu) menu.classList.toggle('show');
+      }
     });
   });
 
@@ -206,45 +246,74 @@ document.addEventListener("DOMContentLoaded", () => {
   const track = document.querySelector(".blog-card-grid");
   const prevBtn = document.querySelector(".blog-carousel-btn.prev");
   const nextBtn = document.querySelector(".blog-carousel-btn.next");
-  if (track && prevBtn && nextBtn) {
-    const cards = Array.from(track.children);
+
+  function setupCarousel() {
+    if (!track || !prevBtn || !nextBtn) return;
+
     const isMobileView = () => window.innerWidth <= 900;
+    track.style.transition = "none";
+    track.style.transform = "translateX(0)";
 
-    let currentIndex = 1;
-    const firstClone = cards[0].cloneNode(true);
-    const lastClone = cards[cards.length-1].cloneNode(true);
-    firstClone.classList.add("clone");
-    lastClone.classList.add("clone");
-    track.appendChild(firstClone);
-    track.insertBefore(lastClone, track.firstChild);
+    // remove old clones
+    document.querySelectorAll(".blog-card.clone").forEach(el => el.remove());
 
-    const allCards = Array.from(track.children);
+    const cards = Array.from(track.querySelectorAll(".blog-card"));
+    if (!cards.length) return;
+
+    const visibleCards = Math.floor(track.parentElement.offsetWidth / cards[0].offsetWidth);
+
+    const startClones = cards.slice(-visibleCards).map(c => {
+      const clone = c.cloneNode(true);
+      clone.classList.add("clone");
+      return clone;
+    });
+    const endClones = cards.slice(0, visibleCards).map(c => {
+      const clone = c.cloneNode(true);
+      clone.classList.add("clone");
+      return clone;
+    });
+
+    startClones.forEach(clone => track.insertBefore(clone, track.firstChild));
+    endClones.forEach(clone => track.appendChild(clone));
+
+    let allCards = Array.from(track.children);
+    let currentIndex = visibleCards;
     let cardWidth = allCards[0].offsetWidth + 32;
 
-    const setPosition = (noAnim = true) => {
-      track.style.transition = noAnim ? "none" : "transform 0.5s ease";
-      track.style.transform = `translateX(-${currentIndex*cardWidth}px)`;
+    const setPosition = (animate = true) => {
+      track.style.transition = animate ? "transform 0.5s ease" : "none";
+      track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
     };
-    setPosition();
 
-    nextBtn.addEventListener("click", () => {
+    nextBtn.onclick = () => {
       if (isMobileView()) return;
       currentIndex++;
-      setPosition(false);
-    });
-    prevBtn.addEventListener("click", () => {
+      setPosition();
+    };
+    prevBtn.onclick = () => {
       if (isMobileView()) return;
       currentIndex--;
+      setPosition();
+    };
+
+    track.addEventListener("transitionend", () => {
+      if (currentIndex >= allCards.length - visibleCards) {
+        currentIndex = visibleCards;
+        setPosition(false);
+      }
+      if (currentIndex < visibleCards) {
+        currentIndex = allCards.length - visibleCards * 2;
+        setPosition(false);
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      cardWidth = allCards[0].offsetWidth + 32;
       setPosition(false);
     });
 
-    track.addEventListener("transitionend", () => {
-      if (currentIndex === allCards.length - 1) currentIndex = 1;
-      if (currentIndex === 0) currentIndex = allCards.length - 2;
-      setPosition(true);
-    });
-
-    window.addEventListener("resize", () => { cardWidth = allCards[0].offsetWidth + 32; setPosition(true); });
+    setPosition(false);
   }
 
+  setupCarousel();
 });
