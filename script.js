@@ -255,7 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
  // =========================
-// Blog Carousel - True Seamless Infinite
+// Blog Carousel - True Seamless Infinite Loop with No Gap
 // =========================
 const blogTrack = document.querySelector(".blog-card-grid");
 const blogPrev = document.querySelector(".blog-carousel-btn.prev");
@@ -267,43 +267,49 @@ if (blogTrack && blogCards.length > 0) {
   const transitionDuration = parseFloat(getComputedStyle(blogTrack).transitionDuration) * 1000 || 500;
   const total = blogCards.length;
 
-  // Clone cards before and after
+  // Clone cards before and after the original set for seamless loop
   const clonesBefore = blogCards.map(c => c.cloneNode(true));
   const clonesAfter = blogCards.map(c => c.cloneNode(true));
+
+  // Insert clones before and after the original cards
   clonesBefore.forEach(c => blogTrack.insertBefore(c, blogTrack.firstChild));
   clonesAfter.forEach(c => blogTrack.appendChild(c));
 
-  let index = total; // start at first original
+  let index = total; // Start at the first original card (indexing starts after clones)
   let isTransitioning = false;
 
-  // Ensure the track's width is calculated after the clones are added
+  // Calculate the width of the track including both original and cloned cards
   const cardWidth = blogCards[0].offsetWidth;
   const totalWidth = (cardWidth + gap) * (blogCards.length * 2);
-  blogTrack.style.width = `${totalWidth}px`;
+  blogTrack.style.width = `${totalWidth}px`; // Ensure enough space for all cards
+
+  // Hide the track initially to avoid visible jumps during the setup phase
+  blogTrack.style.visibility = "hidden"; 
 
   // Update Carousel position and apply transform
   const updateCarousel = (animate = true) => {
     const offset = index * (cardWidth + gap);
-    blogTrack.style.transition = animate ? `transform ${transitionDuration/1000}s ease` : "none";
+    blogTrack.style.transition = animate ? `transform ${transitionDuration / 1000}s ease` : "none";
     blogTrack.style.transform = `translateX(${-offset}px)`;
   };
 
+  // Check if the index needs to be reset for seamless looping
   const checkLoop = () => {
-    // Forward loop
+    // If the index exceeds total (forwards loop)
     if (index >= total * 2) {
-      index = total; // reset to the first original card
-      updateCarousel(false); // no animation on reset
+      index = total; // Reset to the first original card
+      updateCarousel(false); // No animation on reset
     }
-    // Backward loop
+    // If the index is less than total (backwards loop)
     else if (index < total) {
-      index = total + (index % total); // backward loop
-      updateCarousel(false); // no animation on reset
+      index = total + (index % total); // Loop backwards to the original cards
+      updateCarousel(false); // No animation on reset
     }
   };
 
   // Next button click logic
   const next = () => {
-    if (isTransitioning) return; // prevent rapid clicks
+    if (isTransitioning) return; // Prevent rapid clicks
     isTransitioning = true;
     index++;
     updateCarousel(true);
@@ -317,7 +323,7 @@ if (blogTrack && blogCards.length > 0) {
 
   // Previous button click logic
   const prev = () => {
-    if (isTransitioning) return; // prevent rapid clicks
+    if (isTransitioning) return; // Prevent rapid clicks
     isTransitioning = true;
     index--;
     updateCarousel(true);
@@ -333,7 +339,7 @@ if (blogTrack && blogCards.length > 0) {
   blogPrev?.addEventListener("click", prev);
 
   // Initialize carousel to the first position
-  updateCarousel(false); // no animation for the first setup
+  updateCarousel(false); // No animation for the first setup
 
   // Handle resizing
   window.addEventListener("resize", () => {
@@ -344,6 +350,11 @@ if (blogTrack && blogCards.length > 0) {
 
     requestAnimationFrame(() => updateCarousel(false)); // Recalculate position without animation
   });
+
+  // Once setup is complete, make the carousel track visible
+  setTimeout(() => {
+    blogTrack.style.visibility = "visible"; // Make track visible after setup
+  }, 50);
 }
 
 });
