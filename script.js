@@ -287,23 +287,16 @@ const carouselTrack = document.querySelector(".blog-card-grid");
 const carouselCards = Array.from(document.querySelectorAll(".blog-card"));
 
 if (carouselTrack && carouselCards.length > 0) {
-  // Clone all the cards for a seamless loop
-  const firstClone = carouselCards[0].cloneNode(true);
-  const lastClone = carouselCards[carouselCards.length - 1].cloneNode(true);
+  // Clone all the cards to create a seamless infinite loop
+  const clones = [...carouselCards].map(card => card.cloneNode(true));
 
-  // Add classes to differentiate clones
-  firstClone.classList.add("clone");
-  lastClone.classList.add("clone");
+  // Append the cloned cards after the original set to form a seamless loop
+  clones.forEach(clone => carouselTrack.appendChild(clone));
 
-  // Append the clones at both ends to make the loop seamless
-  carouselTrack.appendChild(firstClone);  // Append first clone at the end
-  carouselTrack.insertBefore(lastClone, carouselTrack.firstChild);  // Insert last clone at the start
-
-  // Select all the cards again after cloning
-  const allCards = document.querySelectorAll(".blog-card");
+  const allCards = [...carouselCards, ...clones]; // Now we have all the original cards + clones
 
   let cardWidth = allCards[0].offsetWidth + 32; // width of one card + margin
-  let currentIndex = 1; // Start from the first actual card (not the first clone)
+  let currentIndex = carouselCards.length; // Start from the first original card (after the last clone)
   let isTransitioning = false; // Prevent multiple clicks during transition
 
   // Helper function to set position of the carousel
@@ -319,9 +312,9 @@ if (carouselTrack && carouselCards.length > 0) {
 
     currentIndex++;  // Move to the next card
 
-    // If we're at the last clone, immediately reset to the first card
-    if (currentIndex >= allCards.length - 1) {
-      currentIndex = 1; // Skip the first clone (back to the actual first card)
+    // If we're at the last card (which is the last clone), immediately reset to the first card
+    if (currentIndex >= allCards.length) {
+      currentIndex = carouselCards.length; // Reset to the first original card
       setPosition(true); // Instantly reset to the start without transition
     } else {
       setPosition(); // Otherwise, apply normal transition
@@ -340,9 +333,9 @@ if (carouselTrack && carouselCards.length > 0) {
 
     currentIndex--;  // Move to the previous card
 
-    // If we're at the first clone, immediately reset to the last card
-    if (currentIndex <= 0) {
-      currentIndex = allCards.length - 2; // Skip the last clone (back to the actual last card)
+    // If we're at the first card (which is the first clone), immediately reset to the last card
+    if (currentIndex < carouselCards.length) {
+      currentIndex = allCards.length - 1; // Reset to the last original card
       setPosition(true); // Instantly reset to the end without transition
     } else {
       setPosition(); // Otherwise, apply normal transition
