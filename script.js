@@ -254,112 +254,88 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
- // Blog Carousel - True Seamless Infinite Loop with No Gap
-const blogTrack = document.querySelector(".blog-card-grid");
-const blogPrev = document.querySelector(".blog-carousel-btn.prev");
-const blogNext = document.querySelector(".blog-carousel-btn.next");
-const blogCards = Array.from(document.querySelectorAll(".blog-card"));
+  /* ================================================= */
+  /* BLOG CAROUSEL - STABLE LOOP (OPTIMIZED) */
+  /* ================================================= */
 
-if (blogTrack && blogCards.length > 0) {
-  const gap = parseFloat(getComputedStyle(blogTrack).gap) || 0;
-  const transitionDuration = parseFloat(getComputedStyle(blogTrack).transitionDuration) * 1000 || 500;
-  const total = blogCards.length;
+  const blogTrack = document.querySelector(".blog-card-grid");
+  const blogPrev = document.querySelector(".blog-carousel-btn.prev");
+  const blogNext = document.querySelector(".blog-carousel-btn.next");
+  const blogCards = Array.from(document.querySelectorAll(".blog-card"));
 
-  // Clone cards before and after the original set for seamless loop
-  const clonesBefore = blogCards.map(c => c.cloneNode(true));
-  const clonesAfter = blogCards.map(c => c.cloneNode(true));
+  if (blogTrack && blogCards.length > 0) {
+    // OPTIMIZATION: Cache computed styles to avoid repeated getComputedStyle calls
+    const trackStyle = getComputedStyle(blogTrack);
+    const gap = parseFloat(trackStyle.gap) || 0;
+    const transitionDuration = parseFloat(trackStyle.transitionDuration) * 1000 || 500; // Fallback to 500ms
+    const total = blogCards.length;
 
-  // Insert clones before and after the original cards
-  clonesBefore.forEach(c => blogTrack.insertBefore(c, blogTrack.firstChild));
-  clonesAfter.forEach(c => blogTrack.appendChild(c));
+    // Clone cards for seamless looping
+    blogCards.forEach(card => blogTrack.appendChild(card.cloneNode(true)));
 
-  let index = total; // Start at the first original card (indexing starts after clones)
-  let isTransitioning = false;
+    let index = 0;
+    let isTransitioning = false; // OPTIMIZATION: Prevent overlapping transitions
 
-  // Calculate the width of the track including both original and cloned cards
-  const cardWidth = blogCards[0].offsetWidth;
-  const totalWidth = (cardWidth + gap) * (blogCards.length * 2);
-  blogTrack.style.width = `${totalWidth}px`; // Ensure enough space for all cards
+    const updateCarousel = (animate = true) => {
+      if (isTransitioning && animate) return; // Skip if already transitioning
+      isTransitioning = animate;
 
-  // Hide the track initially using display: none
-  blogTrack.style.display = "none"; 
+      const cardWidth = blogCards[0].offsetWidth;
+      const offset = index * (cardWidth + gap);
 
-  // Update Carousel position and apply transform
-  const updateCarousel = (animate = true) => {
-    const offset = index * (cardWidth + gap);
-    blogTrack.style.transition = animate ? `transform ${transitionDuration / 1000}s ease` : "none";
-    blogTrack.style.transform = `translateX(${-offset}px)`;
-  };
+      blogTrack.style.transition = animate ? `transform ${transitionDuration / 1000}s ease` : "none";
+      blogTrack.style.transform = `translateX(${-offset}px)`;
 
-  // Check if the index needs to be reset for seamless looping
-  const checkLoop = () => {
-    if (index >= total * 2) {
-      index = total; // Reset to the first original card
-      updateCarousel(false); // No animation on reset
-    } else if (index < total) {
-      index = total + (index % total); // Loop backwards to the original cards
-      updateCarousel(false); // No animation on reset
-    }
-  };
-
-  // Next button click logic
-  const next = () => {
-    if (isTransitioning) return; // Prevent rapid clicks
-    isTransitioning = true;
-    index++;
-    updateCarousel(true);
-    requestAnimationFrame(() => {
-      setTimeout(() => {
+      if (animate) {
+        setTimeout(() => (isTransitioning = false), transitionDuration);
+      } else {
         isTransitioning = false;
-        checkLoop(); // Ensure index is within the original range
-      }, transitionDuration);
+      }
+    };
+
+    const jumpToStart = () => {
+      index = 0;
+      updateCarousel(false);
+    };
+
+    const next = () => {
+      if (isTransitioning) return; // DEBUG: Prevent rapid clicks
+      index++;
+      updateCarousel();
+      if (index >= total) {
+        setTimeout(jumpToStart, transitionDuration + 10); // OPTIMIZATION: Use dynamic duration
+      }
+    };
+
+    const prev = () => {
+      if (isTransitioning) return; // DEBUG: Prevent rapid clicks
+      if (index === 0) {
+        index = total;
+        updateCarousel(false);
+        requestAnimationFrame(() => {
+          index--;
+          updateCarousel();
+        });
+      } else {
+        index--;
+        updateCarousel();
+      }
+    };
+
+    blogNext?.addEventListener("click", next);
+    blogPrev?.addEventListener("click", prev);
+
+    updateCarousel(false); // Initial setup
+
+    /* OPTIMIZATION: Handle resize smoothly without resetting index */
+    let resizeTimeout;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        requestAnimationFrame(() => updateCarousel(false)); // Recalculate position without animation
+      }, 100); // Debounce for performance
     });
-  };
+  }
 
-  // Previous button click logic
-  const prev = () => {
-    if (isTransitioning) return; // Prevent rapid clicks
-    isTransitioning = true;
-    index--;
-    updateCarousel(true);
-    requestAnimationFrame(() => {
-      setTimeout(() => {
-        isTransitioning = false;
-        checkLoop(); // Ensure index is within the original range
-      }, transitionDuration);
-    });
-  };
-
-  blogNext?.addEventListener("click", next);
-  blogPrev?.addEventListener("click", prev);
-
-  // Initialize carousel to the first position
-  updateCarousel(false); // No animation for the first setup
-
-  // Force reflow for styles to apply after the width/transform calculation
-  setTimeout(() => {
-    // Force a reflow to apply the styles correctly
-    blogTrack.offsetHeight; // Trigger reflow
-
-    // Once setup is complete, make the carousel track visible
-    blogTrack.style.display = "block"; // Show track after setup
-
-    // Recalculate position without animation
-    updateCarousel(false);
-  }, 50); // Allow a small delay for layout to be ready
-
-  // Handle resizing
-  window.addEventListener("resize", () => {
-    // Recalculate the total width on resize
-    const cardWidth = blogCards[0].offsetWidth;
-    const totalWidth = (cardWidth + gap) * (blogCards.length * 2);
-    blogTrack.style.width = `${totalWidth}px`;
-
-    // Trigger reflow before updating the carousel position
-    blogTrack.offsetHeight; // Force reflow
-
-    requestAnimationFrame(() => updateCarousel(false)); // Recalculate position without animation
-  });
-}
 
 });
