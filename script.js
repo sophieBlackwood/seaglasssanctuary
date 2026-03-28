@@ -287,20 +287,23 @@ const carouselTrack = document.querySelector(".blog-card-grid");
 const carouselCards = Array.from(document.querySelectorAll(".blog-card"));
 
 if (carouselTrack && carouselCards.length > 0) {
-  // Clone the first and last card for infinite scroll effect
+  // Clone all the cards for a seamless loop
   const firstClone = carouselCards[0].cloneNode(true);
   const lastClone = carouselCards[carouselCards.length - 1].cloneNode(true);
-  
+
+  // Add classes to differentiate clones
   firstClone.classList.add("clone");
   lastClone.classList.add("clone");
 
+  // Append the clones at both ends to make the loop seamless
   carouselTrack.appendChild(firstClone);  // Append first clone at the end
   carouselTrack.insertBefore(lastClone, carouselTrack.firstChild);  // Insert last clone at the start
 
+  // Select all the cards again after cloning
   const allCards = document.querySelectorAll(".blog-card");
-  
-  let cardWidth = allCards[0].offsetWidth + 32;
-  let currentIndex = 1;  // Start from the first actual card (after the last clone)
+
+  let cardWidth = allCards[0].offsetWidth + 32; // width of one card + margin
+  let currentIndex = 1; // Start from the first actual card (not the first clone)
   let isTransitioning = false; // Prevent multiple clicks during transition
 
   // Helper function to set position of the carousel
@@ -314,18 +317,20 @@ if (carouselTrack && carouselCards.length > 0) {
     if (isTransitioning) return; // Prevent multiple clicks during transition
     isTransitioning = true;
 
-    currentIndex++;
+    currentIndex++;  // Move to the next card
 
-    if (currentIndex >= allCards.length - 1) { // If we reached the last clone
-      currentIndex = 1; // Skip the first clone
-      setPosition(true); // Reset without transition
+    // If we're at the last clone, immediately reset to the first card
+    if (currentIndex >= allCards.length - 1) {
+      currentIndex = 1; // Skip the first clone (back to the actual first card)
+      setPosition(true); // Instantly reset to the start without transition
     } else {
-      setPosition();
+      setPosition(); // Otherwise, apply normal transition
     }
 
+    // After the transition ends, allow further movement
     setTimeout(() => {
       isTransitioning = false;
-    }, 500);  // Set to match the transition duration
+    }, 500); // Match the transition duration
   };
 
   // Function to move to the previous card
@@ -333,18 +338,20 @@ if (carouselTrack && carouselCards.length > 0) {
     if (isTransitioning) return; // Prevent multiple clicks during transition
     isTransitioning = true;
 
-    currentIndex--;
+    currentIndex--;  // Move to the previous card
 
-    if (currentIndex <= 0) { // If we reached the first clone
-      currentIndex = allCards.length - 2; // Skip the last clone
-      setPosition(true); // Reset without transition
+    // If we're at the first clone, immediately reset to the last card
+    if (currentIndex <= 0) {
+      currentIndex = allCards.length - 2; // Skip the last clone (back to the actual last card)
+      setPosition(true); // Instantly reset to the end without transition
     } else {
-      setPosition();
+      setPosition(); // Otherwise, apply normal transition
     }
 
+    // After the transition ends, allow further movement
     setTimeout(() => {
       isTransitioning = false;
-    }, 500);  // Set to match the transition duration
+    }, 500); // Match the transition duration
   };
 
   // Next and Previous buttons
