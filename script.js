@@ -313,9 +313,10 @@ if (carouselTrack && carouselCards.length > 0) {
   const moveNext = () => {
     if (isTransitioning) return; // Prevent multiple clicks during transition
     isTransitioning = true;
-    
+
     currentIndex++;
-    if (currentIndex >= allCards.length - 1) { // If we reached the last clone, jump back to the first card
+
+    if (currentIndex >= allCards.length - 1) { // If we reached the last clone
       currentIndex = 1; // Skip the first clone
       setPosition(true); // Reset without transition
     } else {
@@ -333,7 +334,8 @@ if (carouselTrack && carouselCards.length > 0) {
     isTransitioning = true;
 
     currentIndex--;
-    if (currentIndex <= 0) { // If we reached the first clone, jump back to the last card
+
+    if (currentIndex <= 0) { // If we reached the first clone
       currentIndex = allCards.length - 2; // Skip the last clone
       setPosition(true); // Reset without transition
     } else {
@@ -354,6 +356,7 @@ if (carouselTrack && carouselCards.length > 0) {
     nextBtn.addEventListener("click", moveNext);
   }
 
+  // Update the card width on window resize to ensure proper positioning
   window.addEventListener("resize", () => {
     cardWidth = allCards[0].offsetWidth + 32; // Update card width based on screen size
     setPosition(true); // Reposition immediately without transition
