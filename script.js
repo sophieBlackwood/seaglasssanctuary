@@ -280,30 +280,28 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* ================================================= */
-  /* BLOG CAROUSEL - STABLE LOOP (OPTIMIZED) */
-  /* ================================================= */
-
+  // =========================
+  // BLOG CAROUSEL - SEAMLESS LOOP
+  // =========================
   const blogTrack = document.querySelector(".blog-card-grid");
   const blogPrev = document.querySelector(".blog-carousel-btn.prev");
   const blogNext = document.querySelector(".blog-carousel-btn.next");
   const blogCards = Array.from(document.querySelectorAll(".blog-card"));
 
   if (blogTrack && blogCards.length > 0) {
-    // OPTIMIZATION: Cache computed styles to avoid repeated getComputedStyle calls
     const trackStyle = getComputedStyle(blogTrack);
     const gap = parseFloat(trackStyle.gap) || 0;
-    const transitionDuration = parseFloat(trackStyle.transitionDuration) * 1000 || 500; // Fallback to 500ms
+    const transitionDuration = parseFloat(trackStyle.transitionDuration) * 1000 || 500;
     const total = blogCards.length;
 
     // Clone cards for seamless looping
     blogCards.forEach(card => blogTrack.appendChild(card.cloneNode(true)));
 
     let index = 0;
-    let isTransitioning = false; // OPTIMIZATION: Prevent overlapping transitions
+    let isTransitioning = false;
 
     const updateCarousel = (animate = true) => {
-      if (isTransitioning && animate) return; // Skip if already transitioning
+      if (isTransitioning && animate) return;
       isTransitioning = animate;
 
       const cardWidth = blogCards[0].offsetWidth;
@@ -312,33 +310,30 @@ document.addEventListener("DOMContentLoaded", () => {
       blogTrack.style.transition = animate ? `transform ${transitionDuration / 1000}s ease` : "none";
       blogTrack.style.transform = `translateX(${-offset}px)`;
 
-      if (animate) {
-        setTimeout(() => (isTransitioning = false), transitionDuration);
-      } else {
-        isTransitioning = false;
-      }
+      if (animate) setTimeout(() => (isTransitioning = false), transitionDuration);
+      else isTransitioning = false;
     };
 
     const jumpToStart = () => {
       index = 0;
-      blogTrack.style.transition = "none"; // Disable transition temporarily
-      updateCarousel(false); // Jump to the start immediately
+      blogTrack.style.transition = "none";
+      updateCarousel(false);
       setTimeout(() => {
-        blogTrack.style.transition = `transform ${transitionDuration / 1000}s ease`; // Re-enable transition
-      }, 50); // Small timeout to re-enable transition
+        blogTrack.style.transition = `transform ${transitionDuration / 1000}s ease`;
+      }, 50);
     };
 
     const next = () => {
-      if (isTransitioning) return; // DEBUG: Prevent rapid clicks
+      if (isTransitioning) return;
       index++;
       updateCarousel();
-      if (index >= total) {
-        setTimeout(jumpToStart, transitionDuration + 10); // OPTIMIZATION: Use dynamic duration
+      if (index >= total * 2) {
+        setTimeout(jumpToStart, transitionDuration + 10);
       }
     };
 
     const prev = () => {
-      if (isTransitioning) return; // DEBUG: Prevent rapid clicks
+      if (isTransitioning) return;
       if (index === 0) {
         index = total;
         updateCarousel(false);
@@ -355,15 +350,14 @@ document.addEventListener("DOMContentLoaded", () => {
     blogNext?.addEventListener("click", next);
     blogPrev?.addEventListener("click", prev);
 
-    updateCarousel(false); // Initial setup
+    updateCarousel(false);
 
-    /* OPTIMIZATION: Handle resize smoothly without resetting index */
     let resizeTimeout;
     window.addEventListener("resize", () => {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {
-        requestAnimationFrame(() => updateCarousel(false)); // Recalculate position without animation
-      }, 100); // Debounce for performance
+        requestAnimationFrame(() => updateCarousel(false));
+      }, 100);
     });
   }
 
