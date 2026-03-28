@@ -280,90 +280,92 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-// =========================
-// 🔁 Infinite Blog Carousel (Smooth, Manual Control)
-// =========================
-const carouselTrack = document.querySelector(".blog-card-grid");
-const carouselCards = Array.from(document.querySelectorAll(".blog-card"));
+// Blog Carousel  
+const blogTrack = document.querySelector(".blog-card-grid");
+const blogPrev = document.querySelector(".blog-carousel-btn.prev");
+const blogNext = document.querySelector(".blog-carousel-btn.next");
+const blogCards = Array.from(document.querySelectorAll(".blog-card"));
 
-if (carouselTrack && carouselCards.length > 0) {
-  // Step 1: Duplicate all the cards to form the seamless loop
-  const clones = [...carouselCards].map(card => card.cloneNode(true));
+if (blogTrack && blogCards.length > 0) {
+  const trackStyle = getComputedStyle(blogTrack);
+  const gap = parseFloat(trackStyle.gap) || 0;
+  const transitionDuration = parseFloat(trackStyle.transitionDuration) * 1000 || 500;
+  const total = blogCards.length;
 
-  // Step 2: Append all cloned cards after the original ones to create a loop
-  clones.forEach(clone => carouselTrack.appendChild(clone));
+  // Step 1: Duplicate all cards (original + clones)
+  const clones = [...blogCards].map(card => card.cloneNode(true));
+  clones.forEach(clone => blogTrack.appendChild(clone));
 
-  // Now all cards + duplicates (2x the original count)
-  const allCards = [...carouselCards, ...clones];
+  const allCards = [...blogCards, ...clones]; // Combining original and cloned cards
+  let index = blogCards.length; // Start from the first original card after the last clone
+  let isTransitioning = false;
 
-  let cardWidth = allCards[0].offsetWidth + 32; // width of one card + margin
-  let currentIndex = carouselCards.length; // Start from the first original card (after the last clone)
-  let isTransitioning = false; // Prevent multiple clicks during transition
+  // Helper function to update the carousel's position
+  const updateCarousel = (animate = true) => {
+    if (isTransitioning && animate) return;
+    isTransitioning = animate;
 
-  // Helper function to set position of the carousel
-  const setPosition = (instant = false) => {
-    carouselTrack.style.transition = instant ? "none" : "transform 0.5s ease";
-    carouselTrack.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+    const cardWidth = blogCards[0].offsetWidth;  // Get card width (same for all cards)
+    const offset = index * (cardWidth + gap);  // Calculate the offset based on the current index
+    blogTrack.style.transition = animate ? `transform ${transitionDuration / 1000}s ease` : "none";
+    blogTrack.style.transform = `translateX(${-offset}px)`;  // Apply transform
+
+    // Reset the transition and allow further interaction after the animation is complete
+    if (animate) setTimeout(() => (isTransitioning = false), transitionDuration);
+    else isTransitioning = false;
+  };
+
+  // Function to jump to the start (first card)
+  const jumpToStart = () => {
+    index = 0;
+    updateCarousel(false); // Instantly reset position without transition
   };
 
   // Function to move to the next card
-  const moveNext = () => {
-    if (isTransitioning) return; // Prevent multiple clicks during transition
-    isTransitioning = true;
+  const next = () => {
+    if (isTransitioning) return;  // Prevent multiple clicks during transition
+    index++;  // Move forward
 
-    currentIndex++;  // Move to the next card
-
-    // If we're at the last card (which is the last clone), immediately reset to the first card
-    if (currentIndex >= allCards.length) {
-      currentIndex = carouselCards.length; // Reset to the first original card
-      setPosition(true); // Instantly reset to the start without transition
+    // If we reach the last card (clone), reset to the first original card
+    if (index >= allCards.length) {
+      setTimeout(jumpToStart, transitionDuration + 10);
     } else {
-      setPosition(); // Otherwise, apply normal transition
+      updateCarousel(); // Apply normal transition
     }
-
-    // After the transition ends, allow further movement
-    setTimeout(() => {
-      isTransitioning = false;
-    }, 500); // Match the transition duration
   };
 
   // Function to move to the previous card
-  const movePrev = () => {
-    if (isTransitioning) return; // Prevent multiple clicks during transition
-    isTransitioning = true;
+  const prev = () => {
+    if (isTransitioning) return;  // Prevent multiple clicks during transition
 
-    currentIndex--;  // Move to the previous card
-
-    // If we're at the first card (which is the first clone), immediately reset to the last card
-    if (currentIndex < carouselCards.length) {
-      currentIndex = allCards.length - 1; // Reset to the last original card
-      setPosition(true); // Instantly reset to the end without transition
+    // If we are at the first card (the first clone), reset to the last original card
+    if (index === 0) {
+      index = allCards.length - 1;
+      updateCarousel(false); // Instantly reset position without transition
+      requestAnimationFrame(() => {
+        index--; // Move to the actual last card
+        updateCarousel();  // Apply transition
+      });
     } else {
-      setPosition(); // Otherwise, apply normal transition
+      index--; // Move backward
+      updateCarousel();  // Apply normal transition
     }
-
-    // After the transition ends, allow further movement
-    setTimeout(() => {
-      isTransitioning = false;
-    }, 500); // Match the transition duration
   };
 
-  // Next and Previous buttons
-  const prevBtn = document.querySelector(".blog-carousel-btn.prev");
-  const nextBtn = document.querySelector(".blog-carousel-btn.next");
+  // Event listeners for next/previous buttons
+  blogNext?.addEventListener("click", next);
+  blogPrev?.addEventListener("click", prev);
 
-  if (prevBtn && nextBtn) {
-    prevBtn.addEventListener("click", movePrev);
-    nextBtn.addEventListener("click", moveNext);
-  }
+  // Initial setup (without transition)
+  updateCarousel(false);
 
-  // Update the card width on window resize to ensure proper positioning
+  // Reposition carousel on window resize
+  let resizeTimeout;
   window.addEventListener("resize", () => {
-    cardWidth = allCards[0].offsetWidth + 32; // Update card width based on screen size
-    setPosition(true); // Reposition immediately without transition
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      requestAnimationFrame(() => updateCarousel(false));
+    }, 100);
   });
-
-  // Initial setup to position at the first card
-  setPosition();
 }
 });
