@@ -254,7 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // =========================
+ // =========================
 // Blog Carousel - True Seamless Infinite
 // =========================
 const blogTrack = document.querySelector(".blog-card-grid");
@@ -276,45 +276,55 @@ if (blogTrack && blogCards.length > 0) {
   let index = total; // start at first original
   let isTransitioning = false;
 
+  // Ensure the track's width is calculated after the clones are added
+  const cardWidth = blogCards[0].offsetWidth;
+  const totalWidth = (cardWidth + gap) * (blogCards.length * 2);
+  blogTrack.style.width = `${totalWidth}px`;
+
+  // Update Carousel position and apply transform
   const updateCarousel = (animate = true) => {
-    const cardWidth = blogCards[0].offsetWidth;
     const offset = index * (cardWidth + gap);
     blogTrack.style.transition = animate ? `transform ${transitionDuration/1000}s ease` : "none";
     blogTrack.style.transform = `translateX(${-offset}px)`;
   };
 
   const checkLoop = () => {
-    if (index >= total*2) {
-      index = total; // forward loop
-      updateCarousel(false);
-    } else if (index < total) {
+    // Forward loop
+    if (index >= total * 2) {
+      index = total; // reset to the first original card
+      updateCarousel(false); // no animation on reset
+    }
+    // Backward loop
+    else if (index < total) {
       index = total + (index % total); // backward loop
-      updateCarousel(false);
+      updateCarousel(false); // no animation on reset
     }
   };
 
+  // Next button click logic
   const next = () => {
-    if (isTransitioning) return;
+    if (isTransitioning) return; // prevent rapid clicks
     isTransitioning = true;
     index++;
     updateCarousel(true);
     requestAnimationFrame(() => {
       setTimeout(() => {
         isTransitioning = false;
-        checkLoop();
+        checkLoop(); // Ensure index is within the original range
       }, transitionDuration);
     });
   };
 
+  // Previous button click logic
   const prev = () => {
-    if (isTransitioning) return;
+    if (isTransitioning) return; // prevent rapid clicks
     isTransitioning = true;
     index--;
     updateCarousel(true);
     requestAnimationFrame(() => {
       setTimeout(() => {
         isTransitioning = false;
-        checkLoop();
+        checkLoop(); // Ensure index is within the original range
       }, transitionDuration);
     });
   };
@@ -322,11 +332,17 @@ if (blogTrack && blogCards.length > 0) {
   blogNext?.addEventListener("click", next);
   blogPrev?.addEventListener("click", prev);
 
-  // Initial position
-  updateCarousel(false);
+  // Initialize carousel to the first position
+  updateCarousel(false); // no animation for the first setup
 
+  // Handle resizing
   window.addEventListener("resize", () => {
-    requestAnimationFrame(() => updateCarousel(false));
+    // Recalculate the total width on resize
+    const cardWidth = blogCards[0].offsetWidth;
+    const totalWidth = (cardWidth + gap) * (blogCards.length * 2);
+    blogTrack.style.width = `${totalWidth}px`;
+
+    requestAnimationFrame(() => updateCarousel(false)); // Recalculate position without animation
   });
 }
 
