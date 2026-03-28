@@ -254,9 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
- // =========================
-// Blog Carousel - True Seamless Infinite Loop with No Gap
-// =========================
+ // Blog Carousel - True Seamless Infinite Loop with No Gap
 const blogTrack = document.querySelector(".blog-card-grid");
 const blogPrev = document.querySelector(".blog-carousel-btn.prev");
 const blogNext = document.querySelector(".blog-carousel-btn.next");
@@ -283,8 +281,8 @@ if (blogTrack && blogCards.length > 0) {
   const totalWidth = (cardWidth + gap) * (blogCards.length * 2);
   blogTrack.style.width = `${totalWidth}px`; // Ensure enough space for all cards
 
-  // Hide the track initially to avoid visible jumps during the setup phase
-  blogTrack.style.visibility = "hidden"; 
+  // Hide the track initially using display: none
+  blogTrack.style.display = "none"; 
 
   // Update Carousel position and apply transform
   const updateCarousel = (animate = true) => {
@@ -295,13 +293,10 @@ if (blogTrack && blogCards.length > 0) {
 
   // Check if the index needs to be reset for seamless looping
   const checkLoop = () => {
-    // If the index exceeds total (forwards loop)
     if (index >= total * 2) {
       index = total; // Reset to the first original card
       updateCarousel(false); // No animation on reset
-    }
-    // If the index is less than total (backwards loop)
-    else if (index < total) {
+    } else if (index < total) {
       index = total + (index % total); // Loop backwards to the original cards
       updateCarousel(false); // No animation on reset
     }
@@ -341,6 +336,18 @@ if (blogTrack && blogCards.length > 0) {
   // Initialize carousel to the first position
   updateCarousel(false); // No animation for the first setup
 
+  // Force reflow for styles to apply after the width/transform calculation
+  setTimeout(() => {
+    // Force a reflow to apply the styles correctly
+    blogTrack.offsetHeight; // Trigger reflow
+
+    // Once setup is complete, make the carousel track visible
+    blogTrack.style.display = "block"; // Show track after setup
+
+    // Recalculate position without animation
+    updateCarousel(false);
+  }, 50); // Allow a small delay for layout to be ready
+
   // Handle resizing
   window.addEventListener("resize", () => {
     // Recalculate the total width on resize
@@ -348,13 +355,11 @@ if (blogTrack && blogCards.length > 0) {
     const totalWidth = (cardWidth + gap) * (blogCards.length * 2);
     blogTrack.style.width = `${totalWidth}px`;
 
+    // Trigger reflow before updating the carousel position
+    blogTrack.offsetHeight; // Force reflow
+
     requestAnimationFrame(() => updateCarousel(false)); // Recalculate position without animation
   });
-
-  // Once setup is complete, make the carousel track visible
-  setTimeout(() => {
-    blogTrack.style.visibility = "visible"; // Make track visible after setup
-  }, 50);
 }
 
 });
